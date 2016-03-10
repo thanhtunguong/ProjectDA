@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white" >
+
+    <!-- <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white" >
+
+        <TextView
+            android:id="@+id/tvTodayTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/string_tvHelloTextView"
+            android:textColor="@color/text_Title_color"
+            android:textSize="@dimen/text_title" />
+
+        <TextView
+            android:id="@+id/tvTodayTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/string_tvTodayTextView"
+            android:textColor="@color/text_Title_color"
+            android:textSize="@dimen/text_title" />
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/vach_chia"/>
+    </LinearLayout> -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvResetCalendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/ic_calendar_grey600_36dp"
+            android:gravity="center_vertical"
+            android:layout_margin="@dimen/text_margin"
+            android:textColor="@color/text_Title_color"
+            android:textSize="@dimen/text_title" />
+
+        <TextView
+            android:id="@+id/tvWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/ic_arrow_drop_down_grey600_24dp"
+            android:gravity="center_vertical"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/string_tvWeek"
+            android:textColor="@color/text_Title_color"
+            android:textSize="@dimen/text_title" />
+        <!--
+             <TextView 
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"/>
+        -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/tvWeek"
+            android:background="@color/vach_chia" />
+
+    </RelativeLayout>
+
+    <ExpandableListView
+        android:id="@+id/elvDays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:childDivider="@color/transparent"
+        
+        android:divider="@color/transparent"
+        android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp" >
+    </ExpandableListView>
+
+</LinearLayout>

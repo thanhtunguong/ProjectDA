@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/lnDiemItem" >
+    <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:weightSum="16"
+        android:layout_marginLeft="5dp"
+        android:gravity="center_vertical">
+        <TextView 
+            android:text="1"
+            android:id="@+id/tvSttDiem"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <TextView 
+            android:text="AW1"
+            android:id="@+id/tvMaLopTC"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="3"/>
+        <TextView 
+            android:text="Kien truc may tinh"
+            android:id="@+id/tvTenMon"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="5"/>
+        <TextView 
+            android:text="4"
+            android:id="@+id/tvSoTinChi"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"/>
+        <TextView 
+            android:text="8.0"
+            android:id="@+id/tvDiemCC"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"/>
+        <TextView 
+            android:text="8.0"
+            android:id="@+id/tvDiemKT"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"/>
+        <TextView 
+            android:text="5.0"
+            android:id="@+id/tvDiemThi"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"/>
+        <TextView 
+            android:text="5.9"
+            android:id="@+id/tvDiemTongKet"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"/>
+    </LinearLayout>
+
+</LinearLayout>

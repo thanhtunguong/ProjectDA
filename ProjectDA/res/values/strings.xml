@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!-- Tùng -->
+    
+    <string name="app_name">LichHocTap</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="string_title_tab_lich">Lịch</string>
+    <string name="string_title_tab_diem">Điểm</string>
+    <string name="string_tvHelloTextView">Xin chào! Hôm nay là</string>
+    <string name="string_tvWeek">Tuần:</string>
+    <string name="string_hoctap_thoigianSang">07:00 - 11:45</string>
+    <string name="string_hoctap_thoigianChieu">12:45 - 17:30</string>
+    <string name="string_hoctap_trangthai_active">Active</string>
+    <string name="string_hoctap_trangthai_deactive">Deactive</string>
+    <string name="string_Monday">thứ Hai</string>
+    <string name="string_Tuesday">thứ Ba</string>
+    <string name="string_Wednesday">thứ Tư</string>
+    <string name="string_Thursday">thứ Năm</string>
+    <string name="string_Friday">thứ Sáu</string>
+    <string name="string_Saturday">thứ Bảy</string>
+    <string name="string_Sunday">Chủ Nhật</string>
+    <string name="string_January">tháng Một</string>
+    <string name="string_February">tháng Hai</string>
+    <string name="string_March">tháng Ba</string>
+    <string name="string_April">tháng Tư</string>
+    <string name="string_May">tháng Năm</string>
+    <string name="string_June">tháng Sáu</string>
+    <string name="string_July">tháng Bảy</string>
+    <string name="string_August">tháng Tám</string>
+    <string name="string_September">tháng Chín</string>
+    <string name="string_October">tháng Mười</string>
+    <string name="string_November">tháng Mười một</string>
+    <string name="string_December">tháng Mười hai</string>
+    <string name="string_SoTinChiDaHoc">Số tín chỉ đã học:</string>
+    <string name="string_DiemTrungBinhTichLuy">Điểm trung bình tích lũy:</string>
+    <string name="string_LichHoc_btnOK">Chọn</string>
+    <string name="string_LichHoc_btnCancel">Hủy</string>
+    <string name="string_LichHoc_DatePicker_Title">Chọn ngày</string>
+    <string name="title_activity_main">MainActivity</string>
+    
+    <!-- MainNavigatorBar -->
+    	<string name="nb"></string>
+    <!-- /MainNavigatorBar -->
+
+<!-- /Tùng -->
+    
+</resources>
