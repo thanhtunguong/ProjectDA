@@ -5,10 +5,12 @@ import com.doan.adapter.HocTapDiemAdapter;
 import com.doan.lichhoctap.R;
 import com.doan.model.DiemHocTap;
 
+import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,10 +31,13 @@ public class DiemFragment extends Fragment {
 	int TC = 0;
     float DTB = 0;
     double tongDiem = 0;
+    Activity c;
     
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.hoctap_diem_layout,container,false);
+        c = getActivity();
+        setTitleActivity(R.string.title_activity_for_selector_NF);
         arlDiem.add(d1);
         arlDiem.add(d2);
         arlDiem.add(d3);
@@ -100,6 +105,12 @@ public class DiemFragment extends Fragment {
         lvDiem.setAdapter(adapter);
         
         return v;
+    }
+    public void setTitleActivity(int titleID){
+    	/*toolbar = (Toolbar) findViewById(R.id.tool_bar);            
+    	setSupportActionBar(toolbar);*/
+		((ActionBarActivity)c).getSupportActionBar().setTitle(titleID);
+    	//getSupportActionBar().setTitle(getString(titleID));
     }
     public void tinhTongKetHocTap(int stc, double sdtb, View v){
     	TC = TC + stc;

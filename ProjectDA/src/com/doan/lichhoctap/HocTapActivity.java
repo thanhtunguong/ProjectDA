@@ -26,7 +26,8 @@ public class HocTapActivity extends ActionBarActivity {
     CharSequence Titles[];
     int Numboftabs = 3;
     FrameLayout flFloatBtn;
- 
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +43,9 @@ public class HocTapActivity extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
  
- 
+        context = this;
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs, context);
  
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
@@ -77,7 +78,7 @@ public class HocTapActivity extends ActionBarActivity {
 		});
  
     }
- 
+    
  
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

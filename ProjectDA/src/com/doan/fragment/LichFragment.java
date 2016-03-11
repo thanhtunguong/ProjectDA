@@ -18,6 +18,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -58,15 +59,17 @@ public class LichFragment extends Fragment {
 	View view;
 	LayoutInflater l;
 	int lan;
+	Activity c;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
 			@Nullable Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.hoctap_lichhoc_layout_test, container, false);
+		c = getActivity();
+		setTitleActivity(R.string.title_activity_for_selector_Lich);
 		view = v;
 		l = inflater;
 		lan = 0;
-		final Activity c = getActivity();
 		tvToday = (TextView) v.findViewById(R.id.tvResetCalendar);
 		tvWeek = (TextView) v.findViewById(R.id.tvWeek);
 		setinItialize(view, l, c);
@@ -98,6 +101,12 @@ public class LichFragment extends Fragment {
 		});
 		return v;
 	}
+	public void setTitleActivity(int titleID){
+    	/*toolbar = (Toolbar) findViewById(R.id.tool_bar);            
+    	setSupportActionBar(toolbar);*/
+		((ActionBarActivity)c).getSupportActionBar().setTitle(titleID);
+    	//getSupportActionBar().setTitle(getString(titleID));
+    }
 
 	private void setinItialize(View v, LayoutInflater l, Activity c) {
 		getNgayThang();

@@ -1,10 +1,12 @@
 package com.doan.fragment;
 import com.doan.lichhoctap.R;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,11 +18,13 @@ import android.widget.Toast;
 public class OthersFragment extends Fragment {
 
 	LinearLayout otherUser, otherUserMark, otherUserCTDT, otherUserDSMCTDK, otherUserInfoSearch, otherUserNotes;
+	Activity c;
 	
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.others_layout_fragment,container,false);
-        final Context c = this.getContext();
+        c = getActivity();
+        setTitleActivity(R.string.title_activity_for_selector_General);
         otherUser = (LinearLayout) v.findViewById(R.id.otherUser);
         otherUserMark = (LinearLayout) v.findViewById(R.id.otherUserMark);
         otherUserCTDT = (LinearLayout) v.findViewById(R.id.otherUserCTDT);
@@ -83,5 +87,11 @@ public class OthersFragment extends Fragment {
 		});
         
         return v;
+    }
+    public void setTitleActivity(int titleID){
+    	/*toolbar = (Toolbar) findViewById(R.id.tool_bar);            
+    	setSupportActionBar(toolbar);*/
+		((ActionBarActivity)c).getSupportActionBar().setTitle(titleID);
+    	//getSupportActionBar().setTitle(getString(titleID));
     }
 }

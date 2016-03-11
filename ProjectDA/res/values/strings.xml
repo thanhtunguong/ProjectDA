@@ -48,6 +48,9 @@
     <string name="others_textview_options_DSMCTDK">Danh sách môn có thể đăng kí</string>
     <string name="others_textview_options_Sotay">Sổ tay thông tin</string>
     <string name="others_textview_options_Notes">Ghi chú cá nhân</string>
+    <string name="title_activity_for_selector_Lich">Lịch học tập</string>
+    <string name="title_activity_for_selector_NF">Bảng tin</string>
+    <string name="title_activity_for_selector_General">Tổng quan</string>
     <!-- MainNavigatorBar -->
     	<string name="nb"></string>
     <!-- /MainNavigatorBar -->
