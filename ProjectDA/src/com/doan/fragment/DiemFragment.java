@@ -37,7 +37,7 @@ public class DiemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.hoctap_diem_layout,container,false);
         c = getActivity();
-        setTitleActivity(R.string.title_activity_for_selector_NF);
+        //setTitleActivity(R.string.title_activity_for_selector_NF);
         arlDiem.add(d1);
         arlDiem.add(d2);
         arlDiem.add(d3);

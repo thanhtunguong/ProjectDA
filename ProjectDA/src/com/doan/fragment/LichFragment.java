@@ -66,7 +66,7 @@ public class LichFragment extends Fragment {
 			@Nullable Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.hoctap_lichhoc_layout_test, container, false);
 		c = getActivity();
-		setTitleActivity(R.string.title_activity_for_selector_Lich);
+		//setTitleActivity(R.string.title_activity_for_selector_Lich);
 		view = v;
 		l = inflater;
 		lan = 0;

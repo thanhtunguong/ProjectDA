@@ -24,7 +24,7 @@ public class OthersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.others_layout_fragment,container,false);
         c = getActivity();
-        setTitleActivity(R.string.title_activity_for_selector_General);
+        //setTitleActivity(R.string.title_activity_for_selector_General);
         otherUser = (LinearLayout) v.findViewById(R.id.otherUser);
         otherUserMark = (LinearLayout) v.findViewById(R.id.otherUserMark);
         otherUserCTDT = (LinearLayout) v.findViewById(R.id.otherUserCTDT);
