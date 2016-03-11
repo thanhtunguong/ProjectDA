@@ -2,6 +2,7 @@ package com.doan.adapter;
 
 import com.doan.fragment.DiemFragment;
 import com.doan.fragment.LichFragment;
+import com.doan.fragment.OthersFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -34,13 +35,15 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 		{
 			LichFragment tab1 = new LichFragment();
 			return tab1;
-		} else // As we are having 2 tabs if the position is now 0 it must be 1
-				// so we are returning second tab
-		{
-			DiemFragment tab2 = new DiemFragment();
-			return tab2;
+		} else{
+			if(position == 1){
+				DiemFragment tab2 = new DiemFragment();
+				return tab2;
+			}else {
+				OthersFragment tab3 = new OthersFragment();
+				return tab3;
+			}
 		}
-
 	}
 
 	// This method return the titles for the Tabs in the Tab Strip

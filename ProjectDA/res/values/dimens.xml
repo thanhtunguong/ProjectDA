@@ -10,8 +10,8 @@
 	<dimen name="tiethoc_item_background_rounded_stroke">0.5dp</dimen>
 	<dimen name="text_margin">10dp</dimen>
 	<dimen name="tiethoc_item_margin">10dp</dimen>
-	<dimen name="others_margin">8dp</dimen>
+	<dimen name="others_margin">15dp</dimen>
 	<dimen name="others_avatar_dimen">30dp</dimen>
-	<dimen name="others_option_pic_dimen">30dp</dimen>
+	<dimen name="others_option_pic_dimen">40dp</dimen>
 <!-- /Tùng -->
 </resources>

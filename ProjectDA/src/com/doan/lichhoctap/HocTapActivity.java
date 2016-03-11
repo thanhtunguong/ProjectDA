@@ -3,13 +3,17 @@ package com.doan.lichhoctap;
 import com.doan.adapter.ViewPagerAdapter;
 import com.doan.slydingtab.SlidingTabLayout;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 public class HocTapActivity extends ActionBarActivity {
  
@@ -20,7 +24,8 @@ public class HocTapActivity extends ActionBarActivity {
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
     CharSequence Titles[];
-    int Numboftabs =2;
+    int Numboftabs = 3;
+    FrameLayout flFloatBtn;
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +34,10 @@ public class HocTapActivity extends ActionBarActivity {
         //CharSequence tab1 = getText(R.string.string_title_tab_lich);
         //CharSequence tab2 = getText(R.string.string_title_tab_diem);
         // Creating The Toolbar and setting it as the Toolbar for the activity
-        Titles = new String[2];
+        Titles = new String[3];
         Titles[0] = getString(R.string.string_title_tab_lich);
         Titles[1] = getString(R.string.string_title_tab_diem);
+        Titles[2] = getString(R.string.string_title_tab_khac);
         
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
@@ -58,8 +64,17 @@ public class HocTapActivity extends ActionBarActivity {
  
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
- 
- 
+        final Context c = this.getApplicationContext();
+        flFloatBtn = (FrameLayout) findViewById(R.id.flFloatBtn);
+		//flFloatBtn.setBackgroundResource(R.drawable.tiet_hoc_circle_background);
+		flFloatBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Toast.makeText(c, "Notes", Toast.LENGTH_SHORT).show();
+			}
+		});
  
     }
  

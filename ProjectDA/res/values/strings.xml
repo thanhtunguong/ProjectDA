@@ -3,11 +3,12 @@
 
 <!-- Tùng -->
     
-    <string name="app_name">LichHocTap</string>
+    <string name="app_name">"I'm student"</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="string_title_tab_lich">Lịch</string>
     <string name="string_title_tab_diem">Điểm</string>
+    <string name="string_title_tab_khac">Khác</string>
     <string name="string_tvHelloTextView">Xin chào! Hôm nay là</string>
     <string name="string_tvWeek">Tuần:</string>
     <string name="string_hoctap_thoigianSang">07:00 - 11:45</string>
@@ -43,6 +44,10 @@
     <string name="text_view_profile">Xem thông tin cá nhân</string>
     <string name="others_textview_options">Lựa chọn</string>
     <string name="others_textview_options_Diem">Kết quả học tập</string>
+    <string name="others_textview_options_CTDT">Chương trình đào tạo</string>
+    <string name="others_textview_options_DSMCTDK">Danh sách môn có thể đăng kí</string>
+    <string name="others_textview_options_Sotay">Sổ tay thông tin</string>
+    <string name="others_textview_options_Notes">Ghi chú cá nhân</string>
     <!-- MainNavigatorBar -->
     	<string name="nb"></string>
     <!-- /MainNavigatorBar -->

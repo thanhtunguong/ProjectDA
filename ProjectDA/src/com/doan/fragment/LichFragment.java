@@ -74,17 +74,6 @@ public class LichFragment extends Fragment {
 		//tvDayName = (TextView) v.findViewById(R.id.tvTodayTextView);
 		//tvDayName.setText("" + resultDayName);
 		
-		FrameLayout flFloatBtn = (FrameLayout) v.findViewById(R.id.flFloatBtn);
-		//flFloatBtn.setBackgroundResource(R.drawable.tiet_hoc_circle_background);
-		flFloatBtn.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Toast.makeText(c, "Notes", Toast.LENGTH_SHORT).show();
-			}
-		});
-		
 		tvToday.setOnClickListener(new OnClickListener() {
 			
 			@Override
