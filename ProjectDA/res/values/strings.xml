@@ -39,7 +39,10 @@
     <string name="string_LichHoc_btnCancel">Hủy</string>
     <string name="string_LichHoc_DatePicker_Title">Chọn ngày</string>
     <string name="title_activity_main">MainActivity</string>
-    
+    <string name="utt_name">Uông Thanh Tùng</string>
+    <string name="text_view_profile">Xem thông tin cá nhân</string>
+    <string name="others_textview_options">Lựa chọn</string>
+    <string name="others_textview_options_Diem">Kết quả học tập</string>
     <!-- MainNavigatorBar -->
     	<string name="nb"></string>
     <!-- /MainNavigatorBar -->
