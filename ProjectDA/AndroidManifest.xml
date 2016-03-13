@@ -18,13 +18,28 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- <activity
+        <!--
+        <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
-        </activity> -->
+        </activity>
+        -->
+        <activity
+            android:name=".GhiChuActivity"
+            android:label="@string/title_activity_ghi_chu" >
+        </activity>
+        <activity
+            android:name=".NhacLichActivity"
+            android:label="@string/title_activity_nhac_lich" >
+        </activity>
+        <activity
+            android:name=".ThongTinCaNhanActivity"
+            android:label="@string/title_activity_thong_tin_ca_nhan" >
+        </activity>
     </application>
 
 </manifest>
