@@ -1,10 +1,14 @@
 package com.doan.slydingtab;
 
 import com.doan.adapter.ViewPagerAdapter;
+import com.doan.app.Global;
+import com.doan.lichhoctap.R;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.util.TypedValue;
@@ -300,7 +304,10 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
 		@Override
 		public void onPageSelected(int position) {
-			
+			Global g = new Global();
+			Context c = getContext();
+	        g.addActivityTitles(c);
+	        ((ActionBarActivity)c).getSupportActionBar().setTitle(Global.activityTitles[position]);
 			for(int i = 0; i < mTabStrip.getChildCount(); i ++){
 	            mTabStrip.getChildAt(i).setSelected(false);
 	        }
@@ -315,7 +322,6 @@ public class SlidingTabLayout extends HorizontalScrollView {
 	            mViewPagerPageChangeListener.onPageSelected(position);
 	        }
 		}
-
 	}
 
 	private class TabClickListener implements View.OnClickListener {

@@ -1,4 +1,5 @@
 package com.doan.fragment;
+import com.doan.lichhoctap.DiemHocTapActivity;
 import com.doan.lichhoctap.GhiChuActivity;
 import com.doan.lichhoctap.R;
 import com.doan.lichhoctap.ThongTinCaNhanActivity;
@@ -51,7 +52,8 @@ public class OthersFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(c, "Mark", Toast.LENGTH_SHORT).show();
+				Intent i = new Intent(getContext(), DiemHocTapActivity.class);
+				startActivity(i);
 			}
 		});
         
@@ -88,7 +90,6 @@ public class OthersFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(c, "Note", Toast.LENGTH_SHORT).show();
 				Intent i = new Intent(getContext(), GhiChuActivity.class);
 				startActivity(i);
 			}

@@ -32,22 +32,11 @@ import android.widget.Toast;
 
 public class LichFragment extends Fragment {
 
-	// private ArrayList<DayInWeek> parentItems = new ArrayList<DayInWeek>();
-	// private ArrayList<Object> childItems = new ArrayList<Object>();
 	private ArrayList<DayInWeek> parentItems;
 	private ArrayList<Object> childItems;
 	ArrayList<TietHoc> arlAll;
 	private ArrayList<TietHoc> arlTh2, arlTh3, arlTh4, arlTh5, arlTh6, arlTh7, arlTh8;
 	ArrayList<Integer> arlColor;
-	/*private ArrayList<TietHoc> arlTh3;
-	private ArrayList<TietHoc> arlTh4;
-	private ArrayList<TietHoc> arlTh5;
-	private ArrayList<TietHoc> arlTh6;
-	private ArrayList<TietHoc> arlTh7;
-	private ArrayList<TietHoc> arlTh8;*/
-
-	
-
 	String resultDate = "";
 	String firstdayOfWeek, lastdayOfWeek;
 	String resultWeek = "";
@@ -66,16 +55,12 @@ public class LichFragment extends Fragment {
 			@Nullable Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.hoctap_lichhoc_layout_test, container, false);
 		c = getActivity();
-		//setTitleActivity(R.string.title_activity_for_selector_Lich);
 		view = v;
 		l = inflater;
 		lan = 0;
 		tvToday = (TextView) v.findViewById(R.id.tvResetCalendar);
 		tvWeek = (TextView) v.findViewById(R.id.tvWeek);
 		setinItialize(view, l, c);
-		// getNgayThang();
-		//tvDayName = (TextView) v.findViewById(R.id.tvTodayTextView);
-		//tvDayName.setText("" + resultDayName);
 		
 		tvToday.setOnClickListener(new OnClickListener() {
 			
@@ -85,11 +70,9 @@ public class LichFragment extends Fragment {
 				lan = 1;
 				Calendar dar = Calendar.getInstance();
 				ngayChonDatePicker = dar.getTime();
-				//chonNgayDatetimePicker(c);
 				setinItialize(view, l, c);
 			}
 		});
-		// tvWeek.setText(resultWeek);
 		tvWeek.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -101,12 +84,6 @@ public class LichFragment extends Fragment {
 		});
 		return v;
 	}
-	public void setTitleActivity(int titleID){
-    	/*toolbar = (Toolbar) findViewById(R.id.tool_bar);            
-    	setSupportActionBar(toolbar);*/
-		((ActionBarActivity)c).getSupportActionBar().setTitle(titleID);
-    	//getSupportActionBar().setTitle(getString(titleID));
-    }
 
 	private void setinItialize(View v, LayoutInflater l, Activity c) {
 		getNgayThang();
@@ -320,56 +297,6 @@ public class LichFragment extends Fragment {
 			arlTh.add(th);
 		}
 	}
-	/*private void checkTietCuThe(ArrayList<TietHoc> arlTh, TietHoc th) {
-		TietHoc pt = new TietHoc();
-		if (arlTh.size() > 0) {
-			if (th.getSpecificDate() != "") {
-				int i = 0;
-				int x = -1;
-				while (i < arlTh.size()){
-					pt = arlTh.get(i);
-					if (th.getBuoiHoc() == pt.getBuoiHoc() && th.getMonHoc() == pt.getMonHoc()) {
-						//arlTh.remove(i);
-						//arlTh.add(th);
-						arlTh.set(i, th);
-						x = i;
-						break;
-					}
-					else {
-						i++;
-					}
-				}
-				Iterator<TietHoc> it = arlTh.iterator();
-				while (it.hasNext()) {
-					if (th.getBuoiHoc() == getBuoiHoc() && th.getMonHoc() == pt.getMonHoc())
-					
-				}
-				if(x != -1){
-					arlTh.remove(x);
-					arlTh.add(th);
-					arlTh.set
-				}
-				
-				 * for(int i = 0; i < arlTh.size(); i++){ pt = arlTh.get(i);
-				 * if(th.getBuoiHoc() == pt.getBuoiHoc() && th.getMonHoc() ==
-				 * pt.getMonHoc()){ arlTh.remove(i); arlTh.add(th); } }
-				 
-			} else {
-				int i = 0;
-				while(i < arlTh.size()){
-					pt = arlTh.get(i);
-					if (th.getBuoiHoc() != pt.getBuoiHoc() || th.getMonHoc() != pt.getMonHoc()) {
-						arlTh.add(th);
-						break;
-					}else {
-						i++;
-					}
-				}
-			}
-		} else {
-			arlTh.add(th);
-		}
-	}*/
 
 	private void phanTietHoc(ArrayList<TietHoc> list) {
 		for (TietHoc tietHoc : list) {
@@ -499,23 +426,12 @@ public class LichFragment extends Fragment {
 		
 		final DatePicker dp = (DatePicker) dialog.findViewById(R.id.dpLichHocDatepicker);
 		dp.updateDate(year, month, day);
-		// set the custom dialog components - text, image and button
-		/*TextView text = (TextView) dialog.findViewById(R.id.text);
-		text.setText("Android custom dialog example!");
-		ImageView image = (ImageView) dialog.findViewById(R.id.image);
-		image.setImageResource(R.drawable.ic_launcher);*/
 
 		Button dialogButtonOK = (Button) dialog.findViewById(R.id.btnLichHocDatePickerOK);
 		// if button is clicked, close the custom dialog
 		dialogButtonOK.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//dialog.dismiss();
-				/*int thang = dp.getMonth() + 1;
-				Toast.makeText(context, dp.getDayOfMonth() + "/" + thang + "/" + dp.getYear(), Toast.LENGTH_SHORT).show();
-				ngayTinh.setDate(dp.getDayOfMonth());
-				ngayTinh.setMonth(thang);
-				ngayTinh.setYear(dp.getYear());*/
 				Calendar c = Calendar.getInstance();
 				c.set(dp.getYear(), dp.getMonth(), dp.getDayOfMonth());
 				ngayChonDatePicker = c.getTime();

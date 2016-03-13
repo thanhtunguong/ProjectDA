@@ -1,0 +1,121 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.doan.lichhoctap.DiemHocTapActivity" >
+
+    <include
+        android:id="@+id/ghichu_activity_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/hoctap_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvSoTinChiDaHoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="test"
+            android:textColor="@color/text_Title_color"
+            android:textSize="@dimen/text_title" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:orientation="horizontal"
+            android:weightSum="10" >
+
+            <TextView
+                android:id="@+id/tvTCpc"
+                android:layout_width="200px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="test"
+                android:textColor="@color/text_Title_color"
+                android:textSize="@dimen/text_title" />
+
+            <LinearLayout
+                android:id="@+id/lnSTC"
+                android:layout_width="220px"
+                android:layout_height="3dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/soft_grey" >
+
+                <TextView
+                    android:id="@+id/tvTCprogess"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/ColorPrimary" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/vach_chia" />
+
+        <TextView
+            android:id="@+id/tvDiemTrungBinhTichLuy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="test"
+            android:textColor="@color/text_Title_color"
+            android:textSize="@dimen/text_title" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:orientation="horizontal"
+            android:weightSum="10" >
+
+            <TextView
+                android:id="@+id/tvDTBpc"
+                android:layout_width="200px"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="test"
+                android:textColor="@color/text_Title_color"
+                android:textSize="@dimen/text_title" />
+
+            <LinearLayout
+                android:id="@+id/lnDTB"
+                android:layout_width="220px"
+                android:layout_height="3dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/soft_grey" >
+
+                <TextView
+                    android:id="@+id/tvDTBprogess"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/ColorPrimary" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvDiem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:divider="@color/vach_chia"
+        android:dividerHeight="1dp" >
+    </ListView>
+
+</LinearLayout>

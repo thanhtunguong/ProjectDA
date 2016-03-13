@@ -35,6 +35,11 @@
         <item name="colorAccent">@color/ColorPrimary</item>
     </style>
     
+    <style name="MyThemeWithActionBar" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
+        <item name="colorAccent">@color/ColorPrimary</item>
+    </style>
+    
     <style name="AccountsLightActivities" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/ColorPrimary</item>
         <item name="windowActionBar">false</item>

@@ -6,6 +6,7 @@ import com.doan.slydingtab.SlidingTabLayout;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -24,6 +25,7 @@ public class HocTapActivity extends ActionBarActivity {
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
     CharSequence Titles[];
+    CharSequence ActivityTitles[];
     int Numboftabs = 3;
     FrameLayout flFloatBtn;
     Context context;
@@ -32,24 +34,19 @@ public class HocTapActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hoc_tap_activity);
-        //CharSequence tab1 = getText(R.string.string_title_tab_lich);
-        //CharSequence tab2 = getText(R.string.string_title_tab_diem);
-        // Creating The Toolbar and setting it as the Toolbar for the activity
-        Titles = new String[3];
-        Titles[0] = getString(R.string.string_title_tab_lich);
-        Titles[1] = getString(R.string.string_title_tab_diem);
-        Titles[2] = getString(R.string.string_title_tab_khac);
         
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        
+        toolbar = (Toolbar) findViewById(R.id.ghichu_activity_tool_bar);
         setSupportActionBar(toolbar);
  
         context = this;
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs, context);
+        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Numboftabs, context);
  
         // Assigning ViewPager View and setting the adapter
-        pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(adapter);
+		pager = (ViewPager) findViewById(R.id.pager);
+		pager.setAdapter(adapter);
+        
  
         // Assiging the Sliding Tab Layout View
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);

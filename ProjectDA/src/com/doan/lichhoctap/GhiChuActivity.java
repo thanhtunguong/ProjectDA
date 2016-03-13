@@ -19,6 +19,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -42,7 +44,7 @@ import android.widget.Toast;
 
 
 
-public class GhiChuActivity extends Activity implements OnClickListener{
+public class GhiChuActivity extends ActionBarActivity implements OnClickListener{
 
 	
 	ListView lvGhichu;
@@ -56,6 +58,7 @@ public class GhiChuActivity extends Activity implements OnClickListener{
 	private static int ngay = 29;
 	private static int thang = 2;
 	private static int nam = 2016;
+	Toolbar toolbar;
 
 	private ScheduleClient scheduleClient;  
 	
@@ -63,6 +66,12 @@ public class GhiChuActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ghi_chu);
+		toolbar = (Toolbar) findViewById(R.id.ghichu_activity_tool_bar);
+		setSupportActionBar(toolbar);
+
+		if (getSupportActionBar() != null) {
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		}
 		
 		lvGhichu = (ListView) findViewById(R.id.lvGhichu);
 		btnThemghichu = (Button) findViewById(R.id.btnThemghichu);

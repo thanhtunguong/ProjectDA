@@ -20,7 +20,7 @@ import android.text.style.ImageSpan;
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 	
 	private Context context;
-	CharSequence Titles[]; // This will Store the Titles of the Tabs which are
+	//CharSequence Titles[]; // This will Store the Titles of the Tabs which are
 							// Going to be passed when ViewPagerAdapter is
 							// created
 	int NumbOfTabs; // Store the number of tabs, this will also be passed when
@@ -28,10 +28,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 	private int[] imageResId = {R.color.selector_calendar, R.color.selector_nf, R.color.selector_menu};
 	// Build a Constructor and assign the passed Values to appropriate values in
 	// the class
-	public ViewPagerAdapter(FragmentManager fm, CharSequence mTitles[], int mNumbOfTabsumb, Context c) {
+	public ViewPagerAdapter(FragmentManager fm, int mNumbOfTabsumb, Context c) {
 		super(fm);
 		this.context = c;
-		this.Titles = mTitles;
 		this.NumbOfTabs = mNumbOfTabsumb;
 
 	}
@@ -40,7 +39,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 	@Override
 	public Fragment getItem(int position) {
 		String title = "";
-		if (position == 0) // if the position is 0 we are returning the First
+		/*if (position == 0) // if the position is 0 we are returning the First
 							// tab
 		{
 			LichFragment tab1 = new LichFragment();
@@ -56,7 +55,21 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
 				return tab3;
 			}
+		}*/
+		((ActionBarActivity)context).getSupportActionBar().setTitle(R.string.title_activity_for_selector_Lich);
+		Fragment tab = null;
+		switch(position){
+		case 0:
+			tab = new LichFragment();
+			break;
+		case 1:
+			tab = new DiemFragment();
+			break;
+		case 2:
+			tab = new OthersFragment();
+			break;
 		}
+		return tab;
 	}
 
 	// This method return the titles for the Tabs in the Tab Strip
@@ -90,5 +103,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 	public int getDrawableId(int position){
         return imageResId[position];
     }
-	
+	public void setTitleActivity(int titleID){
+		((ActionBarActivity)context).getSupportActionBar().setTitle(titleID);
+    }
 }
