@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,12 +51,13 @@ public class GhiChuActivity extends Activity implements OnClickListener{
 
 	ArrayList<ItemGhiChu> arrItemghichu = new ArrayList<ItemGhiChu>();
 	GhiChuAdapter adapter = null;
-	static int gio = 23;
-	static int phut = 40;
-	static int ngay = 29;
-	static int thang = 2;
-	static int nam = 2016;
-	ScheduleClient scheduleClient;  
+	private static int gio = 23;
+	private static int phut = 40;
+	private static int ngay = 29;
+	private static int thang = 2;
+	private static int nam = 2016;
+
+	private ScheduleClient scheduleClient;  
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +69,14 @@ public class GhiChuActivity extends Activity implements OnClickListener{
 
 		arrItemghichu = new ArrayList<ItemGhiChu>();
 
-		ItemGhiChu gc = new ItemGhiChu("Công việc 01", "13:40 25/02/2016",
-				"Làm bài tập về nhà");
+		ItemGhiChu gc = new ItemGhiChu("Cong viec 01", "13:40 25/02/2016",
+				"Lam bai ve nha");
 		arrItemghichu.add(gc);
-		ItemGhiChu gc1 = new ItemGhiChu("Bài tập lớn", "15:00 26/02/2016",
-				"Hoàn thành bài tập lớn môn lập trình di động");
+		ItemGhiChu gc1 = new ItemGhiChu("Bai tap lon", "15:00 26/02/2016",
+				"Hoan thanh bai tap lon mon lap trinh di dong");
 		arrItemghichu.add(gc1);
-		ItemGhiChu gc2 = new ItemGhiChu("Chuyền đề cơ sở", "17:30 27/02/2016",
-				"Đi học chuyên đề");
+		ItemGhiChu gc2 = new ItemGhiChu("Chuyen de co so", "17:30 27/02/2016",
+				"Di hoc chuyen de");
 		arrItemghichu.add(gc2);
 
 		adapter = new GhiChuAdapter(getBaseContext(), R.layout.ghichu_item,
@@ -127,11 +129,11 @@ public class GhiChuActivity extends Activity implements OnClickListener{
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("Sửa ghi chú ");
+		builder.setTitle(R.string.tv_suaghichu);
 		builder.setView(alertLayout);
 		
 
-		builder.setCancelable(false);
+		builder.setCancelable(true);
 
 		tvTime.setOnTouchListener(new OnTouchListener() {
 
@@ -151,7 +153,7 @@ public class GhiChuActivity extends Activity implements OnClickListener{
 			}
 		});
 
-		builder.setPositiveButton("Sửa",
+		builder.setPositiveButton(R.string.btn_sua,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 
@@ -164,7 +166,7 @@ public class GhiChuActivity extends Activity implements OnClickListener{
 					}
 				});
 
-		builder.setNegativeButton("Thoát",
+		builder.setNegativeButton(R.string.btn_thoat,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
@@ -189,10 +191,10 @@ public class GhiChuActivity extends Activity implements OnClickListener{
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		builder.setTitle("Thêm ghi chú mới");
+		builder.setTitle(R.string.tv_themghichu);
 		builder.setView(alertLayout);
 
-		builder.setCancelable(false);
+		builder.setCancelable(true);
 
 		tvTime.setOnTouchListener(new OnTouchListener() {
 
@@ -210,7 +212,7 @@ public class GhiChuActivity extends Activity implements OnClickListener{
 			}
 		});
 
-		builder.setPositiveButton("Thêm",
+		builder.setPositiveButton(R.string.btn_them,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 
@@ -222,7 +224,7 @@ public class GhiChuActivity extends Activity implements OnClickListener{
 					}
 				});
 
-		builder.setNegativeButton("Thoát",
+		builder.setNegativeButton(R.string.btn_thoat,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
@@ -265,6 +267,7 @@ public class GhiChuActivity extends Activity implements OnClickListener{
     	c.set(Calendar.SECOND, 0);
     	// Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
     	scheduleClient.setAlarmForNotification(c);
+    //	Toast.makeText(getApplicationContext(), c.getTime().getMinutes() +"", Toast.LENGTH_LONG).show();
 	}
 
 	// ----------------------------------------------------------------------------------------
@@ -418,6 +421,8 @@ public class GhiChuActivity extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		
 	}
+	 
+
 
 	
 }
