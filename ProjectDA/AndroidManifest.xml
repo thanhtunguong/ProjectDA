@@ -40,6 +40,8 @@
             android:name=".ThongTinCaNhanActivity"
             android:label="@string/title_activity_thong_tin_ca_nhan" >
         </activity>
+          <service android:name="com.doan.service.ScheduleService"></service>
+        <service android:name="com.doan.service.NotifyService"></service>
     </application>
 
 </manifest>

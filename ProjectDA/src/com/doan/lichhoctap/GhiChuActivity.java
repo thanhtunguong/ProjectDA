@@ -251,7 +251,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		gc.setContent(strContent);
 		arrItemghichu.add(gc);
 		adapter.notifyDataSetChanged();
-	//	datNotify(gio,phut,ngay,thang,nam);
+		datNotify(gio,phut,ngay,thang,nam);
 
 	}
 	protected void suaGhichu(String strTitle, String strTime, String strContent, int position) {
@@ -259,7 +259,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		arrItemghichu.get(position).setTime(strTime);
 		arrItemghichu.get(position).setContent(strContent);
 		adapter.notifyDataSetChanged();
-	//	datNotify(gio,phut,ngay,thang,nam);
+		datNotify(gio,phut,ngay,thang,nam);
 
 	}
 
