@@ -63,6 +63,14 @@
     <string name="tv_diachi">Địa chỉ:</string>
     <string name="tv_email">Email:</string>
     <string name="tv_lop">Lớp:</string>
+    
+    <string name="tv_themghichu">Thêm ghi chú</string>
+    <string name="tv_suaghichu">Sửa ghi chú</string>
+    <string name="btn_them">Thêm</string>
+    <string name="btn_sua">Sửa</string>
+    <string name="btn_thoat">Thoát</string>
+    <!-- MainNavigatorBar -->
+    
     <string name="title_activity_ghi_chu">GhiChuActivity</string>
     <string name="title_activity_nhac_lich">NhacLichActivity</string>
     <string name="title_activity_thong_tin_ca_nhan">ThongTinCaNhanActivity</string>
