@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<!-- Tùng -->
-    
+    <!-- Tùng -->
+
     <string name="app_name">"I'm student"</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -51,10 +51,25 @@
     <string name="title_activity_for_selector_Lich">Lịch học tập</string>
     <string name="title_activity_for_selector_NF">Bảng tin</string>
     <string name="title_activity_for_selector_General">Tổng quan</string>
+
+    <!-- Việt -->
+    <string name="titleTimeDialog">Đặt thời gian</string>
+    <string name="thongtin_canhan">THÔNG TIN CÁ NHÂN</string>
+    <string name="tv_hoten">Họ tên:</string>
+    <string name="tv_ngaysinh">Ngày sinh:</string>
+    <string name="tv_gioitinh">Giới tính:</string>
+    <string name="tv_diachi">Địa chỉ:</string>
+    <string name="tv_email">Email:</string>
+    <string name="tv_lop">Lớp:</string>
     <!-- MainNavigatorBar -->
-    	<string name="nb"></string>
+    <string name="nb"></string>
     <!-- /MainNavigatorBar -->
 
-<!-- /Tùng -->
-    
+
+    <!-- /Tùng -->
+
+    <string name="title_activity_ghi_chu">GhiChuActivity</string>
+    <string name="title_activity_nhac_lich">NhacLichActivity</string>
+    <string name="title_activity_thong_tin_ca_nhan">ThongTinCaNhanActivity</string>
+
 </resources>

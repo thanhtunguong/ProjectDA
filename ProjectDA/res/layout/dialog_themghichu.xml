@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="300dp"
+    android:orientation="vertical" 
+    android:background="#FFFFFF"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:weightSum="11" >
+
+        <TextView
+            
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Tiêu đề:"
+            android:textSize="15sp" />
+
+        <EditText
+            
+            android:id="@+id/edtTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="9"
+            android:background="#EEEEEE"
+             />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:weightSum="11" >
+
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Thời gian:"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="9"
+            
+            android:background="#EEEEEE" 
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"        
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="vertical"
+         >
+
+        <TextView
+            android:minWidth="20dp"
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nội dung:"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/edtContent"
+            android:layout_marginTop="5dp"         
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="200dp"
+            android:textSize="15sp"
+            android:gravity="top"
+            android:background="#EEEEEE" />
+    </LinearLayout>
+
+</LinearLayout>

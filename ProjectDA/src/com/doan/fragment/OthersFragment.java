@@ -1,8 +1,11 @@
 package com.doan.fragment;
+import com.doan.lichhoctap.GhiChuActivity;
 import com.doan.lichhoctap.R;
+import com.doan.lichhoctap.ThongTinCaNhanActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,6 +41,8 @@ public class OthersFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Toast.makeText(c, "User", Toast.LENGTH_SHORT).show();
+				Intent i = new Intent(getContext(),ThongTinCaNhanActivity.class);
+				startActivity(i);
 			}
 		});
         
@@ -74,6 +79,7 @@ public class OthersFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Toast.makeText(c, "InfoSearch", Toast.LENGTH_SHORT).show();
+				
 			}
 		});
         
@@ -83,6 +89,8 @@ public class OthersFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Toast.makeText(c, "Note", Toast.LENGTH_SHORT).show();
+				Intent i = new Intent(getContext(), GhiChuActivity.class);
+				startActivity(i);
 			}
 		});
         

@@ -13,4 +13,8 @@
     <color name="vach_chia">#E0E0E0</color>
     <color name="background_grey">#eeeeee</color>
     <color name="soft_grey">#bdbdbd</color>
+    
+    <color name="StatusBarColor">#2E7D32</color>
+    <color name="ActionBarColor">#E74C3C</color>    
+    <color name="gray">#E0E0E0</color> 
 </resources>
