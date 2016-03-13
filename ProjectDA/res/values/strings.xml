@@ -51,6 +51,8 @@
     <string name="title_activity_for_selector_Lich">Lịch học tập</string>
     <string name="title_activity_for_selector_NF">Bảng tin</string>
     <string name="title_activity_for_selector_General">Tổng quan</string>
+    
+    <!-- /Tùng -->
 
     <!-- Việt -->
     <string name="titleTimeDialog">Đặt thời gian</string>
@@ -61,15 +63,9 @@
     <string name="tv_diachi">Địa chỉ:</string>
     <string name="tv_email">Email:</string>
     <string name="tv_lop">Lớp:</string>
-    <!-- MainNavigatorBar -->
-    <string name="nb"></string>
-    <!-- /MainNavigatorBar -->
-
-
-    <!-- /Tùng -->
-
     <string name="title_activity_ghi_chu">GhiChuActivity</string>
     <string name="title_activity_nhac_lich">NhacLichActivity</string>
     <string name="title_activity_thong_tin_ca_nhan">ThongTinCaNhanActivity</string>
+    <!-- /Việt -->
 
 </resources>
