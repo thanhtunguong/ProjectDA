@@ -128,5 +128,15 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003
     <!-- /Việt -->
 
     <string name="title_activity_bai_viet_detail">BaiVietDetailActivity</string>
-
+    <!-- /API Test -->
+    
+    <string name="api_LichHocTheoMaSV">[{"thu":"3","buoi":"1","tentrangthai":"Hoc","tenphonghoc":"Phong 32"},{"thu":"3","buoi":"2","tentrangthai":"Nghi","tenphonghoc":"Phong 51"}]</string>
+    <string name="api_LichThitheoMaSV">[{"thu":"2","buoi":"1","tenphonghoc":"Phong 21"},{"thu":"3","buoi":"2","tenphonghoc":"Phong 32"}]</string>
+    <string name="api_DanhSachBaiViet">[{"tieudebaiviet":"Hoi trai khoa","noidungbaiviet":"Vao chu nhat ngay 13 thang 03 Khoa to chuc hoi trai giua cac lop","ngaytaobaiviet":"2016-03-08","thoigianchinhsua":"2016-03-09","hoten":"Giang Vien 01"},{"tieudebaiviet":"Bao cao tien do lan 1","noidungbaiviet":"Vao chu nhat ngay 14 thang 03 Sinh vien bao cao tien do lam do an lan 1","ngaytaobaiviet":"2016-03-08","thoigianchinhsua":"2016-03-10","hoten":"Giang Vien 02"}]</string>
+    <string name="api_DanhSachThongBaoTheoMaSV">[{"tieudethongbao":"Hop Lop dau ki","noidungthongbao":"Vao ngay 05\/03\/2016 lop hop tai phong 21","ngaytaothongbao":"2016-03-01"},{"tieudethongbao":"Thong bao so 2","noidungthongbao":"Dia diem hop lop chuyen sang phong 41 thoi gian giu nguyen","ngaytaothongbao":"2016-03-02"}]</string>
+    <string name="api_DiemTheoMaSV">[{"diem1":"10","diem2":"7","diem3":"8","tenmonhoc":"Co So Lap Trinh","sotinchi":"3"},{"diem1":"9","diem2":"9","diem3":"5","tenmonhoc":"Toan 2","sotinchi":"3"}]</string>
+    <string name="api_GhiChuTheoMaSV">[{"PK_GhiChu":"GC01","TieuDeGhiChu":"Cong viec 01","NoiDungGhiChu":"Lam bai tap ve nha","ThoiGianNhacGhiChu":"2016-03-18","ThoiGianChinhSuaGhiChu":"2016-03-03","MaSV":"SV01"},{"PK_GhiChu":"GC02","TieuDeGhiChu":"Bai Tap Lon","NoiDungGhiChu":"Hoan thanh bai tap lon mon Web","ThoiGianNhacGhiChu":"2016-03-10","ThoiGianChinhSuaGhiChu":"2016-03-04","MaSV":"SV01"}]</string>
+    <string name="api_ThongTinTheoMaSV">[{"HoTen":"Nguyen Van A","NgaySinh":"1994-01-20","GioiTinh":"Nam","DiaChi":"So 11 Le Thanh Nghi","SDT":"0881233211","Email":"sinhvien01@gmail.com"}]</string> 
+    <string name="api_TraCuuDieuLeTheoTag">[{"tendieule":"Tin chi","noidungdieule":"Sinh vien duoc dang ky mon hoc theo chuong trinh dao tao voi so luong va thoi gian tuy theo lich dang ky"}]</string>
+    
 </resources>
