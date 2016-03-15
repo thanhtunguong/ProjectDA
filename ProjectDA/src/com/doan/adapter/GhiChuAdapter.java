@@ -31,9 +31,16 @@ public class GhiChuAdapter extends ArrayAdapter<ItemGhiChu> {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View row = inflater.inflate(R.layout.ghichu_item, parent, false);
 		TextView tvTitle = (TextView) row.findViewById(R.id.tvTitle);
+		TextView tvContent = (TextView) row.findViewById(R.id.tvContent);
 
 		final ItemGhiChu igc = myArray.get(position);
 		tvTitle.setText(igc.getTitle());
+		String chitietghichu = igc.getContent();
+		if(chitietghichu.length() > 50){
+			chitietghichu = chitietghichu.substring(0,40);
+			chitietghichu = chitietghichu + ".......";
+		}
+		tvContent.setText(chitietghichu);
 
 		return row;
 	}
