@@ -38,7 +38,7 @@ public class DiemHocTapActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_diem_hoc_tap);
-		toolbar = (Toolbar) findViewById(R.id.ghichu_activity_tool_bar);
+		toolbar = (Toolbar) findViewById(R.id.BaiViet_detail_activity_tool_bar);
 		setSupportActionBar(toolbar);
 
 		if (getSupportActionBar() != null) {

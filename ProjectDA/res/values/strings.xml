@@ -52,6 +52,56 @@
     <string name="title_activity_for_selector_NF">Bảng tin</string>
     <string name="title_activity_for_selector_General">Tổng quan</string>
     <string name="title_activity_diem_hoc_tap">DiemHocTapActivity</string>
+    <string name="text_test">
+        “Samsung Future Developer” là chương trình đào tạo nhằm cung cấp cho sinh viên các kiến thức, kĩ năng thiết yếu để làm quen với bài thi lập trình đó và trở thành một Developer tài năng theo chuẩn toàn cầu của Tập đoàn Samsung Electronics.
+Từ năm 2016, để trở thành lập trình viên của tập đoàn Samsung, tất cả các ứng viên sẽ phải vượt qua một bài kiểm tra kĩ năng lập trình được biên soạn bởi các chuyên gia hàng đầu của Tập đoàn Samsung trên toàn thế giới.
+“Samsung Future Developer” là chương trình đào tạo nhằm cung cấp cho sinh viên các kiến thức, kĩ năng thiết yếu để làm quen với bài thi lập trình đó và trở thành một Developer tài năng theo chuẩn toàn cầu của Tập đoàn Samsung Electronics.
+Thông tin khóa học
+Đối tượng:
+Ưu tiên Sinh viên các chuyên ngành kỹ thuật và có kỹ năng lập trình (các ngành như Công nghệ thông tin, Điện tử viễn thông, Khoa học máy tính, Toán tin Ứng dụng, Cơ điện tử,…) năm cuối hoặc đã/ sẽ tốt nghiệp trong năm 2016; đam mê lập trình và có mong muốn được làm việc tại SVMS sau khi tốt nghiệp ra trường.
+Chương trình đào tạo:
+Ngày
+Thời lượng
+Chủ đề và hoạt động
+Các kỹ năng
+1
+ 
+ 
+ 
+ 
+ 
+ 
+2
+4 giờ
+Introduction and Team building Programming language overview
+1.     Requirement Analysis (Phân tích yêu cầu)
+4 giờ
+Basic of algorithm and approaches
+2.     Algorithm design (Thiết kế thuật toán
+4 giờ
+Data Structure and Algorithm I
+3.     Algorithm implementation (Triển khai thuật toán)
+4 giờ
+Data Structure and Alogorithm II Class closing
+4.     Solution optimization (Tối ưu thuật toán)
+Thời gian học:
+Khóa học sẽ kéo dài trong 04 buổi (04 giờ/buổi) các ngày thứ 7 hàng tuần, bắt đầu từ 27/02/2016
+Địa điểm học:
+Tại Hà Nội (sẽ thông báo sau)
+Học phí: Hoàn toàn miễn phí!
+Số lượng:~ 40 sinh viên/ lớp
+Giảng viên: 
+Các chuyên gia hàng đầu từ Trung tâm Nghiên cứu và Phát triền Điện thoại Di động Samsung Việt Nam (SVMC)
+Cách thức đăng ký
+Các bạn sinh viên truy cập địa chỉ website, facebook của Nhà trường, của Viện/ khoa để tham khảo thông tin và đăng ký chương trình SFD,  đăng ký trực tiếp tại: http://goo.gl/forms/YWYnrQR9M8
+Liên hệ
+Thông tin chi tiết về chương trình, nội dung, cách thức đăng kí hoặc bất kì câu hỏi, thắc mắc nào về khóa học “Samsung Future Developer” vui lòng liên hệ:
+Địa chỉ
+Trung tâm nghiên cứu and Phát triển  ĐTDĐ Samsung Việt Nam
+Tòa nhà PVI, Số 01 Phạm Văn Bạch, Cầu Giấy, Hà Nội
+Tel: +08-4-6263 5200 Fax:  +84-241-369 6003
+        
+    </string>
 
     <!-- /Tùng -->
 
@@ -65,19 +115,18 @@
     <string name="tv_diachi">Địa chỉ:</string>
     <string name="tv_email">Email:</string>
     <string name="tv_lop">Lớp:</string>
-    
     <string name="tv_themghichu">Thêm ghi chú</string>
     <string name="tv_suaghichu">Sửa ghi chú</string>
     <string name="btn_them">Thêm</string>
     <string name="btn_sua">Sửa</string>
     <string name="btn_thoat">Thoát</string>
     <!-- MainNavigatorBar -->
-    
+
     <string name="title_activity_ghi_chu">Ghi chú cá nhân</string>
     <string name="title_activity_nhac_lich">NhacLichActivity</string>
     <string name="title_activity_thong_tin_ca_nhan">ThongTinCaNhanActivity</string>
     <!-- /Việt -->
 
-    
+    <string name="title_activity_bai_viet_detail">BaiVietDetailActivity</string>
 
 </resources>

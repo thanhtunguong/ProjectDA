@@ -1,5 +1,6 @@
 package com.doan.adapter;
 
+import com.doan.fragment.BaiVietFragment;
 import com.doan.fragment.DiemFragment;
 import com.doan.fragment.LichFragment;
 import com.doan.fragment.OthersFragment;
@@ -63,7 +64,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 			tab = new LichFragment();
 			break;
 		case 1:
-			tab = new DiemFragment();
+			tab = new BaiVietFragment();
 			break;
 		case 2:
 			tab = new OthersFragment();
