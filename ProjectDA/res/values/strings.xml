@@ -52,8 +52,7 @@
     <string name="title_activity_for_selector_NF">Bảng tin</string>
     <string name="title_activity_for_selector_General">Tổng quan</string>
     <string name="title_activity_diem_hoc_tap">DiemHocTapActivity</string>
-    <string name="text_test">
-        “Samsung Future Developer” là chương trình đào tạo nhằm cung cấp cho sinh viên các kiến thức, kĩ năng thiết yếu để làm quen với bài thi lập trình đó và trở thành một Developer tài năng theo chuẩn toàn cầu của Tập đoàn Samsung Electronics.
+    <string name="text_test">        “Samsung Future Developer” là chương trình đào tạo nhằm cung cấp cho sinh viên các kiến thức, kĩ năng thiết yếu để làm quen với bài thi lập trình đó và trở thành một Developer tài năng theo chuẩn toàn cầu của Tập đoàn Samsung Electronics.
 Từ năm 2016, để trở thành lập trình viên của tập đoàn Samsung, tất cả các ứng viên sẽ phải vượt qua một bài kiểm tra kĩ năng lập trình được biên soạn bởi các chuyên gia hàng đầu của Tập đoàn Samsung trên toàn thế giới.
 “Samsung Future Developer” là chương trình đào tạo nhằm cung cấp cho sinh viên các kiến thức, kĩ năng thiết yếu để làm quen với bài thi lập trình đó và trở thành một Developer tài năng theo chuẩn toàn cầu của Tập đoàn Samsung Electronics.
 Thông tin khóa học
@@ -99,9 +98,16 @@ Thông tin chi tiết về chương trình, nội dung, cách thức đăng kí 
 Địa chỉ
 Trung tâm nghiên cứu and Phát triển  ĐTDĐ Samsung Việt Nam
 Tòa nhà PVI, Số 01 Phạm Văn Bạch, Cầu Giấy, Hà Nội
-Tel: +08-4-6263 5200 Fax:  +84-241-369 6003
-        
-    </string>
+Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
+    <string name="title_activity_bai_viet_detail">BaiVietDetailActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="login_tvEmail">Email</string>
+    <string name="login_tvPassword">Password</string>
+    <string name="btn_login">Đăng nhập</string>
+    <string name="btn_ForgotPwd">Quên mật khẩu?</string>
+    <string name="acc1_email">abc@gmail.com</string>
+    <string name="acc1_pwd">123</string>
+    <string name="splashScreen_text">Xin chờ 1 lát!</string>
 
     <!-- /Tùng -->
 
@@ -127,16 +133,17 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003
     <string name="title_activity_thong_tin_ca_nhan">ThongTinCaNhanActivity</string>
     <!-- /Việt -->
 
-    <string name="title_activity_bai_viet_detail">BaiVietDetailActivity</string>
+
     <!-- /API Test -->
-    
+
     <string name="api_LichHocTheoMaSV">[{"thu":"3","buoi":"1","tentrangthai":"Hoc","tenphonghoc":"Phong 32"},{"thu":"3","buoi":"2","tentrangthai":"Nghi","tenphonghoc":"Phong 51"}]</string>
     <string name="api_LichThitheoMaSV">[{"thu":"2","buoi":"1","tenphonghoc":"Phong 21"},{"thu":"3","buoi":"2","tenphonghoc":"Phong 32"}]</string>
     <string name="api_DanhSachBaiViet">[{"tieudebaiviet":"Hoi trai khoa","noidungbaiviet":"Vao chu nhat ngay 13 thang 03 Khoa to chuc hoi trai giua cac lop","ngaytaobaiviet":"2016-03-08","thoigianchinhsua":"2016-03-09","hoten":"Giang Vien 01"},{"tieudebaiviet":"Bao cao tien do lan 1","noidungbaiviet":"Vao chu nhat ngay 14 thang 03 Sinh vien bao cao tien do lam do an lan 1","ngaytaobaiviet":"2016-03-08","thoigianchinhsua":"2016-03-10","hoten":"Giang Vien 02"}]</string>
     <string name="api_DanhSachThongBaoTheoMaSV">[{"tieudethongbao":"Hop Lop dau ki","noidungthongbao":"Vao ngay 05\/03\/2016 lop hop tai phong 21","ngaytaothongbao":"2016-03-01"},{"tieudethongbao":"Thong bao so 2","noidungthongbao":"Dia diem hop lop chuyen sang phong 41 thoi gian giu nguyen","ngaytaothongbao":"2016-03-02"}]</string>
     <string name="api_DiemTheoMaSV">[{"diem1":"10","diem2":"7","diem3":"8","tenmonhoc":"Co So Lap Trinh","sotinchi":"3"},{"diem1":"9","diem2":"9","diem3":"5","tenmonhoc":"Toan 2","sotinchi":"3"}]</string>
     <string name="api_GhiChuTheoMaSV">[{"PK_GhiChu":"GC01","TieuDeGhiChu":"Cong viec 01","NoiDungGhiChu":"Lam bai tap ve nha","ThoiGianNhacGhiChu":"2016-03-18","ThoiGianChinhSuaGhiChu":"2016-03-03","MaSV":"SV01"},{"PK_GhiChu":"GC02","TieuDeGhiChu":"Bai Tap Lon","NoiDungGhiChu":"Hoan thanh bai tap lon mon Web","ThoiGianNhacGhiChu":"2016-03-10","ThoiGianChinhSuaGhiChu":"2016-03-04","MaSV":"SV01"}]</string>
-    <string name="api_ThongTinTheoMaSV">[{"HoTen":"Nguyen Van A","NgaySinh":"1994-01-20","GioiTinh":"Nam","DiaChi":"So 11 Le Thanh Nghi","SDT":"0881233211","Email":"sinhvien01@gmail.com"}]</string> 
+    <string name="api_ThongTinTheoMaSV">[{"HoTen":"Nguyen Van A","NgaySinh":"1994-01-20","GioiTinh":"Nam","DiaChi":"So 11 Le Thanh Nghi","SDT":"0881233211","Email":"sinhvien01@gmail.com"}]</string>
     <string name="api_TraCuuDieuLeTheoTag">[{"tendieule":"Tin chi","noidungdieule":"Sinh vien duoc dang ky mon hoc theo chuong trinh dao tao voi so luong va thoi gian tuy theo lich dang ky"}]</string>
-    
+    <string name="title_activity_splash_screen">SplashScreen</string>
+
 </resources>

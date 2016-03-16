@@ -13,5 +13,6 @@
 	<dimen name="others_margin">15dp</dimen>
 	<dimen name="others_avatar_dimen">30dp</dimen>
 	<dimen name="others_option_pic_dimen">40dp</dimen>
+	<dimen name="LoginScreenMargin">20dp</dimen>
 <!-- /Tùng -->
 </resources>

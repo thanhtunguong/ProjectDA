@@ -10,24 +10,21 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/i_m_student_logo"
         android:label="@string/app_name"
         android:theme="@style/MyTheme" >
         <activity
             android:name=".HocTapActivity"
             android:label="@string/app_name" >
+
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
+            -->
         </activity>
-        <!--
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
-        </activity>
-        -->
         <activity
             android:name=".GhiChuActivity"
             android:label="@string/title_activity_ghi_chu" >
@@ -40,8 +37,36 @@
             android:name=".ThongTinCaNhanActivity"
             android:label="@string/title_activity_thong_tin_ca_nhan" >
         </activity>
-          <service android:name="com.doan.service.ScheduleService"></service>
-        <service android:name="com.doan.service.NotifyService"></service>
+        <activity
+            android:name=".DiemHocTapActivity"
+            android:label="@string/title_activity_diem_hoc_tap" >
+        </activity>
+        <activity
+            android:name=".BaiVietDetailActivity"
+            android:label="@string/title_activity_bai_viet_detail" >
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name="com.doan.service.ScheduleService" >
+        </service>
+        <service android:name="com.doan.service.NotifyService" >
+        </service>
+
+        <activity
+            android:name=".SplashScreen"
+            android:label="@string/title_activity_splash_screen"
+            android:noHistory="true" >
+        </activity>
     </application>
 
 </manifest>
