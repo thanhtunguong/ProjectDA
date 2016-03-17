@@ -126,6 +126,7 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="btn_them">Thêm</string>
     <string name="btn_sua">Sửa</string>
     <string name="btn_thoat">Thoát</string>
+    <string name="btn_xoa">Xóa</string>
     <!-- MainNavigatorBar -->
 
     <string name="title_activity_ghi_chu">Ghi chú cá nhân</string>
