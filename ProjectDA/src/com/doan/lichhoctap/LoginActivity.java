@@ -1,6 +1,9 @@
 package com.doan.lichhoctap;
+import java.util.ArrayList;
 
-import android.app.Activity;
+import com.doan.database_handle.ExecuteQuery;
+import com.doan.model.SinhVien;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -16,16 +19,27 @@ import android.widget.Toast;
 
 public class LoginActivity extends ActionBarActivity {
 
-	EditText edEmail, edPwd;
-	Button btnLogin;
+	private EditText edEmail, edPwd;
+	private Button btnLogin;
+	private ExecuteQuery exeQ;
+	private ArrayList<SinhVien> arrAllSV;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		
+		exeQ = new ExecuteQuery(this);
+		exeQ.createDatabase();
+		exeQ.open();
+		arrAllSV = exeQ.getAllSinhVien();
+		
 		edEmail = (EditText) findViewById(R.id.edtLoginEmail);
 		edPwd = (EditText) findViewById(R.id.edtLoginPwd);
-		edEmail.setText("abc@gmail.com");
+		edEmail.setText("utititung@gmail.com");
+		//Hưng edEmail.setText("daigianghean@gmail.com");
+		//Viet edEmail.setText("vietkop94@gmail.com");
+		
 		edPwd.setText("123");
 		btnLogin = (Button) findViewById(R.id.btnLogin);
 		btnLogin.setOnClickListener(new OnClickListener() {
@@ -33,11 +47,18 @@ public class LoginActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String email = getString(R.string.acc1_email);
+				/*String email = getString(R.string.acc1_email);
 				String pwd = getString(R.string.acc1_pwd);
 				String email_input = edEmail.getText().toString();
 				String pwd_input = edPwd.getText().toString();
 				if(email_input.matches(email) && pwd_input.matches(pwd)){
+					Toast.makeText(getBaseContext(), "Ok", Toast.LENGTH_SHORT).show();
+					Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
+					startActivity(intent);
+				}else {
+					Toast.makeText(getBaseContext(), "Failed", Toast.LENGTH_SHORT).show();
+				}*/
+				if(checkAcc() == true){
 					Toast.makeText(getBaseContext(), "Ok", Toast.LENGTH_SHORT).show();
 					Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
 					startActivity(intent);
@@ -88,7 +109,31 @@ public class LoginActivity extends ActionBarActivity {
 			}
 		});
 	}
+	private boolean checkAcc(){
+		String dbEmail, dbPwd, inputEmail, inputPwd;
+		inputEmail = edEmail.getText().toString();
+		inputPwd = edPwd.getText().toString();
+		int i=0;
+		for (SinhVien sv : arrAllSV) {
+			 dbEmail = sv.getEmailSV();
+			 dbPwd = sv.getPwdSV();
+			 if(inputEmail.matches(dbEmail) && inputPwd.matches(dbPwd)){
+				 /*Toast.makeText(getBaseContext(), "Ok", Toast.LENGTH_SHORT).show();
+				 Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
+				 startActivity(intent);*/
+				 i = 1;
+				 break;
+			 }
+		}
+		if(i == 0){
+			return false;
+		}else {
+			return true;
+		}
+	}
 	private void checkEditText(){
+		
+		
 		String eemail, epwd;
 		eemail = edEmail.getText().toString();
 		epwd = edPwd.getText().toString();
