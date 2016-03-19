@@ -78,13 +78,13 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 
 		arrItemghichu = new ArrayList<ItemGhiChu>();
 
-		ItemGhiChu gc = new ItemGhiChu("Cong viec 01", "13:40 25/02/2016",
+		ItemGhiChu gc = new ItemGhiChu("Cong viec 01", 13,40,25,02,2016,
 				"Lam bai ve nha");
 		arrItemghichu.add(gc);
-		ItemGhiChu gc1 = new ItemGhiChu("Bai tap lon", "15:00 26/02/2016",
+		ItemGhiChu gc1 = new ItemGhiChu("Bai tap lon", 15,00,26,02,2016,
 				"Hoan thanh bai tap lon mon lap trinh di dong");
 		arrItemghichu.add(gc1);
-		ItemGhiChu gc2 = new ItemGhiChu("Chuyen de co so", "17:30 27/02/2016",
+		ItemGhiChu gc2 = new ItemGhiChu("Chuyen de co so",17,30,27,02,2016,
 				"Di hoc chuyen de");
 		arrItemghichu.add(gc2);
 
@@ -136,6 +136,12 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		tvTime.setText(arrItemghichu.get(position).getTime());
 		edtContent.setText(arrItemghichu.get(position).getContent());
 		
+		gio = arrItemghichu.get(position).getHour();
+		phut = arrItemghichu.get(position).getMinute();
+		ngay = arrItemghichu.get(position).getDay();
+		thang = arrItemghichu.get(position).getMonth();
+		nam = arrItemghichu.get(position).getYear();
+		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
 		builder.setTitle(R.string.tv_suaghichu);
@@ -168,9 +174,11 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 
 						// ItemGhiChu gc = new
 						// ItemGhiChu("Cong viec 01","13:40 25/02/2016","Lam bai tap ve nha");
-						suaGhichu(edtTitle.getText().toString(), tvTime
-								.getText().toString(), edtContent.getText()
+						suaGhichu(edtTitle.getText().toString(), 
+								gio, phut, ngay, thang, nam,
+								edtContent.getText()
 								.toString(),position);
+						
 						
 					}
 				});
@@ -181,6 +189,13 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 						dialog.dismiss();
 					}
 				});
+		builder.setNeutralButton(R.string.btn_xoa, new DialogInterface.OnClickListener() {
+			
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				xoaGhichu(position);
+			}
+		});
 		AlertDialog dialog = builder.create();
 		return dialog;
 
@@ -197,6 +212,12 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 				.findViewById(R.id.tvTime);
 		final EditText edtContent = (EditText) alertLayout
 				.findViewById(R.id.edtContent);
+		
+		Calendar c1 = Calendar.getInstance();
+		gio = c1.getTime().getHours();
+		phut = c1.getTime().getMinutes();
+		ngay = c1.getTime().getDate();
+		thang = c1.getTime().getMonth();
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -227,8 +248,9 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 
 						// ItemGhiChu gc = new
 						// ItemGhiChu("Cong viec 01","13:40 25/02/2016","Lam bai tap ve nha");
-						themGhichu(edtTitle.getText().toString(), tvTime
-								.getText().toString(), edtContent.getText()
+						themGhichu(edtTitle.getText().toString(), 
+								gio, phut, ngay, thang, nam,
+								 edtContent.getText()
 								.toString());
 					}
 				});
@@ -244,26 +266,40 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 
 	}
 
-	protected void themGhichu(String strTitle, String strTime, String strContent) {
+	protected void themGhichu(String strTitle, int hour, int minute, int day, int month, int year, String strContent) {
 		ItemGhiChu gc = new ItemGhiChu();
 		gc.setTitle(strTitle);
-		gc.setTime(strTime);
+//		gc.setTime(strTime);
+		gc.setHour(hour);
+		gc.setMinute(minute);
+		gc.setDay(day);
+		gc.setMonth(month);
+		gc.setYear(year);
 		gc.setContent(strContent);
 		arrItemghichu.add(gc);
 		adapter.notifyDataSetChanged();
-		datNotify(gio,phut,ngay,thang,nam);
+		datNotify(hour,minute,day,month,year);
 
 	}
-	protected void suaGhichu(String strTitle, String strTime, String strContent, int position) {
+	protected void suaGhichu(String strTitle, int hour, int minute, int day, int month, int year, String strContent, int position) {
 		arrItemghichu.get(position).setTitle(strTitle);
-		arrItemghichu.get(position).setTime(strTime);
+//		arrItemghichu.get(position).setTime(strTime);
+		arrItemghichu.get(position).setHour(hour);
+		arrItemghichu.get(position).setMinute(minute);
+		arrItemghichu.get(position).setDay(day);
+		arrItemghichu.get(position).setMonth(month);
+		arrItemghichu.get(position).setYear(year);
 		arrItemghichu.get(position).setContent(strContent);
 		adapter.notifyDataSetChanged();
-		datNotify(gio,phut,ngay,thang,nam);
+		datNotify(hour,minute,day,month,year);
 
 	}
+	protected void xoaGhichu(int positon) {
+		arrItemghichu.remove(positon);
+		adapter.notifyDataSetChanged();
+	}
 
-	public void datNotify(int hour, int minute, int day1, int month1, int year1 ){
+	public void datNotify(int hour1, int minute1, int day1, int month1, int year1 ){
 //		ScheduleClient scheduleClient;
 //		scheduleClient = new ScheduleClient(this);
 //	    scheduleClient.doBindService();
@@ -271,8 +307,8 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
     	// we set the time to midnight (i.e. the first minute of that day)
     	Calendar c = Calendar.getInstance();
     	c.set(year1, month1, day1);
-    	c.set(Calendar.HOUR_OF_DAY, hour);
-    	c.set(Calendar.MINUTE, minute);
+    	c.set(Calendar.HOUR_OF_DAY, hour1);
+    	c.set(Calendar.MINUTE, minute1);
     	c.set(Calendar.SECOND, 0);
     	// Ask our service to set an alarm for that date, this activity talks to the client that talks to the service
     	scheduleClient.setAlarmForNotification(c);
