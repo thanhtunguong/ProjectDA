@@ -1,0 +1,136 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.doan.lichhoctap.DanhSachMonCoTheDangKiActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Ki_1" />
+
+        <ExpandableListView
+            android:id="@+id/elvKi1"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:childDivider="@color/transparent"
+            android:divider="@color/transparent"
+            android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"
+            android:scrollbars="none" >
+        </ExpandableListView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Ki_2" />
+
+        <ExpandableListView
+            android:id="@+id/elvKi2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:childDivider="@color/transparent"
+            android:divider="@color/transparent"
+            android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"
+            android:scrollbars="none" >
+        </ExpandableListView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Ki_3" />
+
+        <ExpandableListView
+            android:id="@+id/elvKi3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:childDivider="@color/transparent"
+            android:divider="@color/transparent"
+            android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"
+            android:scrollbars="none" >
+        </ExpandableListView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Ki_4" />
+
+        <ExpandableListView
+            android:id="@+id/elvKi4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:childDivider="@color/transparent"
+            android:divider="@color/transparent"
+            android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"
+            android:scrollbars="none" >
+        </ExpandableListView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Ki_5" />
+
+        <ExpandableListView
+            android:id="@+id/elvKi5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:childDivider="@color/transparent"
+            android:divider="@color/transparent"
+            android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"
+            android:scrollbars="none" >
+        </ExpandableListView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Ki_6" />
+
+        <ExpandableListView
+            android:id="@+id/elvKi6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:childDivider="@color/transparent"
+            android:divider="@color/transparent"
+            android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"
+            android:scrollbars="none" >
+        </ExpandableListView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Ki_7" />
+
+        <ExpandableListView
+            android:id="@+id/elvKi7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:childDivider="@color/transparent"
+            android:divider="@color/transparent"
+            android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"
+            android:scrollbars="none" >
+        </ExpandableListView>
+    </LinearLayout>
+
+</ScrollView>

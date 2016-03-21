@@ -108,6 +108,13 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="acc1_email">abc@gmail.com</string>
     <string name="acc1_pwd">123</string>
     <string name="splashScreen_text">Xin chờ 1 lát!</string>
+    <string name="Ki_1">Kì I</string>
+    <string name="Ki_2">Kì II</string>
+    <string name="Ki_3">Kì III</string>
+    <string name="Ki_4">Kì IV</string>
+    <string name="Ki_5">Kì V</string>
+    <string name="Ki_6">Kì VI</string>
+    <string name="Ki_7">Kì VII</string>
 
     <!-- /Tùng -->
 
@@ -146,5 +153,6 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="api_ThongTinTheoMaSV">[{"HoTen":"Nguyen Van A","NgaySinh":"1994-01-20","GioiTinh":"Nam","DiaChi":"So 11 Le Thanh Nghi","SDT":"0881233211","Email":"sinhvien01@gmail.com"}]</string>
     <string name="api_TraCuuDieuLeTheoTag">[{"tendieule":"Tin chi","noidungdieule":"Sinh vien duoc dang ky mon hoc theo chuong trinh dao tao voi so luong va thoi gian tuy theo lich dang ky"}]</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="title_activity_danh_sach_mon_co_the_dang_ki">DanhSachMonCoTheDangKiActivity</string>
 
 </resources>

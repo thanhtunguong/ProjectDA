@@ -3,6 +3,8 @@ package com.doan.lichhoctap;
 import java.util.ArrayList;
 
 import com.doan.adapter.HocTapDiemAdapter;
+import com.doan.app.Global;
+import com.doan.database_handle.ExecuteQuery;
 import com.doan.model.DiemHocTap;
 
 import android.app.Activity;
@@ -23,16 +25,17 @@ import android.widget.LinearLayout.LayoutParams;
 
 public class DiemHocTapActivity extends ActionBarActivity {
 	
-	Toolbar toolbar;
-	DiemHocTap d1 = new DiemHocTap("AWD1", "Kien truc may tinh", 4, 10, 5, 8);
+	private Toolbar toolbar;
+	/*DiemHocTap d1 = new DiemHocTap("AWD1", "Kien truc may tinh", 4, 10, 5, 8);
 	DiemHocTap d2 = new DiemHocTap("AWD2", "Ki thuat dien tu so", 4, 8, 8, 5);
 	DiemHocTap d3 = new DiemHocTap("AWD3", "Nguyen ly he dieu hanh", 3, 10, 8, 2);
-	DiemHocTap d4 = new DiemHocTap("AWD4", "Thuong mai dien tu", 3, 10, 8, 6);
-	ArrayList<DiemHocTap> arlDiem = new ArrayList<DiemHocTap>();
-	int TC = 0;
-    float DTB = 0;
-    double tongDiem = 0;
-    Context c;
+	DiemHocTap d4 = new DiemHocTap("AWD4", "Thuong mai dien tu", 3, 10, 8, 6);*/
+	private ArrayList<DiemHocTap> arlDiem = new ArrayList<DiemHocTap>();
+	private int TC = 0;
+	private float DTB = 0;
+    private double tongDiem = 0;
+    private Context c;
+    private ExecuteQuery exeQ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +50,25 @@ public class DiemHocTapActivity extends ActionBarActivity {
 		
 		c = this;
         //setTitleActivity(R.string.title_activity_for_selector_NF);
-        arlDiem.add(d1);
+        /*arlDiem.add(d1);
         arlDiem.add(d2);
         arlDiem.add(d3);
-        arlDiem.add(d4);
+        arlDiem.add(d4);*/
         /*arlDiem.add(d5);
         arlDiem.add(d6);*/
+		String masv = Global.getStringPreference(c, "MaSVDN", "0");
+		exeQ = new ExecuteQuery(c);
+		arlDiem = exeQ.getDiemSV(c);
+		
         TextView tvTC, tvDTB, tvSTCpc, tvSTCprogess, tvDTBpc, tvDTBprogess;
         LinearLayout lnSTC, lnDTB;
         for (DiemHocTap diemHocTap : arlDiem) {
         	double sdtb = ((diemHocTap.getDiemCC() + diemHocTap.getDiemKT()*2 + diemHocTap.getDiemThi()*7)/10)*1.0;
         	sdtb = Math.floor(sdtb*10)/10;
-			tinhTongKetHocTap(diemHocTap.getSoTinChi(), sdtb);
+        	//trạng thái = 0 tức là môn đã có điểm
+        	if(diemHocTap.getMaTrangThaiDK().matches("0")){
+        		tinhTongKetHocTap(diemHocTap.getSoTinChi(), sdtb);
+        	}
 		}
         tvTC = (TextView) findViewById(R.id.tvSoTinChiDaHoc);
         tvTC.setText(getString(R.string.string_SoTinChiDaHoc));

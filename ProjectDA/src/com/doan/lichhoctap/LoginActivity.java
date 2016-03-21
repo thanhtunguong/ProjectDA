@@ -1,6 +1,7 @@
 package com.doan.lichhoctap;
 import java.util.ArrayList;
 
+import com.doan.app.Global;
 import com.doan.database_handle.ExecuteQuery;
 import com.doan.model.SinhVien;
 
@@ -23,6 +24,7 @@ public class LoginActivity extends ActionBarActivity {
 	private Button btnLogin;
 	private ExecuteQuery exeQ;
 	private ArrayList<SinhVien> arrAllSV;
+	private SinhVien sv;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -114,13 +116,13 @@ public class LoginActivity extends ActionBarActivity {
 		inputEmail = edEmail.getText().toString();
 		inputPwd = edPwd.getText().toString();
 		int i=0;
-		for (SinhVien sv : arrAllSV) {
+		/*for (SinhVien sv : arrAllSV) {
 			 dbEmail = sv.getEmailSV();
 			 dbPwd = sv.getPwdSV();
 			 if(inputEmail.matches(dbEmail) && inputPwd.matches(dbPwd)){
-				 /*Toast.makeText(getBaseContext(), "Ok", Toast.LENGTH_SHORT).show();
+				 Toast.makeText(getBaseContext(), "Ok", Toast.LENGTH_SHORT).show();
 				 Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
-				 startActivity(intent);*/
+				 startActivity(intent);
 				 i = 1;
 				 break;
 			 }
@@ -129,7 +131,13 @@ public class LoginActivity extends ActionBarActivity {
 			return false;
 		}else {
 			return true;
+		}*/
+		if(exeQ.getSvUser(inputEmail, inputPwd, sv) == true){
+			return true;
+		}else {
+			return false;
 		}
+		
 	}
 	private void checkEditText(){
 		

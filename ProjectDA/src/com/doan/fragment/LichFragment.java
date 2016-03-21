@@ -31,24 +31,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class LichFragment extends Fragment {
-
+	
 	private ArrayList<DayInWeek> parentItems;
 	private ArrayList<Object> childItems;
-	ArrayList<TietHoc> arlAll;
+	private ArrayList<TietHoc> arlAll;
 	private ArrayList<TietHoc> arlTh2, arlTh3, arlTh4, arlTh5, arlTh6, arlTh7, arlTh8;
-	ArrayList<Integer> arlColor;
-	String resultDate = "";
-	String firstdayOfWeek, lastdayOfWeek;
-	String resultWeek = "";
-	String resultDayName = "";
-	Date ngayTinh, ngayChonDatePicker, ngayDauTuanTru1, ngayCuoiTuanCong1;
-	TextView tvToday, tvDayName, tvWeek;
-	ExpandableListView expandableList;
-	HocTapLichNgayAdapter adapter;
-	View view;
-	LayoutInflater l;
+	private ArrayList<Integer> arlColor;
+	private String resultDate = "";
+	private String firstdayOfWeek, lastdayOfWeek;
+	private String resultWeek = "";
+	private String resultDayName = "";
+	private Date ngayTinh, ngayChonDatePicker, ngayDauTuanTru1, ngayCuoiTuanCong1;
+	private TextView tvToday, tvDayName, tvWeek;
+	private ExpandableListView expandableList;
+	private HocTapLichNgayAdapter adapter;
+	private View view;
+	private LayoutInflater l;
 	int lan;
-	Activity c;
+	private Activity c;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,

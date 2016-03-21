@@ -23,10 +23,10 @@ import android.widget.TextView;
 
 public class DiemFragment extends Fragment {
 	
-	DiemHocTap d1 = new DiemHocTap("AWD1", "Kien truc may tinh", 4, 10, 5, 8);
+	/*DiemHocTap d1 = new DiemHocTap("AWD1", "Kien truc may tinh", 4, 10, 5, 8);
 	DiemHocTap d2 = new DiemHocTap("AWD2", "Ki thuat dien tu so", 4, 8, 8, 5);
 	DiemHocTap d3 = new DiemHocTap("AWD3", "Nguyen ly he dieu hanh", 3, 10, 8, 2);
-	DiemHocTap d4 = new DiemHocTap("AWD4", "Thuong mai dien tu", 3, 10, 8, 6);
+	DiemHocTap d4 = new DiemHocTap("AWD4", "Thuong mai dien tu", 3, 10, 8, 6);*/
 	ArrayList<DiemHocTap> arlDiem = new ArrayList<DiemHocTap>();
 	int TC = 0;
     float DTB = 0;
@@ -38,10 +38,10 @@ public class DiemFragment extends Fragment {
         View v =inflater.inflate(R.layout.hoctap_diem_layout,container,false);
         c = getActivity();
         //setTitleActivity(R.string.title_activity_for_selector_NF);
-        arlDiem.add(d1);
+        /*arlDiem.add(d1);
         arlDiem.add(d2);
         arlDiem.add(d3);
-        arlDiem.add(d4);
+        arlDiem.add(d4);*/
         /*arlDiem.add(d5);
         arlDiem.add(d6);*/
         TextView tvTC, tvDTB, tvSTCpc, tvSTCprogess, tvDTBpc, tvDTBprogess;

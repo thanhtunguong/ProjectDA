@@ -30,6 +30,10 @@ public class ColumnName {
 	public static String DIEM_DIEM_2 = "Diem2";
 	public static String DIEM_DIEM_7 = "Diem7";
 	public static String DIEM_MA_LOP_TIN_CHI = "FK_LopTinChi";
+	public static String DIEM_MA_SV = "FK_SV";
+	public static String DIEM_MA_LICH_THI = "FK_LichThi";
+	public static String DIEM_TRANG_THAI_DK = "TrangThaiDK";
+	public static String DIEM_THOI_GIAN_DK = "ThoiGianDK";
 	
 	//tbl_DieuLe
 	public static String DIEULE_TABLE = "tbl_DieuLe";
@@ -127,7 +131,7 @@ public class ColumnName {
 	public static String MON_HOC_SO_TIN_CHI = "SoTinChi";
 	
 	//tbl_MonTienQuyet
-	public static String MonTIENQUYET_TABLE = "tblMonTienQuyet";
+	public static String MonTIENQUYET_TABLE = "tbl_MonTienQuyet";
 	public static String MonTIENQUYET_MA_MON_CTDT = "PK_CTDT_Mon";
 	public static String MonTIENQUYET_MA_MON_CTDT_TIEN_QUYET = "PK_MonTienQuyet";
 	

@@ -44,7 +44,7 @@ public class HocTapDiemAdapter extends ArrayAdapter<DiemHocTap> {
 		//tvMaLopTC = (TextView) convertView.findViewById(R.id.tvMaLopTC);
 		//tvMaLopTC.setText(myArray.get(position).getMaLopTinChi());
 		tvTenMon = (TextView) convertView.findViewById(R.id.tvTenMon);
-		tvTenMon.setText(myArray.get(position).getTenMon());
+		tvTenMon.setText(myArray.get(position).getTenMonHoc());
 		//tvSotinchi = (TextView) convertView.findViewById(R.id.tvSoTinChi);
 		//tvSotinchi.setText(myArray.get(position).getSoTinChi() + "");
 		
