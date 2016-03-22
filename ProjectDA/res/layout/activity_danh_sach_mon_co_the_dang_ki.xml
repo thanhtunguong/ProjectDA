@@ -20,14 +20,16 @@
 
         <ExpandableListView
             android:id="@+id/elvKi1"
+            android:isScrollContainer="true"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:childDivider="@color/transparent"
             android:divider="@color/transparent"
             android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"
             android:scrollbars="none" >
+
         </ExpandableListView>
 
         <TextView

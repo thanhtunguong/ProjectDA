@@ -114,7 +114,7 @@ public class ExecuteQuery {
 		String selectQuery = "SELECT " + ColumnName.DIEM_DIEM_1 + "," + ColumnName.DIEM_DIEM_2 + "," + ColumnName.DIEM_DIEM_7 + ","
 										+ ColumnName.DIEM_MA_LOP_TIN_CHI + "," + ColumnName.DIEM_MA_LICH_THI + ","
 										+ ColumnName.DIEM_TRANG_THAI_DK + ","
-										+ ColumnName.MON_HOC_TEN_MON_HOC + "," + ColumnName.MON_HOC_SO_TIN_CHI + "," + ColumnName.DIEM_THOI_GIAN_DK + ""
+										+ ColumnName.MON_HOC_TEN_MON_HOC + "," + ColumnName.MON_HOC_SO_TIN_CHI + "," + ColumnName.DIEM_THOI_GIAN_DK + " "
 				+ "FROM " + ColumnName.DIEM_TABLE + ", " + ColumnName.LopTINCHI_TABLE + ", " + ColumnName.MON_HOC_TABLE + " "
 				+ " WHERE " + ColumnName.DIEM_MA_SV + " = '" + Global.getStringPreference(c, "MaSVDN", "0") + "'" 
 					+ " and " + ColumnName.DIEM_MA_LOP_TIN_CHI + " = " + ColumnName.LopTINCHI_MA_LOP_TIN_CHI

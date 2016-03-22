@@ -10,7 +10,7 @@
         tools:context="com.doan.lichhoctap.HocTapActivity" >
 
         <include
-            android:id="@+id/BaiViet_detail_activity_tool_bar"
+            android:id="@+id/DanhSachMonDangKi_activity_tool_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/hoctap_toolbar" />

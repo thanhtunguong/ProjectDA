@@ -51,7 +51,7 @@
     <string name="title_activity_for_selector_Lich">Lịch học tập</string>
     <string name="title_activity_for_selector_NF">Bảng tin</string>
     <string name="title_activity_for_selector_General">Tổng quan</string>
-    <string name="title_activity_diem_hoc_tap">DiemHocTapActivity</string>
+    <string name="title_activity_diem_hoc_tap">Kết quả học tập</string>
     <string name="text_test">        “Samsung Future Developer” là chương trình đào tạo nhằm cung cấp cho sinh viên các kiến thức, kĩ năng thiết yếu để làm quen với bài thi lập trình đó và trở thành một Developer tài năng theo chuẩn toàn cầu của Tập đoàn Samsung Electronics.
 Từ năm 2016, để trở thành lập trình viên của tập đoàn Samsung, tất cả các ứng viên sẽ phải vượt qua một bài kiểm tra kĩ năng lập trình được biên soạn bởi các chuyên gia hàng đầu của Tập đoàn Samsung trên toàn thế giới.
 “Samsung Future Developer” là chương trình đào tạo nhằm cung cấp cho sinh viên các kiến thức, kĩ năng thiết yếu để làm quen với bài thi lập trình đó và trở thành một Developer tài năng theo chuẩn toàn cầu của Tập đoàn Samsung Electronics.
@@ -99,7 +99,7 @@ Thông tin chi tiết về chương trình, nội dung, cách thức đăng kí 
 Trung tâm nghiên cứu and Phát triển  ĐTDĐ Samsung Việt Nam
 Tòa nhà PVI, Số 01 Phạm Văn Bạch, Cầu Giấy, Hà Nội
 Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
-    <string name="title_activity_bai_viet_detail">BaiVietDetailActivity</string>
+    <string name="title_activity_bai_viet_detail">Chi tiết bài viết</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="login_tvEmail">Email</string>
     <string name="login_tvPassword">Password</string>
@@ -115,6 +115,8 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="Ki_5">Kì V</string>
     <string name="Ki_6">Kì VI</string>
     <string name="Ki_7">Kì VII</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="title_activity_danh_sach_mon_co_the_dang_ki">Danh sách môn học</string>
 
     <!-- /Tùng -->
 
@@ -152,7 +154,6 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="api_GhiChuTheoMaSV">[{"PK_GhiChu":"GC01","TieuDeGhiChu":"Cong viec 01","NoiDungGhiChu":"Lam bai tap ve nha","ThoiGianNhacGhiChu":"2016-03-18","ThoiGianChinhSuaGhiChu":"2016-03-03","MaSV":"SV01"},{"PK_GhiChu":"GC02","TieuDeGhiChu":"Bai Tap Lon","NoiDungGhiChu":"Hoan thanh bai tap lon mon Web","ThoiGianNhacGhiChu":"2016-03-10","ThoiGianChinhSuaGhiChu":"2016-03-04","MaSV":"SV01"}]</string>
     <string name="api_ThongTinTheoMaSV">[{"HoTen":"Nguyen Van A","NgaySinh":"1994-01-20","GioiTinh":"Nam","DiaChi":"So 11 Le Thanh Nghi","SDT":"0881233211","Email":"sinhvien01@gmail.com"}]</string>
     <string name="api_TraCuuDieuLeTheoTag">[{"tendieule":"Tin chi","noidungdieule":"Sinh vien duoc dang ky mon hoc theo chuong trinh dao tao voi so luong va thoi gian tuy theo lich dang ky"}]</string>
-    <string name="title_activity_splash_screen">SplashScreen</string>
-    <string name="title_activity_danh_sach_mon_co_the_dang_ki">DanhSachMonCoTheDangKiActivity</string>
+    
 
 </resources>
