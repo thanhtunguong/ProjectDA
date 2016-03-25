@@ -59,7 +59,7 @@
 
             <EditText
                 android:id="@+id/edtNgaysinhnguoidung"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/ActionBarColor"
                 android:enabled="false"
@@ -87,8 +87,9 @@
 
             <EditText
                 android:id="@+id/edtGioitinhnguoidung"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
                 android:background="@color/ActionBarColor"
                 android:enabled="false"
                 android:text="Nam"
@@ -110,13 +111,15 @@
 
     <EditText
         android:id="@+id/edtDiachinguoidung"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="20dp"
         android:background="@color/ActionBarColor"
         android:enabled="false"
         android:text="Thanh Trì - Hoàng Mai - Hà Nội"
         android:textColor="@color/white"
+        android:maxLength="30"
         android:textSize="15sp" />
     <!-- Email -->
 
@@ -190,8 +193,9 @@
 
             <EditText
                 android:id="@+id/edtSdtnguoidung"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
                 android:background="@color/ActionBarColor"
                 android:enabled="false"
                 android:maxLength="12"

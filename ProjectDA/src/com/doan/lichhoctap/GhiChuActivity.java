@@ -43,7 +43,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 
-
 public class GhiChuActivity extends ActionBarActivity implements OnClickListener{
 
 	
