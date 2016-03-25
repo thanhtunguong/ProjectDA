@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/ColorPrimary"
+    android:descendantFocusability="beforeDescendants"
+    android:elevation="2dp"
+    android:focusableInTouchMode="true"
+    android:theme="@style/Base.ThemeOverlay.AppCompat.Dark" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <AutoCompleteTextView
+            android:id="@+id/autocpltSearchDieuLe"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:completionThreshold="1"
+            android:drawableLeft="@drawable/ic_search_white_18dp"
+            android:ems="10"
+            android:imeOptions="actionSearch"
+        	android:inputType="text"
+            android:maxLines="1" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btnSoTaySearchClear"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_clear_white_18dp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.Toolbar>

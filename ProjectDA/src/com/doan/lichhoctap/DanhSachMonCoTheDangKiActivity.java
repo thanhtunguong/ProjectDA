@@ -47,7 +47,7 @@ public class DanhSachMonCoTheDangKiActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_danh_sach_mon_co_the_dang_ki_test);
-		Toolbar toolbar = (Toolbar) findViewById(R.id.DanhSachMonDangKi_activity_tool_bar);
+		Toolbar toolbar = (Toolbar) findViewById(R.id.BaiViet_activity_tool_bar);
 		setSupportActionBar(toolbar);
 
 		if (getSupportActionBar() != null) {

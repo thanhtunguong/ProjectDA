@@ -22,7 +22,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -70,6 +70,10 @@
         <activity
             android:name=".DanhSachMonCoTheDangKiActivity"
             android:label="@string/title_activity_danh_sach_mon_co_the_dang_ki" >
+        </activity>
+        <activity
+            android:name=".SoTayThongTinActivity"
+            android:label="@string/title_activity_so_tay_thong_tin" >
         </activity>
     </application>
 

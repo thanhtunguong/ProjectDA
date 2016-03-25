@@ -3,6 +3,7 @@ import com.doan.lichhoctap.DanhSachMonCoTheDangKiActivity;
 import com.doan.lichhoctap.DiemHocTapActivity;
 import com.doan.lichhoctap.GhiChuActivity;
 import com.doan.lichhoctap.R;
+import com.doan.lichhoctap.SoTayThongTinActivity;
 import com.doan.lichhoctap.ThongTinCaNhanActivity;
 
 import android.app.Activity;
@@ -84,7 +85,8 @@ public class OthersFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Toast.makeText(c, "InfoSearch", Toast.LENGTH_SHORT).show();
-				
+				Intent i = new Intent(getContext(), SoTayThongTinActivity.class);
+				startActivity(i);
 			}
 		});
         

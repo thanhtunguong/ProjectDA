@@ -154,6 +154,6 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="api_GhiChuTheoMaSV">[{"PK_GhiChu":"GC01","TieuDeGhiChu":"Cong viec 01","NoiDungGhiChu":"Lam bai tap ve nha","ThoiGianNhacGhiChu":"2016-03-18","ThoiGianChinhSuaGhiChu":"2016-03-03","MaSV":"SV01"},{"PK_GhiChu":"GC02","TieuDeGhiChu":"Bai Tap Lon","NoiDungGhiChu":"Hoan thanh bai tap lon mon Web","ThoiGianNhacGhiChu":"2016-03-10","ThoiGianChinhSuaGhiChu":"2016-03-04","MaSV":"SV01"}]</string>
     <string name="api_ThongTinTheoMaSV">[{"HoTen":"Nguyen Van A","NgaySinh":"1994-01-20","GioiTinh":"Nam","DiaChi":"So 11 Le Thanh Nghi","SDT":"0881233211","Email":"sinhvien01@gmail.com"}]</string>
     <string name="api_TraCuuDieuLeTheoTag">[{"tendieule":"Tin chi","noidungdieule":"Sinh vien duoc dang ky mon hoc theo chuong trinh dao tao voi so luong va thoi gian tuy theo lich dang ky"}]</string>
-    
+    <string name="title_activity_so_tay_thong_tin">SoTayThongTinActivity</string>
 
 </resources>

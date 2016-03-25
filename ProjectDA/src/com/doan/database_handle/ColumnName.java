@@ -41,12 +41,14 @@ public class ColumnName {
 	public static String DIEULE_TEN_DIEU_LE = "TenDieuLe";
 	public static String DIEULE_NOI_DUNG = "NoiDung";
 	public static String DIEULE_MA_HE = "FK_He";
+	public static String DIEULE_MA_CHUONG = "FK_Chuong";
 	
 	//tbl_DieuLeTag
 	public static String DIEULEtag_TABLE = "tbl_DieuLeTag";
 	public static String DIEULEtag_MA_TAG = "PK_Tag";
 	public static String DIEULEtag_TAG = "Tag";
 	public static String DIEULEtag_MA_DIEU_LE = "FK_DieuLe";
+	public static String DIEULEtag_MUC_UU_TIEN = "MucUuTien";
 	
 	//tbl_GhiChu
 	public static String GHI_CHU_TABLE = "tbl_GhiChu";
@@ -167,4 +169,10 @@ public class ColumnName {
 	public static String TRINHDO_TABLE = "tbl_TrinhDo";
 	public static String TRINHDO_MA_TRINH_DO = "PK_TrinhDo";
 	public static String TRINHDO_TEN_TRINH_DO = "TenTrinhDo";
+	
+	//tbl_Chuong
+	public static String CHUONGDIEULE_TABLE = "tbl_Chuong";
+	public static String CHUONGDIEULE_MA_CHUONG = "PK_Chuong";
+	public static String CHUONGDIEULE_TEN_CHUONG = "TenChuong";
+	
 }

@@ -17,7 +17,7 @@ public class BaiVietDetailActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bai_viet_detail);
-		toolbar = (Toolbar) findViewById(R.id.DanhSachMonDangKi_activity_tool_bar);
+		toolbar = (Toolbar) findViewById(R.id.BaiViet_activity_tool_bar);
 		setSupportActionBar(toolbar);
 
 		if (getSupportActionBar() != null) {

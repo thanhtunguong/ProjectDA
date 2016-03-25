@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <include
-        android:id="@+id/DanhSachMonDangKi_activity_tool_bar"
+        android:id="@+id/BaiViet_activity_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/hoctap_toolbar" />
@@ -14,8 +14,6 @@
         android:id="@+id/elvAllMonHoc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:childDivider="@color/transparent"
         android:divider="@color/transparent"
         android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"

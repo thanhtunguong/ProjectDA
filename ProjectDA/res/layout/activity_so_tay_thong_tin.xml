@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context="com.doan.lichhoctap.SoTayThongTinActivity" >
+
+    <include
+        android:id="@+id/SoTay_activity_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/so_tay_thong_tin_toolbar" />
+    
+    
+
+    <TextView
+        android:id="@+id/selection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#5576BE"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <!-- <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/tvContents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin" />
+    </ScrollView> -->
+    <ExpandableListView
+        android:id="@+id/elvAllDieuLe"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:childDivider="@color/transparent"
+        android:divider="@color/transparent"
+        android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"
+        android:scrollbars="none" >
+    </ExpandableListView>
+
+</LinearLayout>

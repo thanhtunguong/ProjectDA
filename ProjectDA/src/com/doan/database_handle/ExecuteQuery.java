@@ -2,9 +2,12 @@ package com.doan.database_handle;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.doan.app.Global;
 import com.doan.model.DiemHocTap;
+import com.doan.model.DieuLe;
+import com.doan.model.DieuLeTag;
 import com.doan.model.MonHoc;
 import com.doan.model.MonHocTienQuyet;
 import com.doan.model.SinhVien;
@@ -249,4 +252,112 @@ public class ExecuteQuery {
 		return arrMonHoc;
 	}
 //___/tbl_MonHoc
+	
+//___tbl_DieuLeTag
+	public ArrayList<DieuLeTag> getAllTag(){
+		String arr[];
+		ArrayList<DieuLeTag> arrTag = new ArrayList<DieuLeTag>();
+		String selectQuery = "SELECT *"
+				+ "FROM " + ColumnName.DIEULEtag_TABLE + " "
+				+ "GROUP BY " + ColumnName.DIEULEtag_TAG; 
+		database = mDbHelper.getReadableDatabase();
+		Cursor cursor = database.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) {
+			do {
+				DieuLeTag dlt = new DieuLeTag();
+				
+				dlt.setTag(cursor.getString(1));
+				dlt.setMaDieuLe(cursor.getString(2));
+				dlt.setMucUuTien(cursor.getInt(3));
+				
+				arrTag.add(dlt);
+			} while (cursor.moveToNext());
+		}
+		return arrTag;
+	}
+	public ArrayList<DieuLeTag> getTagTheoSearch(ArrayList<String> input){
+		String para = "";
+		if(input.size() > 0){
+			para = " where ";
+			for(int i = 0; i < input.size(); i++){
+				if((i + 1) == input.size()){
+					para = para + "Tag ='" + input.get(i).toString() + "' ";
+				}else {
+					para = para + "Tag ='" + input.get(i).toString() + "' or ";
+				}
+			}
+		}
+		ArrayList<DieuLeTag> arrTag = new ArrayList<DieuLeTag>();
+		String selectQuery = "SELECT *"
+				+ "FROM " + ColumnName.DIEULEtag_TABLE + " "
+				+ para; 
+		database = mDbHelper.getReadableDatabase();
+		Cursor cursor = database.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) {
+			do {
+				DieuLeTag dlt = new DieuLeTag();
+				
+				dlt.setTag(cursor.getString(1));
+				dlt.setMaDieuLe(cursor.getString(2));
+				dlt.setMucUuTien(cursor.getInt(3));
+				
+				arrTag.add(dlt);
+			} while (cursor.moveToNext());
+		}
+		return arrTag;
+	}
+//__/tbl_DieuLeTag
+//___tbl_DieuLe
+	public ArrayList<DieuLe> getAllDieuLe(){
+		ArrayList<DieuLe> arrTag = new ArrayList<DieuLe>();
+		String selectQuery = "SELECT *"
+				+ "FROM " + ColumnName.DIEULE_TABLE + " ";
+		database = mDbHelper.getReadableDatabase();
+		Cursor cursor = database.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) {
+			do {
+				DieuLe dl = new DieuLe();
+				
+				dl.setTieuDe(cursor.getString(1));
+				dl.setNoiDung(cursor.getString(2));
+				dl.setMaChuong(cursor.getInt(4));
+				
+				arrTag.add(dl);
+			} while (cursor.moveToNext());
+		}
+		return arrTag;
+	}
+	public ArrayList<DieuLe> resultSearchTag(ArrayList<String> arrDLT){
+		ArrayList<DieuLe> arDL = new ArrayList<DieuLe>();
+		if(arrDLT.size() > 0){
+			for (int i = 0; i < arrDLT.size(); i++) {
+				arDL.addAll(getDieuLeTheoTag(arrDLT.get(i).toString()));
+			}
+		}
+		return arDL;
+	}
+	public ArrayList<DieuLe> getDieuLeTheoTag(String TagInput){
+		ArrayList<DieuLe> arrTag = new ArrayList<DieuLe>();
+		String selectQuery = "SELECT *"
+				+ "FROM " + ColumnName.DIEULEtag_TABLE + "," + ColumnName.DIEULE_TABLE + " "
+				+ "WHERE " + ColumnName.DIEULE_MA_DIEU_LE + "=" + ColumnName.DIEULEtag_MA_DIEU_LE + ""
+							+ " and " + ColumnName.DIEULEtag_TAG + "= '" + TagInput + "'"
+							+ " and " + ColumnName.DIEULEtag_MUC_UU_TIEN + "=1";
+		database = mDbHelper.getReadableDatabase();
+		Cursor cursor = database.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) {
+			do {
+				DieuLe dl = new DieuLe();
+				
+				dl.setTieuDe(cursor.getString(5));
+				dl.setNoiDung(cursor.getString(6));
+				dl.setMaChuong(cursor.getInt(8));
+				
+				arrTag.add(dl);
+			} while (cursor.moveToNext());
+		}
+		return arrTag;
+	}
+	
+//___/tbl_DieuLe
 }
