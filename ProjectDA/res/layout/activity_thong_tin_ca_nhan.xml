@@ -4,30 +4,20 @@
     android:layout_height="match_parent"
     android:background="@color/ActionBarColor"
     android:orientation="vertical"
-    android:paddingLeft="30dp"
-    android:paddingRight="30dp"
-    android:paddingTop="20dp"
-    tools:context="com.doan.lichhoctap.ThongTinCaNhanActivity">
+    tools:context="com.doan.lichhoctap.ThongTinCaNhanActivity" >
 
-    <LinearLayout
+    <include
+        android:id="@+id/thongtincanhan_activity_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/tvThongtincanha"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/thongtin_canhan"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        layout="@layout/hoctap_toolbar" />
 
     <!-- Ho ten -->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:text="@string/tv_hoten"
         android:textColor="@color/gray"
@@ -37,9 +27,11 @@
         android:id="@+id/tvTennguoidung"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
         android:text="Nguyễn Quốc Việt"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
+
     <!-- Ngay sinh  va Gioi tinh -->
 
     <LinearLayout
@@ -51,9 +43,12 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:orientation="vertical" >
-    <!-- Ngay sinh -->
+
+            <!-- Ngay sinh -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,13 +57,15 @@
                 android:textColor="@color/gray"
                 android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/tvNgaysinhnguoidung"
+            <EditText
+                android:id="@+id/edtNgaysinhnguoidung"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/ActionBarColor"
+                android:enabled="false"
                 android:text="19/05/1994"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
         <!-- Gioi tinh -->
@@ -76,6 +73,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:orientation="vertical" >
 
@@ -87,40 +85,45 @@
                 android:textColor="@color/gray"
                 android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/tvGioitinhnguoidung"
+            <EditText
+                android:id="@+id/edtGioitinhnguoidung"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/ActionBarColor"
+                android:enabled="false"
                 android:text="Nam"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>
-
-
 
     <!-- Dia chi -->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:text="@string/tv_diachi"
         android:textColor="@color/gray"
         android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/tvDiachinguoidung"
+    <EditText
+        android:id="@+id/edtDiachinguoidung"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:background="@color/ActionBarColor"
+        android:enabled="false"
         android:text="Thanh Trì - Hoàng Mai - Hà Nội"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
     <!-- Email -->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:text="@string/tv_email"
         android:textColor="@color/gray"
@@ -130,25 +133,112 @@
         android:id="@+id/tvEmailnguoidung"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
         android:text="vietkop94@gmail.com"
         android:textColor="@color/white"
-        android:textSize="18sp" />
-    <!-- Lop -->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/tv_lop"
-        android:textColor="@color/gray"
         android:textSize="15sp" />
+    <!-- Lop  va SDT -->
 
-    <TextView
-        android:id="@+id/tvLopnguoidung"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="1210A01"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <!-- Lop -->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/tv_lop"
+                android:textColor="@color/gray"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvLopnguoidung"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1210A01"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <!-- SDT -->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/tv_sdt"
+                android:textColor="@color/gray"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/edtSdtnguoidung"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/ActionBarColor"
+                android:enabled="false"
+                android:maxLength="12"
+                android:numeric="integer"
+                android:text="09123456789"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+    <!-- Button -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        
+        android:weightSum="10" >
+
+        <Button
+            android:id="@+id/btnHoantac"
+            style="@style/DefaultButtonText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+         	android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="5"
+            android:background="@drawable/button_thongtincanhan"
+            android:text="Hoàn tác"
+            android:visibility="invisible"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnSua"
+            style="@style/DefaultButtonText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="5"
+            android:background="@drawable/button_thongtincanhan"
+            android:text="Sửa"
+            android:visibility="invisible"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
 
 </LinearLayout>
