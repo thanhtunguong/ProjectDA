@@ -5,10 +5,10 @@
     android:orientation="vertical" >
 
     <include
-        android:id="@+id/BaiViet_activity_tool_bar"
+        android:id="@+id/danh_sach_mon_hoc_activity_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/hoctap_toolbar" />
+        layout="@layout/danh_sach_mon_hoc_toolbar" />
 
     <ExpandableListView
         android:id="@+id/elvAllMonHoc"

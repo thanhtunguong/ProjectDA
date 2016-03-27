@@ -49,17 +49,6 @@ public class LoginActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				/*String email = getString(R.string.acc1_email);
-				String pwd = getString(R.string.acc1_pwd);
-				String email_input = edEmail.getText().toString();
-				String pwd_input = edPwd.getText().toString();
-				if(email_input.matches(email) && pwd_input.matches(pwd)){
-					Toast.makeText(getBaseContext(), "Ok", Toast.LENGTH_SHORT).show();
-					Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
-					startActivity(intent);
-				}else {
-					Toast.makeText(getBaseContext(), "Failed", Toast.LENGTH_SHORT).show();
-				}*/
 				if(checkAcc() == true){
 					Toast.makeText(getBaseContext(), "Ok", Toast.LENGTH_SHORT).show();
 					Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
@@ -116,22 +105,6 @@ public class LoginActivity extends ActionBarActivity {
 		inputEmail = edEmail.getText().toString();
 		inputPwd = edPwd.getText().toString();
 		int i=0;
-		/*for (SinhVien sv : arrAllSV) {
-			 dbEmail = sv.getEmailSV();
-			 dbPwd = sv.getPwdSV();
-			 if(inputEmail.matches(dbEmail) && inputPwd.matches(dbPwd)){
-				 Toast.makeText(getBaseContext(), "Ok", Toast.LENGTH_SHORT).show();
-				 Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
-				 startActivity(intent);
-				 i = 1;
-				 break;
-			 }
-		}
-		if(i == 0){
-			return false;
-		}else {
-			return true;
-		}*/
 		if(exeQ.getSvUser(inputEmail, inputPwd, sv) == true){
 			return true;
 		}else {
@@ -140,8 +113,6 @@ public class LoginActivity extends ActionBarActivity {
 		
 	}
 	private void checkEditText(){
-		
-		
 		String eemail, epwd;
 		eemail = edEmail.getText().toString();
 		epwd = edPwd.getText().toString();

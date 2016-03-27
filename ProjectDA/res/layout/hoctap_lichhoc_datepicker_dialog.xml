@@ -7,7 +7,7 @@
         android:id="@+id/dpLichHocDatepicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/MyTheme"/>
+        style="@style/MyThemeForControl"/>
 	<LinearLayout 
 	    android:orientation="horizontal"
 	    android:layout_width="match_parent"

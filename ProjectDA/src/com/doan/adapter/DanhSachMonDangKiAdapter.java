@@ -2,6 +2,7 @@ package com.doan.adapter;
 
 import java.util.ArrayList;
 
+import com.doan.lichhoctap.DanhSachMonCoTheDangKiActivity;
 import com.doan.lichhoctap.R;
 import com.doan.model.DayInWeek;
 import com.doan.model.DiemHocTap;
@@ -10,15 +11,20 @@ import com.doan.model.MonHocTienQuyet;
 import com.doan.model.TietHoc;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DanhSachMonDangKiAdapter extends BaseExpandableListAdapter {
 
@@ -29,10 +35,15 @@ public class DanhSachMonDangKiAdapter extends BaseExpandableListAdapter {
 	private ArrayList<MonHocTienQuyet> child;
 	private ArrayList<Integer> arrColor;
 	private ArrayList<Integer> arrStatus;
+	private ArrayList<Integer> arrStatusTemp;
+	private DanhSachMonDangKiAdapter adapter;
 	private ArrayList<DiemHocTap> arrDiem;
+	private int layoutId;
+	private Switch switchBtn;
 
 	public DanhSachMonDangKiAdapter(ArrayList<MonHoc> parents, ArrayList<Object> childern, 
-			Activity c, ArrayList<Integer> arrColor, ArrayList<DiemHocTap> arrDiem, ArrayList<Integer> arrStatus) {
+			Activity c, ArrayList<Integer> arrColor, ArrayList<DiemHocTap> arrDiem,
+			ArrayList<Integer> arrStatus, int layoutID, ArrayList<Integer> arrStatusTemp, DanhSachMonDangKiAdapter adapter) {
 		this.parentItems = parents;
 		this.childtems = childern;
 		this.activity = c;
@@ -40,6 +51,9 @@ public class DanhSachMonDangKiAdapter extends BaseExpandableListAdapter {
 		this.arrColor = arrColor;
 		this.arrDiem = arrDiem;
 		this.arrStatus = arrStatus;
+		this.layoutId = layoutID;
+		this.arrStatusTemp = arrStatusTemp;
+		this.adapter = adapter;
 	}
 
 	@Override
@@ -54,9 +68,15 @@ public class DanhSachMonDangKiAdapter extends BaseExpandableListAdapter {
 		tvChildMonHoc = (TextView) convertView.findViewById(R.id.tvChildTenMon);
 		tvChildMonHoc.setText(child.get(childPosition).getTenMon_MHTQ());
 		int status = 4;
-		for (DiemHocTap diem : arrDiem) {
+		/*for (DiemHocTap diem : arrDiem) {
 			if(child.get(childPosition).getTenMon_MHTQ().matches(diem.getTenMonHoc())){
 				status = 1;
+			}
+		}*/
+		for (int i = 0; i < parentItems.size(); i++) {
+			MonHoc monhoc = parentItems.get(i);
+			if(child.get(childPosition).getTenMon_MHTQ().matches(monhoc.getTenMon())){
+				status = arrStatus.get(i);
 			}
 		}
 		ImageView ivChildStatus = (ImageView) convertView.findViewById(R.id.ivChildStatus);
@@ -66,73 +86,137 @@ public class DanhSachMonDangKiAdapter extends BaseExpandableListAdapter {
 	}
 
 	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.danh_sach_mon_dang_ki_mon_hoc_parent_item, null);
+	public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+		if(layoutId == R.layout.danh_sach_mon_dang_ki_mon_hoc_parent_item){
+			if (convertView == null) {
+				convertView = inflater.inflate(layoutId, null);
+			}
+			TextView tvParentMonHoc = (TextView) convertView.findViewById(R.id.tvParentTenMonHocCTDT);
+			tvParentMonHoc.setText(""  + parentItems.get(groupPosition).getTenMon());
+			TextView tvKiMon = (TextView) convertView.findViewById(R.id.tvKiMon);
+			String maki = parentItems.get(groupPosition).getMaMonCTDT().charAt(3) + "";
+			String kitudau = parentItems.get(groupPosition).getTenMon().charAt(0) + "";
+			tvKiMon.setText(kitudau);
+			GradientDrawable d = (GradientDrawable) tvKiMon.getBackground();
+			switch(maki){
+			case "1":
+				d.setColor(arrColor.get(0));
+				break;
+			case "2":
+				d.setColor(arrColor.get(2));
+				break;
+			case "3":
+				d.setColor(arrColor.get(3));
+				break;
+			case "4":
+				d.setColor(arrColor.get(4));
+				break;
+			case "5":
+				d.setColor(arrColor.get(5));
+				break;
+			case "6":
+				d.setColor(arrColor.get(6));
+				break;
+			case "7":
+				d.setColor(arrColor.get(7));
+				break;
+			case "8":
+				d.setColor(arrColor.get(8));
+				break;
+			}
+			ImageView ivStatus = (ImageView) convertView.findViewById(R.id.ivStatus);
+			String tenmon = parentItems.get(groupPosition).getTenMon();
+			int t = groupPosition;
+			if(t == 12){
+				t = 0;
+			}
+			MonHoc mh = parentItems.get(groupPosition);
+			int x = arrStatus.get(groupPosition);
+			setIcon(groupPosition, x, ivStatus);
+			
+			TextView tvNumberMTQ = (TextView) convertView.findViewById(R.id.tvMonTienQuyetNumber);
+			int n = parentItems.get(groupPosition).getArrMonTienQuyet().size();
+				tvNumberMTQ.setText("(" + n + ")");
+		}else {
+			if (convertView == null) {
+				convertView = inflater.inflate(layoutId, null);
+			}
+			TextView tvParentMonHoc = (TextView) convertView.findViewById(R.id.tvParentTenMonHocCTDTSwitch);
+			tvParentMonHoc.setText(""  + parentItems.get(groupPosition).getTenMon());
+			TextView tvKiMon = (TextView) convertView.findViewById(R.id.tvKiMonSwitch);
+			String maki = parentItems.get(groupPosition).getMaMonCTDT().charAt(3) + "";
+			String kitudau = parentItems.get(groupPosition).getTenMon().charAt(0) + "";
+			tvKiMon.setText(kitudau);
+			GradientDrawable d = (GradientDrawable) tvKiMon.getBackground();
+			switch(maki){
+			case "1":
+				d.setColor(arrColor.get(0));
+				break;
+			case "2":
+				d.setColor(arrColor.get(2));
+				break;
+			case "3":
+				d.setColor(arrColor.get(3));
+				break;
+			case "4":
+				d.setColor(arrColor.get(4));
+				break;
+			case "5":
+				d.setColor(arrColor.get(5));
+				break;
+			case "6":
+				d.setColor(arrColor.get(6));
+				break;
+			case "7":
+				d.setColor(arrColor.get(7));
+				break;
+			case "8":
+				d.setColor(arrColor.get(8));
+				break;
+			}
+			ImageView ivStatus = (ImageView) convertView.findViewById(R.id.ivStatusSwitch);
+			switchBtn = (Switch) convertView.findViewById(R.id.switchBtnMonHocSwitch);
+			String tenmon = parentItems.get(groupPosition).getTenMon();
+			int t = groupPosition;
+			if(t == 12){
+				t = 0;
+			}
+			final MonHoc mh = parentItems.get(groupPosition);
+			int x = arrStatus.get(groupPosition);
+			setIcon(groupPosition, x, ivStatus);
+			final Context context = activity;
+			switchBtn.setTag(groupPosition);
+			setSwitch(x);
+			switchBtn.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					switchBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+						
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+							// TODO Auto-generated method stub
+							if(isChecked == true){
+								Toast.makeText(context, mh.getTenMon() + "checked", Toast.LENGTH_SHORT).show();
+								arrStatus.set(groupPosition, 1);
+								adapter.notifyDataSetChanged();
+							}else {
+								Toast.makeText(context, mh.getTenMon() + "Unchecked", Toast.LENGTH_SHORT).show();
+								arrStatus.set(groupPosition, arrStatusTemp.get(groupPosition));
+								adapter.notifyDataSetChanged();
+							}
+						}
+					});
+					if(switchBtn.isChecked()){
+						switchBtn.setChecked(false);
+					}else {
+						switchBtn.setChecked(true);
+					}
+				}
+			});
 		}
-		TextView tvParentMonHoc = (TextView) convertView.findViewById(R.id.tvParentTenMonHocCTDT);
-		tvParentMonHoc.setText(""  + parentItems.get(groupPosition).getTenMon());
-		TextView tvKiMon = (TextView) convertView.findViewById(R.id.tvKiMon);
-		String maki = parentItems.get(groupPosition).getMaMonCTDT().charAt(3) + "";
-		String kitudau = parentItems.get(groupPosition).getTenMon().charAt(0) + "";
-		tvKiMon.setText(kitudau);
-		GradientDrawable d = (GradientDrawable) tvKiMon.getBackground();
-		switch(maki){
-		case "1":
-			d.setColor(arrColor.get(0));
-			break;
-		case "2":
-			d.setColor(arrColor.get(2));
-			break;
-		case "3":
-			d.setColor(arrColor.get(3));
-			break;
-		case "4":
-			d.setColor(arrColor.get(4));
-			break;
-		case "5":
-			d.setColor(arrColor.get(5));
-			break;
-		case "6":
-			d.setColor(arrColor.get(6));
-			break;
-		case "7":
-			d.setColor(arrColor.get(7));
-			break;
-		case "8":
-			d.setColor(arrColor.get(8));
-			break;
-		}
-		ImageView ivStatus = (ImageView) convertView.findViewById(R.id.ivStatus);
-		String tenmon = parentItems.get(groupPosition).getTenMon();
-		int t = groupPosition;
-		if(t == 12){
-			t = 0;
-		}
-		MonHoc mh = parentItems.get(groupPosition);
-		int x = arrStatus.get(groupPosition);
-		setIcon(groupPosition, x, ivStatus);
-		/*switch (arrStatus.get(groupPosition)) {
-		case 0:
-			ivStatus.setBackgroundResource(R.drawable.ic_mon_hoc_available);
-			break;
-		case 1:
-			ivStatus.setBackgroundResource(R.drawable.ic_mon_hoc_done);
-			break;
-		case 2:
-			ivStatus.setBackgroundResource(R.drawable.ic_mon_hoc_available);
-			break;
-		case 3:
-			ivStatus.setBackgroundResource(R.drawable.ic_mon_hoc_pending);
-			break;
-		case 4:
-			ivStatus.setBackgroundResource(R.drawable.circle_deactive_icon);
-			break;
-		}*/
 		
-		TextView tvNumberMTQ = (TextView) convertView.findViewById(R.id.tvMonTienQuyetNumber);
-		int n = parentItems.get(groupPosition).getArrMonTienQuyet().size();
-			tvNumberMTQ.setText("(" + n + ")");
 		return convertView;
 	}
 	private void setIcon(int position, int status, ImageView ivStatus){
@@ -151,6 +235,30 @@ public class DanhSachMonDangKiAdapter extends BaseExpandableListAdapter {
 			break;
 		case 4:
 			ivStatus.setBackgroundResource(R.drawable.circle_deactive_icon);
+			break;
+		}
+	}
+	private void setSwitch(int status){
+		switch (status) {
+		case 0:
+			switchBtn.setEnabled(true);
+			switchBtn.setChecked(false);
+			break;
+		case 1:
+			switchBtn.setEnabled(false);
+			switchBtn.setChecked(true);
+			break;
+		case 2:
+			switchBtn.setEnabled(true);
+			switchBtn.setChecked(false);
+			break;
+		case 3:
+			switchBtn.setEnabled(false);
+			switchBtn.setChecked(false);
+			break;
+		case 4:
+			switchBtn.setEnabled(true);
+			switchBtn.setChecked(false);
 			break;
 		}
 	}

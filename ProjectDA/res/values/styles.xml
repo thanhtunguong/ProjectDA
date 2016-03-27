@@ -1,6 +1,6 @@
 <resources>
 
-       <style name="DefaultButtonText">
+    <style name="DefaultButtonText">
         <item name="android:layout_width">150dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:textColor">#FFF</item>
@@ -13,13 +13,13 @@
     </style>
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="@style/Theme.AppCompat">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -37,14 +37,23 @@
         <item name="colorControlNormal">#c5c5c5</item>
         <item name="colorControlActivated">@color/white</item>
         <item name="colorControlHighlight">@color/white</item>
-
     </style>
-    
+	
+    <style name="MyThemeForControl" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
+        <item name="colorAccent">@color/ColorPrimary</item>
+        <item name="colorControlNormal">@color/ColorPrimary</item>
+        <item name="colorControlActivated">@color/ColorPrimary</item>
+        <item name="colorControlHighlight">@color/ColorPrimary</item>
+    </style>
+
     <style name="MyThemeWithActionBar" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
         <item name="colorAccent">@color/ColorPrimary</item>
     </style>
-    
+
     <style name="AccountsLightActivities" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/ColorPrimary</item>
         <item name="windowActionBar">false</item>
@@ -53,6 +62,5 @@
         <item name="colorAccent">@color/ColorPrimary</item>
         <item name="android:textColorSecondary">@color/white</item>
     </style>
-
 
 </resources>

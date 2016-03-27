@@ -15,7 +15,8 @@
         android:theme="@style/MyTheme" >
         <activity
             android:name=".HocTapActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/MyThemeForControl" >
 
             <!--
             <intent-filter>
@@ -69,7 +70,8 @@
         </activity>
         <activity
             android:name=".DanhSachMonCoTheDangKiActivity"
-            android:label="@string/title_activity_danh_sach_mon_co_the_dang_ki" >
+            android:label="@string/title_activity_danh_sach_mon_co_the_dang_ki"
+            android:theme="@style/MyThemeForControl" >
         </activity>
         <activity
             android:name=".SoTayThongTinActivity"

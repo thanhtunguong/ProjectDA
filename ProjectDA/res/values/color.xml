@@ -18,6 +18,7 @@
     <color name="StatusBarColor">#2E7D32</color>
     <color name="ActionBarColor">#E74C3C</color>    
     <color name="gray">#E0E0E0</color> 
+    <color name="hard_grey">#c5c5c5</color>
     <color name="indigo">#3f51d5</color>
     <color name="amber">#ffc107</color>
     

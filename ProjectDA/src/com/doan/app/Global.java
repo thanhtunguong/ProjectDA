@@ -34,10 +34,24 @@ public class Global {
 		mEditor.putString(key, value);
 		mEditor.commit();
 	}
+	public static void saveIntegerPreference(Context mContext, String key, Integer value) {
+		SharedPreferences mSharedPrefences = mContext.getSharedPreferences(
+				XML_FILE_NAME, Context.MODE_PRIVATE);
+
+		Editor mEditor = mSharedPrefences.edit();
+		mEditor.putInt(key, value);
+		mEditor.commit();
+	}
 	public static String getStringPreference(Context mContext, String key,
 			String defValue) {
 		SharedPreferences mSharedPrefences = mContext.getSharedPreferences(
 				XML_FILE_NAME, Context.MODE_PRIVATE);
 		return mSharedPrefences.getString(key, defValue);
+	}
+	public static int getIntegerPreference(Context mContext, String key,
+			Integer defValue) {
+		SharedPreferences mSharedPrefences = mContext.getSharedPreferences(
+				XML_FILE_NAME, Context.MODE_PRIVATE);
+		return mSharedPrefences.getInt(key, defValue);
 	}
 }
