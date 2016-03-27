@@ -2,7 +2,7 @@ package com.doan.slydingtab;
 
 import com.doan.adapter.ViewPagerAdapter;
 import com.doan.app.Global;
-import com.doan.lichhoctap.R;
+
 
 import android.content.Context;
 import android.graphics.Typeface;

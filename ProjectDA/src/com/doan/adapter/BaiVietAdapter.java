@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import com.doan.lichhoctap.BaiVietDetailActivity;
 import com.doan.lichhoctap.R;
+
 import com.doan.model.BaiViet;
+
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -40,7 +43,7 @@ public class BaiVietAdapter extends ArrayAdapter<BaiViet> {
 		ngaytao = (TextView) convertView.findViewById(R.id.tvBaiVietCreateDate);
 		loaibaiviet = (TextView) convertView.findViewById(R.id.tvLoaiBaiViet);
 		
-		//0-90-80-0 đỏ, 100-60-0-0 xanh dương, 60-0-100-0 xanh lá
+		//0-90-80-0 Ä‘á»�, 100-60-0-0 xanh dÆ°Æ¡ng, 60-0-100-0 xanh lÃ¡
 		Integer mau;
 		GradientDrawable d = (GradientDrawable) loaibaiviet.getBackground();
 		switch(myArray.get(position).getLoaiBaiViet()){
