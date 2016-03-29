@@ -2,6 +2,15 @@ package com.doan.lichhoctap;
 
 import java.util.Calendar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.doan.app.Global;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -30,6 +39,7 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 	private Button btnHoantac, btnSua;
 	private String ngaysinh,gioitinh,diachi,sdt;
 	private String s_ngaysinh,s_gioitinh,s_diachi,s_sdt;
+	private String chuoi="";
 	
 
 	Toolbar toolbar;
@@ -46,7 +56,7 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 		
-
+		suaThongtin("a","b","c","d");
 		tvTennguoidung = (TextView) findViewById(R.id.tvTennguoidung);
 		tvEmailnguoidung = (TextView) findViewById(R.id.tvEmailnguoidung);
 		tvLopnguoidung = (TextView) findViewById(R.id.tvLopnguoidung);
@@ -145,12 +155,10 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 				btnSua.setVisibility(4);
 			}
 
-			private void suaThongtin(String s_ngaysinh, String s_gioitinh,
-					String s_diachi, String s_sdt) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getApplicationContext(), s_ngaysinh +" + " + s_gioitinh +" + " + s_diachi + " + " + s_sdt,Toast.LENGTH_SHORT).show();
-			}
+		
+
 		});
+
 		
 		edtNgaysinhnguoidung.setOnClickListener(new OnClickListener() {
 			
@@ -215,6 +223,66 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 			
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	public void suaThongtin(String s_ngaysinh, String s_gioitinh,
+			String s_diachi, String s_sdt) {
+		// TODO Auto-generated method stub
+		// Toast.makeText(getApplicationContext(), s_ngaysinh +" + " +
+		// s_gioitinh +" + " + s_diachi + " + " +
+		// s_sdt,Toast.LENGTH_SHORT).show();
+		String masinhvien = "SV_00001";
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+		params.put("masinhvien", masinhvien);
+	//	client.setTimeout(30000);
+		
+
+		client.post(Global.BASE_URI +"/" + "csdlda"+"/"+ Global.URI_LICH_HOC,
+				params, new AsyncHttpResponseHandler() {
+					public void onSuccess(String response) {
+						// Log.e("loginToServer", response);
+						if (executeWhenLoginSuccess(response)) {
+							Toast.makeText(getApplicationContext(),
+									"Thanh cong", Toast.LENGTH_LONG)
+									.show();
+						} else {
+							Toast.makeText(getApplicationContext(),
+									"That bai", Toast.LENGTH_LONG)
+									.show();
+						}
+					}
+
+					public void onFailure(int statusCode, Throwable error,
+							String content) {
+						Toast.makeText(getApplicationContext(),
+								error+"", Toast.LENGTH_LONG)
+								.show();
+					}
+				});
+	}
+
+	private boolean executeWhenLoginSuccess(String response) {
+		Toast.makeText(getApplicationContext(),
+				response+"", Toast.LENGTH_LONG)
+				.show();
+		try {
+			JSONArray arrObj = new JSONArray(response);
+			for (int i = 0; i < arrObj.length(); i++) {
+				JSONObject lichhocJson = arrObj.getJSONObject(i);
+
+				String thu = lichhocJson.optString("thu");
+				String buoi = lichhocJson.optString("buoi");
+				String tentrangthai = lichhocJson
+						.optString("tentrangthai");
+				String tenphonghoc = lichhocJson.optString("tenphonghoc");
+				chuoi += thu;
+					
+			}
+			return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	private void chonNgaySinhDatetimePicker(){
