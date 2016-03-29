@@ -17,7 +17,9 @@ public class Global {
 	
 	public static String activityTitles[];
 	public static String MaSVDN;
-	
+	public static String BASE_URI ="http://192.168.56.1:533";
+	public static String URI_LICH_HOC ="api_LichHocTheoMaSV";
+
 	
 	
 	public static void addActivityTitles(Context c){
