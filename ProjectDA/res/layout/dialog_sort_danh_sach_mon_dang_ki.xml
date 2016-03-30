@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    <RadioGroup 
+        android:id="@+id/rgGroupRbtnSortDSDK"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton 
+            android:id="@+id/rBtnNamHoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rbtnNamHoc_string"/>
+        <RadioButton 
+            android:id="@+id/rBtnMonHoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rbtnMonHoc_string"/>
+    </RadioGroup>
+	<LinearLayout 
+	    android:orientation="horizontal"
+	    android:background="@color/ColorPrimary"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:weightSum="2" >
+	    <Button 
+	        android:id="@+id/btnOKDialogSortDSDK"
+	        android:background="@color/ColorPrimary"
+	        android:textColor="@color/white"
+	        android:textSize="@dimen/text_title"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:layout_height="wrap_content"
+	        android:text="@string/string_LichHoc_btnOK"/>
+	    <Button 
+	        android:id="@+id/btnCancelDialogSortDSDK"
+	        android:background="@color/ColorPrimary"
+	        android:textColor="@color/white"
+	        android:textSize="@dimen/text_title"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:layout_height="wrap_content"
+	        android:text="@string/string_LichHoc_btnCancel"/>
+	</LinearLayout>
+</LinearLayout>

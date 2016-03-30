@@ -117,6 +117,8 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="Ki_7">Kì VII</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="title_activity_danh_sach_mon_co_the_dang_ki">Danh sách môn học</string>
+    <string name="rbtnNamHoc_string">Năm học</string>
+    <string name="rbtnMonHoc_string">Môn học tối ưu</string>
 
     <!-- /Tùng -->
 
