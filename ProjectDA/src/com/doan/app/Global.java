@@ -18,7 +18,25 @@ public class Global {
 	public static String activityTitles[];
 	public static String MaSVDN;
 	public static String BASE_URI ="http://192.168.56.1:8080";
-	public static String URI_LICH_HOC ="api_LichHocTheoMaSV";
+	
+	public static String URI_DANGNHAP ="api_DangNhap.php";
+	public static String URI_DANGTHONGBAOTHEOGVLHC ="api_DangThongBaoTheoMaGVLHC.php";
+	public static String URI_DANHSACHBAIVIET ="api_DanhSachBaiViet.php";
+	public static String URI_DANHSACHTHONGBAOTHEOMASV ="api_DanhSachThongBaoTheoMaSV.php";
+	public static String URI_DIEMTHEOMASV ="api_DiemTheoMaSV.php";
+	public static String URI_DOIMATKHAUTHEOMAGV ="api_DoiMatKhauTheoMaGV.php";
+	public static String URI_DOIMATKHAUTHEOMASV ="api_DoiMatKhauTheoMaSV.php";
+	public static String URI_DOITHONGTINTHEOMAGV ="api_DoiThongTinTheoMaGV.php";
+	public static String URI_DOITHONGTINTHEOMASV ="api_DoiThongTinTheoMaSV.php";
+	public static String URI_GHICHUTHEOMATHEOMASV ="api_GhiChuTheoMaSV.php";
+	public static String URI_LICHHOCTHEOMASV ="api_LichHocTheoMaSV.php";
+	public static String URI_LICHTHITHEOMASV ="api_LichThiTheoMaSV.php";
+	public static String URI_SUAGHICHUTHEOMASV ="api_SuaGhiChuTheoMaSV.php";
+	public static String URI_TAOGHICHUTHEOMASV ="api_TaoGhiChuTheoMaSV.php";
+	public static String URI_THONGTINTHEOMAGV ="api_ThongTinTheoMaGV.php";
+	public static String URI_THONGTINTHEOMASV ="api_ThongTinTheoMaSV.php";
+	public static String URI_XOAGHICHUTHEOMASVGC ="api_XoaGhiChuTheoMaSVGC.php";
+	
 
 	
 	
