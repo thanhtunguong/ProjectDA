@@ -39,7 +39,16 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 	private Button btnHoantac, btnSua;
 	private String ngaysinh,gioitinh,diachi,sdt;
 	private String s_ngaysinh,s_gioitinh,s_diachi,s_sdt;
-	private String chuoi="";
+//	private String chuoi="";
+	private String masinhvien = "SV_00001";
+	
+	private String HoTen = "";
+	private String NgaySinh = "";
+	private String GioiTinh ="";
+	private String DiaChi = "";
+	private String SDT = "";
+	private String Email = "";
+	private String tenlophanhchinh ="";
 	
 
 	Toolbar toolbar;
@@ -56,7 +65,10 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 		
-		suaThongtin("a","b","c","d");
+	//	suaThongtin("a","b","c","d");
+
+				
+		getThongtinSV(masinhvien);
 		tvTennguoidung = (TextView) findViewById(R.id.tvTennguoidung);
 		tvEmailnguoidung = (TextView) findViewById(R.id.tvEmailnguoidung);
 		tvLopnguoidung = (TextView) findViewById(R.id.tvLopnguoidung);
@@ -79,6 +91,14 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 		// tvGioitinhnguoidung.setEnabled(false);
 		// tvDiachinguoidung.setEnabled(false);
 		// tvSdtnguoidung.setEnabled(false);
+		
+		tvTennguoidung.setText(HoTen);
+		tvEmailnguoidung.setText(Email);
+		tvLopnguoidung.setText(tenlophanhchinh);
+		edtNgaysinhnguoidung.setText(NgaySinh);
+		edtGioitinhnguoidung.setText(GioiTinh);
+		edtDiachinguoidung.setText(DiaChi);
+		edtSdtnguoidung.setText(SDT);
 		
 		btnHoantac = (Button) findViewById(R.id.btnHoantac);
 		btnSua = (Button) findViewById(R.id.btnSua);
@@ -234,10 +254,51 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
 		params.put("masinhvien", masinhvien);
+		params.put("ngaysinhsinhvien", s_ngaysinh);
+		params.put("gioitinhsinhvien", s_gioitinh);
+		params.put("diachisinhvien", s_diachi);
+		params.put("sdtsinhvien", s_sdt);
 	//	client.setTimeout(30000);
 		
 
-		client.post(Global.BASE_URI +"/" + "csdlda"+"/"+ Global.URI_LICH_HOC,
+		client.post(Global.BASE_URI +"/" + "csdlda"+"/"+ Global.URI_DOITHONGTINTHEOMASV,
+				params, new AsyncHttpResponseHandler() {
+					public void onSuccess(String response) {
+						// Log.e("loginToServer", response);
+						if (checkUpdate()) {
+							Toast.makeText(getApplicationContext(),
+									"Thanh cong", Toast.LENGTH_LONG)
+									.show();
+						} else {
+							Toast.makeText(getApplicationContext(),
+									"That bai", Toast.LENGTH_LONG)
+									.show();
+						}
+					}
+
+					public void onFailure(int statusCode, Throwable error,
+							String content) {
+						Toast.makeText(getApplicationContext(),
+								error+"", Toast.LENGTH_LONG)
+								.show();
+					}
+				});
+	}
+
+	public void getThongtinSV(String masinhvien) {
+		// TODO Auto-generated method stub
+		// Toast.makeText(getApplicationContext(), s_ngaysinh +" + " +
+		// s_gioitinh +" + " + s_diachi + " + " +
+		// s_sdt,Toast.LENGTH_SHORT).show();
+	//	String masinhvien = "SV_00001";
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+		params.put("masinhvien", masinhvien);
+		
+	//	client.setTimeout(30000);
+		
+
+		client.post(Global.BASE_URI +"/" + "csdlda"+"/"+ Global.URI_THONGTINTHEOMASV,
 				params, new AsyncHttpResponseHandler() {
 					public void onSuccess(String response) {
 						// Log.e("loginToServer", response);
@@ -260,24 +321,19 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 					}
 				});
 	}
-
 	private boolean executeWhenLoginSuccess(String response) {
-		Toast.makeText(getApplicationContext(),
-				response+"", Toast.LENGTH_LONG)
-				.show();
+		
 		try {
-			JSONArray arrObj = new JSONArray(response);
-			for (int i = 0; i < arrObj.length(); i++) {
-				JSONObject lichhocJson = arrObj.getJSONObject(i);
+			JSONObject userJson = new JSONObject(response);
 
-				String thu = lichhocJson.optString("thu");
-				String buoi = lichhocJson.optString("buoi");
-				String tentrangthai = lichhocJson
-						.optString("tentrangthai");
-				String tenphonghoc = lichhocJson.optString("tenphonghoc");
-				chuoi += thu;
-					
-			}
+			HoTen = userJson.optString("HoTen");
+			NgaySinh = userJson.optString("NgaySinh");
+			GioiTinh = userJson.optString("GioiTinh");
+			DiaChi = userJson.optString("DiaChi");
+			SDT = userJson.optString("SDT");
+			Email = userJson.optString("Email");
+			tenlophanhchinh = userJson.optString("tenlophanhchinh");	
+			
 			return true;
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -285,6 +341,10 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 		}
 	}
 	
+	private boolean checkUpdate() {
+		
+		return true;
+	}
 	private void chonNgaySinhDatetimePicker(){
 		final Dialog dialog = new Dialog(this);
 		dialog.setContentView(R.layout.hoctap_lichhoc_datepicker_dialog);
