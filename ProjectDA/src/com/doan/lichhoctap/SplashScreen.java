@@ -103,11 +103,11 @@ public class SplashScreen extends Activity {
 			for (int i = 0; i < arrObj.length(); i++) {
 				JSONObject thongbaoJson = arrObj.getJSONObject(i);
 
-				String mathongbao = thongbaoJson.optString("pk_thongbao");
+				String mathongbao = thongbaoJson.optString("PK_ThongBao");
 				String tieudethongbao = thongbaoJson.optString("tieudethongbao");
 				String noidungthongbao = thongbaoJson.optString("noidungthongbao");
 				String ngaytaothongbao = thongbaoJson.optString("ngaytaothongbao");
-				String magv = thongbaoJson.optString("magv");
+				String magv = thongbaoJson.optString("MaGV");
 				
 				ThongBao tb = new ThongBao(mathongbao, tieudethongbao, noidungthongbao, ngaytaothongbao, magv);
 				arrThongBao.add(tb);
