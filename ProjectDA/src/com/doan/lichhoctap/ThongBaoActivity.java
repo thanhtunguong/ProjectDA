@@ -47,6 +47,7 @@ public class ThongBaoActivity extends ActionBarActivity {
 		elv_ThongBao.setGroupIndicator(null);
 		ThongBaoAdapter adapter = new ThongBaoAdapter(arrThongBaoTrongNgay, childItems, this);
 		elv_ThongBao.setAdapter(adapter);
+		elv_ThongBao.setSelection(arrThongBaoTrongNgay.size() - 1);
 	}
 
 	private void xulyPhanDinhNgay() {

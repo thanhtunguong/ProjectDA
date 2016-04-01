@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.doan.app.Global;
+import com.doan.model.ThongBao;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -67,9 +68,6 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 		}
 		
 	//	suaThongtin("a","b","c","d");
-
-				
-		getThongtinSV(masinhvien);
 		tvTennguoidung = (TextView) findViewById(R.id.tvTennguoidung);
 		tvEmailnguoidung = (TextView) findViewById(R.id.tvEmailnguoidung);
 		tvLopnguoidung = (TextView) findViewById(R.id.tvLopnguoidung);
@@ -77,6 +75,9 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 		edtGioitinhnguoidung = (EditText) findViewById(R.id.edtGioitinhnguoidung);
 		edtDiachinguoidung = (EditText) findViewById(R.id.edtDiachinguoidung);
 		edtSdtnguoidung = (EditText) findViewById(R.id.edtSdtnguoidung);
+				
+		getThongtinSV(masinhvien);
+		
 
 		Typeface face = Typeface.createFromAsset(getAssets(),
 				"fonts/Roboto-Thin.ttf");
@@ -88,18 +89,14 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 		edtGioitinhnguoidung.setTypeface(face);
 		edtDiachinguoidung.setTypeface(face);
 		edtSdtnguoidung.setTypeface(face);
-		// tvNgaysinhnguoidung.setEnabled(false);
-		// tvGioitinhnguoidung.setEnabled(false);
-		// tvDiachinguoidung.setEnabled(false);
-		// tvSdtnguoidung.setEnabled(false);
 		
-		tvTennguoidung.setText(HoTen);
+		/*tvTennguoidung.setText(HoTen);
 		tvEmailnguoidung.setText(Email);
 		tvLopnguoidung.setText(tenlophanhchinh);
 		edtNgaysinhnguoidung.setText(NgaySinh);
 		edtGioitinhnguoidung.setText(GioiTinh);
 		edtDiachinguoidung.setText(DiaChi);
-		edtSdtnguoidung.setText(SDT);
+		edtSdtnguoidung.setText(SDT);*/
 		
 		btnHoantac = (Button) findViewById(R.id.btnHoantac);
 		btnSua = (Button) findViewById(R.id.btnSua);
@@ -189,6 +186,15 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 				chonNgaySinhDatetimePicker();
 			}
 		});
+	}
+	private void setThongTin(){
+		tvTennguoidung.setText(HoTen);
+		tvEmailnguoidung.setText(Email);
+		tvLopnguoidung.setText(tenlophanhchinh);
+		edtNgaysinhnguoidung.setText(NgaySinh);
+		edtGioitinhnguoidung.setText(GioiTinh);
+		edtDiachinguoidung.setText(DiaChi);
+		edtSdtnguoidung.setText(SDT);
 	}
 
 	@Override
@@ -302,7 +308,7 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 	//	client.setTimeout(30000);
 		
 
-		client.post(Global.BASE_URI +"/" + "csdlda"+"/"+ Global.URI_THONGTINTHEOMASV,
+		client.post(Global.BASE_URI + Global.URI_THONGTINTHEOMASV,
 				params, new AsyncHttpResponseHandler() {
 					public void onSuccess(String response) {
 						// Log.e("loginToServer", response);
@@ -310,6 +316,7 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 							Toast.makeText(getApplicationContext(),
 									"Thanh cong", Toast.LENGTH_LONG)
 									.show();
+							setThongTin();
 						} else {
 							Toast.makeText(getApplicationContext(),
 									"That bai", Toast.LENGTH_LONG)
@@ -368,21 +375,24 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 	}*/
 
 	private boolean executeWhenLoginSuccess(String response) {
-		
-		try {
-			JSONObject userJson = new JSONObject(response);
 
-			HoTen = userJson.optString("HoTen");
-			NgaySinh = userJson.optString("NgaySinh");
-			GioiTinh = userJson.optString("GioiTinh");
-			DiaChi = userJson.optString("DiaChi");
-			SDT = userJson.optString("SDT");
-			Email = userJson.optString("Email");
-			tenlophanhchinh = userJson.optString("tenlophanhchinh");	
-			
+		try {
+			JSONArray arrObj = new JSONArray(response);
+			for (int i = 0; i < arrObj.length(); i++) {
+				JSONObject userJson = arrObj.getJSONObject(i);
+
+				HoTen = userJson.optString("HoTen");
+				NgaySinh = userJson.optString("NgaySinh");
+				GioiTinh = userJson.optString("GioiTinh");
+				DiaChi = userJson.optString("DiaChi");
+				SDT = userJson.optString("SDT");
+				Email = userJson.optString("Email");
+				tenlophanhchinh = userJson.optString("tenlophanhchinh");
+			}
 			return true;
 		} catch (JSONException e) {
 			e.printStackTrace();
+			Log.e("loi", e + "");
 			return false;
 		}
 	}
@@ -411,9 +421,25 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				Calendar c = Calendar.getInstance();
 				c.set(dp.getYear(), dp.getMonth(), dp.getDayOfMonth());
-			//	ngayChonDatePicker = c.getTime();
-			//	setinItialize(view, l, context);
-				edtNgaysinhnguoidung.setText(dp.getDayOfMonth()+"/"+dp.getMonth()+"/"+dp.getYear());
+				String ngay = "";
+				String thang = "";
+				String nam = "";
+				if(dp.getMonth() < 10){
+					thang = "0" + dp.getMonth();
+				}else {
+					thang = dp.getMonth()+"";
+				}
+				if(dp.getDayOfMonth() < 10){
+					ngay = "0" + dp.getDayOfMonth();
+				}else {
+					ngay = dp.getDayOfMonth()+"";
+				}
+				nam = dp.getYear() + "";
+				String result = nam + "-" + thang + "-" + ngay;
+				//gayChonDatePicker = c.getTime();
+				//setinItialize(view, l, context);
+				//edtNgaysinhnguoidung.setText(dp.getDayOfMonth()+"/"+dp.getMonth()+"/"+dp.getYear());
+				edtNgaysinhnguoidung.setText(result);
 				dialog.dismiss();
 			}
 		});

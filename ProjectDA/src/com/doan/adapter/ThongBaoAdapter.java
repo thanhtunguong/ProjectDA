@@ -1,6 +1,8 @@
 package com.doan.adapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import com.doan.lichhoctap.R;
 import com.doan.model.DayInWeek;
@@ -62,7 +64,13 @@ public class ThongBaoAdapter extends BaseExpandableListAdapter {
 		ExpandableListView eLV = (ExpandableListView) parent;
 	    eLV.expandGroup(groupPosition);
 		TextView tvDate = (TextView) convertView.findViewById(R.id.tvDateParentItem);
-		tvDate.setText(parentItems.get(groupPosition).getNgayCuThe()+"");
+		Date date = parentItems.get(groupPosition).getNgayCuThe();
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		String thoigian = c.get(Calendar.DAY_OF_WEEK) + ", " 
+				+ c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.YEAR);
+		//tvDate.setText(parentItems.get(groupPosition).getNgayCuThe()+"");
+		tvDate.setText(thoigian);
 		return convertView;
 	}
 
