@@ -175,4 +175,12 @@ public class ColumnName {
 	public static String CHUONGDIEULE_MA_CHUONG = "PK_Chuong";
 	public static String CHUONGDIEULE_TEN_CHUONG = "TenChuong";
 	
+	//tbl_ThongBao
+	public static String THONG_BAO_TABLE = "tbl_ThongBao";
+	public static String THONG_BAO_MA_THONG_BAO = "PK_ThongBao";
+	public static String THONG_BAO_TIEU_DE = "TieuDeThongBao";
+	public static String THONG_BAO_NOI_DUNG = "NoiDungThongBao";
+	public static String THONG_BAO_NGAY_TAO_THONG_BAO = "NgayTaoThongBao";
+	public static String THONG_BAO_MA_GIAO_VIEN = "MaGV";
+	
 }

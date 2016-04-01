@@ -21,6 +21,7 @@ import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -259,12 +260,15 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 		params.put("diachisinhvien", s_diachi);
 		params.put("sdtsinhvien", s_sdt);
 	//	client.setTimeout(30000);
-		
+		//client.post(Global.BASE_URI + Global.URI_LICH_HOC,
 
-		client.post(Global.BASE_URI +"/" + "csdlda"+"/"+ Global.URI_DOITHONGTINTHEOMASV,
+		//client.post(Global.BASE_URI +"/" + "csdlda"+"/"+ Global.URI_LICH_HOC,
+
+		client.post(Global.BASE_URI + Global.URI_DOITHONGTINTHEOMASV,
+
 				params, new AsyncHttpResponseHandler() {
 					public void onSuccess(String response) {
-						// Log.e("loginToServer", response);
+						Log.e("loginToServer", response);
 						if (checkUpdate()) {
 							Toast.makeText(getApplicationContext(),
 									"Thanh cong", Toast.LENGTH_LONG)
@@ -315,12 +319,54 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 
 					public void onFailure(int statusCode, Throwable error,
 							String content) {
+						Log.e("loginToServer", error+" "+content);
 						Toast.makeText(getApplicationContext(),
 								error+"", Toast.LENGTH_LONG)
 								.show();
 					}
 				});
 	}
+	/*public void suaThongtin(String s_ngaysinh, String s_gioitinh,
+			String s_diachi, String s_sdt) {
+		// TODO Auto-generated method stub
+		// Toast.makeText(getApplicationContext(), s_ngaysinh +" + " +
+		// s_gioitinh +" + " + s_diachi + " + " +
+		// s_sdt,Toast.LENGTH_SHORT).show();
+		String masinhvien = "SV_00001";
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+		//params.put("masinhvien", masinhvien);
+		//client.setTimeout(30000);
+		
+
+||||||| .r44
+
+=======
+>>>>>>> .r49
+		client.get(
+				Global.BASE_URI +"/" + "csdlda"+"/"+ "api_DanhSachBaiViet.php",
+				new AsyncHttpResponseHandler() {
+					public void onSuccess(String response) {
+						if (executeWhenLoginSuccess(response)) {
+							Toast.makeText(getApplicationContext(),
+									"Thanh cong", Toast.LENGTH_LONG)
+									.show();
+						} else {
+							Toast.makeText(getApplicationContext(),
+									"That bai", Toast.LENGTH_LONG)
+									.show();
+						}
+					}
+
+					public void onFailure(int statusCode, Throwable error,
+							String content) {
+						Toast.makeText(getApplicationContext(),
+								error+"", Toast.LENGTH_LONG)
+								.show();
+					}
+				});
+	}*/
+
 	private boolean executeWhenLoginSuccess(String response) {
 		
 		try {

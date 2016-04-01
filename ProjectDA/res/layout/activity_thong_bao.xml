@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.doan.lichhoctap.ThongBaoActivity" >
+
+    <include
+        android:id="@+id/thong_bao_activity_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/thong_bao_toolbar" />
+
+    <ExpandableListView
+        android:id="@+id/elvThongBao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:childDivider="@color/transparent"
+        android:divider="@color/transparent"
+        android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"
+        android:isScrollContainer="true"
+        android:scrollbars="none" >
+    </ExpandableListView>
+
+</LinearLayout>

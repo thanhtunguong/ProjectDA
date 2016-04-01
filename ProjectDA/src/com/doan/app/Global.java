@@ -17,7 +17,12 @@ public class Global {
 	
 	public static String activityTitles[];
 	public static String MaSVDN;
-	public static String BASE_URI ="http://192.168.56.1:8080";
+	//Tung
+	public static String BASE_URI ="http://192.168.3.101:8080/csdlda/";
+	public static String URI_LICH_HOC ="api_LichHocTheoMaSV.php";
+	public static String URI_THONG_BAO = "api_DanhSachThongBaoTheoMaSV.php";
+	//public static String BASE_URI ="http://192.168.56.1:533";
+	//public static String BASE_URI ="http://192.168.56.1:8080";
 	
 	public static String URI_DANGNHAP ="api_DangNhap.php";
 	public static String URI_DANGTHONGBAOTHEOGVLHC ="api_DangThongBaoTheoMaGVLHC.php";
@@ -36,7 +41,6 @@ public class Global {
 	public static String URI_THONGTINTHEOMAGV ="api_ThongTinTheoMaGV.php";
 	public static String URI_THONGTINTHEOMASV ="api_ThongTinTheoMaSV.php";
 	public static String URI_XOAGHICHUTHEOMASVGC ="api_XoaGhiChuTheoMaSVGC.php";
-	
 
 	
 	

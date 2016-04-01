@@ -7,6 +7,8 @@ import java.util.Date;
 import com.doan.adapter.BaiVietAdapter;
 import com.doan.lichhoctap.BaiVietDetailActivity;
 import com.doan.lichhoctap.R;
+import com.doan.lichhoctap.ThongBaoActivity;
+import com.doan.lichhoctap.ThongTinCaNhanActivity;
 import com.doan.model.BaiViet;
 
 import android.content.Intent;
@@ -20,6 +22,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class BaiVietFragment extends Fragment{
 	
@@ -44,6 +47,17 @@ public class BaiVietFragment extends Fragment{
         final ListView lvBV = (ListView) v.findViewById(R.id.lvBaiViet);
         bvAdapter = new BaiVietAdapter(getActivity(), R.layout.bai_viet_item, allBaiViet);
         lvBV.setAdapter(bvAdapter);
+        
+        TextView tvThongBao = (TextView) v.findViewById(R.id.tvIntentThongBao);
+        tvThongBao.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(getContext(),ThongBaoActivity.class);
+				startActivity(i);
+			}
+		});
         
         return v;
 	}

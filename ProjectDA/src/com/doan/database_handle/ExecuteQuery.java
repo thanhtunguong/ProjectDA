@@ -11,10 +11,14 @@ import com.doan.model.DieuLeTag;
 import com.doan.model.MonHoc;
 import com.doan.model.MonHocTienQuyet;
 import com.doan.model.SinhVien;
+import com.doan.model.ThongBao;
+
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
 public class ExecuteQuery {
@@ -360,4 +364,48 @@ public class ExecuteQuery {
 	}
 	
 //___/tbl_DieuLe
+	
+//___tbl_ThongBao
+	public boolean insert_tbl_ThongBao_multi(ArrayList<ThongBao> listTB) {
+		try {
+			database = mDbHelper.getWritableDatabase();
+			for (ThongBao tb : listTB) {
+				ContentValues cv = new ContentValues();
+
+				cv.put(ColumnName.THONG_BAO_MA_THONG_BAO, tb.getMaThongBao());
+				cv.put(ColumnName.THONG_BAO_TIEU_DE, tb.getTieuDeThongBao());
+				cv.put(ColumnName.THONG_BAO_NOI_DUNG, tb.getNoiDungThongBao());
+				cv.put(ColumnName.THONG_BAO_NGAY_TAO_THONG_BAO, tb.getNgayTaoThongBao());
+				cv.put(ColumnName.THONG_BAO_MA_GIAO_VIEN, tb.getMaGVGui());
+
+				database.insert(ColumnName.THONG_BAO_TABLE, null, cv);
+			}
+			return true;
+		} catch (SQLiteException e) {
+			Log.e("insert_tbl_thongbao_multi", e.getMessage());
+			return false;
+		}
+	}
+	public ArrayList<ThongBao> getAllThongBaoSqLite(){
+		ArrayList<ThongBao> arrThongBao = new ArrayList<ThongBao>();
+		String selectQuery = "SELECT *"
+				+ "FROM " + ColumnName.THONG_BAO_TABLE;
+		database = mDbHelper.getReadableDatabase();
+		Cursor cursor = database.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) {
+			do {
+				ThongBao tb = new ThongBao();
+				
+				tb.setMaThongBao(cursor.getString(0));
+				tb.setTieuDeThongBao(cursor.getString(1));
+				tb.setNoiDungThongBao(cursor.getString(2));
+				tb.setNgayTaoThongBao(cursor.getString(3));
+				tb.setMaGVGui(cursor.getString(4));
+				
+				arrThongBao.add(tb);
+			} while (cursor.moveToNext());
+		}
+		return arrThongBao;
+	}
+//___/tbl_ThongBao
 }

@@ -567,9 +567,7 @@ public class DanhSachMonCoTheDangKiActivity extends ActionBarActivity {
 		private void xulySwitch(Switch switchBtn, Context context, int groupPosition, MonHoc mh){
 			if (switchBtn.isChecked() == false) {
 				// switchBtn.setChecked(false);
-				if(groupPosition == 6){
-					
-				}
+
 				Toast.makeText(context, mh.getTenMon() + "Unchecked", Toast.LENGTH_SHORT).show();
 				arrStatus.set(groupPosition, arrstttemp.get(groupPosition));
 				arrStatus = xacDinhStatusKichBan();
