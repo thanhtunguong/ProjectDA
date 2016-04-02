@@ -1,61 +1,32 @@
 package com.doan.model;
 
 public class ItemGhiChu {
+	private String maghichu;
 	private String title;
-	private int day;
-	private int month;
-	private int year;
-	private int hour;
-	private int minute;	
+	private String thoigiannhac;
+	private String thoigianchinhsua;
 	private String content;
 	
 	public ItemGhiChu(){
-		 this.title = "Tiêu đề";		 
-		 this.day = 25;
-		 this.month = 02;
-		 this.year = 2016;
-		 this.hour = 16;
-		 this.minute = 30;
-		 this.content = "Không có nội dung ";
+		 this.maghichu ="maghichu01";
+		 this.title = "Tieu de";		 
+		 this.thoigiannhac = "2016-03-03 16:30:00";
+		 this.thoigianchinhsua = "2016-03-03 16:30:00";
+		 this.content = "khong co noi dung";
 	 };
-	 public ItemGhiChu(String title, int hour, int minute , int day, int month, int year,String content){
+	 public ItemGhiChu(String maghichu, String title, String thoigiannhac, String thoigianchinhsua,String content){
+		 this.maghichu = maghichu;
 		 this.title = title;
-		 this.day = day;
-		 this.month = month;
-		 this.year = year;
-		 this.hour = hour;
-		 this.minute = minute;
+		 this.thoigiannhac = thoigiannhac;
+		 this.thoigianchinhsua = thoigianchinhsua;
 		 this.content = content;
 	 }
-	public int getDay() {
-		return day;
+	
+	public String getMaghichu() {
+		return maghichu;
 	}
-	public void setDay(int day) {
-		this.day = day;
-	}
-	public int getMonth() {
-		return month;
-	}
-	public void setMonth(int month) {
-		this.month = month;
-	}
-	public int getYear() {
-		return year;
-	}
-	public void setYear(int year) {
-		this.year = year;
-	}
-	public int getHour() {
-		return hour;
-	}
-	public void setHour(int hour) {
-		this.hour = hour;
-	}
-	public int getMinute() {
-		return minute;
-	}
-	public void setMinute(int minute) {
-		this.minute = minute;
+	public void setMaghichu(String maghichu) {
+		this.maghichu = maghichu;
 	}
 	public String getTitle() {
 		return title;
@@ -69,32 +40,17 @@ public class ItemGhiChu {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getTime(){
-		String str = "";
-		if (getHour() < 10) {
-			str += "0" + getHour();
-		} else {
-			str += getHour();
-		}
-		if (getMinute() < 10) {
-			str += ":0" + getMinute();	
-		} else {
-			str += ":" + getMinute();
-		}
-		str += " ";
-		if (getDay() < 10) {
-			str += "0" + getDay();
-		} else {
-			str += getHour();
-		}
-		if (getMonth() < 10) {
-			str += "/0" + getMonth();	
-		} else {
-			str += "/" +getMonth();
-		}
-		str += "/" + getYear();
-	
-		return str;
-		
+	public String getThoigiannhac() {
+		return thoigiannhac;
 	}
+	public void setThoigiannhac(String thoigiannhac) {
+		this.thoigiannhac = thoigiannhac;
+	}
+	public String getThoigianchinhsua() {
+		return thoigianchinhsua;
+	}
+	public void setThoigianchinhsua(String thoigianchinhsua) {
+		this.thoigianchinhsua = thoigianchinhsua;
+	}
+
 }
