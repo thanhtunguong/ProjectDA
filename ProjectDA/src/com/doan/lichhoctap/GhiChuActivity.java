@@ -5,11 +5,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.doan.service.ScheduleClient;
 
 
 import com.doan.adapter.GhiChuAdapter;
+import com.doan.app.Global;
 import com.doan.model.ItemGhiChu;
+import com.doan.model.ThongBao;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -21,6 +31,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -49,6 +60,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 	ListView lvGhichu;
 	Button btnThemghichu;
 	private static String thoigian_ghichu = "";
+	private String masinhvien = "SV_00001";
 
 	ArrayList<ItemGhiChu> arrItemghichu = new ArrayList<ItemGhiChu>();
 	GhiChuAdapter adapter = null;
@@ -76,22 +88,20 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		btnThemghichu = (Button) findViewById(R.id.btnThemghichu);
 
 		arrItemghichu = new ArrayList<ItemGhiChu>();
+		getGhiChu(masinhvien);
 
-		ItemGhiChu gc = new ItemGhiChu("Cong viec 01", 13,40,25,02,2016,
-				"Lam bai ve nha");
-		arrItemghichu.add(gc);
-		ItemGhiChu gc1 = new ItemGhiChu("Bai tap lon", 15,00,26,02,2016,
-				"Hoan thanh bai tap lon mon lap trinh di dong");
-		arrItemghichu.add(gc1);
-		ItemGhiChu gc2 = new ItemGhiChu("Chuyen de co so",17,30,27,02,2016,
-				"Di hoc chuyen de");
-		arrItemghichu.add(gc2);
+//		ItemGhiChu gc = new ItemGhiChu("Cong viec 01", 13,40,25,02,2016,
+//				"Lam bai ve nha");
+//		arrItemghichu.add(gc);
+//		ItemGhiChu gc1 = new ItemGhiChu("Bai tap lon", 15,00,26,02,2016,
+//				"Hoan thanh bai tap lon mon lap trinh di dong");
+//		arrItemghichu.add(gc1);
+//		ItemGhiChu gc2 = new ItemGhiChu("Chuyen de co so",17,30,27,02,2016,
+//				"Di hoc chuyen de");
+//		arrItemghichu.add(gc2);
 
-		adapter = new GhiChuAdapter(getBaseContext(), R.layout.ghichu_item,
-				arrItemghichu);
-		lvGhichu.setAdapter(adapter);
-		 scheduleClient = new ScheduleClient(this);
-	     scheduleClient.doBindService();
+		
+		
 	     
 
 
@@ -118,6 +128,13 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		});
 
 	}
+	private void setGhiChu(){
+		adapter = new GhiChuAdapter(getBaseContext(), R.layout.ghichu_item,
+				arrItemghichu);
+		lvGhichu.setAdapter(adapter);
+		 scheduleClient = new ScheduleClient(this);
+	     scheduleClient.doBindService();
+	}
 	
 	private AlertDialog suaGhichulertDialog(final int position) {
 
@@ -132,14 +149,14 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 				.findViewById(R.id.edtContent);
 
 		edtTitle.setText(arrItemghichu.get(position).getTitle());
-		tvTime.setText(arrItemghichu.get(position).getTime());
+		tvTime.setText(arrItemghichu.get(position).getThoigiannhac());
 		edtContent.setText(arrItemghichu.get(position).getContent());
 		
-		gio = arrItemghichu.get(position).getHour();
-		phut = arrItemghichu.get(position).getMinute();
-		ngay = arrItemghichu.get(position).getDay();
-		thang = arrItemghichu.get(position).getMonth();
-		nam = arrItemghichu.get(position).getYear();
+//		gio = arrItemghichu.get(position).getHour();
+//		phut = arrItemghichu.get(position).getMinute();
+//		ngay = arrItemghichu.get(position).getDay();
+//		thang = arrItemghichu.get(position).getMonth();
+//		nam = arrItemghichu.get(position).getYear();
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -264,37 +281,95 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		return dialog;
 
 	}
+	
+	private String formatDate(int year, int month, int day, int hour, int minute){
+		String result ="";
+		String thang,ngay,gio,phut;
+		if(month < 10){
+			thang = "0"+month;
+		}else{
+			thang = month+"";
+		}
+		if(day < 10){
+			ngay = "0"+day;
+		}else{
+			ngay = day+"";
+		}
+		if(hour < 10){
+			gio = "0"+hour;
+		}else{
+			gio = hour+"";
+		}
+		if(minute < 10){
+			phut = "0"+minute;
+		}else{
+			phut = minute+"";
+		}
+		result = year+"-"+thang+"-"+ngay+" " +gio+":"+phut+":00";
+		return result;
+	}
 
 	protected void themGhichu(String strTitle, int hour, int minute, int day, int month, int year, String strContent) {
 		ItemGhiChu gc = new ItemGhiChu();
+		String thoigiannhac = "";
+		String thoigianchinhsua = "";
+		
+		thoigiannhac = formatDate(year,month,day,hour,minute);
+		
+		Calendar c_sua = Calendar.getInstance();
+		int nam_sua = c_sua.get(Calendar.YEAR);
+		int thang_sua = c_sua.get(Calendar.MONTH);
+		int ngay_sua = c_sua.get(Calendar.DAY_OF_MONTH);
+		int gio_sua = c_sua.get(Calendar.HOUR_OF_DAY);
+		int phut_sua = c_sua.get(Calendar.MINUTE);
+		
+		thoigianchinhsua = formatDate(nam_sua,thang_sua,ngay_sua,gio_sua,phut_sua);
+				
+		gc.setThoigiannhac(thoigiannhac);
+		gc.setThoigiannhac(thoigianchinhsua);
 		gc.setTitle(strTitle);
-//		gc.setTime(strTime);
-		gc.setHour(hour);
-		gc.setMinute(minute);
-		gc.setDay(day);
-		gc.setMonth(month);
-		gc.setYear(year);
 		gc.setContent(strContent);
 		arrItemghichu.add(gc);
 		adapter.notifyDataSetChanged();
+		createGhiChu(masinhvien,strTitle,strContent,thoigiannhac,thoigianchinhsua);
 		datNotify(hour,minute,day,month,year);
 
 	}
 	protected void suaGhichu(String strTitle, int hour, int minute, int day, int month, int year, String strContent, int position) {
+		String maghichu = arrItemghichu.get(position).getMaghichu();
+		
+		Toast.makeText(getApplicationContext(),
+				maghichu, Toast.LENGTH_LONG)
+				.show();
+		String thoigiannhac = "";
+		String thoigianchinhsua = "";
+		
+		thoigiannhac = formatDate(year,month,day,hour,minute);
+		
+	    Calendar c_sua = Calendar.getInstance();
+		int nam_sua = c_sua.get(Calendar.YEAR);
+		int thang_sua = c_sua.get(Calendar.MONTH);
+		int ngay_sua = c_sua.get(Calendar.DAY_OF_MONTH);
+		int gio_sua = c_sua.get(Calendar.HOUR_OF_DAY);
+		int phut_sua = c_sua.get(Calendar.MINUTE);
+		
+		thoigianchinhsua = formatDate(nam_sua,thang_sua,ngay_sua,gio_sua,phut_sua);
+		
 		arrItemghichu.get(position).setTitle(strTitle);
-//		arrItemghichu.get(position).setTime(strTime);
-		arrItemghichu.get(position).setHour(hour);
-		arrItemghichu.get(position).setMinute(minute);
-		arrItemghichu.get(position).setDay(day);
-		arrItemghichu.get(position).setMonth(month);
-		arrItemghichu.get(position).setYear(year);
+		arrItemghichu.get(position).setThoigiannhac(thoigiannhac);
+		arrItemghichu.get(position).setThoigiannhac(thoigianchinhsua);
 		arrItemghichu.get(position).setContent(strContent);
+		
+	
 		adapter.notifyDataSetChanged();
+		updateGhiChu(maghichu,strTitle,strContent,thoigiannhac,thoigianchinhsua);
 		datNotify(hour,minute,day,month,year);
 
 	}
-	protected void xoaGhichu(int positon) {
-		arrItemghichu.remove(positon);
+	protected void xoaGhichu(int position) {
+		String maghichu = arrItemghichu.get(position).getMaghichu();
+		arrItemghichu.remove(position);
+		deleteGhiChu(maghichu,masinhvien);
 		adapter.notifyDataSetChanged();
 	}
 
@@ -333,7 +408,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 			// Do something with the date chosen by the user
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy",
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",
 					Locale.US);
 			try {
 				thoigian_ghichu = dateFormat
@@ -394,14 +469,14 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 					gio = tpTimePK.getCurrentHour();
 				}
 				if (tpTimePK.getCurrentMinute() < 10) {
-					res += ":0" + tpTimePK.getCurrentMinute();
+					res += ":0" + tpTimePK.getCurrentMinute()+":00";
 					phut = tpTimePK.getCurrentMinute();
 				} else {
-					res += ":" + tpTimePK.getCurrentMinute();
+					res += ":" + tpTimePK.getCurrentMinute()+":00";
 					phut = tpTimePK.getCurrentMinute();
 				}
 				
-				tv.setText(res + " " + thoigian_ghichu);
+				tv.setText(thoigian_ghichu+ " "+res);
 				dialog.dismiss();
 			}
 		});
@@ -441,7 +516,200 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 //			return row;
 //		}
 //	}
+	//--------------------------------------------------
+	private void getGhiChu(String masinhvien){
+		
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+		params.put("masinhvien", masinhvien);
+		String url = Global.BASE_URI + Global.URI_GHICHUTHEOMATHEOMASV;
+		client.post(url, params, new AsyncHttpResponseHandler() {
+			public void onSuccess(String response) {
+				Log.e("JsonThongBao", response);
+				if (executeWhenGetGhiChuSuccess(response)) {
+				//	ArrayList<ThongBao> arrThongBao = exeQ.getAllThongBaoSqLite();
+					Toast.makeText(getApplicationContext(),
+							"Thanh cong", Toast.LENGTH_LONG)
+							.show();
+					setGhiChu();
+				} else {
+					Toast.makeText(getApplicationContext(),
+							"That bai", Toast.LENGTH_LONG)
+							.show();
+				}
+			}
 
+			public void onFailure(int statusCode, Throwable error,
+					String content) {
+				Log.e("JsonThongBao", error+" "+content);
+				Toast.makeText(getApplicationContext(),
+						error+"", Toast.LENGTH_LONG)
+						.show();
+			}
+		});
+	}
+	
+	private boolean executeWhenGetGhiChuSuccess(String response) {
+		Toast.makeText(getApplicationContext(),
+				response+"", Toast.LENGTH_LONG)
+				.show();
+	//	ArrayList<ThongBao> arrThongBao = new ArrayList<ThongBao>();
+		
+		try {
+			JSONArray arrObj = new JSONArray(response);
+			for (int i = 0; i < arrObj.length(); i++) {
+				JSONObject ghichuJson = arrObj.getJSONObject(i);
+
+				String maghichu = ghichuJson.optString("pk_ghichu");
+				String tieudeghichu = ghichuJson.optString("TieuDeGhiChu");
+				String noidungghichu = ghichuJson.optString("NoiDungGhiChu");
+				String thoigiannhacghichu = ghichuJson.optString("ThoiGianNhacGhiChu");
+				String thoigianchinhsuaghichu = ghichuJson.optString("ThoiGianChinhSuaGhiChu");
+				
+				Toast.makeText(getApplicationContext(),
+						maghichu, Toast.LENGTH_LONG)
+						.show();
+				ItemGhiChu gc = new ItemGhiChu(maghichu,tieudeghichu,thoigiannhacghichu,thoigianchinhsuaghichu,
+						noidungghichu);
+				arrItemghichu.add(gc);
+			}
+		//	exeQ.insert_tbl_ThongBao_multi(arrThongBao);
+			return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	//-----Them ghi chu
+	public void createGhiChu(String masinhvien, String tieude, String noidung,
+			String thoigiannhac, String thoigiansua) {
+		// TODO Auto-generated method stub
+		// Toast.makeText(getApplicationContext(), s_ngaysinh +" + " +
+		// s_gioitinh +" + " + s_diachi + " + " +
+		// s_sdt,Toast.LENGTH_SHORT).show();
+		
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+		params.put("masinhvien", masinhvien);
+		params.put("tieude", tieude);
+		params.put("noidung", noidung);
+		params.put("thoigiannhac", thoigiannhac);
+		params.put("thoigiansua", thoigiansua);
+	//	client.setTimeout(30000);
+		
+
+		client.post(Global.BASE_URI + Global.URI_TAOGHICHUTHEOMASV,
+
+				params, new AsyncHttpResponseHandler() {
+					public void onSuccess(String response) {
+						
+						if (checkUpdate()) {
+							Toast.makeText(getApplicationContext(),
+									"Thanh cong", Toast.LENGTH_LONG)
+									.show();
+						} else {
+							Toast.makeText(getApplicationContext(),
+									"That bai", Toast.LENGTH_LONG)
+									.show();
+						}
+					}
+
+					public void onFailure(int statusCode, Throwable error,
+							String content) {
+						Toast.makeText(getApplicationContext(),
+								error+"", Toast.LENGTH_LONG)
+								.show();
+					}
+				});
+	}
+	
+	//-----Sua ghi chu
+		public void updateGhiChu(String maghichu, String tieude, String noidung,
+				String thoigiannhac, String thoigiansua) {
+			// TODO Auto-generated method stub
+			// Toast.makeText(getApplicationContext(), s_ngaysinh +" + " +
+			// s_gioitinh +" + " + s_diachi + " + " +
+			// s_sdt,Toast.LENGTH_SHORT).show();
+			
+			AsyncHttpClient client = new AsyncHttpClient();
+			RequestParams params = new RequestParams();
+			params.put("maghichu", maghichu);
+			params.put("tieude", tieude);
+			params.put("noidung", noidung);
+			params.put("thoigiannhac", thoigiannhac);
+			params.put("thoigiansua", thoigiansua);
+		//	client.setTimeout(30000);
+			
+
+			client.post(Global.BASE_URI + Global.URI_SUAGHICHUTHEOMASV,
+
+					params, new AsyncHttpResponseHandler() {
+						public void onSuccess(String response) {
+							
+							if (checkUpdate()) {
+								Toast.makeText(getApplicationContext(),
+										"Thanh cong", Toast.LENGTH_LONG)
+										.show();
+							} else {
+								Toast.makeText(getApplicationContext(),
+										"That bai", Toast.LENGTH_LONG)
+										.show();
+							}
+						}
+
+						public void onFailure(int statusCode, Throwable error,
+								String content) {
+							Toast.makeText(getApplicationContext(),
+									error+"", Toast.LENGTH_LONG)
+									.show();
+						}
+					});
+		}
+		
+		//-----Xoa ghi chu
+				public void deleteGhiChu(String maghichu, String masinhvien) {
+					// TODO Auto-generated method stub
+					// Toast.makeText(getApplicationContext(), s_ngaysinh +" + " +
+					// s_gioitinh +" + " + s_diachi + " + " +
+					// s_sdt,Toast.LENGTH_SHORT).show();
+					
+					AsyncHttpClient client = new AsyncHttpClient();
+					RequestParams params = new RequestParams();
+					params.put("maghichu", maghichu);
+					params.put("masinhvien", masinhvien);
+					
+				//	client.setTimeout(30000);
+					
+
+					client.post(Global.BASE_URI + Global.URI_XOAGHICHUTHEOMASVGC,
+
+							params, new AsyncHttpResponseHandler() {
+								public void onSuccess(String response) {
+									
+									if (checkUpdate()) {
+										Toast.makeText(getApplicationContext(),
+												"Thanh cong", Toast.LENGTH_LONG)
+												.show();
+									} else {
+										Toast.makeText(getApplicationContext(),
+												"That bai", Toast.LENGTH_LONG)
+												.show();
+									}
+								}
+
+								public void onFailure(int statusCode, Throwable error,
+										String content) {
+									Toast.makeText(getApplicationContext(),
+											error+"", Toast.LENGTH_LONG)
+											.show();
+								}
+							});
+				}	
+	
+	private boolean checkUpdate() {
+		
+		return true;
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
