@@ -152,6 +152,14 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		tvTime.setText(arrItemghichu.get(position).getThoigiannhac());
 		edtContent.setText(arrItemghichu.get(position).getContent());
 		
+		String thoigian = arrItemghichu.get(position).getThoigiannhac();
+		String result[] = thoigian.split("[-,:, ]");
+		nam = Integer.valueOf(result[0]);
+		thang = Integer.valueOf(result[1]);
+		ngay = Integer.valueOf(result[2]);
+		gio = Integer.valueOf(result[3]);
+		phut = Integer.valueOf(result[4]);
+	   
 //		gio = arrItemghichu.get(position).getHour();
 //		phut = arrItemghichu.get(position).getMinute();
 //		ngay = arrItemghichu.get(position).getDay();
