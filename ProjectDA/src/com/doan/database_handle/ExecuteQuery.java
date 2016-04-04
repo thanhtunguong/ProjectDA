@@ -491,7 +491,7 @@ public class ExecuteQuery {
 				
 				//database.update(ColumnName.SV_TABLE, cv, s_sdt, null);
 			//	database.update(ColumnName.SV_TABLE, cv, null, sv);
-				database.update(ColumnName.SV_TABLE, cv, ColumnName.SV_MA_SV +"=" +masinhvien, null);
+				database.update(ColumnName.SV_TABLE, cv, ColumnName.SV_MA_SV +"='" +masinhvien+"'", null);
 
 			
 			return true;
@@ -565,7 +565,7 @@ public class ExecuteQuery {
 					
 					//database.update(ColumnName.SV_TABLE, cv, s_sdt, null);
 				//	database.update(ColumnName.SV_TABLE, cv, null, sv);
-					database.update(ColumnName.GHI_CHU_TABLE, cv,null, null);
+					database.update(ColumnName.GHI_CHU_TABLE, cv,ColumnName.GHI_CHU_MA_GHI_CHU +"='" +maghichu+"'", null);
 					
 				
 				return true;
