@@ -8,6 +8,7 @@ import com.doan.app.Global;
 import com.doan.model.DiemHocTap;
 import com.doan.model.DieuLe;
 import com.doan.model.DieuLeTag;
+import com.doan.model.ItemGhiChu;
 import com.doan.model.MonHoc;
 import com.doan.model.MonHocTienQuyet;
 import com.doan.model.SinhVien;
@@ -493,4 +494,50 @@ public class ExecuteQuery {
 			return false;
 		}
 	}
+	
+	//---- tbl_GhiChu
+	// ---- Get all ghi chu
+	//___tbl_ThongBao
+		public boolean insert_tbl_GhiChu_multi(ArrayList<ItemGhiChu> listGC) {
+			try {
+				database = mDbHelper.getWritableDatabase();
+				for (ItemGhiChu gc : listGC) {
+					ContentValues cv = new ContentValues();
+
+					cv.put(ColumnName.GHI_CHU_TABLE, gc.getMaghichu());
+					cv.put(ColumnName.GHI_CHU_TABLE, gc.getTitle());
+					cv.put(ColumnName.GHI_CHU_TABLE, gc.getContent());
+					cv.put(ColumnName.GHI_CHU_TABLE, gc.getThoigiannhac());
+					cv.put(ColumnName.GHI_CHU_TABLE, gc.getThoigianchinhsua());
+
+					database.insert(ColumnName.GHI_CHU_TABLE, null, cv);
+				}
+				return true;
+			} catch (SQLiteException e) {
+				Log.e("insert_tbl_GhiChu_multi", e.getMessage());
+				return false;
+			}
+		}
+		public ArrayList<ItemGhiChu> getAllGhiChuSqLite(String masinhvien){
+			ArrayList<ItemGhiChu> arrItemghichu = new ArrayList<ItemGhiChu>();
+			String selectQuery = "SELECT *"
+					+ "FROM " + ColumnName.GHI_CHU_TABLE;
+				//	+ " WHERE " + ColumnName.SV_MA_SV + "='" +masinhvien+"'";
+			database = mDbHelper.getReadableDatabase();
+			Cursor cursor = database.rawQuery(selectQuery, null);
+			if (cursor.moveToFirst()) {
+				do {
+					ItemGhiChu gc = new ItemGhiChu();
+					
+					gc.setMaghichu(cursor.getString(0));
+					gc.setTitle(cursor.getString(1));
+					gc.setContent(cursor.getString(2));
+					gc.setThoigiannhac(cursor.getString(3));
+					gc.setThoigianchinhsua(cursor.getString(4));
+					
+					arrItemghichu.add(gc);
+				} while (cursor.moveToNext());
+			}
+			return arrItemghichu;
+		}
 }
