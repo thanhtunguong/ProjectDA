@@ -472,7 +472,13 @@ public class ExecuteQuery {
 			String s_diachi, String s_sdt) {
 		try {
 			    database = mDbHelper.getWritableDatabase();
-			
+//			    String strSQL = "UPDATE "+ ColumnName.SV_TABLE+" SET "+ColumnName.SV_NGAY_SINH_SV +" = "+s_ngaysinh+"," +
+//			    		ColumnName.SV_GIOI_TINH_SV+" = "+s_gioitinh+"," +
+//			    		ColumnName.SV_DIA_CHI_SV+" = "+s_diachi+","+
+//			    		ColumnName.SV_SDT_SV+" = "+s_sdt 
+//			    		+ "WHERE " + ColumnName.SV_MA_SV +"=" +masinhvien;
+//			    Cursor cursor = database.rawQuery(strSQL, null);
+//			    database.execSQL(strSQL);
 				ContentValues cv = new ContentValues();
 
 				
@@ -480,12 +486,12 @@ public class ExecuteQuery {
 				cv.put(ColumnName.SV_GIOI_TINH_SV, s_gioitinh);
 				cv.put(ColumnName.SV_DIA_CHI_SV,s_diachi);
 				cv.put(ColumnName.SV_SDT_SV, s_sdt);
-				String [] sv= {s_ngaysinh,s_gioitinh,s_diachi,s_sdt};
+			//	String [] sv= {s_ngaysinh,s_gioitinh,s_diachi,s_sdt};
 
 				
 				//database.update(ColumnName.SV_TABLE, cv, s_sdt, null);
 			//	database.update(ColumnName.SV_TABLE, cv, null, sv);
-				database.update(ColumnName.SV_TABLE, cv, null, null);
+				database.update(ColumnName.SV_TABLE, cv, ColumnName.SV_MA_SV +"=" +masinhvien, null);
 
 			
 			return true;
@@ -497,18 +503,20 @@ public class ExecuteQuery {
 	
 	//---- tbl_GhiChu
 	// ---- Get all ghi chu
-	//___tbl_ThongBao
-		public boolean insert_tbl_GhiChu_multi(ArrayList<ItemGhiChu> listGC) {
+
+		public boolean insert_tbl_GhiChu_multi(ArrayList<ItemGhiChu> listGC, String masinhvien) {
 			try {
 				database = mDbHelper.getWritableDatabase();
 				for (ItemGhiChu gc : listGC) {
 					ContentValues cv = new ContentValues();
 
-					cv.put(ColumnName.GHI_CHU_TABLE, gc.getMaghichu());
-					cv.put(ColumnName.GHI_CHU_TABLE, gc.getTitle());
-					cv.put(ColumnName.GHI_CHU_TABLE, gc.getContent());
-					cv.put(ColumnName.GHI_CHU_TABLE, gc.getThoigiannhac());
-					cv.put(ColumnName.GHI_CHU_TABLE, gc.getThoigianchinhsua());
+					cv.put(ColumnName.GHI_CHU_MA_GHI_CHU, gc.getMaghichu());
+					cv.put(ColumnName.GHI_CHU_TIEU_DE_GHI_CHU, gc.getTitle());
+					cv.put(ColumnName.GHI_CHU_NOI_DUNG_GHI_CHU, gc.getContent());
+					cv.put(ColumnName.GHI_CHU_THOI_GIAN_NHAC, gc.getThoigiannhac());
+					cv.put(ColumnName.GHI_CHU_THOI_GIAN_CHINH_SUA, gc.getThoigianchinhsua());
+					cv.put(ColumnName.GHI_CHU_MA_SV, masinhvien);
+					
 
 					database.insert(ColumnName.GHI_CHU_TABLE, null, cv);
 				}
@@ -522,7 +530,7 @@ public class ExecuteQuery {
 			ArrayList<ItemGhiChu> arrItemghichu = new ArrayList<ItemGhiChu>();
 			String selectQuery = "SELECT *"
 					+ "FROM " + ColumnName.GHI_CHU_TABLE;
-				//	+ " WHERE " + ColumnName.SV_MA_SV + "='" +masinhvien+"'";
+				//	+ " WHERE " + ColumnName.GHI_CHU_MA_SV + "='" +masinhvien+"'";
 			database = mDbHelper.getReadableDatabase();
 			Cursor cursor = database.rawQuery(selectQuery, null);
 			if (cursor.moveToFirst()) {
@@ -539,5 +547,31 @@ public class ExecuteQuery {
 				} while (cursor.moveToNext());
 			}
 			return arrItemghichu;
+		}
+	//----- Update tbl_ghichu
+		public boolean update_tbl_ghichu(String maghichu,String tieude, String noidung,
+				String thoigiannhac, String thoigianchinhsua) {
+			try {
+				    database = mDbHelper.getWritableDatabase();
+				
+					ContentValues cv = new ContentValues();
+
+					cv.put(ColumnName.GHI_CHU_MA_GHI_CHU,maghichu);
+					cv.put(ColumnName.GHI_CHU_TIEU_DE_GHI_CHU,tieude);
+					cv.put(ColumnName.GHI_CHU_NOI_DUNG_GHI_CHU, noidung);
+					cv.put(ColumnName.GHI_CHU_THOI_GIAN_NHAC,thoigiannhac);
+					cv.put(ColumnName.GHI_CHU_THOI_GIAN_CHINH_SUA, thoigianchinhsua);
+					
+					
+					//database.update(ColumnName.SV_TABLE, cv, s_sdt, null);
+				//	database.update(ColumnName.SV_TABLE, cv, null, sv);
+					database.update(ColumnName.GHI_CHU_TABLE, cv,null, null);
+					
+				
+				return true;
+			} catch (SQLiteException e) {
+				Log.e("update_tbl_ghichu", e.getMessage());
+				return false;
+			}
 		}
 }
