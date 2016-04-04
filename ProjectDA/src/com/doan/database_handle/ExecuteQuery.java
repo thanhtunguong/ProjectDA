@@ -70,7 +70,7 @@ public class ExecuteQuery {
 				sv.setMaSV(cursor.getString(0));
 				sv.setTenSV(cursor.getString(1));
 				sv.setNgaySinhSV(cursor.getString(2));
-				sv.setGioiTinhSV(cursor.getInt(3));
+				sv.setGioiTinhSV(cursor.getString(3));
 				sv.setDiaChiSV(cursor.getString(4));
 				sv.setSDTSV(cursor.getString(5));
 				sv.setEmailSV(cursor.getString(6));
@@ -98,7 +98,7 @@ public class ExecuteQuery {
 				Global.saveStringPreference(mContext, "MaSVDN", cursor.getString(0));
 				sv.setTenSV(cursor.getString(1));
 				sv.setNgaySinhSV(cursor.getString(2));
-				sv.setGioiTinhSV(cursor.getInt(3));
+				sv.setGioiTinhSV(cursor.getString(3));
 				sv.setDiaChiSV(cursor.getString(4));
 				sv.setSDTSV(cursor.getString(5));
 				sv.setEmailSV(cursor.getString(6));
@@ -408,4 +408,89 @@ public class ExecuteQuery {
 		return arrThongBao;
 	}
 //___/tbl_ThongBao
+// ---- tbl_SinhVien
+	//--- Insert tbl_sinhvien
+	public boolean insert_tbl_SinhVien(String masinhvien,String email,String tensinhvein, String lop,String ngaysinh, String gioitinh,
+			String diachi, String sdt) {
+		try {
+			database = mDbHelper.getWritableDatabase();
+			
+				ContentValues cv = new ContentValues();
+
+				cv.put(ColumnName.SV_MA_SV,masinhvien);
+				cv.put(ColumnName.SV_EMAIL_SV, email);
+				cv.put(ColumnName.SV_TEN_SV,tensinhvein);
+				cv.put(ColumnName.SV_MA_LOP_HANH_CHINH,lop);
+				cv.put(ColumnName.SV_NGAY_SINH_SV,ngaysinh);
+				cv.put(ColumnName.SV_GIOI_TINH_SV, gioitinh);
+				cv.put(ColumnName.SV_DIA_CHI_SV,diachi);
+				cv.put(ColumnName.SV_SDT_SV, sdt);
+
+
+				database.insert(ColumnName.SV_TABLE, null, cv);
+			
+			return true;
+		} catch (SQLiteException e) {
+			Log.e("insert_tbl_SinhVien", e.getMessage());
+			return false;
+		}
+	}
+	// ------------ get Thong tin sinh vien
+	public SinhVien getThongTinSinhVienSqLite(String masinhvien){
+		SinhVien ttsv = new SinhVien();
+		String selectQuery = "SELECT *"
+				+ "FROM " + ColumnName.SV_TABLE
+				+ " WHERE " + ColumnName.SV_MA_SV + "='" +masinhvien+"'";
+		database = mDbHelper.getReadableDatabase();
+		Cursor cursor = database.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) {
+			 
+			do {			
+			ttsv.setMaSV(cursor.getString(0));
+			ttsv.setTenSV(cursor.getString(1));
+			ttsv.setNgaySinhSV(cursor.getString(2));
+			ttsv.setGioiTinhSV(cursor.getString(3));
+			ttsv.setDiaChiSV(cursor.getString(4));
+			ttsv.setSDTSV(cursor.getString(5));
+			ttsv.setEmailSV(cursor.getString(6));
+			ttsv.setPwdSV(cursor.getString(7));
+			ttsv.setSoLanDangNhapSV(cursor.getInt(8));
+			ttsv.setMaLopHanhChinh(cursor.getString(9));
+			
+			} while (cursor.moveToNext());
+		}else {
+			}
+		return ttsv;
+	}
+	
+	
+	
+	
+	//-- Update thong tin sinh vien
+	public boolean update_tbl_sinhvien(String masinhvien,String s_ngaysinh, String s_gioitinh,
+			String s_diachi, String s_sdt) {
+		try {
+			    database = mDbHelper.getWritableDatabase();
+			
+				ContentValues cv = new ContentValues();
+
+				
+				cv.put(ColumnName.SV_NGAY_SINH_SV,s_ngaysinh);
+				cv.put(ColumnName.SV_GIOI_TINH_SV, s_gioitinh);
+				cv.put(ColumnName.SV_DIA_CHI_SV,s_diachi);
+				cv.put(ColumnName.SV_SDT_SV, s_sdt);
+				String [] sv= {s_ngaysinh,s_gioitinh,s_diachi,s_sdt};
+
+				
+				//database.update(ColumnName.SV_TABLE, cv, s_sdt, null);
+			//	database.update(ColumnName.SV_TABLE, cv, null, sv);
+				database.update(ColumnName.SV_TABLE, cv, null, null);
+
+			
+			return true;
+		} catch (SQLiteException e) {
+			Log.e("update_tbl_sinhvien", e.getMessage());
+			return false;
+		}
+	}
 }
