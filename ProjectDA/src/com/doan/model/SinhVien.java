@@ -3,8 +3,8 @@ package com.doan.model;
 import java.util.Date;
 
 public class SinhVien {
-	private String MaSV, TenSV, DiaChiSV, SDTSV, EmailSV, PwdSV, MaLopHanhChinh, NgaySinhSV;
-	private int GioiTinhSV, SoLanDangNhapSV;
+	private String MaSV, TenSV, DiaChiSV, SDTSV, EmailSV, PwdSV, MaLopHanhChinh, NgaySinhSV,GioiTinhSV;
+	private int SoLanDangNhapSV;
 	
 	
 	public String getNgaySinhSV() {
@@ -55,10 +55,10 @@ public class SinhVien {
 	public void setMaLopHanhChinh(String maLopHanhChinh) {
 		MaLopHanhChinh = maLopHanhChinh;
 	}
-	public int getGioiTinhSV() {
+	public String getGioiTinhSV() {
 		return GioiTinhSV;
 	}
-	public void setGioiTinhSV(int gioiTinhSV) {
+	public void setGioiTinhSV(String gioiTinhSV) {
 		GioiTinhSV = gioiTinhSV;
 	}
 	public int getSoLanDangNhapSV() {
