@@ -39,8 +39,12 @@ public class SplashScreen extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash_screen);
+		
 		c = this;
+		String masinhvien = Global.getStringPreference(c, "MaSVDN", "0");
 		getThongBao();
+		getGhiChu();
+		getThongtinSV(masinhvien);
 		exeQ = new ExecuteQuery(c);
 		
 		secondBar = (ProgressBar) findViewById(R.id.secondBar);
@@ -199,7 +203,7 @@ private void getGhiChu(){
 	String url = Global.BASE_URI + Global.URI_GHICHUTHEOMATHEOMASV;
 	client.post(url, params, new AsyncHttpResponseHandler() {
 		public void onSuccess(String response) {
-			Log.e("JsonThongBao", response);
+			//Log.e("JsonGhiChu", response);
 			if (executeWhenGetGhiChuSuccess(response)) {
 			//	ArrayList<ThongBao> arrThongBao = exeQ.getAllThongBaoSqLite();
 				Toast.makeText(getApplicationContext(),
@@ -224,9 +228,8 @@ private void getGhiChu(){
 }
 
 private boolean executeWhenGetGhiChuSuccess(String response) {
-	Toast.makeText(getApplicationContext(),
-			response+"", Toast.LENGTH_LONG)
-			.show();
+	
+	String masinhvien = Global.getStringPreference(c, "MaSVDN", "0");
 //	ArrayList<ThongBao> arrThongBao = new ArrayList<ThongBao>();
 	ArrayList<ItemGhiChu> arrItemghichu = new ArrayList<ItemGhiChu>();
 	try {
@@ -240,6 +243,7 @@ private boolean executeWhenGetGhiChuSuccess(String response) {
 			String thoigiannhacghichu = ghichuJson.optString("ThoiGianNhacGhiChu");
 			String thoigianchinhsuaghichu = ghichuJson.optString("ThoiGianChinhSuaGhiChu");
 			
+			
 			Toast.makeText(getApplicationContext(),
 					maghichu, Toast.LENGTH_LONG)
 					.show();
@@ -248,7 +252,7 @@ private boolean executeWhenGetGhiChuSuccess(String response) {
 			arrItemghichu.add(gc);
 		}
 		
-		exeQ.insert_tbl_GhiChu_multi(arrItemghichu);
+		exeQ.insert_tbl_GhiChu_multi(arrItemghichu,masinhvien);
 		return true;
 	} catch (JSONException e) {
 		e.printStackTrace();

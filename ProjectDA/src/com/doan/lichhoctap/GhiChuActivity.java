@@ -147,8 +147,8 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		adapter = new GhiChuAdapter(getBaseContext(), R.layout.ghichu_item,
 				arrItemghichu);
 		lvGhichu.setAdapter(adapter);
-		 scheduleClient = new ScheduleClient(this);
-	     scheduleClient.doBindService();
+//		 scheduleClient = new ScheduleClient(this);
+//	     scheduleClient.doBindService();
 	}
 	
 	private AlertDialog suaGhichulertDialog(final int position) {
@@ -167,13 +167,13 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		tvTime.setText(arrItemghichu.get(position).getThoigiannhac());
 		edtContent.setText(arrItemghichu.get(position).getContent());
 		
-//		String thoigian = arrItemghichu.get(position).getThoigiannhac();
-//		String result[] = thoigian.split("[-,:, ]");
-//		nam = Integer.valueOf(result[0]);
-//		thang = Integer.valueOf(result[1]);
-//		ngay = Integer.valueOf(result[2]);
-//		gio = Integer.valueOf(result[3]);
-//		phut = Integer.valueOf(result[4]);
+		String thoigian = arrItemghichu.get(position).getThoigiannhac();
+		String result[] = thoigian.split("[-,:, ]");
+		nam = Integer.valueOf(result[0]);
+		thang = Integer.valueOf(result[1]);
+		ngay = Integer.valueOf(result[2]);
+		gio = Integer.valueOf(result[3]);
+		phut = Integer.valueOf(result[4]);
 	   
 //		gio = arrItemghichu.get(position).getHour();
 //		phut = arrItemghichu.get(position).getMinute();
@@ -355,7 +355,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		arrItemghichu.add(gc);
 		adapter.notifyDataSetChanged();
 	//	createGhiChu(masinhvien,strTitle,strContent,thoigiannhac,thoigianchinhsua);
-		datNotify(hour,minute,day,month,year);
+	//	datNotify(hour,minute,day,month,year);
 
 	}
 	protected void suaGhichu(String strTitle, int hour, int minute, int day, int month, int year, String strContent, int position) {
@@ -386,7 +386,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 	
 		adapter.notifyDataSetChanged();
 		updateGhiChu(maghichu,strTitle,strContent,thoigiannhac,thoigianchinhsua);
-		datNotify(hour,minute,day,month,year);
+	//	datNotify(hour,minute,day,month,year);
 
 	}
 	protected void xoaGhichu(int position) {
@@ -647,8 +647,8 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 	}
 	
 	//-----Sua ghi chu
-		public void updateGhiChu(String maghichu, String tieude, String noidung,
-				String thoigiannhac, String thoigiansua) {
+		public void updateGhiChu(final String maghichu,final String tieude,final String noidung,
+				final String thoigiannhac,final String thoigiansua) {
 			// TODO Auto-generated method stub
 			// Toast.makeText(getApplicationContext(), s_ngaysinh +" + " +
 			// s_gioitinh +" + " + s_diachi + " + " +
@@ -668,11 +668,12 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 
 					params, new AsyncHttpResponseHandler() {
 						public void onSuccess(String response) {
-							
+							exeQ.update_tbl_ghichu(maghichu,tieude,noidung,thoigiannhac,thoigiansua);
 							if (checkUpdate()) {
 								Toast.makeText(getApplicationContext(),
 										"Thanh cong", Toast.LENGTH_LONG)
 										.show();
+								
 							} else {
 								Toast.makeText(getApplicationContext(),
 										"That bai", Toast.LENGTH_LONG)
