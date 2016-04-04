@@ -7,6 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.doan.app.Global;
+import com.doan.database_handle.ExecuteQuery;
+import com.doan.model.SinhVien;
 import com.doan.model.ThongBao;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
@@ -42,7 +44,7 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 	private String ngaysinh,gioitinh,diachi,sdt;
 	private String s_ngaysinh,s_gioitinh,s_diachi,s_sdt;
 //	private String chuoi="";
-	private String masinhvien = "SV_00001";
+	
 	
 	private String HoTen = "";
 	private String NgaySinh = "";
@@ -51,6 +53,9 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 	private String SDT = "";
 	private String Email = "";
 	private String tenlophanhchinh ="";
+	
+	private ExecuteQuery exeQ;
+	private Context context;
 	
 
 	Toolbar toolbar;
@@ -62,6 +67,10 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 
 		toolbar = (Toolbar) findViewById(R.id.thongtincanhan_activity_tool_bar);
 		setSupportActionBar(toolbar);
+		
+		context = this;
+		exeQ = new ExecuteQuery(context);
+		final String masinhvien = Global.getStringPreference(context, "MaSVDN", "0");
 
 		if (getSupportActionBar() != null) {
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -76,7 +85,8 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 		edtDiachinguoidung = (EditText) findViewById(R.id.edtDiachinguoidung);
 		edtSdtnguoidung = (EditText) findViewById(R.id.edtSdtnguoidung);
 				
-		getThongtinSV(masinhvien);
+	//	getThongtinSV(masinhvien);
+		getThongtinSVSqlite(masinhvien);
 		
 
 		Typeface face = Typeface.createFromAsset(getAssets(),
@@ -147,7 +157,7 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 				s_gioitinh = edtGioitinhnguoidung.getText().toString();
 				s_diachi = edtDiachinguoidung.getText().toString();
 				s_sdt = edtSdtnguoidung.getText().toString();
-				suaThongtin(s_ngaysinh,s_gioitinh,s_diachi,s_sdt);
+				suaThongtin(masinhvien,s_ngaysinh,s_gioitinh,s_diachi,s_sdt);
 				
 				// Khong cho tuong tac voi edittext
 				edtNgaysinhnguoidung.setEnabled(false);
@@ -186,6 +196,25 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 				chonNgaySinhDatetimePicker();
 			}
 		});
+	}
+	private void getThongtinSVSqlite(String masinhvien2) {
+		SinhVien sv = new SinhVien();
+		sv = exeQ.getThongTinSinhVienSqLite(masinhvien2);
+		setThongTinSinhVien(sv.getTenSV(),sv.getEmailSV(),sv.getMaLopHanhChinh(),
+				sv.getNgaySinhSV(),sv.getGioiTinhSV(),sv.getDiaChiSV(),sv.getSDTSV());
+		
+	}
+	
+	private void setThongTinSinhVien(String svHoten ,String svEmail,
+			String svtenlophanhchinh,String svNgaySinh,String svGioiTinh,
+			String svDiaChi,String svSDT){
+		tvTennguoidung.setText(svHoten);
+		tvEmailnguoidung.setText(svEmail);
+		tvLopnguoidung.setText(svtenlophanhchinh);
+		edtNgaysinhnguoidung.setText(svNgaySinh);
+		edtGioitinhnguoidung.setText(svGioiTinh);
+		edtDiachinguoidung.setText(svDiaChi);
+		edtSdtnguoidung.setText(svSDT);
 	}
 	private void setThongTin(){
 		tvTennguoidung.setText(HoTen);
@@ -251,13 +280,13 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	public void suaThongtin(String s_ngaysinh, String s_gioitinh,
-			String s_diachi, String s_sdt) {
+	public void suaThongtin(final String masinhvien,final String s_ngaysinh, final String s_gioitinh,
+			final String s_diachi,final String s_sdt) {
 		// TODO Auto-generated method stub
 		// Toast.makeText(getApplicationContext(), s_ngaysinh +" + " +
 		// s_gioitinh +" + " + s_diachi + " + " +
 		// s_sdt,Toast.LENGTH_SHORT).show();
-		String masinhvien = "SV_00001";
+		
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
 		params.put("masinhvien", masinhvien);
@@ -274,11 +303,12 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 
 				params, new AsyncHttpResponseHandler() {
 					public void onSuccess(String response) {
-						Log.e("loginToServer", response);
+						
 						if (checkUpdate()) {
-							Toast.makeText(getApplicationContext(),
+							/*Toast.makeText(getApplicationContext(),
 									"Thanh cong", Toast.LENGTH_LONG)
-									.show();
+									.show();*/
+							exeQ.update_tbl_sinhvien(masinhvien,s_ngaysinh,s_gioitinh,s_diachi,s_sdt);
 						} else {
 							Toast.makeText(getApplicationContext(),
 									"That bai", Toast.LENGTH_LONG)
@@ -296,23 +326,19 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 	}
 
 	public void getThongtinSV(String masinhvien) {
-		// TODO Auto-generated method stub
-		// Toast.makeText(getApplicationContext(), s_ngaysinh +" + " +
-		// s_gioitinh +" + " + s_diachi + " + " +
-		// s_sdt,Toast.LENGTH_SHORT).show();
-	//	String masinhvien = "SV_00001";
+		
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
 		params.put("masinhvien", masinhvien);
 		
-	//	client.setTimeout(30000);
+	
 		
 
 		client.post(Global.BASE_URI + Global.URI_THONGTINTHEOMASV,
 				params, new AsyncHttpResponseHandler() {
 					public void onSuccess(String response) {
 						// Log.e("loginToServer", response);
-						if (executeWhenLoginSuccess(response)) {
+						if (executeWhenGetThongTinSuccess(response)) {
 							Toast.makeText(getApplicationContext(),
 									"Thanh cong", Toast.LENGTH_LONG)
 									.show();
@@ -374,7 +400,7 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 				});
 	}*/
 
-	private boolean executeWhenLoginSuccess(String response) {
+	private boolean executeWhenGetThongTinSuccess(String response) {
 
 		try {
 			JSONArray arrObj = new JSONArray(response);

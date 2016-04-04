@@ -71,7 +71,7 @@ public class SplashScreen extends Activity {
 		client.post(url, params, new AsyncHttpResponseHandler() {
 			public void onSuccess(String response) {
 				Log.e("JsonThongBao", response);
-				if (executeWhenGetThongBaoSuccess(response)) {
+				if (executeWhenGetGhiChuSuccess(response)) {
 					ArrayList<ThongBao> arrThongBao = exeQ.getAllThongBaoSqLite();
 					Toast.makeText(getApplicationContext(),
 							"Thanh cong", Toast.LENGTH_LONG)
@@ -92,10 +92,10 @@ public class SplashScreen extends Activity {
 			}
 		});
 	}
-	private boolean executeWhenGetThongBaoSuccess(String response) {
-		Toast.makeText(getApplicationContext(),
+	private boolean executeWhenGetGhiChuSuccess(String response) {
+		/*Toast.makeText(getApplicationContext(),
 				response+"", Toast.LENGTH_LONG)
-				.show();
+				.show();*/
 		ArrayList<ThongBao> arrThongBao = new ArrayList<ThongBao>();
 		
 		try {
@@ -119,4 +119,75 @@ public class SplashScreen extends Activity {
 			return false;
 		}
 	}
+	//----- Lay thong tin sinh vien
+public void getThongtinSV(String masinhvien) {
+		
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+		params.put("masinhvien", masinhvien);
+					
+		client.post(Global.BASE_URI + Global.URI_THONGTINTHEOMASV,
+				params, new AsyncHttpResponseHandler() {
+					public void onSuccess(String response) {
+						// Log.e("loginToServer", response);
+						if (executeWhenGetThongTinSuccess(response)) {
+							Toast.makeText(getApplicationContext(),
+									"Thanh cong", Toast.LENGTH_LONG)
+									.show();
+					//		setThongTin();
+						} else {
+							Toast.makeText(getApplicationContext(),
+									"That bai", Toast.LENGTH_LONG)
+									.show();
+						}
+					}
+
+					public void onFailure(int statusCode, Throwable error,
+							String content) {
+						Log.e("loginToServer", error+" "+content);
+						Toast.makeText(getApplicationContext(),
+								error+"", Toast.LENGTH_LONG)
+								.show();
+					}
+				});
+	}
+
+private boolean executeWhenGetThongTinSuccess(String response) {
+
+	String masinhvien = Global.getStringPreference(c, "MaSVDN", "0");
+	String HoTen = "";
+	String NgaySinh = "";
+	String GioiTinh ="";
+	String DiaChi = "";
+	String SDT = "";
+	String Email = "";
+	String tenlophanhchinh ="";
+	Toast.makeText(getApplicationContext(),
+			response+"", Toast.LENGTH_LONG)
+			.show();
+	try {
+		JSONArray arrObj = new JSONArray(response);
+		for (int i = 0; i < arrObj.length(); i++) {
+			JSONObject userJson = arrObj.getJSONObject(i);
+
+			HoTen = userJson.optString("HoTen");
+			NgaySinh = userJson.optString("NgaySinh");
+			GioiTinh = userJson.optString("GioiTinh");
+			DiaChi = userJson.optString("DiaChi");
+			SDT = userJson.optString("SDT");
+			Email = userJson.optString("Email");
+			tenlophanhchinh = userJson.optString("tenlophanhchinh");
+		}
+		exeQ.insert_tbl_SinhVien(masinhvien, Email, HoTen,tenlophanhchinh, NgaySinh,GioiTinh,
+				DiaChi, SDT);
+		return true;
+	} catch (JSONException e) {
+		e.printStackTrace();
+		Log.e("loi", e + "");
+		return false;
+	}
+}
+	
+	
+	
 }
