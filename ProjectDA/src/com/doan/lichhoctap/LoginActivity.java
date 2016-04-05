@@ -174,6 +174,7 @@ public class LoginActivity extends ActionBarActivity {
 				response+"", Toast.LENGTH_LONG)
 				.show();
 		String status = "";
+		String masinhvien = "";
 		try {
 			/*JSONArray arrObj = new JSONArray(response);
 			for (int i = 0; i < arrObj.length(); i++) {
@@ -183,6 +184,8 @@ public class LoginActivity extends ActionBarActivity {
 			JSONObject loginJson = new JSONObject(response);
 			status = loginJson.optString("status");
 			if(status.matches(getString(R.string.string_login_sinhvien_success))){
+				masinhvien = loginJson.optString("pk_sv");
+				Global.saveStringPreference(getBaseContext(), "MaSVDN", masinhvien);
 				return true;
 			}else {
 				return false;

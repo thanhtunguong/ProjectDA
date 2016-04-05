@@ -200,8 +200,7 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 	private void getThongtinSVSqlite(String masinhvien2) {
 		SinhVien sv = new SinhVien();
 		sv = exeQ.getThongTinSinhVienSqLite(masinhvien2);
-		setThongTinSinhVien(sv.getTenSV(),sv.getEmailSV(),sv.getMaLopHanhChinh(),
-				sv.getNgaySinhSV(),sv.getGioiTinhSV(),sv.getDiaChiSV(),sv.getSDTSV());
+		setThongTinSinhVien(sv.getTenSV(),sv.getEmailSV(),sv.getMaLopHanhChinh(),sv.getNgaySinhSV(),sv.getGioiTinhSV(),sv.getDiaChiSV(),sv.getSDTSV());
 		
 	}
 	
