@@ -3,13 +3,14 @@ package com.doan.model;
 import java.util.Date;
 
 public class BaiViet {
-	String TieuDeBaiViet, NoiDungBaiViet, MaGiangVien, LoaiBaiViet;
-	Date NgayTaoBaiViet, ThoiGianChinhSua;
+	String MaBaiViet,TieuDeBaiViet, NoiDungBaiViet, MaGiangVien, LoaiBaiViet;
+	String NgayTaoBaiViet, ThoiGianChinhSua;
 	
 	public BaiViet(){}
 	
-	public BaiViet(String tieude, String noidung, 
-			String giangvien, String loaibai, Date ngaytao, Date thoigianchinhsua){
+	public BaiViet(String mabaiviet,String tieude, String noidung, 
+			String giangvien, String loaibai, String ngaytao, String thoigianchinhsua){
+		this.MaBaiViet = mabaiviet;
 		this.TieuDeBaiViet = tieude;
 		this.NoiDungBaiViet = noidung;
 		this.MaGiangVien = giangvien;
@@ -18,6 +19,14 @@ public class BaiViet {
 		this.ThoiGianChinhSua = thoigianchinhsua;
 	}
 	
+	public String getMaBaiViet() {
+		return MaBaiViet;
+	}
+
+	public void setMaBaiViet(String maBaiViet) {
+		MaBaiViet = maBaiViet;
+	}
+
 	public String getLoaiBaiViet() {
 		return LoaiBaiViet;
 	}
@@ -42,16 +51,16 @@ public class BaiViet {
 	public void setMaGiangVien(String maGiangVien) {
 		MaGiangVien = maGiangVien;
 	}
-	public Date getNgayTaoBaiViet() {
+	public String getNgayTaoBaiViet() {
 		return NgayTaoBaiViet;
 	}
-	public void setNgayTaoBaiViet(Date ngayTaoBaiViet) {
+	public void setNgayTaoBaiViet(String ngayTaoBaiViet) {
 		NgayTaoBaiViet = ngayTaoBaiViet;
 	}
-	public Date getThoiGianChinhSua() {
+	public String getThoiGianChinhSua() {
 		return ThoiGianChinhSua;
 	}
-	public void setThoiGianChinhSua(Date thoiGianChinhSua) {
+	public void setThoiGianChinhSua(String thoiGianChinhSua) {
 		ThoiGianChinhSua = thoiGianChinhSua;
 	}
 	
