@@ -3,6 +3,10 @@ package com.doan.app;
 
 
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import com.doan.lichhoctap.R;
 
 import android.content.Context;
@@ -18,7 +22,7 @@ public class Global {
 	public static String activityTitles[];
 	public static String MaSVDN;
 	//Tung
-	public static String BASE_URI ="http://192.168.3.101:8080/csdlda/";
+	public static String BASE_URI ="http://192.168.43.158:8080/csdlda/";
 	public static String URI_LICH_HOC ="api_LichHocTheoMaSV.php";
 	public static String URI_THONG_BAO = "api_DanhSachThongBaoTheoMaSV.php";
 	//public static String BASE_URI ="http://192.168.56.1:533";
@@ -78,4 +82,23 @@ public class Global {
 				XML_FILE_NAME, Context.MODE_PRIVATE);
 		return mSharedPrefences.getInt(key, defValue);
 	}
+	public static String maHoaMd5(String input){
+        String result = input;
+        if(input != null) {
+            MessageDigest md;
+            try {
+                md = MessageDigest.getInstance("MD5");
+            md.update(input.getBytes());
+            BigInteger hash = new BigInteger(1, md.digest());
+            result = hash.toString(16);
+            if ((result.length() % 2) != 0) {
+                result = "0" + result;
+            } 
+            }catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return result;
+    }
 }

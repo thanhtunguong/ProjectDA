@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Tùng -->
-
+	<string name="string_login_sinhvien_success">sinhvien_success</string>
     <string name="app_name">"I'm student"</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -13,6 +13,8 @@
     <string name="string_tvWeek">Tuần:</string>
     <string name="string_hoctap_thoigianSang">07:00 - 11:45</string>
     <string name="string_hoctap_thoigianChieu">12:45 - 17:30</string>
+    <string name="string_Hoc">Học</string>
+    <string name="string_Nghi">Nghỉ</string>
     <string name="string_hoctap_trangthai_active">Active</string>
     <string name="string_hoctap_trangthai_deactive">Deactive</string>
     <string name="string_Monday">thứ Hai</string>

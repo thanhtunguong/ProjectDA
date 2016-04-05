@@ -3,37 +3,47 @@ package com.doan.model;
 import java.util.Date;
 
 public class TietHoc {
-	int BuoiHoc;
-	Date SpecificDate;
+	int CaHoc;
+	String BuoiHoc;
+	String SpecificDate;
 	String MonHoc;
 	String PhongHoc;
-	int TrangThai;
+	String TrangThai;
 	
 	public TietHoc(){
 		
 	}
 	
-	public TietHoc(int buoihoc, Date spec, String monhoc, String phonghoc, int trangthai){
-		this.BuoiHoc = buoihoc;
+	public TietHoc(int CaHoc, String BuoiHoc, String spec, String monhoc, String phonghoc, String trangthai){
+		this.CaHoc = CaHoc;
 		this.SpecificDate = spec;
 		this.MonHoc = monhoc;
 		this.PhongHoc = phonghoc;
 		this.TrangThai = trangthai;
+		this.BuoiHoc = BuoiHoc;
 	}
-	
-	public Date getSpecificDate() {
+
+	public int getCaHoc() {
+		return CaHoc;
+	}
+
+	public void setCaHoc(int caHoc) {
+		CaHoc = caHoc;
+	}
+
+	public String getSpecificDate() {
 		return SpecificDate;
 	}
 
-	public void setSpecificDate(Date specificDate) {
+	public void setSpecificDate(String specificDate) {
 		SpecificDate = specificDate;
 	}
 
-	public int getBuoiHoc() {
+	public String getBuoiHoc() {
 		return BuoiHoc;
 	}
 
-	public void setBuoiHoc(int buoiHoc) {
+	public void setBuoiHoc(String buoiHoc) {
 		BuoiHoc = buoiHoc;
 	}
 
@@ -53,11 +63,11 @@ public class TietHoc {
 		PhongHoc = phongHoc;
 	}
 
-	public int getTrangThai() {
+	public String getTrangThai() {
 		return TrangThai;
 	}
 
-	public void setTrangThai(int trangThai) {
+	public void setTrangThai(String trangThai) {
 		TrangThai = trangThai;
 	}
 }

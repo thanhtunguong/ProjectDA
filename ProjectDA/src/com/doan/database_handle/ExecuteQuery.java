@@ -1,7 +1,11 @@
 package com.doan.database_handle;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.doan.app.Global;
@@ -13,6 +17,7 @@ import com.doan.model.MonHoc;
 import com.doan.model.MonHocTienQuyet;
 import com.doan.model.SinhVien;
 import com.doan.model.ThongBao;
+import com.doan.model.TietHoc;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -409,6 +414,67 @@ public class ExecuteQuery {
 		return arrThongBao;
 	}
 //___/tbl_ThongBao
+
+//___tbl_LichHoc
+	public boolean insert_tbl_TietHoc_multi(ArrayList<TietHoc> listTH) {
+		try {
+			database = mDbHelper.getWritableDatabase();
+			for (TietHoc th : listTH) {
+				ContentValues cv = new ContentValues();
+
+				cv.put(ColumnName.LICHhoc_MA_CA_HOC, th.getCaHoc());
+				cv.put(ColumnName.LICHhoc_BUOI_HOC, th.getBuoiHoc());
+				cv.put(ColumnName.LICHhoc_NGAY_LICH_HOC, th.getSpecificDate()+"");
+				cv.put(ColumnName.LICHhoc_TENMON, th.getMonHoc());
+				cv.put(ColumnName.LICHhoc_MA_PHONG_HOC, th.getPhongHoc());
+				cv.put(ColumnName.LICHhoc_MA_TRANG_THAI, th.getTrangThai());
+				if(th.getSpecificDate() != null){
+					database.insert(ColumnName.LICHhoc_TABLE, null, cv);
+				}
+			}
+			return true;
+		} catch (SQLiteException e) {
+			Log.e("insert_tbl_tiethoc_multi", e.getMessage());
+			return false;
+		}
+	}
+	public ArrayList<TietHoc> getAllTietHocSqLite(){
+		ArrayList<TietHoc> arrTietHoc = new ArrayList<TietHoc>();
+		String selectQuery = "SELECT *"
+				+ "FROM " + ColumnName.LICHhoc_TABLE;
+		database = mDbHelper.getReadableDatabase();
+		Cursor cursor = database.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) {
+			do {
+				TietHoc th = new TietHoc();
+				
+				th.setCaHoc(cursor.getInt(6));
+				th.setBuoiHoc(cursor.getString(2));
+				String ngay = cursor.getString(1);
+				//Date date = epKieuDate(ngay);
+				th.setSpecificDate(cursor.getString(1));
+				th.setMonHoc(cursor.getString(3));
+				th.setPhongHoc(cursor.getString(5));
+				th.setTrangThai(cursor.getString(4));
+				
+				arrTietHoc.add(th);
+			} while (cursor.moveToNext());
+		}
+		return arrTietHoc;
+	}
+//___/tbl_LichHoc
+	private Date epKieuDate(String ngay){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = null;
+		try {
+			date = df.parse(ngay);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date;
+	}
+
 // ---- tbl_SinhVien
 	//--- Insert tbl_sinhvien
 	public boolean insert_tbl_SinhVien(String masinhvien,String email,String tensinhvein, String lop,String ngaysinh, String gioitinh,

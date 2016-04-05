@@ -1,15 +1,24 @@
 package com.doan.lichhoctap;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.doan.app.Global;
 import com.doan.database_handle.ExecuteQuery;
 import com.doan.model.SinhVien;
+import com.doan.model.ThongBao;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,24 +47,25 @@ public class LoginActivity extends ActionBarActivity {
 		
 		edEmail = (EditText) findViewById(R.id.edtLoginEmail);
 		edPwd = (EditText) findViewById(R.id.edtLoginPwd);
-		edEmail.setText("utititung@gmail.com");
+		edEmail.setText("viethungtrn94@gmail.com");
 		//Hưng edEmail.setText("daigianghean@gmail.com");
 		//Viet edEmail.setText("vietkop94@gmail.com");
 		
-		edPwd.setText("123");
+		edPwd.setText("1");
 		btnLogin = (Button) findViewById(R.id.btnLogin);
 		btnLogin.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(checkAcc() == true){
+				/*if(checkAcc() == true){
 					Toast.makeText(getBaseContext(), "Ok", Toast.LENGTH_SHORT).show();
 					Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
 					startActivity(intent);
 				}else {
 					Toast.makeText(getBaseContext(), "Failed", Toast.LENGTH_SHORT).show();
-				}
+				}*/
+				loginToServer(edEmail.getText().toString(), edPwd.getText().toString());
 			}
 		});
 		checkEditText();
@@ -124,6 +134,59 @@ public class LoginActivity extends ActionBarActivity {
 		else {
 			btnLogin.setEnabled(true);
 			btnLogin.setTextColor(getBaseContext().getResources().getColor(R.color.white));
+		}
+	}
+	private void loginToServer(String email, String matkhau){
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+		params.put("email", email);
+		String pwd = Global.maHoaMd5(matkhau);
+		params.put("matkhau", pwd);
+		String url = Global.BASE_URI + Global.URI_DANGNHAP;
+		client.post(url, params, new AsyncHttpResponseHandler() {
+			public void onSuccess(String response) {
+				Log.e("JsonLogin", response);
+				if (executeWhenLoginSuccess(response)) {
+					Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
+					startActivity(intent);
+				} else {
+					Toast.makeText(getApplicationContext(),
+							"Login that bai", Toast.LENGTH_LONG)
+							.show();
+				}
+			}
+
+			public void onFailure(int statusCode, Throwable error,
+					String content) {
+				Log.e("JsonLogin", error+" "+content);
+				Toast.makeText(getApplicationContext(),
+						error+"", Toast.LENGTH_LONG)
+						.show();
+			}
+		});
+	}
+	private boolean executeWhenLoginSuccess(String response) {
+		Toast.makeText(getApplicationContext(),
+				response+"", Toast.LENGTH_LONG)
+				.show();
+		String status = "";
+		try {
+			/*JSONArray arrObj = new JSONArray(response);
+			for (int i = 0; i < arrObj.length(); i++) {
+				JSONObject thongbaoJson = arrObj.getJSONObject(i);
+				status = thongbaoJson.optString("status");
+			}*/
+			JSONObject loginJson = new JSONObject(response);
+			status = loginJson.optString("status");
+			if(status.matches(getString(R.string.string_login_sinhvien_success))){
+				return true;
+			}else {
+				return false;
+			}
+			//return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 

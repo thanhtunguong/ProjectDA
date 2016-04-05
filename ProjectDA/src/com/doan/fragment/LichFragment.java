@@ -1,5 +1,7 @@
 package com.doan.fragment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 import com.doan.adapter.HocTapLichNgayAdapter;
+import com.doan.database_handle.ExecuteQuery;
 import com.doan.lichhoctap.R;
 import com.doan.model.DayInWeek;
 import com.doan.model.TietHoc;
@@ -47,8 +50,9 @@ public class LichFragment extends Fragment {
 	private HocTapLichNgayAdapter adapter;
 	private View view;
 	private LayoutInflater l;
-	int lan;
+	private int lan;
 	private Activity c;
+	private ExecuteQuery exeQ;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -58,6 +62,7 @@ public class LichFragment extends Fragment {
 		view = v;
 		l = inflater;
 		lan = 0;
+		exeQ = new ExecuteQuery(c);
 		tvToday = (TextView) v.findViewById(R.id.tvResetCalendar);
 		tvWeek = (TextView) v.findViewById(R.id.tvWeek);
 		setinItialize(view, l, c);
@@ -89,7 +94,7 @@ public class LichFragment extends Fragment {
 		getNgayThang();
 		tvToday.setText(resultDate);
 		
-		TietHoc th1 = new TietHoc(1, null, "Toan roi rac", "P23", 1);
+		/*TietHoc th1 = new TietHoc(1, null, "Toan roi rac", "P23", 1);
 		TietHoc th2 = new TietHoc(2, null, "Tin dai cuong", "P22", 1);
 		TietHoc th3 = new TietHoc(3, null, "Thiet ke web", "P33", 1);
 		TietHoc th4 = new TietHoc(4, null, "Lap trinh mobile", "P24", 1);
@@ -107,7 +112,7 @@ public class LichFragment extends Fragment {
 		TietHoc th11 = new TietHoc(5, null, "Ki thuat lap trinh huong doi tuong", "P24", 1);
 		calendar.set(2016, 2, 1);
 		specLTHDT = calendar.getTime();
-		TietHoc th12 = new TietHoc(5, specLTHDT, "Ki thuat lap trinh huong doi tuong", "P25", 2);
+		TietHoc th12 = new TietHoc(5, specLTHDT, "Ki thuat lap trinh huong doi tuong", "P25", 2);*/
 		
 		tvWeek.setText(resultWeek);
 		
@@ -119,7 +124,7 @@ public class LichFragment extends Fragment {
 		arlTh6 = new ArrayList<TietHoc>();
 		arlTh7 = new ArrayList<TietHoc>();
 		arlTh8 = new ArrayList<TietHoc>();
-		if (lan != 1) {
+		/*if (lan != 1) {
 			arlAll.add(th1);
 			arlAll.add(th2);
 			arlAll.add(th3);
@@ -133,7 +138,8 @@ public class LichFragment extends Fragment {
 			arlAll.add(th10);
 			arlAll.add(th11);
 			arlAll.add(th12);
-		}
+		}*/
+		arlAll.addAll(exeQ.getAllTietHocSqLite());
 
 		phanTietHoc(arlAll);
 
@@ -230,7 +236,7 @@ public class LichFragment extends Fragment {
 			break;
 		}
 
-		resultWeek = getString(R.string.string_tvWeek) + " " + firstdayOfWeek + " - " + lastdayOfWeek;
+		
 		resultDayName = getString(R.string.string_tvHelloTextView) + " " + resultDayName + ".";
 		//resultDate = date + " " + month + " " + "năm " + year;
 		resultDate = date + " " + month;
@@ -249,29 +255,42 @@ public class LichFragment extends Fragment {
 		int thang1 = 0; int thang2 = 0;
 
 		cFirstdayOfWeek.add(Calendar.DAY_OF_YEAR, tru);
-		ngayDauTuanTru1 = cFirstdayOfWeek.getTime();
+		
 		thang1 = cFirstdayOfWeek.getTime().getMonth() + 1;
 		firstdayOfWeek = cFirstdayOfWeek.getTime().getDate() + "/" + thang1;
+		
 
 		ngayTinh = cFirstdayOfWeek.getTime();
 		// cho thu 2 vao de tao listtuan
 		// setGroupParents(cFirstdayOfWeek.getTime());
 
 		cLastdayOfWeek.add(Calendar.DAY_OF_YEAR, cong - tru);
-		ngayCuoiTuanCong1 = cLastdayOfWeek.getTime();
+		
 		thang2 = cLastdayOfWeek.getTime().getMonth() +1;
 		lastdayOfWeek = cLastdayOfWeek.getTime().getDate() + "/" + thang2;
+		resultWeek = getString(R.string.string_tvWeek) + " " + firstdayOfWeek + " - " + lastdayOfWeek;
+		
+		
+		
+		cFirstdayOfWeek.add(Calendar.DAY_OF_YEAR, -1);
+		ngayDauTuanTru1 = cFirstdayOfWeek.getTime();
+		cLastdayOfWeek.add(Calendar.DAY_OF_YEAR, cong - tru + 1);
+		ngayCuoiTuanCong1 = cLastdayOfWeek.getTime();
 	}
 
 	private void checkTietCuThe(ArrayList<TietHoc> arlTh, TietHoc th) {
 		TietHoc pt = new TietHoc();
 		if (arlTh.size() > 0) {
+			Date dateTH = epKieuDate(th.getSpecificDate()); 
 			if (th.getSpecificDate() != null) {
-				if (th.getSpecificDate().after(ngayDauTuanTru1) == true && th.getSpecificDate().before(ngayCuoiTuanCong1) == true) {
+				if (dateTH.after(ngayDauTuanTru1) == true && dateTH.before(ngayCuoiTuanCong1) == true) {
 					for (int i = 0; i < arlTh.size(); i++) {
 						pt = arlTh.get(i);
 						if (th.getBuoiHoc() == pt.getBuoiHoc() && th.getMonHoc() == pt.getMonHoc()) {
 							arlTh.remove(i);
+							arlTh.add(th);
+							break;
+						}else {
 							arlTh.add(th);
 							break;
 						}
@@ -299,52 +318,48 @@ public class LichFragment extends Fragment {
 	}
 
 	private void phanTietHoc(ArrayList<TietHoc> list) {
+		int t = 0;
 		for (TietHoc tietHoc : list) {
-			switch (tietHoc.getBuoiHoc()) {
-			case 1:
-				checkTietCuThe(arlTh2, tietHoc);
-				break;
-			case 2:
-				checkTietCuThe(arlTh2, tietHoc);
-				break;
-			case 3:
-				checkTietCuThe(arlTh3, tietHoc);
-				break;
-			case 4:
-				checkTietCuThe(arlTh3, tietHoc);
-				break;
-			case 5:
-				checkTietCuThe(arlTh4, tietHoc);
-				break;
-			case 6:
-				checkTietCuThe(arlTh4, tietHoc);
-				break;
-			case 7:
-				checkTietCuThe(arlTh5, tietHoc);
-				break;
-			case 8:
-				checkTietCuThe(arlTh5, tietHoc);
-				break;
-			case 9:
-				checkTietCuThe(arlTh6, tietHoc);
-				break;
-			case 10:
-				checkTietCuThe(arlTh6, tietHoc);
-				break;
-			case 11:
-				checkTietCuThe(arlTh7, tietHoc);
-				break;
-			case 12:
-				checkTietCuThe(arlTh7, tietHoc);
-				break;
-			case 13:
-				checkTietCuThe(arlTh8, tietHoc);
-				break;
-			case 14:
-				checkTietCuThe(arlTh8, tietHoc);
-				break;
+			t = t +1;
+			if(t == 20){
+				int z = 0;
 			}
-		}
+			Date date = epKieuDate(tietHoc.getSpecificDate());
+			if(date.after(ngayDauTuanTru1) == true && date.before(ngayCuoiTuanCong1) == true){
+				for (int i = 1; i < 29; i++) {
+					if (tietHoc.getCaHoc() == i) {
+						if (i == 1 || i == 2 || i == 3 || i == 4) {
+							checkTietCuThe(arlTh2, tietHoc);
+							break;
+						}
+						if (i == 5 || i == 6 || i == 7 || i == 8) {
+							checkTietCuThe(arlTh3, tietHoc);
+							break;
+						}
+						if (i == 9 || i == 10 || i == 11 || i == 12) {
+							checkTietCuThe(arlTh4, tietHoc);
+							break;
+						}
+						if (i == 13 || i == 14 || i == 15 || i == 16) {
+							checkTietCuThe(arlTh5, tietHoc);
+							break;
+						}
+						if (i == 17 || i == 18 || i == 19 || i == 20) {
+							checkTietCuThe(arlTh6, tietHoc);
+							break;
+						}
+						if (i == 21 || i == 22 || i == 23 || i == 24) {
+							checkTietCuThe(arlTh7, tietHoc);
+							break;
+						}
+						if (i == 25 || i == 26 || i == 27 || i == 28) {
+							checkTietCuThe(arlTh7, tietHoc);
+							break;
+						}
+					}
+				}
+			}
+		}		
 	}
 
 	private Date congNgay(Date homtruoc) {
@@ -449,5 +464,16 @@ public class LichFragment extends Fragment {
 		});
 
 		dialog.show();
+	}
+	private Date epKieuDate(String ngay){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = df.parse(ngay);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date;
 	}
 }

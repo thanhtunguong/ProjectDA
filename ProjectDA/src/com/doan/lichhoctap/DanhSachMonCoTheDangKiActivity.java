@@ -21,6 +21,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.View.OnDragListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -531,6 +533,7 @@ public class DanhSachMonCoTheDangKiActivity extends ActionBarActivity {
 				final Context context = activity;
 				switchBtn.setTag(groupPosition);
 				setSwitch(arrStatus.get(groupPosition), switchBtn, arrstttemp.get(groupPosition), groupPosition);
+				
 				switchBtn.setOnClickListener(new OnClickListener() {
 
 					@Override

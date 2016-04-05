@@ -67,11 +67,86 @@ public class ThongBaoAdapter extends BaseExpandableListAdapter {
 		Date date = parentItems.get(groupPosition).getNgayCuThe();
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
+		
 		String thoigian = c.get(Calendar.DAY_OF_WEEK) + ", " 
 				+ c.get(Calendar.DAY_OF_MONTH) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.YEAR);
 		//tvDate.setText(parentItems.get(groupPosition).getNgayCuThe()+"");
-		tvDate.setText(thoigian);
+		tvDate.setText(getNgayThang(c));
 		return convertView;
+	}
+	private String getNgayThang(Calendar c) {
+		int date = c.get(Calendar.DATE);
+		int day = c.get(Calendar.DAY_OF_WEEK);
+		int year = c.get(Calendar.YEAR);
+		int m = c.get(Calendar.MONTH);
+		
+		String month = "";
+		switch (m) {
+		case Calendar.JANUARY:
+			month = activity.getString(R.string.string_January);
+			break;
+		case Calendar.FEBRUARY:
+			month = activity.getString(R.string.string_February);
+			break;
+		case Calendar.MARCH:
+			month = activity.getString(R.string.string_March);
+			break;
+		case Calendar.APRIL:
+			month = activity.getString(R.string.string_April);
+			break;
+		case Calendar.MAY:
+			month = activity.getString(R.string.string_May);
+			break;
+		case Calendar.JUNE:
+			month = activity.getString(R.string.string_June);
+			break;
+		case Calendar.JULY:
+			month = activity.getString(R.string.string_July);
+			break;
+		case Calendar.AUGUST:
+			month = activity.getString(R.string.string_August);
+			break;
+		case Calendar.SEPTEMBER:
+			month = activity.getString(R.string.string_September);
+			break;
+		case Calendar.OCTOBER:
+			month = activity.getString(R.string.string_October);
+			break;
+		case Calendar.NOVEMBER:
+			month = activity.getString(R.string.string_November);
+			break;
+		case Calendar.DECEMBER:
+			month = activity.getString(R.string.string_December);
+			break;
+		}
+		String resultDayName = "";
+		switch (day) {
+		case Calendar.MONDAY:
+			resultDayName = activity.getString(R.string.string_Monday);
+			break;
+		case Calendar.TUESDAY:
+			resultDayName = activity.getString(R.string.string_Tuesday);
+			break;
+		case Calendar.WEDNESDAY:
+			resultDayName = activity.getString(R.string.string_Wednesday);
+			break;
+		case Calendar.THURSDAY:
+			resultDayName = activity.getString(R.string.string_Thursday);
+			break;
+		case Calendar.FRIDAY:
+			resultDayName = activity.getString(R.string.string_Friday);
+			break;
+		case Calendar.SATURDAY:
+			resultDayName = activity.getString(R.string.string_Saturday);
+			break;
+		case Calendar.SUNDAY:
+			resultDayName = activity.getString(R.string.string_Sunday);
+			break;
+		}
+
+		
+		String resultDate = resultDayName + ", " + date + "/" + month + "/" + year;
+		return resultDate;
 	}
 
 	@Override

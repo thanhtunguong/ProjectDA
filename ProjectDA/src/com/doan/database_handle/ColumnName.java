@@ -94,11 +94,13 @@ public class ColumnName {
 	//tblLichHoc
 	public static String LICHhoc_TABLE = "tbl_LichHoc";
 	public static String LICHhoc_MA_LICH_HOC = "PK_LichHoc";
-	public static String LICHhoc_NGAY_LICH_HOC = "NgayLichHoc";
-	public static String LICHhoc_MA_CA_HOC = "FK_CaHoc";
-	public static String LICHhoc_MA_TRANG_THAI = "FK_TrangThai";
-	public static String LICHhoc_MA_PHONG_HOC = "FK_PhongHoc";
-	public static String LICHhoc_MA_LOP_TIN_CHI = "FK_LopTinChi";
+	public static String LICHhoc_NGAY_LICH_HOC = "NgayLH";
+	public static String LICHhoc_MA_CA_HOC = "CaHoc";
+	public static String LICHhoc_BUOI_HOC = "Buoi";
+	public static String LICHhoc_MA_TRANG_THAI = "TenTrangThai";
+	public static String LICHhoc_MA_PHONG_HOC = "TenPhongHoc";
+	//public static String LICHhoc_MA_LOP_TIN_CHI = "FK_LopTinChi";
+	public static String LICHhoc_TENMON = "TenMonHoc";
 	
 	//tbl_LichThi
 	public static String LICHthi_TABLE = "tbl_LichThi";

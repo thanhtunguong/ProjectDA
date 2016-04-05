@@ -53,38 +53,22 @@ public class HocTapLichNgayAdapter extends BaseExpandableListAdapter {
 		}
 
 		tvThoiGian = (TextView) convertView.findViewById(R.id.tvTietHocThoigian);
-		if (child.get(childPosition).getBuoiHoc() % 2 != 0) {
+		/*if (child.get(childPosition).getBuoiHoc() % 2 != 0) {
 			tvThoiGian.setText(R.string.string_hoctap_thoigianSang);
 		} else {
 			tvThoiGian.setText(R.string.string_hoctap_thoigianChieu);
-		}
+		}*/
+		tvThoiGian.setText(child.get(childPosition).getBuoiHoc());
 		tvTenMon = (TextView) convertView.findViewById(R.id.tvTenTietHoc);
 		tvTenMon.setText(child.get(childPosition).getMonHoc());
 		tvPhong = (TextView) convertView.findViewById(R.id.tvTietHocPhong);
 		tvPhong.setText(child.get(childPosition).getPhongHoc());
-		//tvTrangThai = (TextView) convertView.findViewById(R.id.ivTietHocTrangThai);
 		ImageView ivTrangThai = (ImageView) convertView.findViewById(R.id.ivTietHocTrangThai);
-		if(child.get(childPosition).getTrangThai() == 1){
-			//tvTrangThai.setText(R.string.string_hoctap_trangthai_active);
+		if(child.get(childPosition).getTrangThai().matches(activity.getString(R.string.string_Hoc))){
 			ivTrangThai.setBackgroundResource(R.drawable.circle_active_icon);
-		}else if (child.get(childPosition).getTrangThai() == 2) {
-			//tvTrangThai.setText(R.string.string_hoctap_trangthai_deactive);
+		}else if (child.get(childPosition).getTrangThai().matches(activity.getString(R.string.string_Nghi))) {
 			ivTrangThai.setBackgroundResource(R.drawable.circle_deactive_icon);
 		}
-		
-		convertView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View view) {
-				/*
-				 * Toast.makeText(activity,
-				 * child.get(childPosition).getMaSukien(),
-				 * Toast.LENGTH_SHORT).show();
-				 */
-				//sukienDetailDialog(activity, child.get(childPosition));
-			}
-		});
-
 		return convertView;
 	}
 
