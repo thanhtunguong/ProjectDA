@@ -50,11 +50,9 @@ public class SplashScreen extends Activity {
 		getBaiViet();
 		getThongBao();
 		getLichHoc();
-	//	getGhiChu();
-	//	getThongtinSV(masinhvien);
-		
-		
-		
+		getGhiChu();
+		getThongtinSV(masinhvien);
+
 		secondBar = (ProgressBar) findViewById(R.id.secondBar);
 		secondBar.setVisibility(View.VISIBLE);
 		new Handler().postDelayed(new Runnable() {
@@ -85,22 +83,20 @@ public class SplashScreen extends Activity {
 			public void onSuccess(String response) {
 				Log.e("JsonThongBao", response);
 				if (executeWhenGetThongBaoSuccess(response)) {
-					Toast.makeText(getApplicationContext(),
-							"Thanh cong", Toast.LENGTH_LONG)
-							.show();
+					/*Toast.makeText(getApplicationContext(),	"Thanh cong", Toast.LENGTH_LONG).show();*/
 				} else {
-					Toast.makeText(getApplicationContext(),
+					/*Toast.makeText(getApplicationContext(),
 							"That bai", Toast.LENGTH_LONG)
-							.show();
+							.show();*/
 				}
 			}
 
 			public void onFailure(int statusCode, Throwable error,
 					String content) {
 				Log.e("JsonThongBao", error+" "+content);
-				Toast.makeText(getApplicationContext(),
+				/*Toast.makeText(getApplicationContext(),
 						error+"", Toast.LENGTH_LONG)
-						.show();
+						.show();*/
 			}
 		});
 	}
@@ -142,29 +138,29 @@ public class SplashScreen extends Activity {
 			public void onSuccess(String response) {
 				Log.e("JsonLichHoc", response);
 				if (executeWhenGetLichHocSuccess(response)) {
-					Toast.makeText(getApplicationContext(),
+					/*Toast.makeText(getApplicationContext(),
 							"Thanh cong", Toast.LENGTH_LONG)
-							.show();
+							.show();*/
 				} else {
-					Toast.makeText(getApplicationContext(),
+					/*Toast.makeText(getApplicationContext(),
 							"That bai", Toast.LENGTH_LONG)
-							.show();
+							.show();*/
 				}
 			}
 
 			public void onFailure(int statusCode, Throwable error,
 					String content) {
 				Log.e("JsonLichHoc", error+" "+content);
-				Toast.makeText(getApplicationContext(),
+				/*Toast.makeText(getApplicationContext(),
 						error+"", Toast.LENGTH_LONG)
-						.show();
+						.show();*/
 			}
 		});
 	}
 	private boolean executeWhenGetLichHocSuccess(String response) {
-		Toast.makeText(getApplicationContext(),
+		/*Toast.makeText(getApplicationContext(),
 				response+"", Toast.LENGTH_LONG)
-				.show();
+				.show();*/
 		ArrayList<TietHoc> arrTietHoc = new ArrayList<TietHoc>();
 		
 		try {
@@ -215,23 +211,23 @@ public void getThongtinSV(String masinhvien) {
 					public void onSuccess(String response) {
 						// Log.e("loginToServer", response);
 						if (executeWhenGetThongTinSuccess(response)) {
-							Toast.makeText(getApplicationContext(),
+							/*Toast.makeText(getApplicationContext(),
 									"Thanh cong", Toast.LENGTH_LONG)
-									.show();
+									.show();*/
 					//		setThongTin();
 						} else {
-							Toast.makeText(getApplicationContext(),
+							/*Toast.makeText(getApplicationContext(),
 									"That bai", Toast.LENGTH_LONG)
-									.show();
+									.show();*/
 						}
 					}
 
 					public void onFailure(int statusCode, Throwable error,
 							String content) {
 						Log.e("loginToServer", error+" "+content);
-						Toast.makeText(getApplicationContext(),
+						/*Toast.makeText(getApplicationContext(),
 								error+"", Toast.LENGTH_LONG)
-								.show();
+								.show();*/
 					}
 				});
 	}
@@ -246,7 +242,7 @@ public void getThongtinSV(String masinhvien) {
 		String SDT = "";
 		String Email = "";
 		String tenlophanhchinh = "";
-		Toast.makeText(getApplicationContext(), response + "", Toast.LENGTH_LONG).show();
+		/*Toast.makeText(getApplicationContext(), response + "", Toast.LENGTH_LONG).show();*/
 		try {
 			JSONArray arrObj = new JSONArray(response);
 			for (int i = 0; i < arrObj.length(); i++) {
@@ -282,23 +278,23 @@ private void getGhiChu(){
 			//Log.e("JsonGhiChu", response);
 			if (executeWhenGetGhiChuSuccess(response)) {
 			//	ArrayList<ThongBao> arrThongBao = exeQ.getAllThongBaoSqLite();
-				Toast.makeText(getApplicationContext(),
+				/*Toast.makeText(getApplicationContext(),
 						"Thanh cong", Toast.LENGTH_LONG)
-						.show();
+						.show();*/
 			//	setGhiChu();
 			} else {
-				Toast.makeText(getApplicationContext(),
+				/*Toast.makeText(getApplicationContext(),
 						"That bai", Toast.LENGTH_LONG)
-						.show();
+						.show();*/
 			}
 		}
 
 		public void onFailure(int statusCode, Throwable error,
 				String content) {
 			Log.e("JsonThongBao", error+" "+content);
-			Toast.makeText(getApplicationContext(),
+			/*Toast.makeText(getApplicationContext(),
 					error+"", Toast.LENGTH_LONG)
-					.show();
+					.show();*/
 		}
 	});
 }
@@ -318,9 +314,9 @@ private boolean executeWhenGetGhiChuSuccess(String response) {
 			String noidungghichu = ghichuJson.optString("NoiDungGhiChu");
 			String thoigiannhacghichu = ghichuJson.optString("ThoiGianNhacGhiChu");
 			String thoigianchinhsuaghichu = ghichuJson.optString("ThoiGianChinhSuaGhiChu");
-			
-			
-			
+			/*Toast.makeText(getApplicationContext(),
+					maghichu, Toast.LENGTH_LONG)
+					.show();*/
 			ItemGhiChu gc = new ItemGhiChu(maghichu,tieudeghichu,thoigiannhacghichu,thoigianchinhsuaghichu,
 					noidungghichu);
 			arrItemghichu.add(gc);

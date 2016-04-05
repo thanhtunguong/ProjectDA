@@ -22,7 +22,7 @@ public class Global {
 	public static String activityTitles[];
 	public static String MaSVDN;
 	//Tung
-	public static String BASE_URI ="http://192.168.43.158:8080/csdlda/";
+	public static String BASE_URI ="http://192.168.3.103:8080/csdlda/";
 	public static String URI_LICH_HOC ="api_LichHocTheoMaSV.php";
 	public static String URI_THONG_BAO = "api_DanhSachThongBaoTheoMaSV.php";
 	//public static String BASE_URI ="http://192.168.56.1:533";

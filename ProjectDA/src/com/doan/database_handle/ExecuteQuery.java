@@ -449,12 +449,12 @@ public class ExecuteQuery {
 			do {
 				TietHoc th = new TietHoc();
 				
-				th.setCaHoc(cursor.getInt(6));
-				th.setBuoiHoc(cursor.getString(2));
-				String ngay = cursor.getString(1);
+				th.setCaHoc(cursor.getInt(2));
+				th.setBuoiHoc(cursor.getString(3));
+				//String ngay = cursor.getString(1);
 				//Date date = epKieuDate(ngay);
 				th.setSpecificDate(cursor.getString(1));
-				th.setMonHoc(cursor.getString(3));
+				th.setMonHoc(cursor.getString(6));
 				th.setPhongHoc(cursor.getString(5));
 				th.setTrangThai(cursor.getString(4));
 				
