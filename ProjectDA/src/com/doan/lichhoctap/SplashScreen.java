@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import com.doan.app.Global;
 import com.doan.database_handle.ExecuteQuery;
+import com.doan.model.BaiViet;
 import com.doan.model.ItemGhiChu;
 import com.doan.model.ThongBao;
 import com.doan.model.TietHoc;
@@ -46,10 +47,12 @@ public class SplashScreen extends Activity {
 		c = this;
 		exeQ = new ExecuteQuery(c);
 		String masinhvien = Global.getStringPreference(c, "MaSVDN", "0");
+		getBaiViet();
 		getThongBao();
 		getLichHoc();
-		getGhiChu();
-		getThongtinSV(masinhvien);
+	//	getGhiChu();
+	//	getThongtinSV(masinhvien);
+		
 		
 		
 		secondBar = (ProgressBar) findViewById(R.id.secondBar);
@@ -317,9 +320,7 @@ private boolean executeWhenGetGhiChuSuccess(String response) {
 			String thoigianchinhsuaghichu = ghichuJson.optString("ThoiGianChinhSuaGhiChu");
 			
 			
-			Toast.makeText(getApplicationContext(),
-					maghichu, Toast.LENGTH_LONG)
-					.show();
+			
 			ItemGhiChu gc = new ItemGhiChu(maghichu,tieudeghichu,thoigiannhacghichu,thoigianchinhsuaghichu,
 					noidungghichu);
 			arrItemghichu.add(gc);
@@ -332,7 +333,66 @@ private boolean executeWhenGetGhiChuSuccess(String response) {
 		return false;
 	}
 }
+//--------- tbl_BaiViet
+//--- Get all Bai viet
+private void getBaiViet(){
 	
+	AsyncHttpClient client = new AsyncHttpClient();
+	RequestParams params = new RequestParams();
+	
+	String url = Global.BASE_URI + Global.URI_DANHSACHBAIVIET;
+	client.post(url, params, new AsyncHttpResponseHandler() {
+		public void onSuccess(String response) {
+			//Log.e("JsonGhiChu", response);
+			if (executeWhenGetBaiVietSuccess(response)) {
+			
+			} else {
+				
+			}
+		}
+
+		public void onFailure(int statusCode, Throwable error,
+				String content) {
+			Log.e("JsonBaiViet", error+" "+content);
+			
+		}
+	});
+}
+
+private boolean executeWhenGetBaiVietSuccess(String response) {
+	
+//	String masinhvien = Global.getStringPreference(c, "MaSVDN", "0");
+//	ArrayList<ThongBao> arrThongBao = new ArrayList<ThongBao>();
+	
+	ArrayList<BaiViet> arrBaiViet = new ArrayList<BaiViet>();
+	try {
+		JSONArray arrObj = new JSONArray(response);
+		for (int i = 0; i < arrObj.length(); i++) {
+			JSONObject baivietJson = arrObj.getJSONObject(i);
+
+			String mabaiviet = baivietJson.optString("pk_baiviet");
+			String tieudebaiviet = baivietJson.optString("tieudebaiviet");
+			String noidungbaiviet = baivietJson.optString("noidungbaiviet");
+			String ngaytaobaiviet = baivietJson.optString("ngaytaobaiviet");
+			String thoigiansua = baivietJson.optString("thoigianchinhsua");
+			String loaibaiviet = baivietJson.optString("maloaibaiviet");
+			String giangvien = baivietJson.optString("hoten");
+			
+//			Toast.makeText(getApplicationContext(),
+//					maghichu, Toast.LENGTH_LONG)
+//					.show();
+			BaiViet bv = new BaiViet(mabaiviet,tieudebaiviet,noidungbaiviet,giangvien,loaibaiviet,
+					ngaytaobaiviet,thoigiansua);
+			arrBaiViet.add(bv);
+		}
+		
+		exeQ.insert_tbl_BaiViet_multi(arrBaiViet);
+		return true;
+	} catch (JSONException e) {
+		e.printStackTrace();
+		return false;
+	}
+}	
 	
 	
 }
