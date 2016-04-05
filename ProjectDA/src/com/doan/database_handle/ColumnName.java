@@ -185,4 +185,13 @@ public class ColumnName {
 	public static String THONG_BAO_NGAY_TAO_THONG_BAO = "NgayTaoThongBao";
 	public static String THONG_BAO_MA_GIAO_VIEN = "MaGV";
 	
+	//tbl_BaiViet
+		public static String BAI_VIET_TABLE = "tbl_BaiViet";
+		public static String BAI_VIET_MA_BAI_VIET = "PK_BaiViet";
+		public static String BAI_VIET_TIEU_DE_BAI_VIET = "TieuDeBaiViet";
+		public static String BAI_VIET_NOI_DUNG_BAI_VIET = "NoiDungBaiViet";
+		public static String BAI_VIET_NGAY_TAO = "NgayTaoBaiViet";
+		public static String BAI_VIET_THOI_GIAN_CHINH_SUA = "ThoiGianChinhSua";
+		public static String BAI_VIET_LOAI_BAI_VIET = "FK_LoaiBaiViet";
+		public static String BAI_VIET_MA_GV = "FK_GV";
 }

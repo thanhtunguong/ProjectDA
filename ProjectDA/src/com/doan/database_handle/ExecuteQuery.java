@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.doan.app.Global;
+import com.doan.model.BaiViet;
 import com.doan.model.DiemHocTap;
 import com.doan.model.DieuLe;
 import com.doan.model.DieuLeTag;
@@ -477,7 +478,7 @@ public class ExecuteQuery {
 
 // ---- tbl_SinhVien
 	//--- Insert tbl_sinhvien
-	public boolean insert_tbl_SinhVien(String masinhvien,String email,String tensinhvein, String lop,String ngaysinh, String gioitinh,
+	public boolean insert_tbl_SinhVien(String masinhvien,String email,String tensinhvien, String lop,String ngaysinh, String gioitinh,
 			String diachi, String sdt) {
 		try {
 			database = mDbHelper.getWritableDatabase();
@@ -486,7 +487,7 @@ public class ExecuteQuery {
 
 				cv.put(ColumnName.SV_MA_SV,masinhvien);
 				cv.put(ColumnName.SV_EMAIL_SV, email);
-				cv.put(ColumnName.SV_TEN_SV,tensinhvein);
+				cv.put(ColumnName.SV_TEN_SV,tensinhvien);
 				cv.put(ColumnName.SV_MA_LOP_HANH_CHINH,lop);
 				cv.put(ColumnName.SV_NGAY_SINH_SV,ngaysinh);
 				cv.put(ColumnName.SV_GIOI_TINH_SV, gioitinh);
@@ -684,4 +685,55 @@ public class ExecuteQuery {
 				return false;
 			}
 		}
+		
+		//---- tbl_BaiViet
+		// ---- Get all ghi chu
+
+			public boolean insert_tbl_BaiViet_multi(ArrayList<BaiViet> listBV) {
+				try {
+					database = mDbHelper.getWritableDatabase();
+					for (BaiViet bv : listBV) {
+						ContentValues cv = new ContentValues();
+
+						cv.put(ColumnName.BAI_VIET_MA_BAI_VIET, bv.getMaBaiViet());
+						cv.put(ColumnName.BAI_VIET_TIEU_DE_BAI_VIET, bv.getTieuDeBaiViet());
+						cv.put(ColumnName.BAI_VIET_NOI_DUNG_BAI_VIET, bv.getNoiDungBaiViet());
+						cv.put(ColumnName.BAI_VIET_NGAY_TAO, bv.getNgayTaoBaiViet());
+						cv.put(ColumnName.BAI_VIET_THOI_GIAN_CHINH_SUA, bv.getThoiGianChinhSua());
+						cv.put(ColumnName.BAI_VIET_LOAI_BAI_VIET, bv.getLoaiBaiViet());
+						cv.put(ColumnName.BAI_VIET_MA_GV, bv.getMaGiangVien());
+						
+
+						database.insert(ColumnName.BAI_VIET_TABLE, null, cv);
+					}
+					return true;
+				} catch (SQLiteException e) {
+					Log.e("insert_tbl_GhiChu_multi", e.getMessage());
+					return false;
+				}
+			}
+			public ArrayList<BaiViet> getAllBaiVietSqLite(){
+				ArrayList<BaiViet> arrBaiViet = new ArrayList<BaiViet>();
+				String selectQuery = "SELECT *"
+						+ "FROM " + ColumnName.BAI_VIET_TABLE;
+					//	+ " WHERE " + ColumnName.GHI_CHU_MA_SV + "='" +masinhvien+"'";
+				database = mDbHelper.getReadableDatabase();
+				Cursor cursor = database.rawQuery(selectQuery, null);
+				if (cursor.moveToFirst()) {
+					do {
+						BaiViet bv = new BaiViet();
+						
+						bv.setMaBaiViet(cursor.getString(0));
+						bv.setTieuDeBaiViet(cursor.getString(1));
+						bv.setNoiDungBaiViet(cursor.getString(2));
+						bv.setNgayTaoBaiViet(cursor.getString(3));
+						bv.setThoiGianChinhSua(cursor.getString(4));
+						bv.setLoaiBaiViet(cursor.getString(5));
+						bv.setMaGiangVien(cursor.getString(6));
+						
+						arrBaiViet.add(bv);
+					} while (cursor.moveToNext());
+				}
+				return arrBaiViet;
+			}
 }
