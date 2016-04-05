@@ -574,4 +574,48 @@ public class ExecuteQuery {
 				return false;
 			}
 		}
+		//----- insert tbl_ghichu
+		public boolean insert_tbl_GhiChu(String masinhvien, String maghichu, String tieude
+				,String noidung, String thoigiannhac, String thoigianchinhsua) {
+			try {
+				database = mDbHelper.getWritableDatabase();
+				
+					ContentValues cv = new ContentValues();
+
+					cv.put(ColumnName.GHI_CHU_MA_GHI_CHU, maghichu);
+					cv.put(ColumnName.GHI_CHU_TIEU_DE_GHI_CHU, tieude);
+					cv.put(ColumnName.GHI_CHU_NOI_DUNG_GHI_CHU, noidung);
+					cv.put(ColumnName.GHI_CHU_THOI_GIAN_NHAC, thoigiannhac);
+					cv.put(ColumnName.GHI_CHU_THOI_GIAN_CHINH_SUA, thoigianchinhsua);
+					cv.put(ColumnName.GHI_CHU_MA_SV, masinhvien);
+					
+
+					database.insert(ColumnName.GHI_CHU_TABLE, null, cv);
+				
+				return true;
+			} catch (SQLiteException e) {
+				Log.e("insert_tbl_GhiChu_multi", e.getMessage());
+				return false;
+			}
+		}
+		//----- delete tbl_ghichu
+		public boolean delete_tbl_GhiChu(String maghichu) {
+			try {
+				database = mDbHelper.getWritableDatabase();
+				
+//					ContentValues cv = new ContentValues();
+//
+//					cv.put(ColumnName.GHI_CHU_MA_GHI_CHU, maghichu);
+					
+					
+					
+
+					database.delete(ColumnName.GHI_CHU_TABLE,ColumnName.GHI_CHU_MA_GHI_CHU +"='" +maghichu+"'", null);
+				
+				return true;
+			} catch (SQLiteException e) {
+				Log.e("insert_tbl_GhiChu_multi", e.getMessage());
+				return false;
+			}
+		}
 }
