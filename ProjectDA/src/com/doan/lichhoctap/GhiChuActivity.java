@@ -62,6 +62,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 	ListView lvGhichu;
 	Button btnThemghichu;
 	private static String thoigian_ghichu = "";
+	private int lastIndex = 0;
 	
 
 	ArrayList<ItemGhiChu> arrItemghichu = new ArrayList<ItemGhiChu>();
@@ -90,7 +91,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		}
 		context = this;
 		exeQ = new ExecuteQuery(context);
-		final String masinhvien = Global.getStringPreference(context, "MaSVDN", "0");
+		String masinhvien = Global.getStringPreference(context, "MaSVDN", "0");
 		lvGhichu = (ListView) findViewById(R.id.lvGhichu);
 		btnThemghichu = (Button) findViewById(R.id.btnThemghichu);
 
@@ -107,7 +108,8 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 //		ItemGhiChu gc2 = new ItemGhiChu("Chuyen de co so",17,30,27,02,2016,
 //				"Di hoc chuyen de");
 //		arrItemghichu.add(gc2);
-
+//		scheduleClient = new ScheduleClient(this);
+//	     scheduleClient.doBindService();
 		
 		
 	     
@@ -141,7 +143,13 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		
 		arrItemghichu = exeQ.getAllGhiChuSqLite(masinhvien);
 		setGhiChu();
+		if(arrItemghichu != null){
+		int sttcuoi = arrItemghichu.size()-1;
+		String maghichucuoi = arrItemghichu.get(sttcuoi).getMaghichu();
 		
+		String result_ma[] = maghichucuoi.split("[_]");
+		lastIndex = Integer.valueOf(result_ma[2]);
+		}
 	}
 	private void setGhiChu(){
 		adapter = new GhiChuAdapter(getBaseContext(), R.layout.ghichu_item,
@@ -284,10 +292,10 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		builder.setPositiveButton(R.string.btn_them,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-
+						String masinhvien = Global.getStringPreference(context, "MaSVDN", "0");
 						// ItemGhiChu gc = new
 						// ItemGhiChu("Cong viec 01","13:40 25/02/2016","Lam bai tap ve nha");
-						themGhichu(edtTitle.getText().toString(), 
+						themGhichu(masinhvien,edtTitle.getText().toString(), 
 								gio, phut, ngay, thang, nam,
 								 edtContent.getText()
 								.toString());
@@ -332,7 +340,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		return result;
 	}
 
-	protected void themGhichu(String strTitle, int hour, int minute, int day, int month, int year, String strContent) {
+	protected void themGhichu(String masinhvien,String strTitle, int hour, int minute, int day, int month, int year, String strContent) {
 		ItemGhiChu gc = new ItemGhiChu();
 		String thoigiannhac = "";
 		String thoigianchinhsua = "";
@@ -354,7 +362,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		gc.setContent(strContent);
 		arrItemghichu.add(gc);
 		adapter.notifyDataSetChanged();
-	//	createGhiChu(masinhvien,strTitle,strContent,thoigiannhac,thoigianchinhsua);
+		createGhiChu(masinhvien,strTitle,strContent,thoigiannhac,thoigianchinhsua);
 	//	datNotify(hour,minute,day,month,year);
 
 	}
@@ -391,8 +399,9 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 	}
 	protected void xoaGhichu(int position) {
 		String maghichu = arrItemghichu.get(position).getMaghichu();
+		String masinhvien = Global.getStringPreference(context, "MaSVDN", "0");
 		arrItemghichu.remove(position);
-	//	deleteGhiChu(maghichu,masinhvien);
+		deleteGhiChu(maghichu,masinhvien);
 		adapter.notifyDataSetChanged();
 	}
 
@@ -604,20 +613,21 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		}
 	}
 	//-----Them ghi chu
-	public void createGhiChu(String masinhvien, String tieude, String noidung,
-			String thoigiannhac, String thoigiansua) {
+	public void createGhiChu(final String masinhvien,final String tieude,final String noidung,
+			final String thoigiannhac,final String thoigianchinhsua) {
 		// TODO Auto-generated method stub
 		// Toast.makeText(getApplicationContext(), s_ngaysinh +" + " +
 		// s_gioitinh +" + " + s_diachi + " + " +
 		// s_sdt,Toast.LENGTH_SHORT).show();
-		
+		lastIndex+=1;
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
 		params.put("masinhvien", masinhvien);
 		params.put("tieude", tieude);
 		params.put("noidung", noidung);
 		params.put("thoigiannhac", thoigiannhac);
-		params.put("thoigiansua", thoigiansua);
+		params.put("thoigiansua", thoigianchinhsua);
+		params.put("maghichu", masinhvien+"_"+lastIndex);
 	//	client.setTimeout(30000);
 		
 
@@ -627,9 +637,14 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 					public void onSuccess(String response) {
 						
 						if (checkUpdate()) {
-							Toast.makeText(getApplicationContext(),
-									"Thanh cong", Toast.LENGTH_LONG)
-									.show();
+//							Toast.makeText(getApplicationContext(),
+//									"Thanh cong", Toast.LENGTH_LONG)
+//									.show();
+							 
+							 exeQ.insert_tbl_GhiChu(masinhvien,masinhvien+"_"+lastIndex,tieude,
+										noidung, thoigiannhac, thoigianchinhsua);
+							 
+							
 						} else {
 							Toast.makeText(getApplicationContext(),
 									"That bai", Toast.LENGTH_LONG)
@@ -668,12 +683,12 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 
 					params, new AsyncHttpResponseHandler() {
 						public void onSuccess(String response) {
-							exeQ.update_tbl_ghichu(maghichu,tieude,noidung,thoigiannhac,thoigiansua);
+							
 							if (checkUpdate()) {
-								Toast.makeText(getApplicationContext(),
-										"Thanh cong", Toast.LENGTH_LONG)
-										.show();
-								
+//								Toast.makeText(getApplicationContext(),
+//										"Thanh cong", Toast.LENGTH_LONG)
+//										.show();
+								exeQ.update_tbl_ghichu(maghichu,tieude,noidung,thoigiannhac,thoigiansua);
 							} else {
 								Toast.makeText(getApplicationContext(),
 										"That bai", Toast.LENGTH_LONG)
@@ -691,7 +706,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		}
 		
 		//-----Xoa ghi chu
-				public void deleteGhiChu(String maghichu, String masinhvien) {
+				public void deleteGhiChu(final String maghichu, String masinhvien) {
 					// TODO Auto-generated method stub
 					// Toast.makeText(getApplicationContext(), s_ngaysinh +" + " +
 					// s_gioitinh +" + " + s_diachi + " + " +
@@ -714,6 +729,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 										Toast.makeText(getApplicationContext(),
 												"Thanh cong", Toast.LENGTH_LONG)
 												.show();
+										exeQ.delete_tbl_GhiChu(maghichu);
 									} else {
 										Toast.makeText(getApplicationContext(),
 												"That bai", Toast.LENGTH_LONG)
