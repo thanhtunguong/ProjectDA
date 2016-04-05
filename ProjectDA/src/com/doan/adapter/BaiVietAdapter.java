@@ -47,19 +47,19 @@ public class BaiVietAdapter extends ArrayAdapter<BaiViet> {
 		Integer mau;
 		GradientDrawable d = (GradientDrawable) loaibaiviet.getBackground();
 		switch(myArray.get(position).getLoaiBaiViet()){
-		case "l01":
+		case "LBV01":
 			loaibaiviet.setText("DT");
 			//mau = Color.argb(0, 90, 80, 0);
 			mau = Color.parseColor(context.getString(R.color.ColorPrimary));
 			d.setColor(mau);
 			break;
-		case "l02":
+		case "LBV02":
 			loaibaiviet.setText("HD");
 			//mau = Color.argb(100, 60, 0, 0);
 			mau = Color.parseColor(context.getString(R.color.indigo));
 			d.setColor(mau);
 			break;
-		case "l03":
+		case "LBV03":
 			loaibaiviet.setText("TN");
 			//mau = Color.argb(60, 0, 100, 0);
 			mau = Color.parseColor(context.getString(R.color.amber));
