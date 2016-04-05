@@ -33,7 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		// If database not exists copy it from the assets
 
 		boolean mDataBaseExist = checkDataBase();
-		//if (!mDataBaseExist) {
+		if (!mDataBaseExist) {
 			this.getReadableDatabase();
 			this.close();
 			try {
@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			} catch (IOException mIOException) {
 				throw new Error("ErrorCopyingDataBase");
 			}
-		//}
+		}
 	}
 
 	// Check that the database exists here: /data/data/your package/databases/Da

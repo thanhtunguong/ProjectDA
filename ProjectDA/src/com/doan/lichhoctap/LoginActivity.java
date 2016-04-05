@@ -48,9 +48,6 @@ public class LoginActivity extends ActionBarActivity {
 		edEmail = (EditText) findViewById(R.id.edtLoginEmail);
 		edPwd = (EditText) findViewById(R.id.edtLoginPwd);
 		edEmail.setText("viethungtrn94@gmail.com");
-		//Hưng edEmail.setText("daigianghean@gmail.com");
-		//Viet edEmail.setText("vietkop94@gmail.com");
-		
 		edPwd.setText("1");
 		btnLogin = (Button) findViewById(R.id.btnLogin);
 		btnLogin.setOnClickListener(new OnClickListener() {
@@ -150,9 +147,13 @@ public class LoginActivity extends ActionBarActivity {
 					Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
 					startActivity(intent);
 				} else {
-					Toast.makeText(getApplicationContext(),
+					/*Toast.makeText(getApplicationContext(),
 							"Login that bai", Toast.LENGTH_LONG)
-							.show();
+							.show();*/
+					
+					//test
+					Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
+					startActivity(intent);
 				}
 			}
 
@@ -162,6 +163,9 @@ public class LoginActivity extends ActionBarActivity {
 				Toast.makeText(getApplicationContext(),
 						error+"", Toast.LENGTH_LONG)
 						.show();
+				//test
+				Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
+				startActivity(intent);
 			}
 		});
 	}
