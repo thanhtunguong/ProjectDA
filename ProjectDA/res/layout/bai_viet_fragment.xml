@@ -3,15 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <TextView 
-        android:id="@+id/tvIntentThongBao"
-        android:text="Thong Bao"
-        android:layout_height="wrap_content"
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_refresh_layout_bang_tin"
         android:layout_width="match_parent"
-        android:layout_margin="@dimen/text_margin"/>
-    <ListView 
-        android:id="@+id/lvBaiViet"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"></ListView>
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvIntentThongBao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:text="Thong Bao" />
+
+            <ListView
+                android:id="@+id/lvBaiViet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+            </ListView>
+        </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

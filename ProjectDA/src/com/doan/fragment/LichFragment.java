@@ -5,25 +5,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.Random;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import com.doan.adapter.HocTapLichNgayAdapter;
 import com.doan.app.Global;
 import com.doan.database_handle.ExecuteQuery;
 import com.doan.lichhoctap.R;
-import com.doan.lichhoctap.SplashScreen;
 import com.doan.model.DayInWeek;
 import com.doan.model.TietHoc;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-
-import android.R.integer;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
@@ -43,9 +37,7 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class LichFragment extends Fragment {
 	
