@@ -463,6 +463,33 @@ public class ExecuteQuery {
 		}
 		return arrTietHoc;
 	}
+	public boolean updateLichHocSqLite(ArrayList<TietHoc> listTH) {
+		ArrayList<TietHoc> listTHtest;
+		try {
+			database = mDbHelper.getWritableDatabase();
+			database.delete(ColumnName.LICHhoc_TABLE, null, null);
+			listTHtest = getAllTietHocSqLite();
+			for (TietHoc th : listTH) {
+				ContentValues cv = new ContentValues();
+
+				cv.put(ColumnName.LICHhoc_MA_CA_HOC, th.getCaHoc());
+				cv.put(ColumnName.LICHhoc_BUOI_HOC, th.getBuoiHoc());
+				cv.put(ColumnName.LICHhoc_NGAY_LICH_HOC, th.getSpecificDate()+"");
+				cv.put(ColumnName.LICHhoc_TENMON, th.getMonHoc());
+				cv.put(ColumnName.LICHhoc_MA_PHONG_HOC, th.getPhongHoc());
+				cv.put(ColumnName.LICHhoc_MA_TRANG_THAI, th.getTrangThai());
+				cv.put(ColumnName.LICHhoc_MA_LICH_HOC, th.getMaLichHoc());
+				if(th.getSpecificDate() != null){
+					database.insert(ColumnName.LICHhoc_TABLE, null, cv);
+				}
+			}
+			listTHtest = getAllTietHocSqLite();
+			return true;
+		} catch (SQLiteException e) {
+			Log.e("insert_tbl_tiethoc_multi", e.getMessage());
+			return false;
+		}
+	}
 //___/tbl_LichHoc
 	private Date epKieuDate(String ngay){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

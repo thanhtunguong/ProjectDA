@@ -8,11 +8,20 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Random;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.doan.adapter.HocTapLichNgayAdapter;
+import com.doan.app.Global;
 import com.doan.database_handle.ExecuteQuery;
 import com.doan.lichhoctap.R;
+import com.doan.lichhoctap.SplashScreen;
 import com.doan.model.DayInWeek;
 import com.doan.model.TietHoc;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import android.R.integer;
 import android.app.Activity;
@@ -21,11 +30,16 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ExpandableListView;
@@ -39,7 +53,7 @@ public class LichFragment extends Fragment {
 	private ArrayList<Object> childItems;
 	private ArrayList<TietHoc> arlAll;
 	private ArrayList<TietHoc> arlTh2, arlTh3, arlTh4, arlTh5, arlTh6, arlTh7, arlTh8;
-	private ArrayList<Integer> arlColor;
+	private ArrayList<Integer> arlColor = new ArrayList<Integer>();
 	private String resultDate = "";
 	private String firstdayOfWeek, lastdayOfWeek;
 	private String resultWeek = "";
@@ -53,7 +67,8 @@ public class LichFragment extends Fragment {
 	private int lan;
 	private Activity c;
 	private ExecuteQuery exeQ;
-
+	private SwipeRefreshLayout swipeRefreshLayout;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
 			@Nullable Bundle savedInstanceState) {
@@ -65,6 +80,44 @@ public class LichFragment extends Fragment {
 		exeQ = new ExecuteQuery(c);
 		tvToday = (TextView) v.findViewById(R.id.tvResetCalendar);
 		tvWeek = (TextView) v.findViewById(R.id.tvWeek);
+		swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout_lich);
+		swipeRefreshLayout.setColorSchemeColors(R.color.ColorPrimary);
+		swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+			
+			@Override
+			public void onRefresh() {
+				// TODO Auto-generated method stub
+				//setinItialize(view, l, c);
+				getLichHoc();
+			}
+		});
+		expandableList = (ExpandableListView) v.findViewById(R.id.elvDays);
+		expandableList.setOnScrollListener(new OnScrollListener() {
+
+		    @Override
+		    public void onScroll(AbsListView view, int firstVisibleItem,
+		            int visibleItemCount, int totalItemCount) {
+		        boolean enable = false;
+		        if(expandableList != null && expandableList.getChildCount() > 0){
+		            // check if the first item of the list is visible
+		            boolean firstItemVisible = expandableList.getFirstVisiblePosition() == 0;
+		            // check if the top of the first item is visible
+		            boolean topOfFirstItemVisible = expandableList.getChildAt(0).getTop() == 0;
+		            // enabling or disabling the refresh layout
+		            enable = firstItemVisible && topOfFirstItemVisible;
+		        }
+		        swipeRefreshLayout.setEnabled(enable);
+		    }
+
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		expandableList.setGroupIndicator(null);
+		expandableList.setClickable(true);
+		intTaoMau();
 		setinItialize(view, l, c);
 		
 		tvToday.setOnClickListener(new OnClickListener() {
@@ -75,7 +128,14 @@ public class LichFragment extends Fragment {
 				lan = 1;
 				Calendar dar = Calendar.getInstance();
 				ngayChonDatePicker = dar.getTime();
+				
+				int index = expandableList.getFirstVisiblePosition();
+				View viewLV = expandableList.getChildAt(0);
+				int top = (viewLV == null) ? 0 : (viewLV.getTop() - expandableList.getPaddingTop());
+				
 				setinItialize(view, l, c);
+				
+				expandableList.setSelectionFromTop(index, top);
 			}
 		});
 		tvWeek.setOnClickListener(new OnClickListener() {
@@ -93,27 +153,6 @@ public class LichFragment extends Fragment {
 	private void setinItialize(View v, LayoutInflater l, Activity c) {
 		getNgayThang();
 		tvToday.setText(resultDate);
-		
-		/*TietHoc th1 = new TietHoc(1, null, "Toan roi rac", "P23", 1);
-		TietHoc th2 = new TietHoc(2, null, "Tin dai cuong", "P22", 1);
-		TietHoc th3 = new TietHoc(3, null, "Thiet ke web", "P33", 1);
-		TietHoc th4 = new TietHoc(4, null, "Lap trinh mobile", "P24", 1);
-		Date specLTMB, specLTHDT;
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(2016, 1, 23); //tháng bắt đầu từ 0
-		specLTMB = calendar.getTime();
-		TietHoc th5 = new TietHoc(4, specLTMB, "Lap trinh mobile", "P24", 2);
-		TietHoc th6 = new TietHoc(5, null, "Ki thuat lap trinh huong doi tuong", "P24", 1);
-
-		TietHoc th7 = new TietHoc(1, null, "Toan roi rac", "P23", 1);
-		TietHoc th8 = new TietHoc(2, null, "Tin dai cuong", "P22", 1);
-		TietHoc th9 = new TietHoc(3, null, "Thiet ke web", "P33", 1);
-		TietHoc th10 = new TietHoc(4, null, "Lap trinh mobile", "P24", 1);
-		TietHoc th11 = new TietHoc(5, null, "Ki thuat lap trinh huong doi tuong", "P24", 1);
-		calendar.set(2016, 2, 1);
-		specLTHDT = calendar.getTime();
-		TietHoc th12 = new TietHoc(5, specLTHDT, "Ki thuat lap trinh huong doi tuong", "P25", 2);*/
-		
 		tvWeek.setText(resultWeek);
 		
 		arlAll = new ArrayList<TietHoc>();
@@ -124,28 +163,9 @@ public class LichFragment extends Fragment {
 		arlTh6 = new ArrayList<TietHoc>();
 		arlTh7 = new ArrayList<TietHoc>();
 		arlTh8 = new ArrayList<TietHoc>();
-		/*if (lan != 1) {
-			arlAll.add(th1);
-			arlAll.add(th2);
-			arlAll.add(th3);
-			arlAll.add(th4);
-			arlAll.add(th5);
-			arlAll.add(th6);
-		} else {
-			arlAll.add(th7);
-			arlAll.add(th8);
-			arlAll.add(th9);
-			arlAll.add(th10);
-			arlAll.add(th11);
-			arlAll.add(th12);
-		}*/
 		arlAll.addAll(exeQ.getAllTietHocSqLite());
 
 		phanTietHoc(arlAll);
-
-		expandableList = (ExpandableListView) v.findViewById(R.id.elvDays);
-		expandableList.setGroupIndicator(null);
-		expandableList.setClickable(true);
 
 		setChildData();
 		setGroupParents(ngayTinh);
@@ -244,14 +264,19 @@ public class LichFragment extends Fragment {
 
 	private void getTuan(int tru, int cong) {
 		Calendar cFirstdayOfWeek, cLastdayOfWeek, specifyDate;
-		cFirstdayOfWeek = cLastdayOfWeek = specifyDate = Calendar.getInstance();
+		//cFirstdayOfWeek = cLastdayOfWeek = specifyDate = Calendar.getInstance();
+		cFirstdayOfWeek = Calendar.getInstance();
+		cLastdayOfWeek = Calendar.getInstance();
+		specifyDate = Calendar.getInstance();
 		if(lan == 1){
 			specifyDate.setTime(ngayChonDatePicker);
 		}else {
 			specifyDate.setTime(Calendar.getInstance().getTime());
 		}
-		cFirstdayOfWeek = specifyDate;
-		cLastdayOfWeek = specifyDate;
+		/*cFirstdayOfWeek = specifyDate;
+		cLastdayOfWeek = specifyDate;*/
+		cFirstdayOfWeek.setTime(specifyDate.getTime());
+		cLastdayOfWeek.setTime(specifyDate.getTime());
 		int thang1 = 0; int thang2 = 0;
 
 		cFirstdayOfWeek.add(Calendar.DAY_OF_YEAR, tru);
@@ -264,7 +289,7 @@ public class LichFragment extends Fragment {
 		// cho thu 2 vao de tao listtuan
 		// setGroupParents(cFirstdayOfWeek.getTime());
 
-		cLastdayOfWeek.add(Calendar.DAY_OF_YEAR, cong - tru);
+		cLastdayOfWeek.add(Calendar.DAY_OF_YEAR, cong);
 		
 		thang2 = cLastdayOfWeek.getTime().getMonth() +1;
 		lastdayOfWeek = cLastdayOfWeek.getTime().getDate() + "/" + thang2;
@@ -272,10 +297,12 @@ public class LichFragment extends Fragment {
 		
 		
 		
-		cFirstdayOfWeek.add(Calendar.DAY_OF_YEAR, -1);
+		//cFirstdayOfWeek.add(Calendar.DAY_OF_YEAR, -1);
 		ngayDauTuanTru1 = cFirstdayOfWeek.getTime();
-		cLastdayOfWeek.add(Calendar.DAY_OF_YEAR, cong - tru + 1);
+		//cLastdayOfWeek.add(Calendar.DAY_OF_YEAR, 1);
 		ngayCuoiTuanCong1 = cLastdayOfWeek.getTime();
+		int t= 0;
+		t = t +1;
 	}
 
 	private void checkTietCuThe(ArrayList<TietHoc> arlTh, TietHoc th) {
@@ -283,7 +310,7 @@ public class LichFragment extends Fragment {
 		if (arlTh.size() > 0) {
 			Date dateTH = epKieuDate(th.getSpecificDate()); 
 			if (th.getSpecificDate() != null) {
-				if (dateTH.after(ngayDauTuanTru1) == true && dateTH.before(ngayCuoiTuanCong1) == true) {
+				//if (dateTH.after(ngayDauTuanTru1) == true && dateTH.before(ngayCuoiTuanCong1) == true) {
 					for (int i = 0; i < arlTh.size(); i++) {
 						pt = arlTh.get(i);
 						if (th.getBuoiHoc() == pt.getBuoiHoc() && th.getMonHoc() == pt.getMonHoc()) {
@@ -295,7 +322,7 @@ public class LichFragment extends Fragment {
 							break;
 						}
 					}
-				}
+				//}
 
 				/**
 				 * for(int i = 0; i < arlTh.size(); i++){ pt = arlTh.get(i);
@@ -325,7 +352,14 @@ public class LichFragment extends Fragment {
 				int z = 0;
 			}
 			Date date = epKieuDate(tietHoc.getSpecificDate());
-			if(date.after(ngayDauTuanTru1) == true && date.before(ngayCuoiTuanCong1) == true){
+			Calendar c = Calendar.getInstance();
+			Calendar c2 = Calendar.getInstance();
+			c.setTime(ngayDauTuanTru1);
+			c2.setTime(date);
+			int dautuan = c.get(c.WEEK_OF_YEAR);
+			int specDay = c2.get(c2.WEEK_OF_YEAR);
+			//if(date.after(ngayDauTuanTru1) == true && date.before(ngayCuoiTuanCong1) == true){
+			if(specDay == dautuan){
 				for (int i = 1; i < 29; i++) {
 					if (tietHoc.getCaHoc() == i) {
 						if (i == 1 || i == 2 || i == 3 || i == 4) {
@@ -370,7 +404,7 @@ public class LichFragment extends Fragment {
 		return ngayTinh;
 	}
 
-	private void intTaoMau() {
+	/*private void intTaoMau() {
 		Random rnd = new Random();
 		Integer mau = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
 		if (arlColor.size() == 0) {
@@ -385,6 +419,26 @@ public class LichFragment extends Fragment {
 				}
 			}
 		}
+	}*/
+	private void intTaoMau() {
+		Random rnd = new Random();
+		//Integer mau = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+		for(int j = 0; j < 7; j++){
+			Integer mau = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+			if (arlColor.size() == 0) {
+				arlColor.add(mau);
+			} else {
+				for (int i = 0; i < arlColor.size(); i++) {
+					int mau2 = arlColor.get(i);
+					if (mau2 == mau) {
+						intTaoMau();
+					} else {
+						arlColor.add(mau);
+						break;
+					}
+				}
+			}
+		}
 	}
 
 
@@ -394,13 +448,13 @@ public class LichFragment extends Fragment {
 		} else {
 			ngayTinh = ngayChonDatePicker;
 		}*/
-		Random rnd = new Random(); 
+		/*Random rnd = new Random(); 
 		arlColor = new ArrayList<Integer>();
 		int color;
 		for(int i = 0; i < 7; i++){
 			 //color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
 			intTaoMau();
-		}   
+		}  */ 
 		ngayTinh = thu2;
 		parentItems = new ArrayList<DayInWeek>();
 		DayInWeek day2 = new DayInWeek(ngayTinh, getString(R.string.string_Monday), arlTh2.size(), arlColor.get(0));
@@ -450,7 +504,14 @@ public class LichFragment extends Fragment {
 				Calendar c = Calendar.getInstance();
 				c.set(dp.getYear(), dp.getMonth(), dp.getDayOfMonth());
 				ngayChonDatePicker = c.getTime();
+				
+				int index = expandableList.getFirstVisiblePosition();
+				View viewLV = expandableList.getChildAt(0);
+				int top = (viewLV == null) ? 0 : (viewLV.getTop() - expandableList.getPaddingTop());
+				
 				setinItialize(view, l, context);
+				
+				expandableList.setSelectionFromTop(index, top);
 				dialog.dismiss();
 			}
 		});
@@ -475,5 +536,67 @@ public class LichFragment extends Fragment {
 			e.printStackTrace();
 		}
 		return date;
+	}
+	private void getLichHoc(){
+		String masinhvien = Global.getStringPreference(c, "MaSVDN", "0");
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+		params.put("masinhvien", masinhvien);
+		String url = Global.BASE_URI + Global.URI_LICH_HOC;
+		client.post(url, params, new AsyncHttpResponseHandler() {
+			public void onSuccess(String response) {
+				Log.e("JsonLichHoc", response);
+				if (executeWhenGetLichHocSuccess(response)) {
+					/*Toast.makeText(getApplicationContext(),
+							"Thanh cong", Toast.LENGTH_LONG)
+							.show();*/
+					swipeRefreshLayout.setRefreshing(false);
+					setinItialize(view, l, c);
+				} else {
+					/*Toast.makeText(getApplicationContext(),
+							"That bai", Toast.LENGTH_LONG)
+							.show();*/
+				}
+			}
+
+			public void onFailure(int statusCode, Throwable error,
+					String content) {
+				Log.e("JsonLichHoc", error+" "+content);
+				/*Toast.makeText(getApplicationContext(),
+						error+"", Toast.LENGTH_LONG)
+						.show();*/
+			}
+		});
+	}
+	private boolean executeWhenGetLichHocSuccess(String response) {
+		/*Toast.makeText(getApplicationContext(),
+				response+"", Toast.LENGTH_LONG)
+				.show();*/
+		ArrayList<TietHoc> arrTietHoc = new ArrayList<TietHoc>();
+		
+		try {
+			JSONArray arrObj = new JSONArray(response);
+			for (int i = 0; i < arrObj.length(); i++) {
+				JSONObject lichhocJson = arrObj.getJSONObject(i);
+
+				String malichhoc = lichhocJson.optString("malichhoc");
+				String ngay = lichhocJson.optString("ngay");
+				String ca = lichhocJson.optString("ca");
+				ca = ca.substring(2);
+				int cahoc = Integer.parseInt(ca);
+				String buoi = lichhocJson.optString("buoi");
+				String tenmonhoc = lichhocJson.optString("tenmonhoc");
+				String tentrangthai = lichhocJson.optString("tentrangthai");
+				String tenphonghoc = lichhocJson.optString("tenphonghoc");
+				
+				TietHoc th = new TietHoc(cahoc, buoi, ngay, tenmonhoc, tenphonghoc, tentrangthai, malichhoc);
+				arrTietHoc.add(th);
+			}
+			exeQ.updateLichHocSqLite(arrTietHoc);
+			return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
