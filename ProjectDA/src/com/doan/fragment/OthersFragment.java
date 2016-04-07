@@ -1,4 +1,5 @@
 package com.doan.fragment;
+import com.doan.app.Global;
 import com.doan.lichhoctap.DanhSachMonCoTheDangKiActivity;
 import com.doan.lichhoctap.DiemHocTapActivity;
 import com.doan.lichhoctap.GhiChuActivity;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -37,6 +39,8 @@ public class OthersFragment extends Fragment {
         otherUserDSMCTDK = (LinearLayout) v.findViewById(R.id.otherUserDSMCTDK);
         otherUserInfoSearch = (LinearLayout) v.findViewById(R.id.otherUserInfoSearch);
         otherUserNotes = (LinearLayout) v.findViewById(R.id.otherUserNotes);
+        TextView otherUserName = (TextView) v.findViewById(R.id.otherUserName);
+        otherUserName.setText(Global.getStringPreference(c, "HoTenSV", ""));
         
         otherUser.setOnClickListener(new OnClickListener() {
 			

@@ -3,24 +3,34 @@ package com.doan.model;
 import java.util.Date;
 
 public class TietHoc {
-	int CaHoc;
-	String BuoiHoc;
-	String SpecificDate;
-	String MonHoc;
-	String PhongHoc;
-	String TrangThai;
+	private int CaHoc;
+	private String MaLichHoc; 
+	private String BuoiHoc;
+	private String SpecificDate;
+	private String MonHoc;
+	private String PhongHoc;
+	private String TrangThai;
 	
 	public TietHoc(){
 		
 	}
 	
-	public TietHoc(int CaHoc, String BuoiHoc, String spec, String monhoc, String phonghoc, String trangthai){
+	public TietHoc(int CaHoc, String BuoiHoc, String spec, String monhoc, String phonghoc, String trangthai, String MaLichHoc){
 		this.CaHoc = CaHoc;
 		this.SpecificDate = spec;
 		this.MonHoc = monhoc;
 		this.PhongHoc = phonghoc;
 		this.TrangThai = trangthai;
 		this.BuoiHoc = BuoiHoc;
+		this.MaLichHoc = MaLichHoc;
+	}
+
+	public String getMaLichHoc() {
+		return MaLichHoc;
+	}
+
+	public void setMaLichHoc(String maLichHoc) {
+		MaLichHoc = maLichHoc;
 	}
 
 	public int getCaHoc() {

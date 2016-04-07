@@ -36,7 +36,7 @@ public class SplashScreen extends Activity {
 	private ProgressBar secondBar = null;
 	private ProgressDialog progressBar;
 	private int i = 0;
-	private final int SPLASH_DISPLAY_LENGTH = 2000;
+	private final int SPLASH_DISPLAY_LENGTH = 4000;
 	private Context c;
 	private ExecuteQuery exeQ;
 
@@ -47,21 +47,22 @@ public class SplashScreen extends Activity {
 		c = this;
 		exeQ = new ExecuteQuery(c);
 		String masinhvien = Global.getStringPreference(c, "MaSVDN", "0");
-		getBaiViet();
+		/*getLichHoc();
+		getBaiViet(); //getBaiViet() cuoi cung, Intent o do;
 		getThongBao();
-		getLichHoc();
-		getGhiChu();
+		getGhiChu();*/
 		getThongtinSV(masinhvien);
 
 		secondBar = (ProgressBar) findViewById(R.id.secondBar);
 		secondBar.setVisibility(View.VISIBLE);
+		/*secondBar.setVisibility(View.VISIBLE);
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
 				Intent intent = new Intent(SplashScreen.this, HocTapActivity.class);
 				startActivity(intent);
 			}
-		}, SPLASH_DISPLAY_LENGTH);
+		}, SPLASH_DISPLAY_LENGTH);*/
 	}
 	/*
 	 * if (i == 0 || i == 10) { //make the progress bar visible
@@ -84,6 +85,7 @@ public class SplashScreen extends Activity {
 				Log.e("JsonThongBao", response);
 				if (executeWhenGetThongBaoSuccess(response)) {
 					/*Toast.makeText(getApplicationContext(),	"Thanh cong", Toast.LENGTH_LONG).show();*/
+					getLichHoc();
 				} else {
 					/*Toast.makeText(getApplicationContext(),
 							"That bai", Toast.LENGTH_LONG)
@@ -141,6 +143,7 @@ public class SplashScreen extends Activity {
 					/*Toast.makeText(getApplicationContext(),
 							"Thanh cong", Toast.LENGTH_LONG)
 							.show();*/
+					getGhiChu();
 				} else {
 					/*Toast.makeText(getApplicationContext(),
 							"That bai", Toast.LENGTH_LONG)
@@ -166,19 +169,19 @@ public class SplashScreen extends Activity {
 		try {
 			JSONArray arrObj = new JSONArray(response);
 			for (int i = 0; i < arrObj.length(); i++) {
-				JSONObject thongbaoJson = arrObj.getJSONObject(i);
+				JSONObject lichhocJson = arrObj.getJSONObject(i);
 
-				String ngay = thongbaoJson.optString("ngay");
-				//Date ngayLH = epKieuDate(ngay);
-				String ca = thongbaoJson.optString("ca");
+				String malichhoc = lichhocJson.optString("malichhoc");
+				String ngay = lichhocJson.optString("ngay");
+				String ca = lichhocJson.optString("ca");
 				ca = ca.substring(2);
 				int cahoc = Integer.parseInt(ca);
-				String buoi = thongbaoJson.optString("buoi");
-				String tenmonhoc = thongbaoJson.optString("tenmonhoc");
-				String tentrangthai = thongbaoJson.optString("tentrangthai");
-				String tenphonghoc = thongbaoJson.optString("tenphonghoc");
+				String buoi = lichhocJson.optString("buoi");
+				String tenmonhoc = lichhocJson.optString("tenmonhoc");
+				String tentrangthai = lichhocJson.optString("tentrangthai");
+				String tenphonghoc = lichhocJson.optString("tenphonghoc");
 				
-				TietHoc th = new TietHoc(cahoc, buoi, ngay, tenmonhoc, tenphonghoc, tentrangthai);
+				TietHoc th = new TietHoc(cahoc, buoi, ngay, tenmonhoc, tenphonghoc, tentrangthai, malichhoc);
 				arrTietHoc.add(th);
 			}
 			exeQ.insert_tbl_TietHoc_multi(arrTietHoc);
@@ -200,36 +203,38 @@ public class SplashScreen extends Activity {
 		return date;
 	}
 	//----- Lay thong tin sinh vien
-public void getThongtinSV(String masinhvien) {
-		
+	public void getThongtinSV(String masinhvien) {
+
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
 		params.put("masinhvien", masinhvien);
-					
-		client.post(Global.BASE_URI + Global.URI_THONGTINTHEOMASV,
-				params, new AsyncHttpResponseHandler() {
-					public void onSuccess(String response) {
-						// Log.e("loginToServer", response);
-						if (executeWhenGetThongTinSuccess(response)) {
-							/*Toast.makeText(getApplicationContext(),
-									"Thanh cong", Toast.LENGTH_LONG)
-									.show();*/
-					//		setThongTin();
-						} else {
-							/*Toast.makeText(getApplicationContext(),
-									"That bai", Toast.LENGTH_LONG)
-									.show();*/
-						}
-					}
 
-					public void onFailure(int statusCode, Throwable error,
-							String content) {
-						Log.e("loginToServer", error+" "+content);
-						/*Toast.makeText(getApplicationContext(),
-								error+"", Toast.LENGTH_LONG)
-								.show();*/
-					}
-				});
+		client.post(Global.BASE_URI + Global.URI_THONGTINTHEOMASV, params, new AsyncHttpResponseHandler() {
+			public void onSuccess(String response) {
+				// Log.e("loginToServer", response);
+				if (executeWhenGetThongTinSuccess(response)) {
+					/*
+					 * Toast.makeText(getApplicationContext(), "Thanh cong",
+					 * Toast.LENGTH_LONG) .show();
+					 */
+					// setThongTin();
+					getThongBao();
+				} else {
+					/*
+					 * Toast.makeText(getApplicationContext(), "That bai",
+					 * Toast.LENGTH_LONG) .show();
+					 */
+				}
+			}
+
+			public void onFailure(int statusCode, Throwable error, String content) {
+				Log.e("loginToServer", error + " " + content);
+				/*
+				 * Toast.makeText(getApplicationContext(), error+"",
+				 * Toast.LENGTH_LONG) .show();
+				 */
+			}
+		});
 	}
 
 	private boolean executeWhenGetThongTinSuccess(String response) {
@@ -267,128 +272,133 @@ public void getThongtinSV(String masinhvien) {
 
 //--------- tbl_GhiChu
 //--- Get all ghi chu
-private void getGhiChu(){
-	String masinhvien = Global.getStringPreference(c, "MaSVDN", "0");
-	AsyncHttpClient client = new AsyncHttpClient();
-	RequestParams params = new RequestParams();
-	params.put("masinhvien", masinhvien);
-	String url = Global.BASE_URI + Global.URI_GHICHUTHEOMATHEOMASV;
-	client.post(url, params, new AsyncHttpResponseHandler() {
-		public void onSuccess(String response) {
-			//Log.e("JsonGhiChu", response);
-			if (executeWhenGetGhiChuSuccess(response)) {
-			//	ArrayList<ThongBao> arrThongBao = exeQ.getAllThongBaoSqLite();
-				/*Toast.makeText(getApplicationContext(),
-						"Thanh cong", Toast.LENGTH_LONG)
-						.show();*/
-			//	setGhiChu();
-			} else {
-				/*Toast.makeText(getApplicationContext(),
-						"That bai", Toast.LENGTH_LONG)
-						.show();*/
+	private void getGhiChu() {
+		String masinhvien = Global.getStringPreference(c, "MaSVDN", "0");
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+		params.put("masinhvien", masinhvien);
+		String url = Global.BASE_URI + Global.URI_GHICHUTHEOMATHEOMASV;
+		client.post(url, params, new AsyncHttpResponseHandler() {
+			public void onSuccess(String response) {
+				// Log.e("JsonGhiChu", response);
+				if (executeWhenGetGhiChuSuccess(response)) {
+					// ArrayList<ThongBao> arrThongBao =
+					// exeQ.getAllThongBaoSqLite();
+					/*
+					 * Toast.makeText(getApplicationContext(), "Thanh cong",
+					 * Toast.LENGTH_LONG) .show();
+					 */
+					// setGhiChu();
+					getBaiViet();
+				} else {
+					/*
+					 * Toast.makeText(getApplicationContext(), "That bai",
+					 * Toast.LENGTH_LONG) .show();
+					 */
+				}
 			}
-		}
 
-		public void onFailure(int statusCode, Throwable error,
-				String content) {
-			Log.e("JsonThongBao", error+" "+content);
-			/*Toast.makeText(getApplicationContext(),
-					error+"", Toast.LENGTH_LONG)
-					.show();*/
-		}
-	});
-}
-
-private boolean executeWhenGetGhiChuSuccess(String response) {
-	
-	String masinhvien = Global.getStringPreference(c, "MaSVDN", "0");
-//	ArrayList<ThongBao> arrThongBao = new ArrayList<ThongBao>();
-	ArrayList<ItemGhiChu> arrItemghichu = new ArrayList<ItemGhiChu>();
-	try {
-		JSONArray arrObj = new JSONArray(response);
-		for (int i = 0; i < arrObj.length(); i++) {
-			JSONObject ghichuJson = arrObj.getJSONObject(i);
-
-			String maghichu = ghichuJson.optString("pk_ghichu");
-			String tieudeghichu = ghichuJson.optString("TieuDeGhiChu");
-			String noidungghichu = ghichuJson.optString("NoiDungGhiChu");
-			String thoigiannhacghichu = ghichuJson.optString("ThoiGianNhacGhiChu");
-			String thoigianchinhsuaghichu = ghichuJson.optString("ThoiGianChinhSuaGhiChu");
-			/*Toast.makeText(getApplicationContext(),
-					maghichu, Toast.LENGTH_LONG)
-					.show();*/
-			ItemGhiChu gc = new ItemGhiChu(maghichu,tieudeghichu,thoigiannhacghichu,thoigianchinhsuaghichu,
-					noidungghichu);
-			arrItemghichu.add(gc);
-		}
-		
-		exeQ.insert_tbl_GhiChu_multi(arrItemghichu,masinhvien);
-		return true;
-	} catch (JSONException e) {
-		e.printStackTrace();
-		return false;
+			public void onFailure(int statusCode, Throwable error, String content) {
+				Log.e("JsonThongBao", error + " " + content);
+				/*
+				 * Toast.makeText(getApplicationContext(), error+"",
+				 * Toast.LENGTH_LONG) .show();
+				 */
+			}
+		});
 	}
-}
+
+	private boolean executeWhenGetGhiChuSuccess(String response) {
+
+		String masinhvien = Global.getStringPreference(c, "MaSVDN", "0");
+		// ArrayList<ThongBao> arrThongBao = new ArrayList<ThongBao>();
+		ArrayList<ItemGhiChu> arrItemghichu = new ArrayList<ItemGhiChu>();
+		try {
+			JSONArray arrObj = new JSONArray(response);
+			for (int i = 0; i < arrObj.length(); i++) {
+				JSONObject ghichuJson = arrObj.getJSONObject(i);
+
+				String maghichu = ghichuJson.optString("pk_ghichu");
+				String tieudeghichu = ghichuJson.optString("TieuDeGhiChu");
+				String noidungghichu = ghichuJson.optString("NoiDungGhiChu");
+				String thoigiannhacghichu = ghichuJson.optString("ThoiGianNhacGhiChu");
+				String thoigianchinhsuaghichu = ghichuJson.optString("ThoiGianChinhSuaGhiChu");
+				/*
+				 * Toast.makeText(getApplicationContext(), maghichu,
+				 * Toast.LENGTH_LONG) .show();
+				 */
+				ItemGhiChu gc = new ItemGhiChu(maghichu, tieudeghichu, thoigiannhacghichu, thoigianchinhsuaghichu,
+						noidungghichu);
+				arrItemghichu.add(gc);
+			}
+
+			exeQ.insert_tbl_GhiChu_multi(arrItemghichu, masinhvien);
+			return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 //--------- tbl_BaiViet
 //--- Get all Bai viet
-private void getBaiViet(){
-	
-	AsyncHttpClient client = new AsyncHttpClient();
-	RequestParams params = new RequestParams();
-	
-	String url = Global.BASE_URI + Global.URI_DANHSACHBAIVIET;
-	client.post(url, params, new AsyncHttpResponseHandler() {
-		public void onSuccess(String response) {
-			//Log.e("JsonGhiChu", response);
-			if (executeWhenGetBaiVietSuccess(response)) {
-			
-			} else {
-				
+	private void getBaiViet() {
+
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+
+		String url = Global.BASE_URI + Global.URI_DANHSACHBAIVIET;
+		client.post(url, params, new AsyncHttpResponseHandler() {
+			public void onSuccess(String response) {
+				// Log.e("JsonGhiChu", response);
+				if (executeWhenGetBaiVietSuccess(response)) {
+					Intent intent = new Intent(SplashScreen.this, HocTapActivity.class);
+					startActivity(intent);
+				} else {
+
+				}
 			}
-		}
 
-		public void onFailure(int statusCode, Throwable error,
-				String content) {
-			Log.e("JsonBaiViet", error+" "+content);
-			
-		}
-	});
-}
+			public void onFailure(int statusCode, Throwable error, String content) {
+				Log.e("JsonBaiViet", error + " " + content);
 
-private boolean executeWhenGetBaiVietSuccess(String response) {
-	
-//	String masinhvien = Global.getStringPreference(c, "MaSVDN", "0");
-//	ArrayList<ThongBao> arrThongBao = new ArrayList<ThongBao>();
-	
-	ArrayList<BaiViet> arrBaiViet = new ArrayList<BaiViet>();
-	try {
-		JSONArray arrObj = new JSONArray(response);
-		for (int i = 0; i < arrObj.length(); i++) {
-			JSONObject baivietJson = arrObj.getJSONObject(i);
-
-			String mabaiviet = baivietJson.optString("pk_baiviet");
-			String tieudebaiviet = baivietJson.optString("tieudebaiviet");
-			String noidungbaiviet = baivietJson.optString("noidungbaiviet");
-			String ngaytaobaiviet = baivietJson.optString("ngaytaobaiviet");
-			String thoigiansua = baivietJson.optString("thoigianchinhsua");
-			String loaibaiviet = baivietJson.optString("maloaibaiviet");
-			String giangvien = baivietJson.optString("hoten");
-			
-//			Toast.makeText(getApplicationContext(),
-//					maghichu, Toast.LENGTH_LONG)
-//					.show();
-			BaiViet bv = new BaiViet(mabaiviet,tieudebaiviet,noidungbaiviet,giangvien,loaibaiviet,
-					ngaytaobaiviet,thoigiansua);
-			arrBaiViet.add(bv);
-		}
-		
-		exeQ.insert_tbl_BaiViet_multi(arrBaiViet);
-		return true;
-	} catch (JSONException e) {
-		e.printStackTrace();
-		return false;
+			}
+		});
 	}
-}	
+
+	private boolean executeWhenGetBaiVietSuccess(String response) {
+
+		// String masinhvien = Global.getStringPreference(c, "MaSVDN", "0");
+		// ArrayList<ThongBao> arrThongBao = new ArrayList<ThongBao>();
+
+		ArrayList<BaiViet> arrBaiViet = new ArrayList<BaiViet>();
+		try {
+			JSONArray arrObj = new JSONArray(response);
+			for (int i = 0; i < arrObj.length(); i++) {
+				JSONObject baivietJson = arrObj.getJSONObject(i);
+
+				String mabaiviet = baivietJson.optString("pk_baiviet");
+				String tieudebaiviet = baivietJson.optString("tieudebaiviet");
+				String noidungbaiviet = baivietJson.optString("noidungbaiviet");
+				String ngaytaobaiviet = baivietJson.optString("ngaytaobaiviet");
+				String thoigiansua = baivietJson.optString("thoigianchinhsua");
+				String loaibaiviet = baivietJson.optString("maloaibaiviet");
+				String giangvien = baivietJson.optString("hoten");
+
+				// Toast.makeText(getApplicationContext(),
+				// maghichu, Toast.LENGTH_LONG)
+				// .show();
+				BaiViet bv = new BaiViet(mabaiviet, tieudebaiviet, noidungbaiviet, giangvien, loaibaiviet,
+						ngaytaobaiviet, thoigiansua);
+				arrBaiViet.add(bv);
+			}
+
+			exeQ.insert_tbl_BaiViet_multi(arrBaiViet);
+			return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 	
 }

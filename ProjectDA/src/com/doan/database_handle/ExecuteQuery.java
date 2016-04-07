@@ -429,6 +429,7 @@ public class ExecuteQuery {
 				cv.put(ColumnName.LICHhoc_TENMON, th.getMonHoc());
 				cv.put(ColumnName.LICHhoc_MA_PHONG_HOC, th.getPhongHoc());
 				cv.put(ColumnName.LICHhoc_MA_TRANG_THAI, th.getTrangThai());
+				cv.put(ColumnName.LICHhoc_MA_LICH_HOC, th.getMaLichHoc());
 				if(th.getSpecificDate() != null){
 					database.insert(ColumnName.LICHhoc_TABLE, null, cv);
 				}
@@ -449,14 +450,13 @@ public class ExecuteQuery {
 			do {
 				TietHoc th = new TietHoc();
 				
+				th.setMaLichHoc(cursor.getString(0));
+				th.setSpecificDate(cursor.getString(1));
 				th.setCaHoc(cursor.getInt(2));
 				th.setBuoiHoc(cursor.getString(3));
-				//String ngay = cursor.getString(1);
-				//Date date = epKieuDate(ngay);
-				th.setSpecificDate(cursor.getString(1));
-				th.setMonHoc(cursor.getString(6));
-				th.setPhongHoc(cursor.getString(5));
 				th.setTrangThai(cursor.getString(4));
+				th.setPhongHoc(cursor.getString(5));
+				th.setMonHoc(cursor.getString(6));
 				
 				arrTietHoc.add(th);
 			} while (cursor.moveToNext());

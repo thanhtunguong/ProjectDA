@@ -175,6 +175,7 @@ public class LoginActivity extends ActionBarActivity {
 				.show();
 		String status = "";
 		String masinhvien = "";
+		String tensinhvien = "";
 		try {
 			/*JSONArray arrObj = new JSONArray(response);
 			for (int i = 0; i < arrObj.length(); i++) {
@@ -185,7 +186,9 @@ public class LoginActivity extends ActionBarActivity {
 			status = loginJson.optString("status");
 			if(status.matches(getString(R.string.string_login_sinhvien_success))){
 				masinhvien = loginJson.optString("pk_sv");
+				tensinhvien = loginJson.optString("hoten");
 				Global.saveStringPreference(getBaseContext(), "MaSVDN", masinhvien);
+				Global.saveStringPreference(getBaseContext(), "HoTenSV", tensinhvien);
 				return true;
 			}else {
 				return false;
