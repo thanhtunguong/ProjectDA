@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.doan.app.Global;
 import com.doan.model.BaiViet;
+import com.doan.model.ChiTietThongBao;
 import com.doan.model.DiemHocTap;
 import com.doan.model.DieuLe;
 import com.doan.model.DieuLeTag;
@@ -502,6 +503,73 @@ public class ExecuteQuery {
 		}
 		return date;
 	}
+//___tbl_CTThongBao
+	public boolean insert_tbl_CTThongBao_single(String MaCTThongBao, String MaNguoiGui, String TenNguoiGui, 
+			String NoiDung, String ThoiGian, String MaThongBao) {
+		try {
+			database = mDbHelper.getWritableDatabase();
+			ContentValues cv = new ContentValues();
+
+			cv.put(ColumnName.CHI_TIET_THONG_BAO_MA_CT_THONG_BAO, MaCTThongBao);
+			cv.put(ColumnName.CHI_TIET_THONG_BAO_MA_NGUOI_GUI_REPLY, MaNguoiGui);
+			cv.put(ColumnName.CHI_TIET_THONG_BAO_TEN_NGUOI_GUI_REPLY, TenNguoiGui);
+			cv.put(ColumnName.CHI_TIET_THONG_BAO_NOI_DUNG_TRA_LOI, NoiDung);
+			cv.put(ColumnName.CHI_TIET_THONG_BAO_THOI_GIAN_REPLY, ThoiGian);
+			cv.put(ColumnName.CHI_TIET_THONG_BAO_MA_THONG_BAO, MaThongBao);
+
+			database.insert(ColumnName.CHI_TIET_THONG_BAO_TABLE, null, cv);
+			return true;
+		} catch (SQLiteException e) {
+			Log.e("insert_tbl_CTThongBao_single", e.getMessage());
+			return false;
+		}
+	}
+	public boolean insert_tbl_CTThongBao_multi(ArrayList<ChiTietThongBao> listCTThongBao) {
+		try {
+			database = mDbHelper.getWritableDatabase();
+			database.delete(ColumnName.CHI_TIET_THONG_BAO_TABLE, null, null);
+			for (ChiTietThongBao cttb : listCTThongBao) {
+				ContentValues cv = new ContentValues();
+
+				cv.put(ColumnName.CHI_TIET_THONG_BAO_MA_CT_THONG_BAO, cttb.getMaChiTietThongBao());
+				cv.put(ColumnName.CHI_TIET_THONG_BAO_MA_NGUOI_GUI_REPLY, cttb.getMaNguoiReply());
+				cv.put(ColumnName.CHI_TIET_THONG_BAO_TEN_NGUOI_GUI_REPLY, cttb.getTenNguoiReply());
+				cv.put(ColumnName.CHI_TIET_THONG_BAO_NOI_DUNG_TRA_LOI, cttb.getNoiDungReply());
+				cv.put(ColumnName.CHI_TIET_THONG_BAO_THOI_GIAN_REPLY, cttb.getThoiGianTraLoi()+"");
+				cv.put(ColumnName.CHI_TIET_THONG_BAO_MA_THONG_BAO, cttb.getMaThongBao());
+				
+				database.insert(ColumnName.CHI_TIET_THONG_BAO_TABLE, null, cv);
+			}
+			return true;
+		} catch (SQLiteException e) {
+			Log.e("insert_CTThongBao_multi", e.getMessage());
+			return false;
+		}
+	}
+	public ArrayList<ChiTietThongBao> getAllReplyTheoThongBaoSqLite(String mathongbao){
+		ArrayList<ChiTietThongBao> arrChiTietThongBao = new ArrayList<ChiTietThongBao>();
+		String selectQuery = "SELECT *"
+				+ "FROM " + ColumnName.CHI_TIET_THONG_BAO_TABLE
+				+ " WHERE " + ColumnName.CHI_TIET_THONG_BAO_MA_THONG_BAO + "='"+ mathongbao +"'";
+		database = mDbHelper.getReadableDatabase();
+		Cursor cursor = database.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) {
+			do {
+				ChiTietThongBao cttb = new ChiTietThongBao();
+				
+				cttb.setMaChiTietThongBao(cursor.getString(0));
+				cttb.setMaNguoiReply(cursor.getString(1));
+				cttb.setTenNguoiReply(cursor.getString(2));
+				cttb.setNoiDungReply(cursor.getString(3));
+				cttb.setThoiGianTraLoi(cursor.getString(4));
+				cttb.setMaThongBao(cursor.getString(5));
+				
+				arrChiTietThongBao.add(cttb);
+			} while (cursor.moveToNext());
+		}
+		return arrChiTietThongBao;
+	}
+//___/tbl_CTThongBao
 
 // ---- tbl_SinhVien
 	//--- Insert tbl_sinhvien

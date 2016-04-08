@@ -6,19 +6,32 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.doan.adapter.ThongBaoAdapter;
+import com.doan.app.Global;
 import com.doan.database_handle.ExecuteQuery;
 import com.doan.model.ThongBao;
 import com.doan.model.ThongBaoTrongNgay;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.Toast;
 
 public class ThongBaoActivity extends ActionBarActivity {
 	
@@ -45,9 +58,27 @@ public class ThongBaoActivity extends ActionBarActivity {
 		xulyPhanDinhNgay();
 		elv_ThongBao = (ExpandableListView) findViewById(R.id.elvThongBao);
 		elv_ThongBao.setGroupIndicator(null);
+		elv_ThongBao.setClickable(true);
+
 		ThongBaoAdapter adapter = new ThongBaoAdapter(arrThongBaoTrongNgay, childItems, this);
 		elv_ThongBao.setAdapter(adapter);
 		elv_ThongBao.setSelection(arrThongBaoTrongNgay.size() - 1);
+		elv_ThongBao.setOnChildClickListener(new OnChildClickListener() {
+
+			@Override
+			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition,
+					long id) {
+				// TODO Auto-generated method stub
+				ThongBao tb = ((ArrayList<ThongBao>) childItems.get(groupPosition)).get(childPosition);
+				Toast.makeText(context, "" + tb.getMaThongBao(), Toast.LENGTH_SHORT).show();
+				/*Bundle ThongBaoSingle = new Bundle();
+				ThongBaoSingle.putString("mathongbaoBundle", tb.getMaThongBao());*/
+				Intent intent = new Intent(ThongBaoActivity.this, ChiTietThongBaoActivity.class);
+				intent.putExtra("mathongbaoExtra", tb.getMaThongBao());
+				startActivity(intent);
+				return false;
+			}
+		});
 	}
 
 	private void xulyPhanDinhNgay() {

@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Tùng -->
-	<string name="string_login_sinhvien_success">sinhvien_success</string>
+    <string name="string_login_sinhvien_success">sinhvien_success</string>
     <string name="app_name">"I'm student"</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -161,5 +161,6 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="api_TraCuuDieuLeTheoTag">[{"tendieule":"Tin chi","noidungdieule":"Sinh vien duoc dang ky mon hoc theo chuong trinh dao tao voi so luong va thoi gian tuy theo lich dang ky"}]</string>
     <string name="title_activity_so_tay_thong_tin">SoTayThongTinActivity</string>
     <string name="title_activity_thong_bao">ThongBaoActivity</string>
+    <string name="title_activity_chi_tiet_thong_bao">ChiTietThongBaoActivity</string>
 
 </resources>

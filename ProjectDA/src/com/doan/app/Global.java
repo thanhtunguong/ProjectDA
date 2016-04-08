@@ -6,6 +6,9 @@ package com.doan.app;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.doan.lichhoctap.R;
 
@@ -25,6 +28,7 @@ public class Global {
 	public static String BASE_URI ="http://192.168.3.101:8080/csdlda/";
 	public static String URI_LICH_HOC ="api_LichHocTheoMaSV.php";
 	public static String URI_THONG_BAO = "api_DanhSachThongBaoTheoMaSV.php";
+	public static String URI_REPLY_THEO_MA_THONGBAO = "api_ChiTietThongBaoTheoMaThongBao.php";
 	//public static String BASE_URI ="http://192.168.56.1:533";
 	//public static String BASE_URI ="http://192.168.56.1:8080";
 	
@@ -101,4 +105,26 @@ public class Global {
         }
         return result;
     }
+	public static Date epKieuDateAndTime(String ngay){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = null;
+		try {
+			date = df.parse(ngay);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date;
+	}
+	public static Date epKieuDate(String ngay){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = df.parse(ngay);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date;
+	}
 }

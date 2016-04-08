@@ -185,13 +185,22 @@ public class ColumnName {
 	public static String THONG_BAO_NGAY_TAO_THONG_BAO = "NgayTaoThongBao";
 	public static String THONG_BAO_MA_GIAO_VIEN = "MaGV";
 	
+	//tbl_CTThongBao
+	public static String CHI_TIET_THONG_BAO_TABLE = "tbl_CTThongBao";
+	public static String CHI_TIET_THONG_BAO_MA_CT_THONG_BAO = "PK_CTThongBao";
+	public static String CHI_TIET_THONG_BAO_MA_NGUOI_GUI_REPLY = "MaNguoiDung";
+	public static String CHI_TIET_THONG_BAO_TEN_NGUOI_GUI_REPLY = "TenNguoiDung";
+	public static String CHI_TIET_THONG_BAO_NOI_DUNG_TRA_LOI = "NoiDungTraLoi";
+	public static String CHI_TIET_THONG_BAO_THOI_GIAN_REPLY = "ThoiGianTraLoi";
+	public static String CHI_TIET_THONG_BAO_MA_THONG_BAO = "FK_ThongBao";
+	
 	//tbl_BaiViet
-		public static String BAI_VIET_TABLE = "tbl_BaiViet";
-		public static String BAI_VIET_MA_BAI_VIET = "PK_BaiViet";
-		public static String BAI_VIET_TIEU_DE_BAI_VIET = "TieuDeBaiViet";
-		public static String BAI_VIET_NOI_DUNG_BAI_VIET = "NoiDungBaiViet";
-		public static String BAI_VIET_NGAY_TAO = "NgayTaoBaiViet";
-		public static String BAI_VIET_THOI_GIAN_CHINH_SUA = "ThoiGianChinhSua";
-		public static String BAI_VIET_LOAI_BAI_VIET = "FK_LoaiBaiViet";
-		public static String BAI_VIET_MA_GV = "FK_GV";
+	public static String BAI_VIET_TABLE = "tbl_BaiViet";
+	public static String BAI_VIET_MA_BAI_VIET = "PK_BaiViet";
+	public static String BAI_VIET_TIEU_DE_BAI_VIET = "TieuDeBaiViet";
+	public static String BAI_VIET_NOI_DUNG_BAI_VIET = "NoiDungBaiViet";
+	public static String BAI_VIET_NGAY_TAO = "NgayTaoBaiViet";
+	public static String BAI_VIET_THOI_GIAN_CHINH_SUA = "ThoiGianChinhSua";
+	public static String BAI_VIET_LOAI_BAI_VIET = "FK_LoaiBaiViet";
+	public static String BAI_VIET_MA_GV = "FK_GV";
 }

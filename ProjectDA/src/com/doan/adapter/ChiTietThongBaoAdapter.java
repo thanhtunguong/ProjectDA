@@ -1,35 +1,32 @@
 package com.doan.adapter;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.doan.app.Global;
 import com.doan.lichhoctap.R;
-import com.doan.model.DayInWeek;
-import com.doan.model.ThongBao;
-import com.doan.model.ThongBaoTrongNgay;
-import com.doan.model.TietHoc;
-
+import com.doan.model.ChiTietThongBao;
+import com.doan.model.ReplyTrongNgay;
 import android.app.Activity;
-import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ThongBaoAdapter extends BaseExpandableListAdapter {
+public class ChiTietThongBaoAdapter extends BaseExpandableListAdapter {
 
 	private Activity activity;
 	private ArrayList<Object> childtems;
 	private LayoutInflater inflater;
-	private ArrayList<ThongBaoTrongNgay> parentItems;
-	private ArrayList<ThongBao> child;
+	private ArrayList<ReplyTrongNgay> parentItems;
+	private ArrayList<ChiTietThongBao> child;
+	private TextView tvNoiDung, tvThoiGian;
 
-	public ThongBaoAdapter(ArrayList<ThongBaoTrongNgay> parents, ArrayList<Object> childern, Activity activity) {
+	public ChiTietThongBaoAdapter(ArrayList<ReplyTrongNgay> parents, ArrayList<Object> childern, Activity activity) {
 		this.parentItems = parents;
 		this.childtems = childern;
 		this.activity = activity;
@@ -45,14 +42,34 @@ public class ThongBaoAdapter extends BaseExpandableListAdapter {
 	public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView,
 			ViewGroup parent) {
 
-		child = (ArrayList<ThongBao>) childtems.get(groupPosition);
-		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.thong_bao_child_item, null);
+		child = (ArrayList<ChiTietThongBao>) childtems.get(groupPosition);
+		
+		String manguoidung = child.get(childPosition).getMaNguoiReply().substring(0, 2);
+		if(manguoidung.matches("GV")){
+			if (convertView == null) {
+				convertView = inflater.inflate(R.layout.chi_tiet_thong_bao_child_item_others_gv, null);
+				tvNoiDung = (TextView) convertView.findViewById(R.id.tvChiTietThongBaoReplyNoiDungOthersGV);
+				tvThoiGian = (TextView) convertView.findViewById(R.id.tvChiTietThongBaoReplyTimeOthersGV);
+			}
+		}else {
+			if(child.get(childPosition).getMaNguoiReply().matches(Global.getStringPreference(activity, "MaSVDN", "0"))){
+				if (convertView == null) {
+					convertView = inflater.inflate(R.layout.chi_tiet_thong_bao_child_item_me, null);
+					tvNoiDung = (TextView) convertView.findViewById(R.id.tvChiTietThongBaoReplyNoiDungMe);
+					tvThoiGian = (TextView) convertView.findViewById(R.id.tvChiTietThongBaoReplyTimeMe);
+				}
+			}else {
+				if (convertView == null) {
+					convertView = inflater.inflate(R.layout.chi_tiet_thong_bao_child_item_others, null);
+					tvNoiDung = (TextView) convertView.findViewById(R.id.tvChiTietThongBaoReplyNoiDungOthers);
+					tvThoiGian = (TextView) convertView.findViewById(R.id.tvChiTietThongBaoReplyTimeOthers);
+				}
+			}
 		}
 
-		TextView tvNoiDung = (TextView) convertView.findViewById(R.id.tvThongBaoContents);
-		tvNoiDung.setText(child.get(childPosition).getNoiDungThongBao());
-
+		tvNoiDung.setText(child.get(childPosition).getNoiDungReply());
+		String gioPhut = child.get(childPosition).getThoiGianTraLoi().substring(11, 16);
+		tvThoiGian.setText(gioPhut);
 		return convertView;
 	}
 
@@ -64,7 +81,7 @@ public class ThongBaoAdapter extends BaseExpandableListAdapter {
 		ExpandableListView eLV = (ExpandableListView) parent;
 	    eLV.expandGroup(groupPosition);
 		TextView tvDate = (TextView) convertView.findViewById(R.id.tvDateParentItem);
-		Date date = parentItems.get(groupPosition).getNgayCuThe();
+		Date date = parentItems.get(groupPosition).getNgay();
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		

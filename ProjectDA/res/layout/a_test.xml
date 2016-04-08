@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/khoiDuoi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="0"
+        android:elevation="2dp"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="8"
+            android:padding="5dp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="2"
+            android:background="@drawable/shape_thong_bao_contents" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/khoiTren"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/khoiDuoi"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/chi_tiet_thong_bao_activity_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/chi_tiet_thong_bao_toolbar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10" >
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/swipe_refresh_layout_chi_tiet_thong_bao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tvThongBaoTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/activity_vertical_margin"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:paddingTop="@dimen/activity_vertical_margin"
+                        android:text="@string/hello_world" />
+
+                    <ExpandableListView
+                        android:id="@+id/elvReplyThongBao"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:childDivider="@color/transparent"
+                        android:divider="@color/transparent"
+                        android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"
+                        android:isScrollContainer="true"
+                        android:scrollbars="none" >
+                    </ExpandableListView>
+                </LinearLayout>
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
