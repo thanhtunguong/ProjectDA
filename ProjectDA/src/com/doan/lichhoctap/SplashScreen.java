@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import com.doan.app.Global;
 import com.doan.database_handle.ExecuteQuery;
 import com.doan.model.BaiViet;
+import com.doan.model.DiemHocTap;
 import com.doan.model.ItemGhiChu;
 import com.doan.model.ThongBao;
 import com.doan.model.TietHoc;
@@ -51,18 +52,21 @@ public class SplashScreen extends Activity {
 		getBaiViet(); //getBaiViet() cuoi cung, Intent o do;
 		getThongBao();
 		getGhiChu();*/
-		getThongtinSV(masinhvien);
-
 		secondBar = (ProgressBar) findViewById(R.id.secondBar);
 		secondBar.setVisibility(View.VISIBLE);
-		/*secondBar.setVisibility(View.VISIBLE);
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				Intent intent = new Intent(SplashScreen.this, HocTapActivity.class);
-				startActivity(intent);
-			}
-		}, SPLASH_DISPLAY_LENGTH);*/
+		exeQ.createDatabase();
+		exeQ.open();
+		getThongtinSV(masinhvien);
+		/*DeviceStatus dv = new DeviceStatus();
+		if(dv.isInternetAvailable()){
+			exeQ.createDatabase();
+			exeQ.open();
+			getThongtinSV(masinhvien);
+		}else {
+			Toast.makeText(c, "No internet connection! \n Please try to refesh later", Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(SplashScreen.this, HocTapActivity.class);
+			startActivity(intent);
+		}*/
 	}
 	/*
 	 * if (i == 0 || i == 10) { //make the progress bar visible
@@ -202,6 +206,69 @@ public class SplashScreen extends Activity {
 		}
 		return date;
 	}
+	//___tbl_Diem
+	private void getDiem(){
+		String masinhvien = Global.getStringPreference(c, "MaSVDN", "0");
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+		params.put("masinhvien", masinhvien);
+		String url = Global.BASE_URI + Global.URI_DIEMTHEOMASV;
+		client.post(url, params, new AsyncHttpResponseHandler() {
+			public void onSuccess(String response) {
+				Log.e("JsonDiem", response);
+				if (executeWhenGetDiemSuccess(response)) {
+					/*Toast.makeText(getApplicationContext(),
+							"Thanh cong", Toast.LENGTH_LONG)
+							.show();*/
+					exeQ.close();
+					Intent intent = new Intent(SplashScreen.this, HocTapActivity.class);
+					startActivity(intent);
+				} else {
+					/*Toast.makeText(getApplicationContext(),
+							"That bai", Toast.LENGTH_LONG)
+							.show();*/
+				}
+			}
+
+			public void onFailure(int statusCode, Throwable error,
+					String content) {
+				Log.e("JsonDiem", error+" "+content);
+				/*Toast.makeText(getApplicationContext(),
+						error+"", Toast.LENGTH_LONG)
+						.show();*/
+			}
+		});
+	}
+	private boolean executeWhenGetDiemSuccess(String response) {
+		/*Toast.makeText(getApplicationContext(),
+				response+"", Toast.LENGTH_LONG)
+				.show();*/
+		ArrayList<DiemHocTap> arrTietHoc = new ArrayList<DiemHocTap>();
+		
+		try {
+			JSONArray arrObj = new JSONArray(response);
+			for (int i = 0; i < arrObj.length(); i++) {
+				JSONObject diemJson = arrObj.getJSONObject(i);
+				DiemHocTap diem = new DiemHocTap();
+				diem.setDiemCC(diemJson.optInt("diem1"));
+				diem.setDiemKT(diemJson.optInt("diem2"));
+				diem.setDiemThi(diemJson.optInt("diem3"));
+				diem.setTenMonHoc(diemJson.optString("tenmonhoc"));
+				diem.setSoTinChi(diemJson.optInt("sotinchi"));
+				diem.setMaLopTinChi(diemJson.optString("maloptinchi"));
+				diem.setMaDiem(diemJson.optString("pk_diem"));
+				diem.setMaTrangThaiDK(diemJson.optString("trangthaidk"));
+				diem.setThoiGianDK(diemJson.optString("Thoigiandk"));
+				arrTietHoc.add(diem);
+			}
+			exeQ.insert_tbl_DiemHocTap_multi(arrTietHoc);
+			return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	//___/tbl_Diem
 	//----- Lay thong tin sinh vien
 	public void getThongtinSV(String masinhvien) {
 
@@ -351,8 +418,7 @@ public class SplashScreen extends Activity {
 			public void onSuccess(String response) {
 				// Log.e("JsonGhiChu", response);
 				if (executeWhenGetBaiVietSuccess(response)) {
-					Intent intent = new Intent(SplashScreen.this, HocTapActivity.class);
-					startActivity(intent);
+					getDiem();
 				} else {
 
 				}

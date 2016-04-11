@@ -40,10 +40,10 @@ public class LoginActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
-		exeQ = new ExecuteQuery(this);
+		/*exeQ = new ExecuteQuery(this);
 		exeQ.createDatabase();
-		exeQ.open();
-		arrAllSV = exeQ.getAllSinhVien();
+		exeQ.open();*/
+		//arrAllSV = exeQ.getAllSinhVien();
 		
 		edEmail = (EditText) findViewById(R.id.edtLoginEmail);
 		edPwd = (EditText) findViewById(R.id.edtLoginPwd);
@@ -160,9 +160,9 @@ public class LoginActivity extends ActionBarActivity {
 			public void onFailure(int statusCode, Throwable error,
 					String content) {
 				Log.e("JsonLogin", error+" "+content);
-				Toast.makeText(getApplicationContext(),
+				/*Toast.makeText(getApplicationContext(),
 						error+"", Toast.LENGTH_LONG)
-						.show();
+						.show();*/
 				//test
 				Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
 				startActivity(intent);

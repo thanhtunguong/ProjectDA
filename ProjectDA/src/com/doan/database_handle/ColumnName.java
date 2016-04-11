@@ -28,10 +28,12 @@ public class ColumnName {
 	public static String DIEM_MA_DIEM = "PK_Diem";
 	public static String DIEM_DIEM_1 = "Diem1";
 	public static String DIEM_DIEM_2 = "Diem2";
-	public static String DIEM_DIEM_7 = "Diem7";
+	public static String DIEM_DIEM_7 = "Diem3";
+	public static String DIEM_TEN_MON_HOC = "TenMonHoc";
+	public static String DIEM_SO_TIN_CHI = "SoTinChi";
 	public static String DIEM_MA_LOP_TIN_CHI = "FK_LopTinChi";
-	public static String DIEM_MA_SV = "FK_SV";
-	public static String DIEM_MA_LICH_THI = "FK_LichThi";
+	//public static String DIEM_MA_SV = "FK_SV";
+	//public static String DIEM_MA_LICH_THI = "FK_LichThi";
 	public static String DIEM_TRANG_THAI_DK = "TrangThaiDK";
 	public static String DIEM_THOI_GIAN_DK = "ThoiGianDK";
 	

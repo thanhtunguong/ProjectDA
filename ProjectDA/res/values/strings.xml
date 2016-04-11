@@ -37,7 +37,9 @@
     <string name="string_November">tháng Mười một</string>
     <string name="string_December">tháng Mười hai</string>
     <string name="string_SoTinChiDaHoc">Số tín chỉ đã học:</string>
-    <string name="string_DiemTrungBinhTichLuy">Điểm trung bình tích lũy:</string>
+    <string name="string_DiemTrungBinhHocTap">Điểm trung bình học tập:</string>
+    <string name="string_DiemTrungBinhQuaCaoNhat">Điểm trung bình tích lũy:</string>
+    <string name="string_DiemTrungBinhQuaLanMot">Điểm trung bình theo học kì:</string>
     <string name="string_LichHoc_btnOK">Chọn</string>
     <string name="string_LichHoc_btnCancel">Hủy</string>
     <string name="string_LichHoc_DatePicker_Title">Chọn ngày</string>

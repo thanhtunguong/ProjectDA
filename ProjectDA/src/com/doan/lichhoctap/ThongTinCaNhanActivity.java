@@ -70,6 +70,7 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 		
 		context = this;
 		exeQ = new ExecuteQuery(context);
+		exeQ.open();
 		final String masinhvien = Global.getStringPreference(context, "MaSVDN", "0");
 
 		if (getSupportActionBar() != null) {
@@ -157,6 +158,7 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 				s_gioitinh = edtGioitinhnguoidung.getText().toString();
 				s_diachi = edtDiachinguoidung.getText().toString();
 				s_sdt = edtSdtnguoidung.getText().toString();
+				exeQ.open();
 				suaThongtin(masinhvien,s_ngaysinh,s_gioitinh,s_diachi,s_sdt);
 				
 				// Khong cho tuong tac voi edittext
@@ -196,12 +198,14 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 				chonNgaySinhDatetimePicker();
 			}
 		});
+		exeQ.close();
 	}
 	private void getThongtinSVSqlite(String masinhvien2) {
 		SinhVien sv = new SinhVien();
+		exeQ.open();
 		sv = exeQ.getThongTinSinhVienSqLite(masinhvien2);
 		setThongTinSinhVien(sv.getTenSV(),sv.getEmailSV(),sv.getMaLopHanhChinh(),sv.getNgaySinhSV(),sv.getGioiTinhSV(),sv.getDiaChiSV(),sv.getSDTSV());
-		
+		exeQ.close();
 	}
 	
 	private void setThongTinSinhVien(String svHoten ,String svEmail,
@@ -308,6 +312,7 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 									"Thanh cong", Toast.LENGTH_LONG)
 									.show();*/
 							exeQ.update_tbl_sinhvien(masinhvien,s_ngaysinh,s_gioitinh,s_diachi,s_sdt);
+							exeQ.close();
 						} else {
 							Toast.makeText(getApplicationContext(),
 									"That bai", Toast.LENGTH_LONG)
@@ -342,6 +347,7 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 									"Thanh cong", Toast.LENGTH_LONG)
 									.show();
 							setThongTin();
+							exeQ.close();
 						} else {
 							Toast.makeText(getApplicationContext(),
 									"That bai", Toast.LENGTH_LONG)

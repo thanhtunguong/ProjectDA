@@ -56,6 +56,9 @@ public class ChiTietThongBaoActivity extends ActionBarActivity {
 		}
 		
 		exeQ = new ExecuteQuery(this);
+		
+		exeQ.open();
+		
 		swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_chi_tiet_thong_bao);
 		swipeRefreshLayout.setRefreshing(true);
 		Intent callerIntent = getIntent();
@@ -93,9 +96,11 @@ public class ChiTietThongBaoActivity extends ActionBarActivity {
 			@Override
 			public void onRefresh() {
 				// TODO Auto-generated method stub
+				exeQ.open();
 				getReplyTheoThongBao(mathongbao);
 			}
 		});
+		exeQ.close();
 	}
 	private void setList(){
 		arrChiTietThongBao = new ArrayList<ChiTietThongBao>();
@@ -175,6 +180,7 @@ public class ChiTietThongBaoActivity extends ActionBarActivity {
 				// Log.e("loginToServer", response);
 				if (executeWhenGetReplyTheoThongBaoSuccess(response)) {
 					setList();
+					exeQ.close();
 					swipeRefreshLayout.setRefreshing(false);
 				} else {
 					

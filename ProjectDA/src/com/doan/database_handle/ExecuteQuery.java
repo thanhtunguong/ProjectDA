@@ -124,16 +124,43 @@ public class ExecuteQuery {
 //___/tbl_SinhVien
 
 //___tbl_Diem
+	public boolean insert_tbl_DiemHocTap_multi(ArrayList<DiemHocTap> listTH) {
+		try {
+			database = mDbHelper.getWritableDatabase();
+			for (DiemHocTap diem : listTH) {
+				ContentValues cv = new ContentValues();
+
+				cv.put(ColumnName.DIEM_DIEM_1, diem.getDiemCC());
+				cv.put(ColumnName.DIEM_DIEM_2, diem.getDiemKT());
+				cv.put(ColumnName.DIEM_DIEM_7, diem.getDiemThi());
+				cv.put(ColumnName.DIEM_TEN_MON_HOC, diem.getTenMonHoc());
+				cv.put(ColumnName.DIEM_SO_TIN_CHI, diem.getSoTinChi());
+				cv.put(ColumnName.DIEM_MA_LOP_TIN_CHI, diem.getMaLopTinChi());
+				cv.put(ColumnName.DIEM_MA_DIEM, diem.getMaDiem());
+				cv.put(ColumnName.DIEM_TRANG_THAI_DK, diem.getMaTrangThaiDK());
+				cv.put(ColumnName.DIEM_THOI_GIAN_DK, diem.getThoiGianDK());
+				/*if(th.getSpecificDate() != null){
+					database.insert(ColumnName.LICHhoc_TABLE, null, cv);
+				}*/
+				database.insert(ColumnName.DIEM_TABLE, null, cv);
+			}
+			return true;
+		} catch (SQLiteException e) {
+			Log.e("insert_tbl_diemHocTap_multi", e.getMessage());
+			return false;
+		}
+	}
 	public ArrayList<DiemHocTap> getDiemSV(Context c){
 		ArrayList<DiemHocTap> arrDiem = new ArrayList<DiemHocTap>();
 		String selectQuery = "SELECT " + ColumnName.DIEM_DIEM_1 + "," + ColumnName.DIEM_DIEM_2 + "," + ColumnName.DIEM_DIEM_7 + ","
-										+ ColumnName.DIEM_MA_LOP_TIN_CHI + "," + ColumnName.DIEM_MA_LICH_THI + ","
-										+ ColumnName.DIEM_TRANG_THAI_DK + ","
-										+ ColumnName.MON_HOC_TEN_MON_HOC + "," + ColumnName.MON_HOC_SO_TIN_CHI + "," + ColumnName.DIEM_THOI_GIAN_DK + " "
-				+ "FROM " + ColumnName.DIEM_TABLE + ", " + ColumnName.LopTINCHI_TABLE + ", " + ColumnName.MON_HOC_TABLE + " "
-				+ " WHERE " + ColumnName.DIEM_MA_SV + " = '" + Global.getStringPreference(c, "MaSVDN", "0") + "'" 
+										+ ColumnName.DIEM_MA_LOP_TIN_CHI + "," /*+ ColumnName.DIEM_MA_LICH_THI + ","*/
+										+ ColumnName.DIEM_TRANG_THAI_DK + "," + ColumnName.MON_HOC_TEN_MON_HOC + "," 
+										+ ColumnName.MON_HOC_SO_TIN_CHI + "," + ColumnName.DIEM_THOI_GIAN_DK + ","
+										+ ColumnName.DIEM_MA_DIEM + " "
+				+ "FROM " + ColumnName.DIEM_TABLE + " ";
+				/*+ " WHERE " + ColumnName.DIEM_MA_SV + " = '" + Global.getStringPreference(c, "MaSVDN", "0") + "'" 
 					+ " and " + ColumnName.DIEM_MA_LOP_TIN_CHI + " = " + ColumnName.LopTINCHI_MA_LOP_TIN_CHI
-					+ " and " + ColumnName.LopTINCHI_MA_MON_HOC + " = " + ColumnName.MON_HOC_MA_MON_HOC;
+					+ " and " + ColumnName.LopTINCHI_MA_MON_HOC + " = " + ColumnName.MON_HOC_MA_MON_HOC;*/
 		database = mDbHelper.getReadableDatabase();
 		Cursor cursor = database.rawQuery(selectQuery, null);
 		if (cursor.moveToFirst()) {
@@ -144,11 +171,12 @@ public class ExecuteQuery {
 				diem.setDiemKT(cursor.getInt(1));
 				diem.setDiemThi(cursor.getInt(2));
 				diem.setMaLopTinChi(cursor.getString(3));
-				diem.setMaLichThi(cursor.getString(4));
-				diem.setMaTrangThaiDK(cursor.getString(5));
-				diem.setTenMonHoc(cursor.getString(6));
-				diem.setSoTinChi(cursor.getInt(7));
-				diem.setThoiGianDK(cursor.getString(8));
+				//diem.setMaLichThi(cursor.getString(4));
+				diem.setMaTrangThaiDK(cursor.getString(4));
+				diem.setTenMonHoc(cursor.getString(5));
+				diem.setSoTinChi(cursor.getInt(6));
+				diem.setThoiGianDK(cursor.getString(7));
+				diem.setMaDiem(cursor.getString(8));
 				
 				arrDiem.add(diem);
 			} while (cursor.moveToNext());
@@ -158,14 +186,13 @@ public class ExecuteQuery {
 	public ArrayList<DiemHocTap> getDiemQuaMonSV(Context c){
 		ArrayList<DiemHocTap> arrDiem = new ArrayList<DiemHocTap>();
 		String selectQuery = "SELECT " + ColumnName.DIEM_DIEM_1 + "," + ColumnName.DIEM_DIEM_2 + "," + ColumnName.DIEM_DIEM_7 + ","
-										+ ColumnName.DIEM_MA_LOP_TIN_CHI + "," + ColumnName.DIEM_MA_LICH_THI + ","
-										+ ColumnName.DIEM_TRANG_THAI_DK + ","
-										+ ColumnName.MON_HOC_TEN_MON_HOC + "," + ColumnName.MON_HOC_SO_TIN_CHI + "," + ColumnName.DIEM_THOI_GIAN_DK + "," + ColumnName.DIEM_MA_DIEM + " "
-				+ "FROM " + ColumnName.DIEM_TABLE + ", " + ColumnName.LopTINCHI_TABLE + ", " + ColumnName.MON_HOC_TABLE + " "
-				+ " WHERE " + ColumnName.DIEM_MA_SV + " = '" + Global.getStringPreference(c, "MaSVDN", "0") + "'" 
-					+ " and " + ColumnName.DIEM_MA_LOP_TIN_CHI + " = " + ColumnName.LopTINCHI_MA_LOP_TIN_CHI
-					+ " and " + ColumnName.LopTINCHI_MA_MON_HOC + " = " + ColumnName.MON_HOC_MA_MON_HOC
-					+ " and (" + ColumnName.DIEM_DIEM_1 + "+" + ColumnName.DIEM_DIEM_2 + "*2+" + ColumnName.DIEM_DIEM_7 + "*7)/10 > 5"; 
+				+ ColumnName.DIEM_MA_LOP_TIN_CHI + "," /*+ ColumnName.DIEM_MA_LICH_THI + ","*/
+				+ ColumnName.DIEM_TRANG_THAI_DK + "," + ColumnName.MON_HOC_TEN_MON_HOC + "," 
+				+ ColumnName.MON_HOC_SO_TIN_CHI + "," + ColumnName.DIEM_THOI_GIAN_DK + ","
+				+ ColumnName.DIEM_MA_DIEM + " "
+				+ "FROM " + ColumnName.DIEM_TABLE + " "
+				+ " WHERE "
+					+ " (" + ColumnName.DIEM_DIEM_1 + "+" + ColumnName.DIEM_DIEM_2 + "*2+" + ColumnName.DIEM_DIEM_7 + "*7)/10 > 5"; 
 		database = mDbHelper.getReadableDatabase();
 		Cursor cursor = database.rawQuery(selectQuery, null);
 		if (cursor.moveToFirst()) {
@@ -176,12 +203,12 @@ public class ExecuteQuery {
 				diem.setDiemKT(cursor.getInt(1));
 				diem.setDiemThi(cursor.getInt(2));
 				diem.setMaLopTinChi(cursor.getString(3));
-				diem.setMaLichThi(cursor.getString(4));
-				diem.setMaTrangThaiDK(cursor.getString(5));
-				diem.setTenMonHoc(cursor.getString(6));
-				diem.setSoTinChi(cursor.getInt(7));
-				diem.setThoiGianDK(cursor.getString(8));
-				diem.setMaDiem(cursor.getString(9));
+				//diem.setMaLichThi(cursor.getString(4));
+				diem.setMaTrangThaiDK(cursor.getString(4));
+				diem.setTenMonHoc(cursor.getString(5));
+				diem.setSoTinChi(cursor.getInt(6));
+				diem.setThoiGianDK(cursor.getString(7));
+				diem.setMaDiem(cursor.getString(8));
 				
 				arrDiem.add(diem);
 			} while (cursor.moveToNext());

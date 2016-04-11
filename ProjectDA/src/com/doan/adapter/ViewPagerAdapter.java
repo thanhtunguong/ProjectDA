@@ -1,7 +1,6 @@
 package com.doan.adapter;
 
 import com.doan.fragment.BaiVietFragment;
-import com.doan.fragment.DiemFragment;
 import com.doan.fragment.LichFragment;
 import com.doan.fragment.OthersFragment;
 import com.doan.lichhoctap.HocTapActivity;

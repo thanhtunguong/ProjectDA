@@ -82,6 +82,7 @@ public class ThongBaoActivity extends ActionBarActivity {
 	}
 
 	private void xulyPhanDinhNgay() {
+		exeQ.open();
 		ArrayList<ThongBao> arrThongBao = new ArrayList<ThongBao>();
 		arrThongBao.addAll(exeQ.getAllThongBaoSqLite());
 		for (int i = 0; i < arrThongBao.size(); i++) {
@@ -111,6 +112,7 @@ public class ThongBaoActivity extends ActionBarActivity {
 		for (ThongBaoTrongNgay thongBaoTrongNgay : arrThongBaoTrongNgay) {
 			childItems.add(thongBaoTrongNgay.getArrThongBao());
 		}
+		exeQ.close();
 	}
 	
 	private Date epKieuDate(String ngay){
@@ -137,9 +139,10 @@ public class ThongBaoActivity extends ActionBarActivity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			onBackPressed();
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}

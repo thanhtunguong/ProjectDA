@@ -1,7 +1,6 @@
 package com.doan.lichhoctap;
 
 import java.io.File;
-import com.doan.fragment.DiemFragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,11 +31,6 @@ public class MainActivity extends MaterialNavigationDrawer implements MaterialAc
 		String fullname = "ThanhTungTuong";
 		/*setAccount(new MaterialAccount(this.getResources(), fullname.toUpperCase(), "", R.drawable.ic_launcher,
 				R.drawable.circle_active_icon));*/
-		account = new MaterialAccount(this.getResources(), fullname.toUpperCase(), "", R.drawable.ic_launcher, R.drawable.abc_action_bar_item_background_material);
-		this.addAccount(account);
-		this.disableLearningPattern();
-
-		mnuInfo = newSection("Diem", R.drawable.ic_launcher, new DiemFragment());
 		this.addSection(mnuInfo);
 	}
 

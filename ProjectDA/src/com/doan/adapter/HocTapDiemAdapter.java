@@ -1,8 +1,6 @@
 package com.doan.adapter;
 
 import java.util.ArrayList;
-
-import com.doan.fragment.DiemFragment;
 import com.doan.lichhoctap.R;
 import com.doan.model.DiemHocTap;
 import android.app.Activity;
