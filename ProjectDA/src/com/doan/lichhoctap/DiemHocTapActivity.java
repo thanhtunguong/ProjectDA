@@ -60,6 +60,8 @@ public class DiemHocTapActivity extends ActionBarActivity {
     private TextView tvTC, tvSTCpc, tvSTCprogess;
     private LinearLayout lnSTC;
     private ListView lvDiem;
+    private Point size;
+    private Display display;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,10 @@ public class DiemHocTapActivity extends ActionBarActivity {
         biencheck = 1;
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_diem);
         swipeRefreshLayout.setRefreshing(false);
+        
+        display = this.getWindowManager().getDefaultDisplay();
+        size = new Point();
+        display.getSize(size);
         
         exeQ = new ExecuteQuery(c); 
 		//
@@ -150,24 +156,22 @@ public class DiemHocTapActivity extends ActionBarActivity {
         	if(diemHocTap.getMaTrangThaiDK().matches("0")){
         		tinhTongKetHocTap(diemHocTap.getSoTinChi(), sdtb);
         	}
-		}
-		Display display = this.getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
+		}       
         width = size.x;
         int height = size.y;
         float width2 = (float)(width/1.5);
         width = Math.round(width2);
         lp1 = new LayoutParams(width, 12);
         lp1.gravity = Gravity.CENTER_VERTICAL;
-        lnSTC.setLayoutParams(lp1);                
+        lnSTC.setLayoutParams(lp1); 
+        hienThiTinhDiem();
     	float STCpc = TC/120;
     	int xSTC = 220;
     	float x = (TC*width)/120;
     	tvSTCprogess.setLayoutParams(new LayoutParams(Math.round(x), 12));
     	tvSTCpc.setText(x + " %");
     	//getResultHocTap(arlDiemQuaCaoNhat, lnDTB, tvDTBprogess, tvDTBpc);
-    	hienThiTinhDiem();
+    	
 		tvSTCpc.setText(TC + "/120");
         HocTapDiemAdapter adapter = new HocTapDiemAdapter(this , R.layout.hoctap_diem_diemso_item_test, arlDiemAll);
         lvDiem.setAdapter(adapter);
