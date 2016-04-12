@@ -534,6 +534,7 @@ public class LichFragment extends Fragment {
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
 		params.put("masinhvien", masinhvien);
+		params.put("access_token", Global.getStringPreference(c, "access_token", ""));
 		String url = Global.BASE_URI + Global.URI_LICH_HOC;
 		client.post(url, params, new AsyncHttpResponseHandler() {
 			public void onSuccess(String response) {

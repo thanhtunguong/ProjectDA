@@ -127,6 +127,7 @@ public class ExecuteQuery {
 	public boolean insert_tbl_DiemHocTap_multi(ArrayList<DiemHocTap> listTH) {
 		try {
 			database = mDbHelper.getWritableDatabase();
+			database.delete(ColumnName.DIEM_TABLE, null, null);
 			for (DiemHocTap diem : listTH) {
 				ContentValues cv = new ContentValues();
 
@@ -404,6 +405,7 @@ public class ExecuteQuery {
 	public boolean insert_tbl_ThongBao_multi(ArrayList<ThongBao> listTB) {
 		try {
 			database = mDbHelper.getWritableDatabase();
+			database.delete(ColumnName.THONG_BAO_TABLE, null, null);
 			for (ThongBao tb : listTB) {
 				ContentValues cv = new ContentValues();
 
@@ -448,6 +450,7 @@ public class ExecuteQuery {
 	public boolean insert_tbl_TietHoc_multi(ArrayList<TietHoc> listTH) {
 		try {
 			database = mDbHelper.getWritableDatabase();
+			database.delete(ColumnName.LICHhoc_TABLE, null, null);
 			for (TietHoc th : listTH) {
 				ContentValues cv = new ContentValues();
 
@@ -535,6 +538,7 @@ public class ExecuteQuery {
 			String NoiDung, String ThoiGian, String MaThongBao) {
 		try {
 			database = mDbHelper.getWritableDatabase();
+			database.delete(ColumnName.CHI_TIET_THONG_BAO_TABLE, null, null);
 			ContentValues cv = new ContentValues();
 
 			cv.put(ColumnName.CHI_TIET_THONG_BAO_MA_CT_THONG_BAO, MaCTThongBao);
@@ -659,6 +663,7 @@ public class ExecuteQuery {
 	//-- Update thong tin sinh vien
 	public boolean update_tbl_sinhvien(String masinhvien,String s_ngaysinh, String s_gioitinh,
 			String s_diachi, String s_sdt) {
+		database.delete(ColumnName.SV_TABLE, null, null);
 		try {
 			    database = mDbHelper.getWritableDatabase();
 //			    String strSQL = "UPDATE "+ ColumnName.SV_TABLE+" SET "+ColumnName.SV_NGAY_SINH_SV +" = "+s_ngaysinh+"," +
@@ -769,7 +774,7 @@ public class ExecuteQuery {
 				,String noidung, String thoigiannhac, String thoigianchinhsua) {
 			try {
 				database = mDbHelper.getWritableDatabase();
-				
+				database.delete(ColumnName.GHI_CHU_TABLE, null, null);
 					ContentValues cv = new ContentValues();
 
 					cv.put(ColumnName.GHI_CHU_MA_GHI_CHU, maghichu);

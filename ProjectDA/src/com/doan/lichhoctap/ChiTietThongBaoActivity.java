@@ -19,6 +19,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -43,6 +44,7 @@ public class ChiTietThongBaoActivity extends ActionBarActivity {
 	private ChiTietThongBaoAdapter adapter;
 	private ExpandableListView elv_Reply;
 	private Toolbar toolbar;
+	private Context c;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class ChiTietThongBaoActivity extends ActionBarActivity {
 		if (getSupportActionBar() != null) {
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		}
-		
+		c = this;
 		exeQ = new ExecuteQuery(this);
 		
 		exeQ.open();
@@ -174,7 +176,7 @@ public class ChiTietThongBaoActivity extends ActionBarActivity {
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
 		params.put("mathongbao", mathongbao);
-
+		params.put("access_token", Global.getStringPreference(c, "access_token", ""));
 		client.post(Global.BASE_URI + Global.URI_REPLY_THEO_MA_THONGBAO, params, new AsyncHttpResponseHandler() {
 			public void onSuccess(String response) {
 				// Log.e("loginToServer", response);

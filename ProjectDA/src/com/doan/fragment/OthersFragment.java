@@ -3,12 +3,13 @@ import com.doan.app.Global;
 import com.doan.lichhoctap.DanhSachMonCoTheDangKiActivity;
 import com.doan.lichhoctap.DiemHocTapActivity;
 import com.doan.lichhoctap.GhiChuActivity;
+import com.doan.lichhoctap.LoginActivity;
 import com.doan.lichhoctap.R;
 import com.doan.lichhoctap.SoTayThongTinActivity;
 import com.doan.lichhoctap.ThongTinCaNhanActivity;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,14 +19,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class OthersFragment extends Fragment {
 
-	LinearLayout otherUser, otherUserMark, otherUserCTDT, otherUserDSMCTDK, otherUserInfoSearch, otherUserNotes;
+	LinearLayout otherUser, otherUserMark, otherUserCTDT, otherUserDSMCTDK, otherUserInfoSearch, otherUserNotes, otherLogout;
 	Activity c;
 	
     @Override
@@ -39,6 +42,7 @@ public class OthersFragment extends Fragment {
         otherUserDSMCTDK = (LinearLayout) v.findViewById(R.id.otherUserDSMCTDK);
         otherUserInfoSearch = (LinearLayout) v.findViewById(R.id.otherUserInfoSearch);
         otherUserNotes = (LinearLayout) v.findViewById(R.id.otherUserNotes);
+        otherLogout = (LinearLayout) v.findViewById(R.id.otherLogout);
         TextView otherUserName = (TextView) v.findViewById(R.id.otherUserName);
         otherUserName.setText(Global.getStringPreference(c, "HoTenSV", ""));
         
@@ -104,8 +108,40 @@ public class OthersFragment extends Fragment {
 			}
 		});
         
+        otherLogout.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				dialogLogoutConfirm(c);
+			}
+		});
+        
         return v;
     }
+    private void dialogLogoutConfirm(final Activity context){
+		final Dialog dialog = new Dialog(context);
+		dialog.setContentView(R.layout.dialog_logout);
+		Button dialogButtonOK = (Button) dialog.findViewById(R.id.btnOKDialogLogout);
+		dialogButtonOK.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Global.saveStringPreference(c, "access_token", "");
+				dialog.dismiss();
+				Intent i = new Intent(getContext(), LoginActivity.class);
+				startActivity(i);
+			}
+		});
+		Button dialogButtonCancel = (Button) dialog.findViewById(R.id.btnCancelDialogLogout);
+		dialogButtonCancel.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+
+		dialog.show();
+	}
     public void setTitleActivity(int titleID){
     	/*toolbar = (Toolbar) findViewById(R.id.tool_bar);            
     	setSupportActionBar(toolbar);*/

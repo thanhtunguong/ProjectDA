@@ -57,16 +57,7 @@ public class SplashScreen extends Activity {
 		exeQ.createDatabase();
 		exeQ.open();
 		getThongtinSV(masinhvien);
-		/*DeviceStatus dv = new DeviceStatus();
-		if(dv.isInternetAvailable()){
-			exeQ.createDatabase();
-			exeQ.open();
-			getThongtinSV(masinhvien);
-		}else {
-			Toast.makeText(c, "No internet connection! \n Please try to refesh later", Toast.LENGTH_SHORT).show();
-			Intent intent = new Intent(SplashScreen.this, HocTapActivity.class);
-			startActivity(intent);
-		}*/
+		DeviceStatus dv = new DeviceStatus();
 	}
 	/*
 	 * if (i == 0 || i == 10) { //make the progress bar visible
@@ -83,6 +74,7 @@ public class SplashScreen extends Activity {
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
 		params.put("masinhvien", masinhvien);
+		params.put("access_token", Global.getStringPreference(c, "access_token", ""));
 		String url = Global.BASE_URI + Global.URI_THONG_BAO;
 		client.post(url, params, new AsyncHttpResponseHandler() {
 			public void onSuccess(String response) {
@@ -139,6 +131,7 @@ public class SplashScreen extends Activity {
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
 		params.put("masinhvien", masinhvien);
+		params.put("access_token", Global.getStringPreference(c, "access_token", ""));
 		String url = Global.BASE_URI + Global.URI_LICH_HOC;
 		client.post(url, params, new AsyncHttpResponseHandler() {
 			public void onSuccess(String response) {
@@ -212,6 +205,7 @@ public class SplashScreen extends Activity {
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
 		params.put("masinhvien", masinhvien);
+		params.put("access_token", Global.getStringPreference(c, "access_token", ""));
 		String url = Global.BASE_URI + Global.URI_DIEMTHEOMASV;
 		client.post(url, params, new AsyncHttpResponseHandler() {
 			public void onSuccess(String response) {
@@ -275,7 +269,7 @@ public class SplashScreen extends Activity {
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
 		params.put("masinhvien", masinhvien);
-
+		params.put("access_token", Global.getStringPreference(c, "access_token", ""));
 		client.post(Global.BASE_URI + Global.URI_THONGTINTHEOMASV, params, new AsyncHttpResponseHandler() {
 			public void onSuccess(String response) {
 				// Log.e("loginToServer", response);
@@ -300,6 +294,9 @@ public class SplashScreen extends Activity {
 				 * Toast.makeText(getApplicationContext(), error+"",
 				 * Toast.LENGTH_LONG) .show();
 				 */
+				Toast.makeText(c, c.getString(R.string.internet_error), Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(SplashScreen.this, HocTapActivity.class);
+				startActivity(intent);
 			}
 		});
 	}
@@ -344,6 +341,7 @@ public class SplashScreen extends Activity {
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
 		params.put("masinhvien", masinhvien);
+		params.put("access_token", Global.getStringPreference(c, "access_token", ""));
 		String url = Global.BASE_URI + Global.URI_GHICHUTHEOMATHEOMASV;
 		client.post(url, params, new AsyncHttpResponseHandler() {
 			public void onSuccess(String response) {
@@ -412,7 +410,7 @@ public class SplashScreen extends Activity {
 
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
-
+		
 		String url = Global.BASE_URI + Global.URI_DANHSACHBAIVIET;
 		client.post(url, params, new AsyncHttpResponseHandler() {
 			public void onSuccess(String response) {

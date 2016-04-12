@@ -44,6 +44,11 @@ public class LoginActivity extends ActionBarActivity {
 		exeQ.createDatabase();
 		exeQ.open();*/
 		//arrAllSV = exeQ.getAllSinhVien();
+		String accessToken = Global.getStringPreference(this, "access_token", "");
+		if(accessToken.matches("") == false){
+			Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
+			startActivity(intent);
+		}
 		
 		edEmail = (EditText) findViewById(R.id.edtLoginEmail);
 		edPwd = (EditText) findViewById(R.id.edtLoginPwd);
@@ -187,11 +192,23 @@ public class LoginActivity extends ActionBarActivity {
 			if(status.matches(getString(R.string.string_login_sinhvien_success))){
 				masinhvien = loginJson.optString("pk_sv");
 				tensinhvien = loginJson.optString("hoten");
+				String actk = loginJson.optString("access_token");
 				Global.saveStringPreference(getBaseContext(), "MaSVDN", masinhvien);
 				Global.saveStringPreference(getBaseContext(), "HoTenSV", tensinhvien);
+				Global.saveStringPreference(getBaseContext(), "access_token", actk);
 				return true;
 			}else {
-				return false;
+				if(status.matches(getString(R.string.string_login_giangvien_success))){
+					String magiangvien = loginJson.getString("pk_gv");
+					String tengiangvien = loginJson.getString("hoten");
+					String accessToken = loginJson.getString("access_token");
+					Global.saveStringPreference(getBaseContext(), "MaGVDN", magiangvien);
+					Global.saveStringPreference(getBaseContext(), "HoTenGV", tengiangvien);
+					Global.saveStringPreference(getBaseContext(), "access_token", accessToken);
+					return true;
+				}else {
+					return false;
+				}
 			}
 			//return true;
 		} catch (JSONException e) {
