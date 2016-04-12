@@ -297,6 +297,7 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 		params.put("gioitinhsinhvien", s_gioitinh);
 		params.put("diachisinhvien", s_diachi);
 		params.put("sdtsinhvien", s_sdt);
+		params.put("access_token", Global.getStringPreference(getApplicationContext(), "access_token", ""));
 	//	client.setTimeout(30000);
 		//client.post(Global.BASE_URI + Global.URI_LICH_HOC,
 
@@ -307,14 +308,15 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 				params, new AsyncHttpResponseHandler() {
 					public void onSuccess(String response) {
 						
-		//				if (checkUpdate(response)) {
-							if (true) {
+						if (checkUpdate(response)) {
+		//					if (true) {
 							/*Toast.makeText(getApplicationContext(),
 									"Thanh cong", Toast.LENGTH_LONG)
 									.show();*/
 							exeQ.update_tbl_sinhvien(masinhvien,s_ngaysinh,s_gioitinh,s_diachi,s_sdt);
-							getThongtinSVSqlite(masinhvien);
 							exeQ.close();
+							getThongtinSVSqlite(masinhvien);
+						//	exeQ.close();
 						} else {
 							if(status.matches("false_update") == true){
 								Toast.makeText(getApplicationContext(),

@@ -663,7 +663,7 @@ public class ExecuteQuery {
 	//-- Update thong tin sinh vien
 	public boolean update_tbl_sinhvien(String masinhvien,String s_ngaysinh, String s_gioitinh,
 			String s_diachi, String s_sdt) {
-		database.delete(ColumnName.SV_TABLE, null, null);
+	//	database.delete(ColumnName.SV_TABLE, null, null);
 		try {
 			    database = mDbHelper.getWritableDatabase();
 //			    String strSQL = "UPDATE "+ ColumnName.SV_TABLE+" SET "+ColumnName.SV_NGAY_SINH_SV +" = "+s_ngaysinh+"," +
