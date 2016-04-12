@@ -56,7 +56,7 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 	
 	private ExecuteQuery exeQ;
 	private Context context;
-	
+	private String status ="";
 
 	Toolbar toolbar;
 
@@ -307,16 +307,27 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 				params, new AsyncHttpResponseHandler() {
 					public void onSuccess(String response) {
 						
-						if (checkUpdate()) {
+		//				if (checkUpdate(response)) {
+							if (true) {
 							/*Toast.makeText(getApplicationContext(),
 									"Thanh cong", Toast.LENGTH_LONG)
 									.show();*/
 							exeQ.update_tbl_sinhvien(masinhvien,s_ngaysinh,s_gioitinh,s_diachi,s_sdt);
+							getThongtinSVSqlite(masinhvien);
 							exeQ.close();
 						} else {
-							Toast.makeText(getApplicationContext(),
-									"That bai", Toast.LENGTH_LONG)
-									.show();
+							if(status.matches("false_update") == true){
+								Toast.makeText(getApplicationContext(),
+										"That bai", Toast.LENGTH_LONG)
+										.show();
+							}
+							if(status.matches("false") == true){
+								Toast.makeText(getApplicationContext(),
+										"Goi ham logout app", Toast.LENGTH_LONG)
+										.show();
+							}
+//							logoutapp();
+							
 						}
 					}
 
@@ -428,9 +439,32 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 		}
 	}
 	
-	private boolean checkUpdate() {
+	private boolean checkUpdate(String response) {
 		
-		return true;
+		try {
+			JSONArray arrObj = new JSONArray(response);
+			for (int i = 0; i < arrObj.length(); i++) {
+				JSONObject userJson = arrObj.getJSONObject(i);
+
+				status = userJson.optString("status");				
+			}
+			if(status.matches("success") == true){
+				return true;
+			}
+			if(status.matches("false_update") == true){
+				return false;
+			}
+			
+			else{
+				return false;
+			}
+//			return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Log.e("loi", e + "");
+			return false;
+		}
+		
 	}
 	private void chonNgaySinhDatetimePicker(){
 		final Dialog dialog = new Dialog(this);

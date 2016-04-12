@@ -332,7 +332,7 @@ public class SplashScreen extends Activity {
 			return true;
 		} catch (JSONException e) {
 			e.printStackTrace();
-			Log.e("loi", e + "");
+			Log.e("JsonThongTinSinhVien", e + "");
 			return false;
 		}
 	}

@@ -604,7 +604,7 @@ public class ExecuteQuery {
 			String diachi, String sdt) {
 		try {
 			database = mDbHelper.getWritableDatabase();
-			
+			database.delete(ColumnName.SV_TABLE, null, null);
 				ContentValues cv = new ContentValues();
 
 				cv.put(ColumnName.SV_MA_SV,masinhvien);
@@ -696,6 +696,7 @@ public class ExecuteQuery {
 		public boolean insert_tbl_GhiChu_multi(ArrayList<ItemGhiChu> listGC, String masinhvien) {
 			try {
 				database = mDbHelper.getWritableDatabase();
+				database.delete(ColumnName.GHI_CHU_TABLE, null, null);
 				for (ItemGhiChu gc : listGC) {
 					ContentValues cv = new ContentValues();
 
@@ -814,6 +815,7 @@ public class ExecuteQuery {
 			public boolean insert_tbl_BaiViet_multi(ArrayList<BaiViet> listBV) {
 				try {
 					database = mDbHelper.getWritableDatabase();
+					database.delete(ColumnName.BAI_VIET_TABLE, null, null);
 					for (BaiViet bv : listBV) {
 						ContentValues cv = new ContentValues();
 
