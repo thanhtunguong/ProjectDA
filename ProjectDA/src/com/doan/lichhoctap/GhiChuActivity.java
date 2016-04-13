@@ -63,7 +63,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 	Button btnThemghichu;
 	private static String thoigian_ghichu = "";
 	private int lastIndex = 0;
-	
+	private String status ="";
 
 	ArrayList<ItemGhiChu> arrItemghichu = new ArrayList<ItemGhiChu>();
 	GhiChuAdapter adapter = null;
@@ -140,15 +140,19 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 	}
 	private void getGhiChuSQlite(String masinhvien) {
 		// TODO Auto-generated method stub
-		
+		exeQ.open();
 		arrItemghichu = exeQ.getAllGhiChuSqLite(masinhvien);
 		setGhiChu();
-		if(arrItemghichu != null){
+		exeQ.close();
+		if(arrItemghichu.size() != 0){
 		int sttcuoi = arrItemghichu.size()-1;
 		String maghichucuoi = arrItemghichu.get(sttcuoi).getMaghichu();
 		
 		String result_ma[] = maghichucuoi.split("[_]");
 		lastIndex = Integer.valueOf(result_ma[2]);
+		}
+		else{			
+			lastIndex = 0;
 		}
 	}
 	private void setGhiChu(){
@@ -356,22 +360,22 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		
 		thoigianchinhsua = formatDate(nam_sua,thang_sua,ngay_sua,gio_sua,phut_sua);
 				
-		gc.setThoigiannhac(thoigiannhac);
-		gc.setThoigiannhac(thoigianchinhsua);
-		gc.setTitle(strTitle);
-		gc.setContent(strContent);
-		arrItemghichu.add(gc);
-		adapter.notifyDataSetChanged();
+//		gc.setThoigiannhac(thoigiannhac);
+//		gc.setThoigiannhac(thoigianchinhsua);
+//		gc.setTitle(strTitle);
+//		gc.setContent(strContent);
+//		arrItemghichu.add(gc);
+//		adapter.notifyDataSetChanged();
 		createGhiChu(masinhvien,strTitle,strContent,thoigiannhac,thoigianchinhsua);
 	//	datNotify(hour,minute,day,month,year);
 
 	}
 	protected void suaGhichu(String strTitle, int hour, int minute, int day, int month, int year, String strContent, int position) {
 		String maghichu = arrItemghichu.get(position).getMaghichu();
-		
-		Toast.makeText(getApplicationContext(),
-				maghichu, Toast.LENGTH_LONG)
-				.show();
+		String masinhvien = Global.getStringPreference(context, "MaSVDN", "0");
+//		Toast.makeText(getApplicationContext(),
+//				maghichu, Toast.LENGTH_LONG)
+//				.show();
 		String thoigiannhac = "";
 		String thoigianchinhsua = "";
 		
@@ -386,23 +390,24 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		
 		thoigianchinhsua = formatDate(nam_sua,thang_sua,ngay_sua,gio_sua,phut_sua);
 		
-		arrItemghichu.get(position).setTitle(strTitle);
-		arrItemghichu.get(position).setThoigiannhac(thoigiannhac);
-		arrItemghichu.get(position).setThoigiannhac(thoigianchinhsua);
-		arrItemghichu.get(position).setContent(strContent);
+//		arrItemghichu.get(position).setTitle(strTitle);
+//		arrItemghichu.get(position).setThoigiannhac(thoigiannhac);
+//		arrItemghichu.get(position).setThoigiannhac(thoigianchinhsua);
+//		arrItemghichu.get(position).setContent(strContent);
 		
 	
-		adapter.notifyDataSetChanged();
-		updateGhiChu(maghichu,strTitle,strContent,thoigiannhac,thoigianchinhsua);
+	//	adapter.notifyDataSetChanged();
+		updateGhiChu(masinhvien,maghichu,strTitle,strContent,thoigiannhac,thoigianchinhsua);
 	//	datNotify(hour,minute,day,month,year);
 
 	}
 	protected void xoaGhichu(int position) {
 		String maghichu = arrItemghichu.get(position).getMaghichu();
 		String masinhvien = Global.getStringPreference(context, "MaSVDN", "0");
-		arrItemghichu.remove(position);
-		deleteGhiChu(maghichu,masinhvien);
-		adapter.notifyDataSetChanged();
+		
+		deleteGhiChu(masinhvien,maghichu);
+//		arrItemghichu.remove(position);
+//		adapter.notifyDataSetChanged();
 	}
 
 	public void datNotify(int hour1, int minute1, int day1, int month1, int year1 ){
@@ -549,69 +554,69 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 //		}
 //	}
 	//--------------------------------------------------
-	private void getGhiChu(String masinhvien){
-		
-		AsyncHttpClient client = new AsyncHttpClient();
-		RequestParams params = new RequestParams();
-		params.put("masinhvien", masinhvien);
-		String url = Global.BASE_URI + Global.URI_GHICHUTHEOMATHEOMASV;
-		client.post(url, params, new AsyncHttpResponseHandler() {
-			public void onSuccess(String response) {
-				Log.e("JsonThongBao", response);
-				if (executeWhenGetGhiChuSuccess(response)) {
-				//	ArrayList<ThongBao> arrThongBao = exeQ.getAllThongBaoSqLite();
-					Toast.makeText(getApplicationContext(),
-							"Thanh cong", Toast.LENGTH_LONG)
-							.show();
-					setGhiChu();
-				} else {
-					Toast.makeText(getApplicationContext(),
-							"That bai", Toast.LENGTH_LONG)
-							.show();
-				}
-			}
-
-			public void onFailure(int statusCode, Throwable error,
-					String content) {
-				Log.e("JsonThongBao", error+" "+content);
-				Toast.makeText(getApplicationContext(),
-						error+"", Toast.LENGTH_LONG)
-						.show();
-			}
-		});
-	}
+//	private void getGhiChu(String masinhvien){
+//		
+//		AsyncHttpClient client = new AsyncHttpClient();
+//		RequestParams params = new RequestParams();
+//		params.put("masinhvien", masinhvien);
+//		String url = Global.BASE_URI + Global.URI_GHICHUTHEOMATHEOMASV;
+//		client.post(url, params, new AsyncHttpResponseHandler() {
+//			public void onSuccess(String response) {
+//				Log.e("JsonThongBao", response);
+//				if (executeWhenGetGhiChuSuccess(response)) {
+//				//	ArrayList<ThongBao> arrThongBao = exeQ.getAllThongBaoSqLite();
+//					Toast.makeText(getApplicationContext(),
+//							"Thanh cong", Toast.LENGTH_LONG)
+//							.show();
+//					setGhiChu();
+//				} else {
+//					Toast.makeText(getApplicationContext(),
+//							"That bai", Toast.LENGTH_LONG)
+//							.show();
+//				}
+//			}
+//
+//			public void onFailure(int statusCode, Throwable error,
+//					String content) {
+//				Log.e("JsonThongBao", error+" "+content);
+//				Toast.makeText(getApplicationContext(),
+//						error+"", Toast.LENGTH_LONG)
+//						.show();
+//			}
+//		});
+//	}
 	
-	private boolean executeWhenGetGhiChuSuccess(String response) {
-		Toast.makeText(getApplicationContext(),
-				response+"", Toast.LENGTH_LONG)
-				.show();
-	//	ArrayList<ThongBao> arrThongBao = new ArrayList<ThongBao>();
-		
-		try {
-			JSONArray arrObj = new JSONArray(response);
-			for (int i = 0; i < arrObj.length(); i++) {
-				JSONObject ghichuJson = arrObj.getJSONObject(i);
-
-				String maghichu = ghichuJson.optString("pk_ghichu");
-				String tieudeghichu = ghichuJson.optString("TieuDeGhiChu");
-				String noidungghichu = ghichuJson.optString("NoiDungGhiChu");
-				String thoigiannhacghichu = ghichuJson.optString("ThoiGianNhacGhiChu");
-				String thoigianchinhsuaghichu = ghichuJson.optString("ThoiGianChinhSuaGhiChu");
-				
-				Toast.makeText(getApplicationContext(),
-						maghichu, Toast.LENGTH_LONG)
-						.show();
-				ItemGhiChu gc = new ItemGhiChu(maghichu,tieudeghichu,thoigiannhacghichu,thoigianchinhsuaghichu,
-						noidungghichu);
-				arrItemghichu.add(gc);
-			}
-		//	exeQ.insert_tbl_ThongBao_multi(arrThongBao);
-			return true;
-		} catch (JSONException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+//	private boolean executeWhenGetGhiChuSuccess(String response) {
+//		Toast.makeText(getApplicationContext(),
+//				response+"", Toast.LENGTH_LONG)
+//				.show();
+//	//	ArrayList<ThongBao> arrThongBao = new ArrayList<ThongBao>();
+//		
+//		try {
+//			JSONArray arrObj = new JSONArray(response);
+//			for (int i = 0; i < arrObj.length(); i++) {
+//				JSONObject ghichuJson = arrObj.getJSONObject(i);
+//
+//				String maghichu = ghichuJson.optString("pk_ghichu");
+//				String tieudeghichu = ghichuJson.optString("TieuDeGhiChu");
+//				String noidungghichu = ghichuJson.optString("NoiDungGhiChu");
+//				String thoigiannhacghichu = ghichuJson.optString("ThoiGianNhacGhiChu");
+//				String thoigianchinhsuaghichu = ghichuJson.optString("ThoiGianChinhSuaGhiChu");
+//				
+//				Toast.makeText(getApplicationContext(),
+//						maghichu, Toast.LENGTH_LONG)
+//						.show();
+//				ItemGhiChu gc = new ItemGhiChu(maghichu,tieudeghichu,thoigiannhacghichu,thoigianchinhsuaghichu,
+//						noidungghichu);
+//				arrItemghichu.add(gc);
+//			}
+//		//	exeQ.insert_tbl_ThongBao_multi(arrThongBao);
+//			return true;
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//			return false;
+//		}
+//	}
 	//-----Them ghi chu
 	public void createGhiChu(final String masinhvien,final String tieude,final String noidung,
 			final String thoigiannhac,final String thoigianchinhsua) {
@@ -628,6 +633,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		params.put("thoigiannhac", thoigiannhac);
 		params.put("thoigiansua", thoigianchinhsua);
 		params.put("maghichu", masinhvien+"_"+lastIndex);
+		params.put("access_token", Global.getStringPreference(getApplicationContext(), "access_token", ""));
 	//	client.setTimeout(30000);
 		
 
@@ -636,14 +642,16 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 				params, new AsyncHttpResponseHandler() {
 					public void onSuccess(String response) {
 						
-						if (checkUpdate()) {
+						if (checkUpdate(response)) {
 //							Toast.makeText(getApplicationContext(),
 //									"Thanh cong", Toast.LENGTH_LONG)
 //									.show();
 							 
 							 exeQ.insert_tbl_GhiChu(masinhvien,masinhvien+"_"+lastIndex,tieude,
 										noidung, thoigiannhac, thoigianchinhsua);
-							 
+							
+								exeQ.close();
+								getGhiChuSQlite(masinhvien);
 							
 						} else {
 							Toast.makeText(getApplicationContext(),
@@ -654,15 +662,15 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 
 					public void onFailure(int statusCode, Throwable error,
 							String content) {
-						Toast.makeText(getApplicationContext(),
-								error+"", Toast.LENGTH_LONG)
-								.show();
+//						Toast.makeText(getApplicationContext(),
+//								error+"", Toast.LENGTH_LONG)
+//								.show();
 					}
 				});
 	}
 	
 	//-----Sua ghi chu
-		public void updateGhiChu(final String maghichu,final String tieude,final String noidung,
+		public void updateGhiChu(final String masinhvien,final String maghichu,final String tieude,final String noidung,
 				final String thoigiannhac,final String thoigiansua) {
 			// TODO Auto-generated method stub
 			// Toast.makeText(getApplicationContext(), s_ngaysinh +" + " +
@@ -671,11 +679,13 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 			
 			AsyncHttpClient client = new AsyncHttpClient();
 			RequestParams params = new RequestParams();
+			params.put("masinhvien", masinhvien);
 			params.put("maghichu", maghichu);
 			params.put("tieude", tieude);
 			params.put("noidung", noidung);
 			params.put("thoigiannhac", thoigiannhac);
 			params.put("thoigiansua", thoigiansua);
+			params.put("access_token", Global.getStringPreference(getApplicationContext(), "access_token", ""));
 		//	client.setTimeout(30000);
 			
 
@@ -684,15 +694,27 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 					params, new AsyncHttpResponseHandler() {
 						public void onSuccess(String response) {
 							
-							if (checkUpdate()) {
+							if (checkUpdate(response)) {
 //								Toast.makeText(getApplicationContext(),
 //										"Thanh cong", Toast.LENGTH_LONG)
 //										.show();
 								exeQ.update_tbl_ghichu(maghichu,tieude,noidung,thoigiannhac,thoigiansua);
+							
+								exeQ.close();
+								getGhiChuSQlite(masinhvien);
 							} else {
-								Toast.makeText(getApplicationContext(),
-										"That bai", Toast.LENGTH_LONG)
-										.show();
+								if(status.matches("false_execute") == true){
+									Toast.makeText(getApplicationContext(),
+											"That bai", Toast.LENGTH_LONG)
+											.show();
+								}
+								if(status.matches("false") == true){
+									Toast.makeText(getApplicationContext(),
+											"Goi ham logout app", Toast.LENGTH_LONG)
+											.show();
+								}
+//								logoutapp();
+							
 							}
 						}
 
@@ -706,7 +728,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		}
 		
 		//-----Xoa ghi chu
-				public void deleteGhiChu(final String maghichu, String masinhvien) {
+				public void deleteGhiChu(final String masinhvien,final String maghichu) {
 					// TODO Auto-generated method stub
 					// Toast.makeText(getApplicationContext(), s_ngaysinh +" + " +
 					// s_gioitinh +" + " + s_diachi + " + " +
@@ -716,6 +738,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 					RequestParams params = new RequestParams();
 					params.put("maghichu", maghichu);
 					params.put("masinhvien", masinhvien);
+					params.put("access_token", Global.getStringPreference(getApplicationContext(), "access_token", ""));
 					
 				//	client.setTimeout(30000);
 					
@@ -725,15 +748,27 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 							params, new AsyncHttpResponseHandler() {
 								public void onSuccess(String response) {
 									
-									if (checkUpdate()) {
+									if (checkUpdate(response)) {
 										Toast.makeText(getApplicationContext(),
 												"Thanh cong", Toast.LENGTH_LONG)
 												.show();
 										exeQ.delete_tbl_GhiChu(maghichu);
+									
+										exeQ.close();
+										getGhiChuSQlite(masinhvien);
 									} else {
-										Toast.makeText(getApplicationContext(),
-												"That bai", Toast.LENGTH_LONG)
-												.show();
+										if(status.matches("false_execute") == true){
+											Toast.makeText(getApplicationContext(),
+													"That bai", Toast.LENGTH_LONG)
+													.show();
+										}
+										if(status.matches("false") == true){
+											Toast.makeText(getApplicationContext(),
+													"Goi ham logout app", Toast.LENGTH_LONG)
+													.show();
+										}
+//										logoutapp();
+									
 									}
 								}
 
@@ -746,9 +781,30 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 							});
 				}	
 	
-	private boolean checkUpdate() {
-		
-		return true;
+	private boolean checkUpdate(String response) {
+		try {
+			JSONArray arrObj = new JSONArray(response);
+			for (int i = 0; i < arrObj.length(); i++) {
+				JSONObject userJson = arrObj.getJSONObject(i);
+
+				status = userJson.optString("status");				
+			}
+			if(status.matches("success") == true){
+				return true;
+			}
+			if(status.matches("false_execute") == true){
+				return false;
+			}
+			
+			else{
+				return false;
+			}
+//			return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Log.e("loi", e + "");
+			return false;
+		}
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

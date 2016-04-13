@@ -774,7 +774,7 @@ public class ExecuteQuery {
 				,String noidung, String thoigiannhac, String thoigianchinhsua) {
 			try {
 				database = mDbHelper.getWritableDatabase();
-				database.delete(ColumnName.GHI_CHU_TABLE, null, null);
+			//	database.delete(ColumnName.GHI_CHU_TABLE, null, null);
 					ContentValues cv = new ContentValues();
 
 					cv.put(ColumnName.GHI_CHU_MA_GHI_CHU, maghichu);
