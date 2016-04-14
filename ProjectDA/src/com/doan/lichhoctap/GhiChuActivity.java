@@ -631,7 +631,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		params.put("tieude", tieude);
 		params.put("noidung", noidung);
 		params.put("thoigiannhac", thoigiannhac);
-		params.put("thoigiansua", thoigianchinhsua);
+//		params.put("thoigiansua", thoigianchinhsua);
 		params.put("maghichu", masinhvien+"_"+lastIndex);
 		params.put("access_token", Global.getStringPreference(getApplicationContext(), "access_token", ""));
 	//	client.setTimeout(30000);
@@ -684,7 +684,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 			params.put("tieude", tieude);
 			params.put("noidung", noidung);
 			params.put("thoigiannhac", thoigiannhac);
-			params.put("thoigiansua", thoigiansua);
+//			params.put("thoigiansua", thoigiansua);
 			params.put("access_token", Global.getStringPreference(getApplicationContext(), "access_token", ""));
 		//	client.setTimeout(30000);
 			
