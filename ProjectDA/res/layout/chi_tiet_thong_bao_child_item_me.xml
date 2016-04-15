@@ -6,7 +6,7 @@
     android:weightSum="10"
     android:layout_margin="@dimen/text_margin" >
     <TextView 
-        android:id="@+id/tvChiTietThongBaoReplyTimeMe"
+        android:id="@+id/tvChiTietThongBaoReplyTime"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_weight="2"
@@ -19,7 +19,7 @@
 
         <TextView
             android:layout_gravity="center_vertical|right"
-            android:id="@+id/tvChiTietThongBaoReplyNoiDungMe"
+            android:id="@+id/tvChiTietThongBaoReplyNoiDung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/chat_box_margin"

@@ -53,6 +53,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		// Log.v("dbFile", dbFile + "   "+ dbFile.exists());
 		return dbFile.exists();
 	}
+	public File dbPath(){
+		File dbFile = new File(DB_PATH + DB_NAME);
+		return dbFile;
+	}
 
 	// Copy the database from assets
 	private void copyDataBase() throws IOException {

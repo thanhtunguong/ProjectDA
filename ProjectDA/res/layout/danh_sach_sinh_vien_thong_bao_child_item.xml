@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    android:weightSum="10"
+    android:gravity="center_vertical" >
+
+    <TextView
+        android:id="@+id/tvSVTBchildSTT"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:text="100" />
+
+    <TextView
+        android:id="@+id/tvSVTBchildMaSV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2.5"
+        android:text="SV_00001" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvSVTBchildTenSV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nguyen Van A"
+            android:textColor="@color/text_Title_color"
+            android:textSize="@dimen/text_title" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/tvSVTBchildNgaySinh"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2016-01-01" />
+            <TextView
+                android:id="@+id/tvSVTBchildGioiTinh"
+                android:layout_toRightOf="@id/tvSVTBchildNgaySinh"
+                android:layout_marginLeft="@dimen/text_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nam" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/cbSendThongBaoSelected"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
+
+</LinearLayout>

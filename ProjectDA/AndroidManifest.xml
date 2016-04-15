@@ -31,7 +31,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -92,7 +92,17 @@
         <activity
             android:name=".ChiTietThongBaoActivity"
             android:label="@string/title_activity_chi_tiet_thong_bao"
-            android:windowSoftInputMode="adjustUnspecified" >
+            android:theme="@style/MyThemeForControl" >
+        </activity>
+        <activity
+            android:name=".TaoThongBaoGVActivity"
+            android:label="@string/title_activity_thong_bao_gv"
+            android:theme="@style/MyThemeForControl" >
+        </activity>
+        <activity
+            android:name=".AddUserActivity"
+            android:label="@string/title_activity_add_user"
+            android:theme="@style/MyThemeForControl" >
         </activity>
     </application>
 

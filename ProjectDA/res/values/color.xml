@@ -21,5 +21,5 @@
     <color name="hard_grey">#c5c5c5</color>
     <color name="indigo">#3f51d5</color>
     <color name="amber">#ffc107</color>
-    
+    <color name="greyDeactive">#888888</color>
 </resources>

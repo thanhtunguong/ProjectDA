@@ -26,12 +26,20 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.ImageView.ScaleType;
+import android.widget.EditText;
 
 public class ChiTietThongBaoActivity extends ActionBarActivity {
 	
@@ -45,11 +53,13 @@ public class ChiTietThongBaoActivity extends ActionBarActivity {
 	private ExpandableListView elv_Reply;
 	private Toolbar toolbar;
 	private Context c;
+	private EditText edtReplyBox;
+	private ImageButton btnSendReplyThongBao;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.a_test);
+		setContentView(R.layout.a_test_2);
 		toolbar = (Toolbar) findViewById(R.id.chi_tiet_thong_bao_activity_tool_bar);
 		setSupportActionBar(toolbar);
 
@@ -60,7 +70,9 @@ public class ChiTietThongBaoActivity extends ActionBarActivity {
 		exeQ = new ExecuteQuery(this);
 		
 		exeQ.open();
-		
+		edtReplyBox = (EditText) findViewById(R.id.edtReplyBox);
+		btnSendReplyThongBao = (ImageButton) findViewById(R.id.btnSendReplyThongBao);
+		btnSendReplyThongBao.setEnabled(false);
 		swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout_chi_tiet_thong_bao);
 		swipeRefreshLayout.setRefreshing(true);
 		Intent callerIntent = getIntent();
@@ -103,6 +115,34 @@ public class ChiTietThongBaoActivity extends ActionBarActivity {
 			}
 		});
 		exeQ.close();
+		edtReplyBox.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				validateReply();
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		btnSendReplyThongBao.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				sendReply();
+			}
+		});
 	}
 	private void setList(){
 		arrChiTietThongBao = new ArrayList<ChiTietThongBao>();
@@ -112,7 +152,6 @@ public class ChiTietThongBaoActivity extends ActionBarActivity {
 		xulyPhanDinhNgay();
 		adapter = new ChiTietThongBaoAdapter(arrReplyTrongNgay, childItems, this);
 		elv_Reply.setAdapter(adapter);
-		elv_Reply.setSelection(elv_Reply.getLastVisiblePosition());
 	}
 	private void xulyPhanDinhNgay() {
 		//ArrayList<ChiTietThongBao> arrChiTietThongBao = new ArrayList<ChiTietThongBao>();
@@ -149,6 +188,34 @@ public class ChiTietThongBaoActivity extends ActionBarActivity {
 		for (ReplyTrongNgay replyThongBaoTrongNgay : arrReplyTrongNgay) {
 			childItems.add(replyThongBaoTrongNgay.getArrChiTiet());
 		}
+	}
+	private void validateReply(){
+		if(edtReplyBox.getText().toString().matches("") == false){
+			btnSendReplyThongBao.setEnabled(true);
+			btnSendReplyThongBao.setBackgroundResource(R.drawable.ic_send_color_primary_48dp);
+			btnSendReplyThongBao.setScaleType(ScaleType.FIT_XY);
+		}else {
+			btnSendReplyThongBao.setEnabled(false);
+			btnSendReplyThongBao.setBackgroundResource(R.drawable.ic_send_color_primary_48dp_grey);
+			btnSendReplyThongBao.setScaleType(ScaleType.FIT_XY);
+		}
+	}
+	private void sendReply(){
+		String URI_REPLY, MaNguoiDung, NoiDung, AccToken, MaThongBao;
+		int check;
+		NoiDung = edtReplyBox.getText().toString();
+		MaThongBao = mathongbao;
+		AccToken = Global.getStringPreference(c, "access_token", "");
+		if(Global.getStringPreference(c, "MaSVDN", "0").matches("0")){
+			URI_REPLY = Global.URI_GUI_REPLY_GV;
+			MaNguoiDung = Global.getStringPreference(c, "MaGVDN", "0");
+			check = 0;
+		}else {
+			URI_REPLY = Global.URI_GUI_REPLY_SV;
+			MaNguoiDung = Global.getStringPreference(c, "MaSVDN", "0");
+			check = 1;
+		}
+		sendReplyAsync(MaNguoiDung, NoiDung, MaThongBao, AccToken, URI_REPLY, check);
 	}
 	
 	@Override
@@ -210,6 +277,22 @@ public class ChiTietThongBaoActivity extends ActionBarActivity {
 				//Date thoigian = Global.epKieuDateAndTime(CTThongBaoJson.optString("ThoiGianTraLoi"));
 				cttb.setThoiGianTraLoi(CTThongBaoJson.optString("ThoiGianTraLoi"));
 				cttb.setMaThongBao(CTThongBaoJson.optString("mathongbao"));
+				String manguoidung = CTThongBaoJson.optString("PK_User").substring(0, 2);
+				int layoutId;
+				if(manguoidung.matches("GV")){
+					if(CTThongBaoJson.optString("PK_User").matches(Global.getStringPreference(c, "MaGVDN", "0"))){
+						layoutId = R.layout.chi_tiet_thong_bao_child_item_others_gv_for_gv;
+					}else {
+						layoutId = R.layout.chi_tiet_thong_bao_child_item_others_gv;
+					}
+				}else {
+					if(CTThongBaoJson.optString("PK_User").matches(Global.getStringPreference(c, "MaSVDN", "0"))){
+						layoutId = R.layout.chi_tiet_thong_bao_child_item_me;
+					}else {
+						layoutId = R.layout.chi_tiet_thong_bao_child_item_others;
+					}
+				}
+				cttb.setLayoutId(layoutId);
 				
 				arrChiTietThongBao.add(cttb);
 				/*MaCTThongBao = CTThongBaoJson.optString("cttthongbao");
@@ -223,6 +306,56 @@ public class ChiTietThongBaoActivity extends ActionBarActivity {
 			}
 			exeQ.insert_tbl_CTThongBao_multi(arrChiTietThongBao);
 			return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Log.e("loi", e + "");
+			return false;
+		}
+	}
+	private void sendReplyAsync(String MaNguoiDung, String NoiDung, final String mathongbao, String AccToken, String URI_REPLY, int check) {
+		String paraMaNguoiDungName;
+		if(check == 0){
+			paraMaNguoiDungName = "magiangvien";
+		}else {
+			paraMaNguoiDungName = "masinhvien";
+		}
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+		params.put(paraMaNguoiDungName, MaNguoiDung);
+		params.put("noidung", NoiDung);
+		params.put("mathongbao", mathongbao);
+		params.put("access_token", AccToken);
+		client.post(Global.BASE_URI + URI_REPLY, params, new AsyncHttpResponseHandler() {
+			public void onSuccess(String response) {
+				// Log.e("loginToServer", response);
+				if (executeWhenSendReplyTheoThongBaoSuccess(response)) {
+					getReplyTheoThongBao(mathongbao);
+					swipeRefreshLayout.setRefreshing(false);
+					edtReplyBox.setText("");
+					elv_Reply.smoothScrollToPosition(elv_Reply.getChildCount() - 1);
+				} else {
+					
+				}
+			}
+			public void onFailure(int statusCode, Throwable error, String content) {
+				Log.e("loginToServer", error + " " + content);
+			}
+		});
+	}
+	private boolean executeWhenSendReplyTheoThongBaoSuccess(String response) {
+		ArrayList<ChiTietThongBao> arrChiTietThongBao = new ArrayList<ChiTietThongBao>();
+		String Status = "";
+		try {
+			JSONArray arrObj = new JSONArray(response);
+			for (int i = 0; i < arrObj.length(); i++) {
+				JSONObject Json = arrObj.getJSONObject(i);
+				Status = Json.optString("status");
+			}
+			if(Status.matches(getString(R.string.string_success))){
+				return true;
+			}else {
+				return false;
+			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 			Log.e("loi", e + "");

@@ -5,58 +5,6 @@
     android:orientation="vertical"
     android:padding="3dp" >
 
-    <!--
-         <LinearLayout 
-	    android:orientation="vertical"
-	    android:layout_width="0dp"
-	    android:layout_weight="1"
-	    android:layout_height="match_parent"></LinearLayout>
-    -->
-    <!--
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical" >
-		<ImageView 
-		    android:layout_width="0dp"
-		    android:layout_weight="1"
-		    android:layout_height="match_parent"/>
-        <TextView
-            android:id="@+id/tvTietHocThoigian"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center_vertical"
-            android:text="@string/string_hoctap_thoigianSang" />
-
-        <TextView
-            android:id="@+id/tvTenTietHoc"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:gravity="center_vertical"
-            android:text="Ki thuat lap trinh huong doi tuong" />
-
-        <TextView
-            android:id="@+id/tvTietHocPhong"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:gravity="center_vertical"
-            android:text="P33" />
-
-        <TextView
-            android:id="@+id/tvTietHocTrangThai"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:gravity="center_vertical"
-            android:text="Hoc" />
-    </LinearLayout>
-    -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

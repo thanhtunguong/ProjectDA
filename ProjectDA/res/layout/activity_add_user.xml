@@ -1,0 +1,85 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.doan.lichhoctap.AddUserActivity" >
+
+    <include
+        android:id="@+id/add_user_activity_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/add_user_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/text_margin"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <TextView
+            android:id="@+id/tvNumberSVSelected"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="7"
+            android:text="1210A0Z" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center_vertical|right"
+            android:orientation="horizontal" >
+
+			<ImageView 
+			    android:id="@+id/btnAddSVTBSelectedAll"
+			    android:layout_width="30dp"
+			    android:layout_height="30dp"
+			    android:layout_marginRight="10dp"
+			    android:scaleType="fitXY"
+			    android:background="@drawable/ic_check_green"/>
+			<ImageView 
+			    android:id="@+id/btnAddSVTBDeselectedAll"
+			    android:layout_marginRight="5dp"
+			    android:layout_width="30dp"
+			    android:layout_height="30dp"
+			    android:scaleType="fitXY"
+			    android:background="@drawable/ic_uncheck_red"/>
+            <!-- <Button
+                android:id="@+id/btnAddSVTBSelectedAll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:focusable="false"
+                android:text="@string/btn_select_svtb_all"
+                android:textSize="@dimen/text_small_small_title" />
+
+            <Button
+                android:id="@+id/btnAddSVTBDeselectedAll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:text="@string/btn_deselect_svtb_all"
+                android:textSize="@dimen/text_small_small_title" /> -->
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/vach_chia" />
+
+    <ExpandableListView
+        android:id="@+id/elvAllSinhVienThongBao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:childDivider="@color/transparent"
+        android:divider="@color/transparent"
+        android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"
+        android:scrollbars="none" >
+    </ExpandableListView>
+
+</LinearLayout>

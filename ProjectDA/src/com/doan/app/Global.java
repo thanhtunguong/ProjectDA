@@ -10,11 +10,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.doan.database_handle.ExecuteQuery;
+import com.doan.lichhoctap.LoginActivity;
 import com.doan.lichhoctap.R;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class Global {
 	
@@ -26,9 +34,16 @@ public class Global {
 	public static String MaSVDN;
 	//Tung
 	public static String BASE_URI ="http://192.168.3.101:8080/csdlda/";
+	//public static String BASE_URI ="http://192.168.43.133:8080/csdlda/";
 	public static String URI_LICH_HOC ="api_LichHocTheoMaSV.php";
 	public static String URI_THONG_BAO = "api_DanhSachThongBaoTheoMaSV.php";
+	public static String URI_THONG_BAO_GV = "api_DanhSachThongBaoTheoMaGV.php";
 	public static String URI_REPLY_THEO_MA_THONGBAO = "api_ChiTietThongBaoTheoMaThongBao.php";
+	public static String URI_DANH_SACH_SINH_VIEN_THEO_MA_LOP = "api_DanhSachSVTheoMaLopHanhChinh.php";
+	public static String URI_DANH_SACH_LOP_CHU_NHIEM_THEO_MA_GV = "api_DanhSachLopChuNhiemTheoMAGV.php";
+	public static String URI_GUI_THONG_BAO = "api_DangThongBaoTheoMaGVLHC.php";
+	public static String URI_GUI_REPLY_GV = "api_DangReplyTheoMaGV.php";
+	public static String URI_GUI_REPLY_SV = "api_DangReplyTheoMaSV.php";
 	//public static String BASE_URI ="http://192.168.56.1:533";
 	//public static String BASE_URI ="http://192.168.56.1:8080";
 	
@@ -126,5 +141,45 @@ public class Global {
 			e.printStackTrace();
 		}
 		return date;
+	}
+	public void DangXuat(Context c){
+		Global.saveStringPreference(c, "access_token", "");
+		Global.saveStringPreference(c, "MaSVDN", "");
+		Global.saveStringPreference(c, "MaGVDN", "");
+		ExecuteQuery exeQ = new ExecuteQuery(c);
+		exeQ.close();
+		exeQ.deleteDB();
+		Intent i = new Intent(c, LoginActivity.class);
+		c.startActivity(i);
+	}
+	public void dialogLogoutConfirm(final Activity context){
+		final Dialog dialog = new Dialog(context);
+		dialog.setContentView(R.layout.dialog_logout);
+		Button dialogButtonOK = (Button) dialog.findViewById(R.id.btnOKDialogLogout);
+		dialogButtonOK.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Global.saveStringPreference(context, "access_token", "");
+				Global.saveStringPreference(context, "MaSVDN", "");
+				Global.saveStringPreference(context, "MaGVDN", "");
+				ExecuteQuery exeQ = new ExecuteQuery(context);
+				exeQ.close();
+				exeQ.deleteDB();
+				dialog.dismiss();
+				Intent i = new Intent(context, LoginActivity.class);
+				context.startActivity(i);
+				/*Global g = new Global();
+				g.DangXuat(context);*/
+			}
+		});
+		Button dialogButtonCancel = (Button) dialog.findViewById(R.id.btnCancelDialogLogout);
+		dialogButtonCancel.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+
+		dialog.show();
 	}
 }

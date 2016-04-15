@@ -4,10 +4,18 @@ import java.util.Date;
 
 public class ChiTietThongBao implements Comparable<ChiTietThongBao> {
 	private String MaChiTietThongBao, MaNguoiReply, TenNguoiReply, NoiDungReply, MaThongBao, ThoiGianTraLoi;
+	int layoutId;
 	//private Date ThoiGianTraLoi;
+	
 	
 	public String getMaChiTietThongBao() {
 		return MaChiTietThongBao;
+	}
+	public int getLayoutId() {
+		return layoutId;
+	}
+	public void setLayoutId(int layoutId) {
+		this.layoutId = layoutId;
 	}
 	public void setMaChiTietThongBao(String maChiTietThongBao) {
 		MaChiTietThongBao = maChiTietThongBao;

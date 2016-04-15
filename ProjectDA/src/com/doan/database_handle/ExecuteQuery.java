@@ -15,9 +15,11 @@ import com.doan.model.DiemHocTap;
 import com.doan.model.DieuLe;
 import com.doan.model.DieuLeTag;
 import com.doan.model.ItemGhiChu;
+import com.doan.model.LopHanhChinh;
 import com.doan.model.MonHoc;
 import com.doan.model.MonHocTienQuyet;
 import com.doan.model.SinhVien;
+import com.doan.model.SinhVienThongBao;
 import com.doan.model.ThongBao;
 import com.doan.model.TietHoc;
 
@@ -49,6 +51,15 @@ public class ExecuteQuery {
 		}
 		return this;
 	}
+	
+	public void deleteDB(){
+		try {
+			database = mDbHelper.getReadableDatabase();
+			database.deleteDatabase(mDbHelper.dbPath());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 
 	public ExecuteQuery open() throws SQLException {
 		try {
@@ -63,6 +74,7 @@ public class ExecuteQuery {
 	public void close() {
 		mDbHelper.close();
 	}
+	
 	
 //___tbl_SinhVien
 	public ArrayList<SinhVien> getAllSinhVien(){
@@ -414,6 +426,7 @@ public class ExecuteQuery {
 				cv.put(ColumnName.THONG_BAO_NOI_DUNG, tb.getNoiDungThongBao());
 				cv.put(ColumnName.THONG_BAO_NGAY_TAO_THONG_BAO, tb.getNgayTaoThongBao());
 				cv.put(ColumnName.THONG_BAO_MA_GIAO_VIEN, tb.getMaGVGui());
+				cv.put(ColumnName.THONG_BAO_SO_NGUOI_NHAN_TB, tb.getSonguoinhan());
 
 				database.insert(ColumnName.THONG_BAO_TABLE, null, cv);
 			}
@@ -438,6 +451,7 @@ public class ExecuteQuery {
 				tb.setNoiDungThongBao(cursor.getString(2));
 				tb.setNgayTaoThongBao(cursor.getString(3));
 				tb.setMaGVGui(cursor.getString(4));
+				tb.setSonguoinhan(cursor.getInt(5));
 				
 				arrThongBao.add(tb);
 			} while (cursor.moveToNext());
@@ -568,6 +582,7 @@ public class ExecuteQuery {
 				cv.put(ColumnName.CHI_TIET_THONG_BAO_NOI_DUNG_TRA_LOI, cttb.getNoiDungReply());
 				cv.put(ColumnName.CHI_TIET_THONG_BAO_THOI_GIAN_REPLY, cttb.getThoiGianTraLoi()+"");
 				cv.put(ColumnName.CHI_TIET_THONG_BAO_MA_THONG_BAO, cttb.getMaThongBao());
+				cv.put(ColumnName.CHI_TIET_THONG_BAO_LAYOUT_ID, cttb.getLayoutId());
 				
 				database.insert(ColumnName.CHI_TIET_THONG_BAO_TABLE, null, cv);
 			}
@@ -594,6 +609,7 @@ public class ExecuteQuery {
 				cttb.setNoiDungReply(cursor.getString(3));
 				cttb.setThoiGianTraLoi(cursor.getString(4));
 				cttb.setMaThongBao(cursor.getString(5));
+				cttb.setLayoutId(cursor.getInt(6));
 				
 				arrChiTietThongBao.add(cttb);
 			} while (cursor.moveToNext());
@@ -601,6 +617,122 @@ public class ExecuteQuery {
 		return arrChiTietThongBao;
 	}
 //___/tbl_CTThongBao
+//____tbl_SinhVienThongBao
+	public boolean deleteAllRowTblSinhVienThongBao(){
+		try {
+			database = mDbHelper.getWritableDatabase();
+			database.delete(ColumnName.GV_SV_TB_TABLE, null, null);
+			return true;
+		} catch (SQLiteException e) {
+			Log.e("insert_SinhVienThongBao_delete", e.getMessage());
+			return false;
+		}
+	}
+	public boolean insert_tbl_SinhVienThongBao_multi(ArrayList<SinhVienThongBao> listSVThongBao) {
+		try {
+			database = mDbHelper.getWritableDatabase();
+			for (SinhVienThongBao svtb : listSVThongBao) {
+				ContentValues cv = new ContentValues();
+
+				cv.put(ColumnName.GV_SV_TB_MA_SINH_VIEN, svtb.getMaSV());
+				cv.put(ColumnName.GV_SV_TB_TEN_SINH_VIEN, svtb.getHoTenSinhVien());
+				cv.put(ColumnName.GV_SV_TB_NGAY_SINH_SINH_VIEN, svtb.getNgaySinhSinhVien());
+				cv.put(ColumnName.GV_SV_TB_GIOI_TINH_SINH_VIEN, svtb.getGioiTinhSinhVien());
+				cv.put(ColumnName.GV_SV_TB_MA_LOP_HANH_CHINH, svtb.getMaLopHanhChinh());
+				
+				database.insert(ColumnName.GV_SV_TB_TABLE, null, cv);
+			}
+			return true;
+		} catch (SQLiteException e) {
+			Log.e("insert_SinhVienThongBao_multi", e.getMessage());
+			return false;
+		}
+	}
+	public ArrayList<SinhVienThongBao> getAllSinhVienThongBaoTheoMaLopSqLite(String malop){
+		ArrayList<SinhVienThongBao> arrSinhVienThongBao = new ArrayList<SinhVienThongBao>();
+		String selectQuery = "SELECT *"
+				+ "FROM " + ColumnName.GV_SV_TB_TABLE
+				+ " WHERE " + ColumnName.GV_SV_TB_MA_LOP_HANH_CHINH + "='"+ malop +"'";
+		database = mDbHelper.getReadableDatabase();
+		Cursor cursor = database.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) {
+			do {
+				SinhVienThongBao svtb = new SinhVienThongBao();
+
+				svtb.setMaSV(cursor.getString(0));
+				svtb.setHoTenSinhVien(cursor.getString(1));
+				svtb.setNgaySinhSinhVien(cursor.getString(2));
+				svtb.setGioiTinhSinhVien(cursor.getString(3));
+				svtb.setMaLopHanhChinh(cursor.getString(4));
+				svtb.setChecked(0);
+				
+				arrSinhVienThongBao.add(svtb);
+			} while (cursor.moveToNext());
+		}
+		return arrSinhVienThongBao;
+	}
+//____/tbl_SinhVienThongBao
+//____tbl_LopHanhChinh
+	public boolean insert_tbl_LopHanhChinh_multi(ArrayList<String> malophanhchinh) {
+		try {
+			database = mDbHelper.getWritableDatabase();
+			database.delete(ColumnName.LopHANHCHINH_TABLE, null, null);
+			for (String malop : malophanhchinh) {
+				ContentValues cv = new ContentValues();
+
+				cv.put(ColumnName.LopHANHCHINH_MA_LOP_HANH_CHINH, malop.toString());
+				
+				database.insert(ColumnName.LopHANHCHINH_TABLE, null, cv);
+			}
+			return true;
+		} catch (SQLiteException e) {
+			Log.e("insert_LopHanhChinh_multi", e.getMessage());
+			return false;
+		}
+	}
+	public boolean insert_tbl_LopHanhChinh_single(String malophanhchinh) {
+		try {
+			database = mDbHelper.getWritableDatabase();
+			//database.delete(ColumnName.LopHANHCHINH_TABLE, null, null);
+			ContentValues cv = new ContentValues();
+
+			cv.put(ColumnName.LopHANHCHINH_MA_LOP_HANH_CHINH, malophanhchinh);
+			/*cv.put(ColumnName.CHI_TIET_THONG_BAO_MA_NGUOI_GUI_REPLY, MaNguoiGui);
+			cv.put(ColumnName.CHI_TIET_THONG_BAO_TEN_NGUOI_GUI_REPLY, TenNguoiGui);
+			cv.put(ColumnName.CHI_TIET_THONG_BAO_NOI_DUNG_TRA_LOI, NoiDung);
+			cv.put(ColumnName.CHI_TIET_THONG_BAO_THOI_GIAN_REPLY, ThoiGian);
+			cv.put(ColumnName.CHI_TIET_THONG_BAO_MA_THONG_BAO, MaThongBao);*/
+
+			database.insert(ColumnName.LopHANHCHINH_TABLE, null, cv);
+			return true;
+		} catch (SQLiteException e) {
+			Log.e("insert_tbl_LopHanhChinh_single", e.getMessage());
+			return false;
+		}
+	}
+	public ArrayList<String> getAllLopHanhChinhSqLite(){
+		ArrayList<String> arrLopHanhChinh = new ArrayList<String>();
+		String selectQuery = "SELECT *"
+				+ "FROM " + ColumnName.LopHANHCHINH_TABLE;
+		database = mDbHelper.getReadableDatabase();
+		Cursor cursor = database.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) {
+			do {
+				//LopHanhChinh lhc = new LopHanhChinh();
+
+				/*svtb.setMaSV(cursor.getString(0));
+				svtb.setHoTenSinhVien(cursor.getString(1));
+				svtb.setNgaySinhSinhVien(cursor.getString(2));
+				svtb.setGioiTinhSinhVien(cursor.getString(3));
+				svtb.setMaLopHanhChinh(cursor.getColumnName(4));*/
+				//lhc.setMaLopHanhChinh(maLopHanhChinh);
+				
+				arrLopHanhChinh.add(cursor.getString(0));
+			} while (cursor.moveToNext());
+		}
+		return arrLopHanhChinh;
+	}
+//____/tbl_LopHanhChinh
 
 // ---- tbl_SinhVien
 	//--- Insert tbl_sinhvien

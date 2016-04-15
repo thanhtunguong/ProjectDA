@@ -186,6 +186,7 @@ public class ColumnName {
 	public static String THONG_BAO_NOI_DUNG = "NoiDungThongBao";
 	public static String THONG_BAO_NGAY_TAO_THONG_BAO = "NgayTaoThongBao";
 	public static String THONG_BAO_MA_GIAO_VIEN = "MaGV";
+	public static String THONG_BAO_SO_NGUOI_NHAN_TB = "SoNguoiNhan";
 	
 	//tbl_CTThongBao
 	public static String CHI_TIET_THONG_BAO_TABLE = "tbl_CTThongBao";
@@ -195,6 +196,7 @@ public class ColumnName {
 	public static String CHI_TIET_THONG_BAO_NOI_DUNG_TRA_LOI = "NoiDungTraLoi";
 	public static String CHI_TIET_THONG_BAO_THOI_GIAN_REPLY = "ThoiGianTraLoi";
 	public static String CHI_TIET_THONG_BAO_MA_THONG_BAO = "FK_ThongBao";
+	public static String CHI_TIET_THONG_BAO_LAYOUT_ID = "LayoutId";
 	
 	//tbl_BaiViet
 	public static String BAI_VIET_TABLE = "tbl_BaiViet";
@@ -205,4 +207,12 @@ public class ColumnName {
 	public static String BAI_VIET_THOI_GIAN_CHINH_SUA = "ThoiGianChinhSua";
 	public static String BAI_VIET_LOAI_BAI_VIET = "FK_LoaiBaiViet";
 	public static String BAI_VIET_MA_GV = "FK_GV";
+	
+	//tbl_SinhVienThongBao
+	public static String GV_SV_TB_TABLE = "tbl_SinhVienThongBao";
+	public static String GV_SV_TB_MA_SINH_VIEN = "MaSinhVien";
+	public static String GV_SV_TB_TEN_SINH_VIEN = "TenSinhVien";
+	public static String GV_SV_TB_NGAY_SINH_SINH_VIEN = "NgaySinhSinhVien";
+	public static String GV_SV_TB_GIOI_TINH_SINH_VIEN = "GioiTinhSinhVien";
+	public static String GV_SV_TB_MA_LOP_HANH_CHINH = "MaLopHanhChinh";
 }

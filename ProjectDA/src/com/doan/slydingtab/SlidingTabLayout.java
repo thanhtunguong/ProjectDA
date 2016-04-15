@@ -278,6 +278,10 @@ public class SlidingTabLayout extends HorizontalScrollView {
 		@Override
 		public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 			int tabStripChildCount = mTabStrip.getChildCount();
+			Global g = new Global();
+			Context c = getContext();
+	        g.addActivityTitles(c);
+	        ((ActionBarActivity)c).getSupportActionBar().setTitle(Global.activityTitles[position]);
 			if ((tabStripChildCount == 0) || (position < 0) || (position >= tabStripChildCount)) {
 				return;
 			}

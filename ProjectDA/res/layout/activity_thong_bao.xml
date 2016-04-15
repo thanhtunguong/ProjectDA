@@ -11,17 +11,64 @@
         android:layout_height="wrap_content"
         layout="@layout/thong_bao_toolbar" />
 
-    <ExpandableListView
-        android:id="@+id/elvThongBao"
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_refresh_layout_thongbao_GV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:childDivider="@color/transparent"
-        android:divider="@color/transparent"
-        android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"
-        android:isScrollContainer="true"
-        android:scrollbars="none" >
-    </ExpandableListView>
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/lnCreateTB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="@dimen/text_margin"
+                    android:background="@drawable/ic_insert_comment_grey600_48dp"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/tvDangThongBaoGV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_dang_thong_bao_moi"
+                    android:textSize="@dimen/text_title" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/vach_chia" />
+
+            <ExpandableListView
+                android:id="@+id/elvThongBao"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:childDivider="@color/transparent"
+                android:divider="@color/transparent"
+                android:groupIndicator="@drawable/ic_arrow_drop_down_grey600_24dp"
+                android:isScrollContainer="true"
+                android:scrollbars="none" >
+            </ExpandableListView>
+
+            <ListView
+                android:id="@+id/lvThongBao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@color/transparent" >
+            </ListView>
+        </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

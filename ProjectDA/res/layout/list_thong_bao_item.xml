@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="10"
+    android:paddingTop="@dimen/text_margin"
+    android:paddingBottom="@dimen/text_margin" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvNumberNguoiNhanTB"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/tiet_hoc_circle_background"
+            android:gravity="center"
+            android:text="3"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:paddingLeft="5dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6.5"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+        <TextView 
+            android:id="@+id/tvTieuDeTB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_title_large"
+            android:textColor="@color/text_Title_color"
+            android:text="tesst"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+        <TextView 
+            android:layout_marginTop="5dp"
+            android:id="@+id/tvNoiDungTB"
+            android:textSize="@dimen/text_small_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="tesst"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+        <TextView 
+            android:id="@+id/tvDateTB"
+            android:textSize="@dimen/text_small_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="2016-12-31"/>
+        <TextView 
+            android:layout_marginTop="5dp"
+            android:id="@+id/tvTimeTB"
+            android:textSize="@dimen/text_small_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="24:59:59"/>
+    </LinearLayout>
+
+</LinearLayout>

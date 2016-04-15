@@ -6,6 +6,14 @@
     android:orientation="horizontal"
     android:weightSum="10" >
 
+    <TextView
+        android:id="@+id/tvChiTietThongBaoReplyTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_weight="2"
+        android:gravity="center_vertical|right" />
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -18,17 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/chat_box_margin"
             android:background="@drawable/shape_thong_bao_contents"
-            android:gravity="center_vertical|left"
+            android:layout_gravity="center_vertical|right"
             android:padding="@dimen/text_margin"
             android:textColor="@color/white" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvChiTietThongBaoReplyTime"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:layout_margin="@dimen/text_margin"
-        android:gravity="center_vertical|right" />
 
 </LinearLayout>

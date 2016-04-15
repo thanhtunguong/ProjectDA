@@ -43,30 +43,13 @@ public class ChiTietThongBaoAdapter extends BaseExpandableListAdapter {
 			ViewGroup parent) {
 
 		child = (ArrayList<ChiTietThongBao>) childtems.get(groupPosition);
+		int layoutId = child.get(childPosition).getLayoutId();
 		
-		String manguoidung = child.get(childPosition).getMaNguoiReply().substring(0, 2);
-		if(manguoidung.matches("GV")){
-			if (convertView == null) {
-				convertView = inflater.inflate(R.layout.chi_tiet_thong_bao_child_item_others_gv, null);
-				tvNoiDung = (TextView) convertView.findViewById(R.id.tvChiTietThongBaoReplyNoiDungOthersGV);
-				tvThoiGian = (TextView) convertView.findViewById(R.id.tvChiTietThongBaoReplyTimeOthersGV);
-			}
-		}else {
-			if(child.get(childPosition).getMaNguoiReply().matches(Global.getStringPreference(activity, "MaSVDN", "0"))){
-				if (convertView == null) {
-					convertView = inflater.inflate(R.layout.chi_tiet_thong_bao_child_item_me, null);
-					tvNoiDung = (TextView) convertView.findViewById(R.id.tvChiTietThongBaoReplyNoiDungMe);
-					tvThoiGian = (TextView) convertView.findViewById(R.id.tvChiTietThongBaoReplyTimeMe);
-				}
-			}else {
-				if (convertView == null) {
-					convertView = inflater.inflate(R.layout.chi_tiet_thong_bao_child_item_others, null);
-					tvNoiDung = (TextView) convertView.findViewById(R.id.tvChiTietThongBaoReplyNoiDungOthers);
-					tvThoiGian = (TextView) convertView.findViewById(R.id.tvChiTietThongBaoReplyTimeOthers);
-				}
-			}
+		if (convertView == null) {
+			convertView = inflater.inflate(activity.getResources().getLayout(layoutId), null);
 		}
-
+		tvNoiDung = (TextView) convertView.findViewById(R.id.tvChiTietThongBaoReplyNoiDung);
+		tvThoiGian = (TextView) convertView.findViewById(R.id.tvChiTietThongBaoReplyTime);
 		tvNoiDung.setText(child.get(childPosition).getNoiDungReply());
 		String gioPhut = child.get(childPosition).getThoiGianTraLoi().substring(11, 16);
 		tvThoiGian.setText(gioPhut);
@@ -213,7 +196,7 @@ public class ChiTietThongBaoAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public boolean isChildSelectable(int groupPosition, int childPosition) {
-		return true;
+		return false;
 	}
 
 }

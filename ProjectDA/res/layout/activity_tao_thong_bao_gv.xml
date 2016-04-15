@@ -1,0 +1,117 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/thong_bao_gv_activity_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/thong_bao_gv_toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/rlBtnBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
+
+        <ImageButton
+            android:id="@+id/btnSendThongBao"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_send_color_primary_48dp_grey"
+            android:baselineAligned="true"
+            android:gravity="center_vertical"
+            android:scaleType="fitXY" />
+
+        <LinearLayout
+            android:id="@+id/lnAddUser"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_alignBaseline="@id/btnSendThongBao"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/btnSendThongBao"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/ivNumberUserAddThongBao"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_add_user"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/tvNumberUserAddThongBao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/text_margin"
+                android:text="@string/string_moi_chon_sv" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="5dp"
+            android:background="@color/vach_chia" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrvText"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/rlBtnBar"
+        android:layout_below="@id/thong_bao_gv_activity_tool_bar"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical" >
+			<LinearLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_margin="@dimen/text_margin"
+			    android:orientation="horizontal"
+			    android:gravity="center_vertical">
+			    <!-- <TextView
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/string_tieu_de" /> -->
+			    <EditText 
+			        android:id="@+id/edtThongBaoTieuDe"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:maxLines="1"
+			        android:ellipsize="end"
+			        android:background="@drawable/edit_text_custom"
+			        android:hint="@string/string_tieu_de"/>
+			</LinearLayout>
+			<TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="5dp"
+            android:background="@color/vach_chia" />
+            <EditText
+                android:id="@+id/edtThongBaoConTents"
+                android:hint="@string/string_noi_dung"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="@dimen/text_margin"
+                android:background="@drawable/edit_text_custom"
+                android:gravity="top|left" />
+
+            <requestFocus />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

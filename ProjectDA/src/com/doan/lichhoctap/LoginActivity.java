@@ -46,13 +46,15 @@ public class LoginActivity extends ActionBarActivity {
 		//arrAllSV = exeQ.getAllSinhVien();
 		String accessToken = Global.getStringPreference(this, "access_token", "");
 		if(accessToken.matches("") == false){
+			//Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
 			Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
 			startActivity(intent);
 		}
 		
 		edEmail = (EditText) findViewById(R.id.edtLoginEmail);
 		edPwd = (EditText) findViewById(R.id.edtLoginPwd);
-		edEmail.setText("viethungtrn94@gmail.com");
+		//edEmail.setText("viethungtrn94@gmail.com");
+		edEmail.setText("conghoaf1@gmail.com");
 		edPwd.setText("1");
 		btnLogin = (Button) findViewById(R.id.btnLogin);
 		btnLogin.setOnClickListener(new OnClickListener() {
@@ -60,13 +62,6 @@ public class LoginActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				/*if(checkAcc() == true){
-					Toast.makeText(getBaseContext(), "Ok", Toast.LENGTH_SHORT).show();
-					Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
-					startActivity(intent);
-				}else {
-					Toast.makeText(getBaseContext(), "Failed", Toast.LENGTH_SHORT).show();
-				}*/
 				loginToServer(edEmail.getText().toString(), edPwd.getText().toString());
 			}
 		});
@@ -157,8 +152,8 @@ public class LoginActivity extends ActionBarActivity {
 							.show();*/
 					
 					//test
-					Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
-					startActivity(intent);
+					/*Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
+					startActivity(intent);*/
 				}
 			}
 

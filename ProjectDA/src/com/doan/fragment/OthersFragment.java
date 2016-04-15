@@ -1,5 +1,6 @@
 package com.doan.fragment;
 import com.doan.app.Global;
+import com.doan.database_handle.ExecuteQuery;
 import com.doan.lichhoctap.DanhSachMonCoTheDangKiActivity;
 import com.doan.lichhoctap.DiemHocTapActivity;
 import com.doan.lichhoctap.GhiChuActivity;
@@ -113,7 +114,9 @@ public class OthersFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				dialogLogoutConfirm(c);
+				//dialogLogoutConfirm(c);
+				Global g = new Global();
+				g.DangXuat(c);
 			}
 		});
         
@@ -126,10 +129,17 @@ public class OthersFragment extends Fragment {
 		dialogButtonOK.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Global.saveStringPreference(c, "access_token", "");
+				/*Global.saveStringPreference(c, "access_token", "");
+				Global.saveStringPreference(c, "MaSVDN", "");
+				Global.saveStringPreference(c, "MaGVDN", "");
+				ExecuteQuery exeQ = new ExecuteQuery(c);
+				exeQ.close();
+				exeQ.deleteDB();
 				dialog.dismiss();
 				Intent i = new Intent(getContext(), LoginActivity.class);
-				startActivity(i);
+				startActivity(i);*/
+				Global g = new Global();
+				g.DangXuat(c);
 			}
 		});
 		Button dialogButtonCancel = (Button) dialog.findViewById(R.id.btnCancelDialogLogout);

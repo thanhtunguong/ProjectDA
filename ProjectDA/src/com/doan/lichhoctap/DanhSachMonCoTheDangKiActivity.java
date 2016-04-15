@@ -35,6 +35,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -56,7 +57,7 @@ public class DanhSachMonCoTheDangKiActivity extends ActionBarActivity {
 	private ArrayList<Integer> arrStatusTemp = new ArrayList<Integer>();
 	private ArrayList<Integer> arrColor = new ArrayList<Integer>();
 	private int checkEditOption;
-	private Button btnEditDSMH, btnSortDsdk;
+	private ImageView btnEditDSMH, btnSortDsdk;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,7 @@ public class DanhSachMonCoTheDangKiActivity extends ActionBarActivity {
 		c = this;
 		elv_MonHoc = (ExpandableListView) findViewById(R.id.elvAllMonHoc);
 		
-		btnSortDsdk = (Button) findViewById(R.id.btnSort);
+		btnSortDsdk = (ImageView) findViewById(R.id.btnSort);
 		btnSortDsdk.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -80,7 +81,7 @@ public class DanhSachMonCoTheDangKiActivity extends ActionBarActivity {
 			}
 		});
 		
-		btnEditDSMH = (Button) findViewById(R.id.btnEditDSMH);
+		btnEditDSMH = (ImageView) findViewById(R.id.btnEditDSMH);
 		btnEditDSMH.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -332,7 +333,8 @@ public class DanhSachMonCoTheDangKiActivity extends ActionBarActivity {
 	private void doiBieuTuongEdit(){
 		if(checkEditOption == 0){
 			checkEditOption = 1;
-			btnEditDSMH.setBackgroundResource(R.drawable.ic_done_white_36dp);
+			btnEditDSMH.setBackgroundResource(R.drawable.ic_done_white_48dp);
+			btnEditDSMH.setScaleType(ScaleType.FIT_XY);
 			adapter = new DanhSachMonDangKiAdapter2(parentItems, childItems, c, arrColor, arrStatusTemp,
 					R.layout.danh_sach_dang_ki_mon_hoc_parent_item_switch);
 			int index = elv_MonHoc.getFirstVisiblePosition();
@@ -342,7 +344,8 @@ public class DanhSachMonCoTheDangKiActivity extends ActionBarActivity {
 			elv_MonHoc.setSelectionFromTop(index, top);
 		}else {
 			checkEditOption = 0;
-			btnEditDSMH.setBackgroundResource(R.drawable.ic_create_white_36dp);
+			btnEditDSMH.setBackgroundResource(R.drawable.ic_create_white_48dp);
+			btnEditDSMH.setScaleType(ScaleType.FIT_XY);
 			/*adapter = new DanhSachMonDangKiAdapter2(parentItems, childItems, c, intTaoMau(),
 					getAllDiemQuaMon(), arrStatus,
 					R.layout.danh_sach_mon_dang_ki_mon_hoc_parent_item);*/

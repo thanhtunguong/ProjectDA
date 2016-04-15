@@ -27,6 +27,7 @@ public class ThongBaoTrongNgay implements Comparable<ThongBaoTrongNgay>{
 	@Override
 	public int compareTo(ThongBaoTrongNgay another) {
 		// TODO Auto-generated method stub
-		return this.NgayCuThe.compareTo(another.NgayCuThe);
+		//return this.NgayCuThe.compareTo(another.NgayCuThe);
+		return another.NgayCuThe.compareTo(this.NgayCuThe);
 	}
 }
