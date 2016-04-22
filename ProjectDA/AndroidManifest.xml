@@ -31,7 +31,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -103,6 +103,14 @@
             android:name=".AddUserActivity"
             android:label="@string/title_activity_add_user"
             android:theme="@style/MyThemeForControl" >
+        </activity>
+        <activity
+            android:name=".ChuongTrinhDaoTaoActivity"
+            android:label="@string/title_activity_chuong_trinh_dao_tao" >
+        </activity>
+        <activity
+            android:name=".PhanTichHocTapActivity"
+            android:label="@string/title_activity_phan_tich_hoc_tap" >
         </activity>
     </application>
 

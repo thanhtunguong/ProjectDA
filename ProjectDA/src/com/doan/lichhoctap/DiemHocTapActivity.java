@@ -216,7 +216,7 @@ public class DiemHocTapActivity extends ActionBarActivity {
         	double sdtb = ((diemHocTap.getDiemCC() + diemHocTap.getDiemKT()*2 + diemHocTap.getDiemThi()*7)/10)*1.0;
         	sdtb = Math.floor(sdtb*10)/10;
         	//trạng thái = 0 tức là môn đã có điểm, 1 là đang học
-        	if(diemHocTap.getMaTrangThaiDK().matches("0")){
+        	if(diemHocTap.getMaTrangThaiDK().matches("1")){
         		tinhTongKetHocTap(diemHocTap.getSoTinChi(), sdtb);
         	}
 		}

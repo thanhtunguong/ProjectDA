@@ -234,7 +234,7 @@ public class TaoThongBaoGVActivity extends ActionBarActivity {
 	}
 	private void sendThongBao() {
 		String magiangvien = Global.getStringPreference(activity, "MaGVDN", "");
-		String tieude = "";
+		String tieude = edtThongBaoTieuDe.getText().toString();
 		String noidung = edND.getText().toString();
 		String danhsachsv = "";
 		for (LopHanhChinh lop : arrayLopHanhChinh) {

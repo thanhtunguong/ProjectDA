@@ -183,5 +183,7 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="title_activity_chi_tiet_thong_bao">Hội thoại</string>
     <string name="title_activity_thong_bao_gv">Soạn thông báo</string>
     <string name="title_activity_add_user">Thêm người nhận</string>
+    <string name="title_activity_chuong_trinh_dao_tao">Chương trình đào tạo</string>
+    <string name="title_activity_phan_tich_hoc_tap">PhanTichHocTapActivity</string>
 
 </resources>

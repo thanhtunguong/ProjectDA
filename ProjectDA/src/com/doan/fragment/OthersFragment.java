@@ -1,6 +1,7 @@
 package com.doan.fragment;
 import com.doan.app.Global;
 import com.doan.database_handle.ExecuteQuery;
+import com.doan.lichhoctap.ChuongTrinhDaoTaoActivity;
 import com.doan.lichhoctap.DanhSachMonCoTheDangKiActivity;
 import com.doan.lichhoctap.DiemHocTapActivity;
 import com.doan.lichhoctap.GhiChuActivity;
@@ -73,7 +74,8 @@ public class OthersFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(c, "CTDT", Toast.LENGTH_SHORT).show();
+				Intent i = new Intent(getContext(), ChuongTrinhDaoTaoActivity.class);
+				startActivity(i);
 			}
 		});
         
@@ -82,7 +84,7 @@ public class OthersFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(c, "DSMDK", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(c, "DSMDK", Toast.LENGTH_SHORT).show();
 				Intent i = new Intent(getContext(), DanhSachMonCoTheDangKiActivity.class);
 				startActivity(i);
 			}
@@ -93,7 +95,7 @@ public class OthersFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Toast.makeText(c, "InfoSearch", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(c, "InfoSearch", Toast.LENGTH_SHORT).show();
 				Intent i = new Intent(getContext(), SoTayThongTinActivity.class);
 				startActivity(i);
 			}
@@ -116,7 +118,7 @@ public class OthersFragment extends Fragment {
 				// TODO Auto-generated method stub
 				//dialogLogoutConfirm(c);
 				Global g = new Global();
-				g.DangXuat(c);
+				g.dialogLogoutConfirm(c);
 			}
 		});
         

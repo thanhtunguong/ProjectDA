@@ -45,7 +45,7 @@ import android.widget.Toast;
 import android.widget.AbsListView.OnScrollListener;
 
 public class ThongBaoActivity extends ActionBarActivity {
-	
+
 	private ExpandableListView elv_ThongBao;
 	private ExecuteQuery exeQ;
 	private Context context;
@@ -57,7 +57,7 @@ public class ThongBaoActivity extends ActionBarActivity {
 	private ListView lv_ThongBao;
 	private SwipeRefreshLayout swipeRefreshLayout;
 	private ImageView ivDangXuatGV;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -164,7 +164,13 @@ public class ThongBaoActivity extends ActionBarActivity {
 			public void onRefresh() {
 				// TODO Auto-generated method stub
 				swipeRefreshLayout.setRefreshing(true);
-				getThongBaoGiangVien();
+				String magiangvien = Global.getStringPreference(context, "MaGVDN", "");
+				if(magiangvien.matches("")){				
+					getThongBaoSinhVien();
+					//getThongBaoGiangVien();
+				}else {
+					getThongBaoGiangVien();
+				}
 			}
 		});
 		ivDangXuatGV.setOnClickListener(new OnClickListener() {
@@ -223,8 +229,8 @@ public class ThongBaoActivity extends ActionBarActivity {
 		}
 		exeQ.close();
 	}
-	
-	private Date epKieuDate(String ngay){
+
+	private Date epKieuDate(String ngay) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = null;
 		try {
@@ -235,12 +241,11 @@ public class ThongBaoActivity extends ActionBarActivity {
 		}
 		return date;
 	}
-	
+
 	@Override
-	public void onActivityResult(int requestCode,int resultCode, Intent data)
-	{
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Boolean checkTaoTB = data.getBooleanExtra("checkTaoThongBao", false);
-		if(checkTaoTB == true){
+		if (checkTaoTB == true) {
 			swipeRefreshLayout.setRefreshing(true);
 			getThongBaoGiangVien();
 		}
@@ -265,7 +270,8 @@ public class ThongBaoActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	private void getThongBaoGiangVien(){
+
+	private void getThongBaoGiangVien() {
 		String magiangvien = Global.getStringPreference(context, "MaGVDN", "0");
 		AsyncHttpClient client = new AsyncHttpClient();
 		RequestParams params = new RequestParams();
@@ -276,33 +282,39 @@ public class ThongBaoActivity extends ActionBarActivity {
 			public void onSuccess(String response) {
 				Log.e("JsonThongBao", response);
 				if (executeWhenGetThongBaoGiangVienSuccess(response)) {
-					/*Toast.makeText(getApplicationContext(),	"Thanh cong", Toast.LENGTH_LONG).show();*/
+					/*
+					 * Toast.makeText(getApplicationContext(), "Thanh cong",
+					 * Toast.LENGTH_LONG).show();
+					 */
 					setList();
 				} else {
-					/*Toast.makeText(getApplicationContext(),
-							"That bai", Toast.LENGTH_LONG)
-							.show();*/
+					/*
+					 * Toast.makeText(getApplicationContext(), "That bai",
+					 * Toast.LENGTH_LONG) .show();
+					 */
 					swipeRefreshLayout.setRefreshing(false);
 				}
 			}
 
-			public void onFailure(int statusCode, Throwable error,
-					String content) {
-				Log.e("JsonThongBao", error+" "+content);
-				/*Toast.makeText(getApplicationContext(),
-						error+"", Toast.LENGTH_LONG)
-						.show();*/
+			public void onFailure(int statusCode, Throwable error, String content) {
+				Log.e("JsonThongBao", error + " " + content);
+				/*
+				 * Toast.makeText(getApplicationContext(), error+"",
+				 * Toast.LENGTH_LONG) .show();
+				 */
 				swipeRefreshLayout.setRefreshing(false);
 			}
 		});
 	}
+
 	private boolean executeWhenGetThongBaoGiangVienSuccess(String response) {
-		/*Toast.makeText(getApplicationContext(),
-				response+"", Toast.LENGTH_LONG)
-				.show();*/
+		/*
+		 * Toast.makeText(getApplicationContext(), response+"",
+		 * Toast.LENGTH_LONG) .show();
+		 */
 		exeQ.open();
 		ArrayList<ThongBao> arrThongBao = new ArrayList<ThongBao>();
-		
+
 		try {
 			JSONArray arrObj = new JSONArray(response);
 			for (int i = 0; i < arrObj.length(); i++) {
@@ -314,8 +326,79 @@ public class ThongBaoActivity extends ActionBarActivity {
 				String ngaytaothongbao = thongbaoJson.optString("ngaytaothongbao");
 				String magv = thongbaoJson.optString("MaGV");
 				int songuoinhanthongbao = thongbaoJson.optInt("sosv");
-				
-				ThongBao tb = new ThongBao(mathongbao, tieudethongbao, noidungthongbao, ngaytaothongbao, magv, songuoinhanthongbao);
+
+				ThongBao tb = new ThongBao(mathongbao, tieudethongbao, noidungthongbao, ngaytaothongbao, magv,
+						songuoinhanthongbao);
+				arrThongBao.add(tb);
+			}
+			exeQ.insert_tbl_ThongBao_multi(arrThongBao);
+			exeQ.close();
+			return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			exeQ.close();
+			return false;
+		}
+	}
+
+	private void getThongBaoSinhVien() {
+		String masinhvien = Global.getStringPreference(context, "MaSVDN", "0");
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+		params.put("masinhvien", masinhvien);
+		params.put("access_token", Global.getStringPreference(context, "access_token", ""));
+		String url = Global.BASE_URI + Global.URI_THONG_BAO;
+		client.post(url, params, new AsyncHttpResponseHandler() {
+			public void onSuccess(String response) {
+				Log.e("JsonThongBao", response);
+				if (executeWhenGetThongBaoSinhVienSuccess(response)) {
+					/*
+					 * Toast.makeText(getApplicationContext(), "Thanh cong",
+					 * Toast.LENGTH_LONG).show();
+					 */
+					setList();
+				} else {
+					/*
+					 * Toast.makeText(getApplicationContext(), "That bai",
+					 * Toast.LENGTH_LONG) .show();
+					 */
+					swipeRefreshLayout.setRefreshing(false);
+				}
+			}
+
+			public void onFailure(int statusCode, Throwable error, String content) {
+				Log.e("JsonThongBao", error + " " + content);
+				/*
+				 * Toast.makeText(getApplicationContext(), error+"",
+				 * Toast.LENGTH_LONG) .show();
+				 */
+				swipeRefreshLayout.setRefreshing(false);
+			}
+		});
+	}
+
+	private boolean executeWhenGetThongBaoSinhVienSuccess(String response) {
+		/*
+		 * Toast.makeText(getApplicationContext(), response+"",
+		 * Toast.LENGTH_LONG) .show();
+		 */
+		exeQ.open();
+		ArrayList<ThongBao> arrThongBao = new ArrayList<ThongBao>();
+
+		try {
+			JSONArray arrObj = new JSONArray(response);
+			for (int i = 0; i < arrObj.length(); i++) {
+				JSONObject thongbaoJson = arrObj.getJSONObject(i);
+
+				String mathongbao = thongbaoJson.optString("PK_ThongBao");
+				String tieudethongbao = thongbaoJson.optString("tieudethongbao");
+				String noidungthongbao = thongbaoJson.optString("noidungthongbao");
+				String ngaytaothongbao = thongbaoJson.optString("ngaytaothongbao");
+				String magv = thongbaoJson.optString("MaGV");
+				int songuoinhanthongbao = thongbaoJson.optInt("sosv");
+
+				ThongBao tb = new ThongBao(mathongbao, tieudethongbao, noidungthongbao, ngaytaothongbao, magv,
+						songuoinhanthongbao);
 				arrThongBao.add(tb);
 			}
 			exeQ.insert_tbl_ThongBao_multi(arrThongBao);
