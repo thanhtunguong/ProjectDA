@@ -31,11 +31,12 @@ public class Global {
 	//__/SharedPreference
 	
 	public static String activityTitles[];
+	public static String activityTitlesHocTap[];
 	public static String MaSVDN;
 	//Tung
-	//public static String BASE_URI ="http://192.168.3.101:8080/csdlda/";
+	public static String BASE_URI ="http://192.168.3.101:8080/csdlda/";
 	//public static String BASE_URI ="http://192.168.100.182:8080/csdlda/";
-	public static String BASE_URI ="http://192.168.43.133:8080/csdlda/";
+	//public static String BASE_URI ="http://192.168.43.133:8080/csdlda/";
 	public static String URI_LICH_HOC ="api_LichHocTheoMaSV.php";
 	public static String URI_THONG_BAO = "api_DanhSachThongBaoTheoMaSV.php";
 	public static String URI_THONG_BAO_GV = "api_DanhSachThongBaoTheoMaGV.php";
@@ -45,6 +46,7 @@ public class Global {
 	public static String URI_GUI_THONG_BAO = "api_DangThongBaoTheoMaGVLHC.php";
 	public static String URI_GUI_REPLY_GV = "api_DangReplyTheoMaGV.php";
 	public static String URI_GUI_REPLY_SV = "api_DangReplyTheoMaSV.php";
+	public static String URI_DIEM_TRUNG_BINH_SINHVIEN = "api_DanhSachDiemTrungBinhSV.php";
 	//public static String BASE_URI ="http://192.168.56.1:533";
 	//pu
 	//blic static String BASE_URI ="http://192.168.56.1:8080";
@@ -68,12 +70,17 @@ public class Global {
 	public static String URI_XOAGHICHUTHEOMASVGC ="api_XoaGhiChuTheoMaSVGC.php";
 
 	
-	
 	public static void addActivityTitles(Context c){
 		activityTitles = new String[3];
 		activityTitles[0] = c.getString(R.string.title_activity_for_selector_Lich);
         activityTitles[1] = c.getString(R.string.title_activity_for_selector_NF);
         activityTitles[2] = c.getString(R.string.title_activity_for_selector_General);
+	}
+	public static void addActivityTitlesHocTap(Context c){
+		activityTitlesHocTap = new String[3];
+		activityTitlesHocTap[0] = c.getString(R.string.title_activity_for_selector_Diem);
+        activityTitlesHocTap[1] = c.getString(R.string.title_activity_for_selector_DiemPhanTich);
+        activityTitlesHocTap[2] = c.getString(R.string.title_activity_for_selector_DiemDuTinh);
 	}
 	public static void saveStringPreference(Context mContext, String key, String value) {
 		SharedPreferences mSharedPrefences = mContext.getSharedPreferences(

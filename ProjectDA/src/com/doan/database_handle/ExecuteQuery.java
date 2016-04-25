@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.doan.app.Global;
 import com.doan.model.BaiViet;
+import com.doan.model.BoMon;
 import com.doan.model.ChiTietThongBao;
 import com.doan.model.DiemHocTap;
 import com.doan.model.DieuLe;
@@ -167,8 +168,8 @@ public class ExecuteQuery {
 		ArrayList<DiemHocTap> arrDiem = new ArrayList<DiemHocTap>();
 		String selectQuery = "SELECT " + ColumnName.DIEM_DIEM_1 + "," + ColumnName.DIEM_DIEM_2 + "," + ColumnName.DIEM_DIEM_7 + ","
 										+ ColumnName.DIEM_MA_LOP_TIN_CHI + "," /*+ ColumnName.DIEM_MA_LICH_THI + ","*/
-										+ ColumnName.DIEM_TRANG_THAI_DK + "," + ColumnName.MON_HOC_TEN_MON_HOC + "," 
-										+ ColumnName.MON_HOC_SO_TIN_CHI + "," + ColumnName.DIEM_THOI_GIAN_DK + ","
+										+ ColumnName.DIEM_TRANG_THAI_DK + "," + ColumnName.DIEM_TEN_MON_HOC + "," 
+										+ ColumnName.DIEM_SO_TIN_CHI + "," + ColumnName.DIEM_THOI_GIAN_DK + ","
 										+ ColumnName.DIEM_MA_DIEM + " "
 				+ "FROM " + ColumnName.DIEM_TABLE + " ";
 				/*+ " WHERE " + ColumnName.DIEM_MA_SV + " = '" + Global.getStringPreference(c, "MaSVDN", "0") + "'" 
@@ -200,8 +201,8 @@ public class ExecuteQuery {
 		ArrayList<DiemHocTap> arrDiem = new ArrayList<DiemHocTap>();
 		String selectQuery = "SELECT " + ColumnName.DIEM_DIEM_1 + "," + ColumnName.DIEM_DIEM_2 + "," + ColumnName.DIEM_DIEM_7 + ","
 				+ ColumnName.DIEM_MA_LOP_TIN_CHI + "," /*+ ColumnName.DIEM_MA_LICH_THI + ","*/
-				+ ColumnName.DIEM_TRANG_THAI_DK + "," + ColumnName.MON_HOC_TEN_MON_HOC + "," 
-				+ ColumnName.MON_HOC_SO_TIN_CHI + "," + ColumnName.DIEM_THOI_GIAN_DK + ","
+				+ ColumnName.DIEM_TRANG_THAI_DK + "," + ColumnName.DIEM_TEN_MON_HOC + "," 
+				+ ColumnName.DIEM_SO_TIN_CHI + "," + ColumnName.DIEM_THOI_GIAN_DK + ","
 				+ ColumnName.DIEM_MA_DIEM + " "
 				+ "FROM " + ColumnName.DIEM_TABLE + " "
 				+ " WHERE "
@@ -265,7 +266,8 @@ public class ExecuteQuery {
 		ArrayList<MonHoc> arrMonHoc = new ArrayList<MonHoc>();
 		
 		String selectQuery =
-				"select " + ColumnName.CTDTmon_MA_MON_CTDT + "," + ColumnName.CTDTmon_MA_MON_HOC + "," + ColumnName.MON_HOC_TEN_MON_HOC + " "
+				"select " + ColumnName.CTDTmon_MA_MON_CTDT + "," + ColumnName.CTDTmon_MA_MON_HOC + "," 
+						+ ColumnName.MON_HOC_TEN_MON_HOC + "," + ColumnName.MON_HOC_DO_KHO + "," + ColumnName.MON_HOC_BO_MON + " "
 				+ "from " + ColumnName.CTDTmon_TABLE + "," + ColumnName.MON_HOC_TABLE + " "
 				+ "where " + ColumnName.CTDTmon_MA_MON_HOC + "=" + ColumnName.MON_HOC_MA_MON_HOC;
 		database = mDbHelper.getReadableDatabase();
@@ -278,6 +280,9 @@ public class ExecuteQuery {
 				mh.setMaMonCTDT(cursor.getString(0));
 				mh.setMaMonHoc(cursor.getString(1));
 				mh.setTenMon(cursor.getString(2));
+				
+				mh.setDoKho(cursor.getInt(3));
+				mh.setMaBoMon(cursor.getString(4));
 				//__danh sách môn tiên quyết
 				String selectQuery2 = 
 						"select " + ColumnName.MonTIENQUYET_MA_MON_CTDT_TIEN_QUYET + "," + ColumnName.CTDTmon_MA_MON_HOC + "," + ColumnName.MON_HOC_TEN_MON_HOC + " "
@@ -303,7 +308,66 @@ public class ExecuteQuery {
 		}
 		return arrMonHoc;
 	}
+	public boolean update_tbl_diemTB_single(String mamon, double diem) {
+		try {
+			database = mDbHelper.getWritableDatabase();
+			ContentValues cv = new ContentValues();
+			cv.put(ColumnName.MON_HOC_DIEM_TB_SV_KHAC, diem);
+			String clause = ColumnName.MON_HOC_MA_MON_HOC + "='"+ mamon+"'";
+			database.update(ColumnName.MON_HOC_TABLE, cv, clause, null);
+			return true;
+		} catch (SQLiteException e) {
+			Log.e("insert_tbl_diemTB_single", e.getMessage());
+			return false;
+		}
+	}
+	
 //___/tbl_MonHoc
+	
+//____tbl_BoMon
+	public ArrayList<BoMon> getAllBoMon(){
+		String arr[];
+		ArrayList<BoMon> arrBoMon = new ArrayList<BoMon>();
+		String selectQuery = "SELECT *"
+				+ "FROM " + ColumnName.BOMON_TABLE
+				+ " order by " + ColumnName.BOMON_TEN_BOMON;
+		database = mDbHelper.getReadableDatabase();
+		Cursor cursor = database.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) {
+			do {
+				BoMon bm = new BoMon();
+				
+				bm.setMaBoMon(cursor.getString(0));
+				bm.setTenBoMon(cursor.getString(1));
+				String selectQuery2 = 
+						"select " + ColumnName.CTDTmon_MA_MON_CTDT + "," + ColumnName.CTDTmon_MA_MON_HOC + "," 
+								+ ColumnName.MON_HOC_TEN_MON_HOC + "," + ColumnName.MON_HOC_DO_KHO + "," + ColumnName.MON_HOC_BO_MON + ","
+								+ ColumnName.MON_HOC_DIEM_TB_SV_KHAC + " "
+						+ "from " + ColumnName.CTDTmon_TABLE + "," + ColumnName.MON_HOC_TABLE + " "
+						+ "where " + ColumnName.CTDTmon_MA_MON_HOC + "=" + ColumnName.MON_HOC_MA_MON_HOC
+						+ " and " + ColumnName.MON_HOC_BO_MON + "=" + "'" + cursor.getString(0) + "'";
+				Cursor cursor2 = database.rawQuery(selectQuery2, null);
+				ArrayList<MonHoc> arrMonHoc = new ArrayList<MonHoc>();
+				if(cursor2.moveToFirst()){
+					do {
+						MonHoc mh = new MonHoc();
+						mh.setMaMonCTDT(cursor2.getString(0));
+						mh.setMaMonHoc(cursor2.getString(1));
+						mh.setTenMon(cursor2.getString(2));
+						mh.setDoKho(cursor2.getInt(3));
+						mh.setMaBoMon(cursor2.getString(4));
+						mh.setDiemTrungBinhToanBo(cursor2.getDouble(5));
+						arrMonHoc.add(mh);
+					} while (cursor2.moveToNext());
+				}
+				bm.setArrMonThuocBoMon(arrMonHoc);
+				
+				arrBoMon.add(bm);
+			} while (cursor.moveToNext());
+		}
+		return arrBoMon;
+	}
+//___/tbl_BoMon
 	
 //___tbl_DieuLeTag
 	public ArrayList<DieuLeTag> getAllTag(){

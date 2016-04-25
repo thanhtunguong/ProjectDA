@@ -134,7 +134,15 @@ public class ColumnName {
 	public static String MON_HOC_TABLE = "tbl_MonHoc";
 	public static String MON_HOC_MA_MON_HOC = "PK_MonHoc";
 	public static String MON_HOC_TEN_MON_HOC = "TenMonHoc";
-	public static String MON_HOC_SO_TIN_CHI = "SoTinChi";
+	//public static String MON_HOC_SO_TIN_CHI = "SoTinChi";
+	public static String MON_HOC_DO_KHO = "DoKho";
+	public static String MON_HOC_BO_MON = "FK_BoMon";
+	public static String MON_HOC_DIEM_TB_SV_KHAC = "DiemTrungBinhSVKhac";
+	
+	//tbl_BoMon
+	public static String BOMON_TABLE = "tbl_BoMon";
+	public static String BOMON_MA_BOMON = "PK_BoMon";
+	public static String BOMON_TEN_BOMON = "TenBoMon";
 	
 	//tbl_MonTienQuyet
 	public static String MonTIENQUYET_TABLE = "tbl_MonTienQuyet";

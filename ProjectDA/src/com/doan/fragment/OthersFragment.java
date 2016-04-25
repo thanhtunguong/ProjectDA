@@ -6,6 +6,7 @@ import com.doan.lichhoctap.DanhSachMonCoTheDangKiActivity;
 import com.doan.lichhoctap.DiemHocTapActivity;
 import com.doan.lichhoctap.GhiChuActivity;
 import com.doan.lichhoctap.LoginActivity;
+import com.doan.lichhoctap.PhanTichHocTapActivity;
 import com.doan.lichhoctap.R;
 import com.doan.lichhoctap.SoTayThongTinActivity;
 import com.doan.lichhoctap.ThongTinCaNhanActivity;
@@ -64,7 +65,8 @@ public class OthersFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(getContext(), DiemHocTapActivity.class);
+				Intent i = new Intent(getContext(), PhanTichHocTapActivity.class);
+				//Intent i = new Intent(getContext(), DiemHocTapActivity.class);
 				startActivity(i);
 			}
 		});

@@ -53,8 +53,8 @@ public class LoginActivity extends ActionBarActivity {
 		
 		edEmail = (EditText) findViewById(R.id.edtLoginEmail);
 		edPwd = (EditText) findViewById(R.id.edtLoginPwd);
-		//edEmail.setText("viethungtrn94@gmail.com");
-		edEmail.setText("conghoaf1@gmail.com");
+		edEmail.setText("viethungtrn94@gmail.com");
+		//edEmail.setText("conghoaf1@gmail.com");
 		edPwd.setText("1");
 		btnLogin = (Button) findViewById(R.id.btnLogin);
 		btnLogin.setOnClickListener(new OnClickListener() {

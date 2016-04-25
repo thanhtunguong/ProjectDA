@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10" >
+    <TextView 
+        android:id="@+id/tvGoiYDanhGiaHocTap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"/>
+	<TextView 
+	    android:layout_width="match_parent"
+	    android:layout_height="1dp"
+	    android:background="@color/gray"/>
+    <LinearLayout
+        android:id="@+id/chart_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <ListView
+            android:id="@+id/lvChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/transparent" >
+        </ListView>
+    </LinearLayout>
+
+</LinearLayout>

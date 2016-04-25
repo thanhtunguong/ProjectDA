@@ -58,6 +58,9 @@
     <string name="title_activity_for_selector_Lich">Lịch học tập</string>
     <string name="title_activity_for_selector_NF">Bảng tin</string>
     <string name="title_activity_for_selector_General">Tổng quan</string>
+    <string name="title_activity_for_selector_Diem">Điểm số</string>
+    <string name="title_activity_for_selector_DiemPhanTich">Phân tích</string>
+    <string name="title_activity_for_selector_DiemDuTinh">Dự tính</string>
     <string name="title_activity_diem_hoc_tap">Kết quả học tập</string>
     <string name="text_test">        “Samsung Future Developer” là chương trình đào tạo nhằm cung cấp cho sinh viên các kiến thức, kĩ năng thiết yếu để làm quen với bài thi lập trình đó và trở thành một Developer tài năng theo chuẩn toàn cầu của Tập đoàn Samsung Electronics.
 Từ năm 2016, để trở thành lập trình viên của tập đoàn Samsung, tất cả các ứng viên sẽ phải vượt qua một bài kiểm tra kĩ năng lập trình được biên soạn bởi các chuyên gia hàng đầu của Tập đoàn Samsung trên toàn thế giới.
@@ -140,6 +143,14 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="string_sinhvien_duoc_chon_tu">sinh viên được chọn từ</string>
     <string name="string_lop">lớp</string>
     <string name="string_chua_sv_nao_dc_chon">Chưa chọn sinh viên</string>
+    <string name="string_chuahoc">Chưa học</string>
+    <string name="string_yeu">Yếu</string>
+    <string name="string_trungbinh">Trung bình</string>
+    <string name="string_kha">Khá</string>
+    <string name="string_gioi">Giỏi</string>
+    <string name="string_chitietKiNangTitle1">Kĩ năng</string>
+    <string name="string_chitietKiNangTitle2">của bạn so sánh với điểm số trung bình các sinh viên khác</string>
+    <string name="string_goiY1">bạn có vẻ mạnh về các môn</string>
 
     <!-- /Tùng -->
 

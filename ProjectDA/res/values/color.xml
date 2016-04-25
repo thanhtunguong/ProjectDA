@@ -22,4 +22,19 @@
     <color name="indigo">#3f51d5</color>
     <color name="amber">#ffc107</color>
     <color name="greyDeactive">#888888</color>
+    <color name="hard_green">#1B5E20</color>
+    
+    <color name="bomon_CoBan">#009688</color>
+    <color name="bomon_HTTT">#9C27B0</color>
+    <color name="bomon_Khac">#FFC107</color>
+    <color name="bomon_laptrinh">#F44336</color>
+    <color name="bomon_MangBaoMat">#3f51d5</color>
+    <color name="bomon_NgoaiNgu">#FF9800</color>
+    <color name="bomon_PhanCung">#E91E63</color>
+    <color name="bomon_Toan">#4CAF50</color>
+    <color name="bomon_DoHoa">#3f51d5</color>
+    
+    
+    
+    
 </resources>

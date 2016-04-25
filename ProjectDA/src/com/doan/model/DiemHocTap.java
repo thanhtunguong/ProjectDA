@@ -101,54 +101,9 @@ public class DiemHocTap {
 		SoTinChi = soTinChi;
 	}
 
-	
-	
-	/*public DiemHocTap(String maloptinchi, 
-			String tenmon, int sotinchi, float diemcc, float diemkt, float diemthi){
-		this.MaLopTinChi = maloptinchi;
-		this.TenMon = tenmon;
-		this.SoTinChi = sotinchi;
-		this.DiemCC = diemcc;
-		this.DiemKT = diemkt;
-		this.DiemThi = diemthi;
+	public double getDiemTongKet(){
+		double dtk = ((DiemCC + DiemKT*2 + DiemThi*7)/10)*1.0;
+		dtk = Math.floor(dtk*10)/10;
+		return dtk;
 	}
-	
-	public int getSoTinChi() {
-		return SoTinChi;
-	}
-
-	public void setSoTinChi(int soTinChi) {
-		SoTinChi = soTinChi;
-	}
-
-	public String getMaLopTinChi() {
-		return MaLopTinChi;
-	}
-	public void setMaLopTinChi(String maLopTinChi) {
-		MaLopTinChi = maLopTinChi;
-	}
-	public String getTenMon() {
-		return TenMon;
-	}
-	public void setTenMon(String tenMon) {
-		TenMon = tenMon;
-	}
-	public float getDiemCC() {
-		return DiemCC;
-	}
-	public void setDiemCC(float diemCC) {
-		DiemCC = diemCC;
-	}
-	public float getDiemKT() {
-		return DiemKT;
-	}
-	public void setDiemKT(float diemKT) {
-		DiemKT = diemKT;
-	}
-	public float getDiemThi() {
-		return DiemThi;
-	}
-	public void setDiemThi(float diemThi) {
-		DiemThi = diemThi;
-	}	*/
 }

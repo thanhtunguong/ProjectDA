@@ -398,9 +398,7 @@ public class SplashScreen extends Activity {
 					/*Toast.makeText(getApplicationContext(),
 							"Thanh cong", Toast.LENGTH_LONG)
 							.show();*/
-					exeQ.close();
-					Intent intent = new Intent(SplashScreen.this, HocTapActivity.class);
-					startActivity(intent);
+					getChiTietMonHoc();
 				} else {
 					/*Toast.makeText(getApplicationContext(),
 							"That bai", Toast.LENGTH_LONG)
@@ -447,6 +445,59 @@ public class SplashScreen extends Activity {
 		}
 	}
 	//___/tbl_Diem
+	
+	//___tbl_MonHoc
+	private void getChiTietMonHoc(){
+		AsyncHttpClient client = new AsyncHttpClient();
+		RequestParams params = new RequestParams();
+		String url = Global.BASE_URI + Global.URI_DIEM_TRUNG_BINH_SINHVIEN;
+		client.post(url, params, new AsyncHttpResponseHandler() {
+			public void onSuccess(String response) {
+				Log.e("JsonChiTietMonHoc", response);
+				if (executeWhenGetChiTietMonHocSuccess(response)) {
+					/*Toast.makeText(getApplicationContext(),
+							"Thanh cong", Toast.LENGTH_LONG)
+							.show();*/
+					exeQ.close();
+					Intent intent = new Intent(SplashScreen.this, HocTapActivity.class);
+					startActivity(intent);
+				} else {
+					/*Toast.makeText(getApplicationContext(),
+							"That bai", Toast.LENGTH_LONG)
+							.show();*/
+				}
+			}
+
+			public void onFailure(int statusCode, Throwable error,
+					String content) {
+				Log.e("JsonDiem", error+" "+content);
+				/*Toast.makeText(getApplicationContext(),
+						error+"", Toast.LENGTH_LONG)
+						.show();*/
+			}
+		});
+	}
+	private boolean executeWhenGetChiTietMonHocSuccess(String response) {
+		/*Toast.makeText(getApplicationContext(),
+				response+"", Toast.LENGTH_LONG)
+				.show();*/
+		String mamon = "";
+		Double diem = null;
+		try {
+			JSONArray arrObj = new JSONArray(response);
+			for (int i = 0; i < arrObj.length(); i++) {
+				JSONObject chiTietMonHocJson = arrObj.getJSONObject(i);
+				mamon = chiTietMonHocJson.optString("pk_monhoc");
+				diem = chiTietMonHocJson.optDouble("DiemTrungBinhSV");
+				exeQ.update_tbl_diemTB_single(mamon, diem);
+			}
+			return true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	//----- Lay thong tin sinh vien
 	public void getThongtinSV(String masinhvien) {
 

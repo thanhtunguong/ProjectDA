@@ -23,7 +23,7 @@
         android:theme="@style/MyTheme" >
         <activity
             android:name=".HocTapActivity"
-            android:label="@string/app_name"
+            android:label="@string/title_activity_for_selector_Lich"
             android:theme="@style/MyThemeForControl" >
 
             <!--
@@ -110,7 +110,7 @@
         </activity>
         <activity
             android:name=".PhanTichHocTapActivity"
-            android:label="@string/title_activity_phan_tich_hoc_tap" >
+            android:label="@string/title_activity_for_selector_Diem" >
         </activity>
     </application>
 

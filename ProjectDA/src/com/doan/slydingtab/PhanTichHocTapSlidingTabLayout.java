@@ -1,12 +1,11 @@
 package com.doan.slydingtab;
 
-import com.doan.adapter.ViewPagerAdapter;
+import com.doan.adapter.PhanTichHocTapViewPagerAdapter;
 import com.doan.app.Global;
-
+import com.doan.slydingtab.PhanTichHocTapSlidingTabLayout.TabColorizer;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.AttributeSet;
@@ -19,8 +18,9 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.FrameLayout.LayoutParams;
 
-public class SlidingTabLayout extends HorizontalScrollView {
+public class PhanTichHocTapSlidingTabLayout extends HorizontalScrollView {
 	/**
 	 * Allows complete control over the colors drawn in the tab layout. Set with
 	 * {@link #setCustomTabColorizer(TabColorizer)}.
@@ -49,17 +49,17 @@ public class SlidingTabLayout extends HorizontalScrollView {
 	private SparseArray<String> mContentDescriptions = new SparseArray<String>();
 	private ViewPager.OnPageChangeListener mViewPagerPageChangeListener;
 
-	private final SlidingTabStrip mTabStrip;
+	private final PhanTichHocTapSlidingTabStrip mTabStrip;
 
-	public SlidingTabLayout(Context context) {
+	public PhanTichHocTapSlidingTabLayout(Context context) {
 		this(context, null);
 	}
 
-	public SlidingTabLayout(Context context, AttributeSet attrs) {
+	public PhanTichHocTapSlidingTabLayout(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
 	}
 
-	public SlidingTabLayout(Context context, AttributeSet attrs, int defStyle) {
+	public PhanTichHocTapSlidingTabLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 
 		// Disable the Scroll Bar
@@ -69,7 +69,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
 		mTitleOffset = (int) (TITLE_OFFSET_DIPS * getResources().getDisplayMetrics().density);
 
-		mTabStrip = new SlidingTabStrip(context);
+		mTabStrip = new PhanTichHocTapSlidingTabStrip(context);
 		addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 	}
 
@@ -98,7 +98,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
 	/**
 	 * Set the {@link ViewPager.OnPageChangeListener}. When using
-	 * {@link SlidingTabLayout} you are required to set any
+	 * {@link PhanTichHocTapSlidingTabLayout} you are required to set any
 	 * {@link ViewPager.OnPageChangeListener} through this method. This is so
 	 * that the layout can update it's scroll position correctly.
 	 *
@@ -213,7 +213,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 			}
 			tabTitleView.setTextColor(getResources().getColorStateList(R.color.selector));
 			tabTitleView.setTextSize(14);*/
-		final ViewPagerAdapter adapter = (ViewPagerAdapter) mViewPager.getAdapter();
+		final PhanTichHocTapViewPagerAdapter adapter = (PhanTichHocTapViewPagerAdapter) mViewPager.getAdapter();
 		final View.OnClickListener tabClickListener = new TabClickListener();
 
 		for (int i = 0; i < adapter.getCount(); i++) {
@@ -306,8 +306,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
 		public void onPageSelected(int position) {
 			Global g = new Global();
 			Context c = getContext();
-	        g.addActivityTitles(c);
-	        ((ActionBarActivity)c).getSupportActionBar().setTitle(Global.activityTitles[position]);
+	        g.addActivityTitlesHocTap(c);
+	        ((ActionBarActivity)c).getSupportActionBar().setTitle(Global.activityTitlesHocTap[position]);
 			for(int i = 0; i < mTabStrip.getChildCount(); i ++){
 	            mTabStrip.getChildAt(i).setSelected(false);
 	        }
