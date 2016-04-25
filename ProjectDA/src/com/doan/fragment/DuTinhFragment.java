@@ -2,6 +2,7 @@ package com.doan.fragment;
 
 import java.text.DecimalFormat;
 
+import com.doan.app.Global;
 import com.doan.lichhoctap.R;
 
 import android.content.Context;
@@ -212,9 +213,8 @@ public class DuTinhFragment extends Fragment {
 
 	}
 
-	private void getInfo() {
-		// TODO Auto-generated method stub
-		soTinchitichluy = 112;
-		diemtbtichluy = (float) 6.92;
+	private void getInfo() {		
+		soTinchitichluy = Global.getIntegerPreference(c, "SoTinChi", 0);
+		diemtbtichluy = Global.getFloatPreference(c, "DiemTrungBinh", (float)0);
 	}
 }

@@ -98,6 +98,14 @@ public class Global {
 		mEditor.putInt(key, value);
 		mEditor.commit();
 	}
+	public static void saveFloatPreference(Context mContext, String key, Float value) {
+		SharedPreferences mSharedPrefences = mContext.getSharedPreferences(
+				XML_FILE_NAME, Context.MODE_PRIVATE);
+
+		Editor mEditor = mSharedPrefences.edit();
+		mEditor.putFloat(key, value);
+		mEditor.commit();
+	}
 	public static String getStringPreference(Context mContext, String key,
 			String defValue) {
 		SharedPreferences mSharedPrefences = mContext.getSharedPreferences(
@@ -109,6 +117,12 @@ public class Global {
 		SharedPreferences mSharedPrefences = mContext.getSharedPreferences(
 				XML_FILE_NAME, Context.MODE_PRIVATE);
 		return mSharedPrefences.getInt(key, defValue);
+	}
+	public static Float getFloatPreference(Context mContext, String key,
+			Float defValue) {
+		SharedPreferences mSharedPrefences = mContext.getSharedPreferences(
+				XML_FILE_NAME, Context.MODE_PRIVATE);
+		return mSharedPrefences.getFloat(key, defValue);
 	}
 	public static String maHoaMd5(String input){
         String result = input;

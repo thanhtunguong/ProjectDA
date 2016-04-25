@@ -41,19 +41,25 @@ public class PhanTichHocTapViewPagerAdapter extends FragmentStatePagerAdapter {
 	public Fragment getItem(int position) {
 		/*String title = "";
 		((ActionBarActivity)context).getSupportActionBar().setTitle(R.string.title_activity_for_selector_Lich);*/
-		Fragment tab = null;
+		Fragment tab1 = null;
+		Fragment tab2 = null;
+		Fragment tab3 = null;
 		switch(position){
 		case 0:
-			tab = new DiemFragment();
-			break;
+			tab1 = new DiemFragment();
+			return tab1;
+			//break;
 		case 1:
-			tab = new DanhGiaKetQuaHocTapFragment();
-			break;
+			tab2 = new DanhGiaKetQuaHocTapFragment();
+			return tab2;
+			//break;
 		case 2:
-			tab = new DuTinhFragment();
-			break;
+			tab3 = new DuTinhFragment();
+			return tab3;
+			//break;
 		}
-		return tab;
+		//return tab;
+		return tab1;
 	}
 
 	// This method return the titles for the Tabs in the Tab Strip
