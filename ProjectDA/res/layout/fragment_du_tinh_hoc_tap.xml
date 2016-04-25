@@ -1,8 +1,260 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dutinh_margin"
+    android:paddingLeft="@dimen/dutinh_margin"
+    android:paddingRight="@dimen/dutinh_margin"
+    android:paddingTop="@dimen/dutinh_margin"
+    >
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_ptkqht_black"
+            android:orientation="vertical"
+            android:visibility="visible" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_sotinchihienco"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSizePTKQ"
+                    android:textStyle="italic|bold" />
+
+                <TextView
+                    android:id="@+id/tvSotinchitichluy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="110"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSizePTKQ"
+                    android:textStyle="italic|bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_diemtbdatduoc"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSizePTKQ"
+                    android:textStyle="italic|bold" />
+
+                <TextView
+                    android:id="@+id/tvDiemtbtichluy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="7.6"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSizePTKQ"
+                    android:textStyle="italic|bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_ptkqht_brown"
+            android:orientation="vertical"
+            android:visibility="visible" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_sotinchitichluy"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSizePTKQ"
+                    android:textStyle="italic|bold" />
+
+                <EditText
+                    android:id="@+id/edtSotinchitichluysehoc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:maxLength="3"
+                    android:numeric="integer"
+                    android:text="120"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSizePTKQ"
+                    android:textStyle="italic|bold" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/sbSotinchitichluysehoc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:max="20"
+                android:progress="0"
+                android:secondaryProgress="20" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_diemtbmongmuon"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSizePTKQ"
+                    android:textStyle="italic|bold" />
+
+                <Spinner
+                    android:id="@+id/spDiemtichluymongmuon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_ptkqht_cyan"
+            android:orientation="vertical"
+            android:visibility="visible" >
+
+            <TextView
+                android:id="@+id/tv5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/tv_diemtbcandatduoc"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSizePTKQ"
+                android:textStyle="italic|bold" />
+
+            <TextView
+                android:id="@+id/tvDiemtbtichluycandat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:text="8.0"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                android:textStyle="italic|bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_ptkqht_blue"
+            android:orientation="vertical"
+            android:visibility="visible" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/tv_dieukien"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSizePTKQ" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/tv_lamchuyende"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSizePTKQ" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/tv_lamdoan"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSizePTKQ" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/tv_banggioi"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSizePTKQ" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/tv_bangxuatsac"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSizePTKQ" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/tv_chuthichbang"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSizePTKQ" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnTinh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_ptkqht"
+        android:text="OK"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

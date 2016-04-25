@@ -18,4 +18,6 @@
 	<dimen name="LoginScreenMargin">20dp</dimen>
 	<dimen name="chat_box_margin">5dp</dimen>
 <!-- /Tùng -->
+	<dimen name="dutinh_margin">5dp</dimen>
+	<dimen name="textSizePTKQ">17sp</dimen>
 </resources>

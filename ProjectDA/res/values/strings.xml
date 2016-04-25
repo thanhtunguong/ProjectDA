@@ -171,6 +171,19 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="btn_sua">Sửa</string>
     <string name="btn_thoat">Thoát</string>
     <string name="btn_xoa">Xóa</string>
+    <string name="tv_sotinchihienco">Số tín chỉ tích lũy hiện có :</string>
+    <string name="tv_diemtbdatduoc">Điểm trung bình đã đạt được :</string>
+    <string name="tv_sotinchitichluy">Số tín chỉ tích lũy :</string>
+    <string name="tv_diemtbmongmuon">Số điểm mong muốn :</string>
+    <string name="tv_diemtbcandatduoc">Số điểm trung bình cần đạt được :</string>
+    <string name="tv_dieukien">Điểu kiện :</string>
+    <string name="tv_lamchuyende">Làm chuyên đề : 6.5 </string>
+    <string name="tv_lamdoan">Làm đồ án và bằng loại khá : 7.0 </string>
+    <string name="tv_banggioi">Bằng loại giỏi* : 8.0 </string>
+    <string name="tv_bangxuatsac">Bằng loại xuất sắc* : 9.0 </string>
+    <string name="tv_chuthichbang">* : Với loại giỏi và xuất sắc sẽ bị trừ 1 bậc nếu số tín chỉ học lại >= 5% tổng số tín chỉ(140)</string>
+    <string name="tv5_tbKetquafalse">Không thể đạt điểm này, bạn nên tăng số tín chỉ hoặc học cải thiện</string>
+	<string name="tv5_tbKetquasusses">Số điểm trung bình cần đạt được :</string>
     <!-- MainNavigatorBar -->
 
     <string name="title_activity_ghi_chu">Ghi chú cá nhân</string>
