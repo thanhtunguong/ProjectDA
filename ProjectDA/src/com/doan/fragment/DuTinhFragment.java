@@ -160,23 +160,27 @@ public class DuTinhFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				int sotinchimongmuon = sbSotinchitichluysehoc.getProgress() + 120;
-				float diemtbcandat = tinhDiem(diemtbtichluy, diemTBmongmuon,
-						soTinchitichluy, sotinchimongmuon);
+				float diemtbcandat;
+				if(soTinchitichluy == 0){
+					diemtbcandat = diemTBmongmuon;				
+				}else{
+					diemtbcandat = tinhDiem(diemtbtichluy, diemTBmongmuon,
+							soTinchitichluy, sotinchimongmuon);
+				
+				
+				}
 				DecimalFormat df = new DecimalFormat("#.00");
-				if (diemtbcandat < diemcanduoi) {
-					tvDiemtbtichluycandat.setText(df.format(diemcanduoi) + "");
-				} else {
-					tvDiemtbtichluycandat.setText(df.format(diemtbcandat) + "");
+				if(diemtbcandat < diemcanduoi){
+					tvDiemtbtichluycandat.setText(df.format(diemcanduoi)+"");
+				}else{
+					tvDiemtbtichluycandat.setText(df.format(diemtbcandat)+"");
 				}
-
-				if (diemtbcandat > diemcantren) {
-					tv5.setText(getResources().getString(
-							R.string.tv5_tbKetquafalse));
-				} else {
-					tv5.setText(getResources().getString(
-							R.string.tv5_tbKetquasusses));
+				
+				if(diemtbcandat > diemcantren){
+					tv5.setText(getResources().getString(R.string.tv5_tbKetquafalse));	
+				}else{
+					tv5.setText(getResources().getString(R.string.tv5_tbKetquasusses));	
 				}
-
 			}
 
 			private float tinhDiem(float diemtbtichluy, float diemttbmongmuon,
