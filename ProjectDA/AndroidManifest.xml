@@ -31,7 +31,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <activity
@@ -111,6 +111,11 @@
         <activity
             android:name=".PhanTichHocTapActivity"
             android:label="@string/title_activity_for_selector_Diem" >
+        </activity>
+        <activity
+            android:name=".DoiMatKhauActivity"
+            android:label="@string/title_activity_doi_mat_khau"
+            android:theme="@style/MyThemeForControl" >
         </activity>
     </application>
 

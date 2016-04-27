@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.doan.lichhoctap.DoiMatKhauActivity" >
+
+    <include
+        android:id="@+id/DoiMatKhau_activity_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/doi_mat_khau_tool_bar" />
+
+    <EditText
+        android:id="@+id/edtCurrentPwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/LoginScreenMargin"
+        android:layout_marginRight="@dimen/LoginScreenMargin"
+        android:layout_marginTop="@dimen/LoginScreenMargin"
+        android:hint="@string/doiMatKhau_PwdHienTai"
+        android:textColor="@color/black"
+        android:textColorHint="@color/soft_grey"
+        android:textSize="@dimen/text_title" />
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginTop="@dimen/text_margin"/>
+    <EditText
+        android:id="@+id/edtNewPwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/LoginScreenMargin"
+        android:layout_marginRight="@dimen/LoginScreenMargin"
+        android:layout_marginTop="@dimen/LoginScreenMargin"
+        android:hint="@string/doiMatKhau_PwdMoi"
+        android:textColor="@color/black"
+        android:textColorHint="@color/soft_grey"
+        android:textSize="@dimen/text_title" />
+	<EditText
+        android:id="@+id/edtNewPwdReType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/LoginScreenMargin"
+        android:layout_marginRight="@dimen/LoginScreenMargin"
+        android:layout_marginTop="@dimen/LoginScreenMargin"
+        android:hint="@string/doiMatKhau_PwdMoiReType"
+        android:textColor="@color/black"
+        android:textColorHint="@color/soft_grey"
+        android:textSize="@dimen/text_title" />
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:weightSum="2"
+	    android:layout_margin="@dimen/text_margin">
+	    <Button 
+	        android:id="@+id/btnChangePwd"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:layout_height="wrap_content"
+	        android:text="@string/string_doimatkhau"
+	        android:backgroundTint="@color/ColorPrimary"
+	        android:textColor="@color/white"/>
+	    <Button 
+	        android:id="@+id/btnUnChangePwd"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
+	        android:layout_height="wrap_content"
+	        android:text="@string/string_huydoimatkhau"/>
+	</LinearLayout>
+	<TextView 
+	    android:id="@+id/tvError"
+	    android:layout_margin="@dimen/text_margin"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textColor="@color/ColorPrimary"/>
+</LinearLayout>

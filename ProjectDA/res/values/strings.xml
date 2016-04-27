@@ -53,6 +53,7 @@
     <string name="others_textview_options_DSMCTDK">Danh sách môn có thể đăng kí</string>
     <string name="others_textview_options_Sotay">Sổ tay thông tin</string>
     <string name="others_textview_options_Notes">Ghi chú cá nhân</string>
+    <string name="others_textview_options_ChangePwd">Đổi mật khẩu</string>
     <string name="others_textview_options_Logout">Đăng xuất</string>
     <string name="logout_confirm">Đăng xuất ngay?</string>
     <string name="title_activity_for_selector_Lich">Lịch học tập</string>
@@ -113,6 +114,9 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="login_tvEmail">Email</string>
     <string name="login_tvPassword">Password</string>
+    <string name="doiMatKhau_PwdHienTai">Mật khẩu hiện tại</string>
+    <string name="doiMatKhau_PwdMoi">Mật khẩu mới</string>
+    <string name="doiMatKhau_PwdMoiReType">Xác nhận mật khẩu</string>
     <string name="btn_login">Đăng nhập</string>
     <string name="btn_ForgotPwd">Quên mật khẩu?</string>
     <string name="acc1_email">abc@gmail.com</string>
@@ -151,6 +155,10 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="string_chitietKiNangTitle1">Kĩ năng</string>
     <string name="string_chitietKiNangTitle2">của bạn so sánh với điểm số trung bình các sinh viên khác</string>
     <string name="string_goiY1">bạn có vẻ mạnh về các môn</string>
+    <string name="string_doimatkhau">Đổi</string>
+    <string name="string_huydoimatkhau">Hủy</string>
+    <string name="string_matkhaumoitrung">Mật khẩu mới trùng mật khẩu cũ</string>
+    <string name="string_xacnhanmatkhaukhongdung">Xác nhận mật khẩu không đúng</string>
 
     <!-- /Tùng -->
 
@@ -183,7 +191,7 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="tv_bangxuatsac">Bằng loại xuất sắc* : 9.0 </string>
     <string name="tv_chuthichbang">* : Với loại giỏi và xuất sắc sẽ bị trừ 1 bậc nếu số tín chỉ học lại >= 5% tổng số tín chỉ(140)</string>
     <string name="tv5_tbKetquafalse">Không thể đạt điểm này, bạn nên tăng số tín chỉ hoặc học cải thiện</string>
-	<string name="tv5_tbKetquasusses">Số điểm trung bình cần đạt được :</string>
+    <string name="tv5_tbKetquasusses">Số điểm trung bình cần đạt được :</string>
     <!-- MainNavigatorBar -->
 
     <string name="title_activity_ghi_chu">Ghi chú cá nhân</string>
@@ -209,5 +217,6 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="title_activity_add_user">Thêm người nhận</string>
     <string name="title_activity_chuong_trinh_dao_tao">Chương trình đào tạo</string>
     <string name="title_activity_phan_tich_hoc_tap">PhanTichHocTapActivity</string>
+    <string name="title_activity_doi_mat_khau">DoiMatKhauActivity</string>
 
 </resources>

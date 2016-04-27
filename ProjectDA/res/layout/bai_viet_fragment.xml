@@ -15,17 +15,41 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/tvIntentThongBao"
+            <LinearLayout
+                android:id="@+id/lnIntentThongBao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
-                android:text="Thong Bao" />
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/ic_thong_bao"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:id="@+id/tvIntentThongBao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/text_margin"
+                    android:text="Thong Bao"
+                    android:textColor="@color/text_Title_color"
+                    android:textSize="@dimen/text_title" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray" />
 
             <ListView
                 android:id="@+id/lvBaiViet"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:divider="@color/transparent" >
             </ListView>
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>

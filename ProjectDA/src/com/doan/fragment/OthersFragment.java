@@ -4,6 +4,7 @@ import com.doan.database_handle.ExecuteQuery;
 import com.doan.lichhoctap.ChuongTrinhDaoTaoActivity;
 import com.doan.lichhoctap.DanhSachMonCoTheDangKiActivity;
 import com.doan.lichhoctap.DiemHocTapActivity;
+import com.doan.lichhoctap.DoiMatKhauActivity;
 import com.doan.lichhoctap.GhiChuActivity;
 import com.doan.lichhoctap.LoginActivity;
 import com.doan.lichhoctap.PhanTichHocTapActivity;
@@ -31,7 +32,8 @@ import android.widget.Toast;
 
 public class OthersFragment extends Fragment {
 
-	LinearLayout otherUser, otherUserMark, otherUserCTDT, otherUserDSMCTDK, otherUserInfoSearch, otherUserNotes, otherLogout;
+	LinearLayout otherUser, otherUserMark, otherUserCTDT, 
+	otherUserDSMCTDK, otherUserInfoSearch, otherUserNotes, otherLogout, otherChangePwd;
 	Activity c;
 	
     @Override
@@ -46,6 +48,7 @@ public class OthersFragment extends Fragment {
         otherUserInfoSearch = (LinearLayout) v.findViewById(R.id.otherUserInfoSearch);
         otherUserNotes = (LinearLayout) v.findViewById(R.id.otherUserNotes);
         otherLogout = (LinearLayout) v.findViewById(R.id.otherLogout);
+        otherChangePwd = (LinearLayout) v.findViewById(R.id.otherChangePwd);
         TextView otherUserName = (TextView) v.findViewById(R.id.otherUserName);
         otherUserName.setText(Global.getStringPreference(c, "HoTenSV", ""));
         
@@ -121,6 +124,15 @@ public class OthersFragment extends Fragment {
 				//dialogLogoutConfirm(c);
 				Global g = new Global();
 				g.dialogLogoutConfirm(c);
+			}
+		});
+        otherChangePwd.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(getContext(), DoiMatKhauActivity.class);
+				startActivity(i);
 			}
 		});
         

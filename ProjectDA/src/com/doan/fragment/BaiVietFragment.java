@@ -40,6 +40,7 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -90,8 +91,8 @@ public class BaiVietFragment extends Fragment{
         bvAdapter = new BaiVietAdapter(getActivity(), R.layout.bai_viet_item, allBaiViet);
         lvBV.setAdapter(bvAdapter);
         
-        TextView tvThongBao = (TextView) v.findViewById(R.id.tvIntentThongBao);
-        tvThongBao.setOnClickListener(new OnClickListener() {
+        LinearLayout lnIntentThongBao = (LinearLayout) v.findViewById(R.id.lnIntentThongBao);
+        lnIntentThongBao.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
