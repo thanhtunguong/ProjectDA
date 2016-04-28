@@ -159,6 +159,11 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="string_huydoimatkhau">Hủy</string>
     <string name="string_matkhaumoitrung">Mật khẩu mới trùng mật khẩu cũ</string>
     <string name="string_xacnhanmatkhaukhongdung">Xác nhận mật khẩu không đúng</string>
+    <string name="string_doi_mat_khau_that_bai">false_compare</string>
+    <string name="string_doi_mat_khau_thanh_cong">success</string>
+    <string name="string_tv_doi_mat_khau_thanh_cong">Đổi mật khẩu thành công!</string>
+    <string name="string_tv_doi_mat_khau_that_bai">Đổi mật khẩu không thành công, mời thử lại!</string>
+    <string name="string_cbVisible">Hiển thị mật khẩu</string>
 
     <!-- /Tùng -->
 
@@ -216,7 +221,7 @@ Tel: +08-4-6263 5200 Fax:  +84-241-369 6003</string>
     <string name="title_activity_thong_bao_gv">Soạn thông báo</string>
     <string name="title_activity_add_user">Thêm người nhận</string>
     <string name="title_activity_chuong_trinh_dao_tao">Chương trình đào tạo</string>
-    <string name="title_activity_phan_tich_hoc_tap">PhanTichHocTapActivity</string>
-    <string name="title_activity_doi_mat_khau">DoiMatKhauActivity</string>
+    <string name="title_activity_phan_tich_hoc_tap">Phân tích học tập</string>
+    <string name="title_activity_doi_mat_khau">Đổi mật khẩu</string>
 
 </resources>

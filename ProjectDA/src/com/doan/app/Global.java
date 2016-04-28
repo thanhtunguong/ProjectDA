@@ -34,7 +34,7 @@ public class Global {
 	public static String activityTitlesHocTap[];
 	public static String MaSVDN;
 	//Tung
-	public static String BASE_URI ="http://192.168.3.101:8080/csdlda/";
+	public static String BASE_URI ="http://192.168.3.102:8080/csdlda/";
 	//public static String BASE_URI ="http://192.168.100.182:8080/csdlda/";
 	//public static String BASE_URI ="http://192.168.43.133:8080/csdlda/";
 	public static String URI_LICH_HOC ="api_LichHocTheoMaSV.php";
@@ -47,6 +47,8 @@ public class Global {
 	public static String URI_GUI_REPLY_GV = "api_DangReplyTheoMaGV.php";
 	public static String URI_GUI_REPLY_SV = "api_DangReplyTheoMaSV.php";
 	public static String URI_DIEM_TRUNG_BINH_SINHVIEN = "api_DanhSachDiemTrungBinhSV.php";
+	public static String URI_DOI_MAT_KHAU_SV = "api_DoiMatKhauTheoMaSV.php";
+	public static String URI_DOI_MAT_KHAU_GV = "api_DoiMatKhauTheoMaGV.php";
 	//public static String BASE_URI ="http://192.168.56.1:533";
 	//pu
 	//blic static String BASE_URI ="http://192.168.56.1:8080";

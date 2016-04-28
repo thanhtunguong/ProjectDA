@@ -18,12 +18,16 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -34,6 +38,7 @@ public class LoginActivity extends ActionBarActivity {
 	private ExecuteQuery exeQ;
 	private ArrayList<SinhVien> arrAllSV;
 	private SinhVien sv;
+	private CheckBox cbPwdVisibleLogin;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +55,11 @@ public class LoginActivity extends ActionBarActivity {
 			Intent intent = new Intent(LoginActivity.this, SplashScreen.class);
 			startActivity(intent);
 		}
-		
+		cbPwdVisibleLogin = (CheckBox) findViewById(R.id.cbPwdVisibleLogin);
 		edEmail = (EditText) findViewById(R.id.edtLoginEmail);
+		edEmail.setSelectAllOnFocus(true);
 		edPwd = (EditText) findViewById(R.id.edtLoginPwd);
+		edPwd.setSelectAllOnFocus(true);
 		edEmail.setText("viethungtrn94@gmail.com");
 		//edEmail.setText("conghoaf1@gmail.com");
 		edPwd.setText("1");
@@ -104,6 +111,20 @@ public class LoginActivity extends ActionBarActivity {
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
 				
+			}
+		});
+		cbPwdVisibleLogin.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				if(cbPwdVisibleLogin.isChecked()){
+					edPwd.setTransformationMethod(null);
+				}else {
+					if(cbPwdVisibleLogin.isChecked() == false){
+						edPwd.setTransformationMethod(new PasswordTransformationMethod());
+					}
+				}
 			}
 		});
 	}
