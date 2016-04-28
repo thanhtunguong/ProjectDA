@@ -76,7 +76,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 
 	private ExecuteQuery exeQ;
 	private Context context;
-	
+	private Global g;
 	private ScheduleClient scheduleClient;  
 	
 	@Override
@@ -85,7 +85,7 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 		setContentView(R.layout.activity_ghi_chu);
 		toolbar = (Toolbar) findViewById(R.id.ghichu_activity_tool_bar);
 		setSupportActionBar(toolbar);
-
+		g = new Global();
 		if (getSupportActionBar() != null) {
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		}
@@ -647,16 +647,26 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 //									"Thanh cong", Toast.LENGTH_LONG)
 //									.show();
 							 
-							 exeQ.insert_tbl_GhiChu(masinhvien,masinhvien+"_"+lastIndex,tieude,
+							    exeQ.insert_tbl_GhiChu(masinhvien,masinhvien+"_"+lastIndex,tieude,
 										noidung, thoigiannhac, thoigianchinhsua);
 							
 								exeQ.close();
 								getGhiChuSQlite(masinhvien);
 							
 						} else {
-							Toast.makeText(getApplicationContext(),
-									"That bai", Toast.LENGTH_LONG)
-									.show();
+							if(status.matches("false_execute") == true){
+								Toast.makeText(getApplicationContext(),
+										"That bai", Toast.LENGTH_LONG)
+										.show();
+							}
+							if(status.matches("false") == true){
+//								Toast.makeText(getApplicationContext(),
+//										"Goi ham logout app", Toast.LENGTH_LONG)
+//										.show();
+								g.DangXuat(context);
+							}
+//							logoutapp();
+						
 						}
 					}
 
@@ -709,9 +719,10 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 											.show();
 								}
 								if(status.matches("false") == true){
-									Toast.makeText(getApplicationContext(),
-											"Goi ham logout app", Toast.LENGTH_LONG)
-											.show();
+//									Toast.makeText(getApplicationContext(),
+//											"Goi ham logout app", Toast.LENGTH_LONG)
+//											.show();
+									g.DangXuat(context);
 								}
 //								logoutapp();
 							
@@ -763,9 +774,10 @@ public class GhiChuActivity extends ActionBarActivity implements OnClickListener
 													.show();
 										}
 										if(status.matches("false") == true){
-											Toast.makeText(getApplicationContext(),
-													"Goi ham logout app", Toast.LENGTH_LONG)
-													.show();
+//											Toast.makeText(getApplicationContext(),
+//													"Goi ham logout app", Toast.LENGTH_LONG)
+//													.show();
+											g.DangXuat(context);
 										}
 //										logoutapp();
 									
