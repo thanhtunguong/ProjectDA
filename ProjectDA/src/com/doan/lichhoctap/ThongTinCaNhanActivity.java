@@ -148,46 +148,46 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 			}
 		});
 		
-		btnSua.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				// chay ham update thong tin nguoi dung
-				s_ngaysinh = edtNgaysinhnguoidung.getText().toString();
-				s_gioitinh = edtGioitinhnguoidung.getText().toString();
-				s_diachi = edtDiachinguoidung.getText().toString();
-				s_sdt = edtSdtnguoidung.getText().toString();
-				exeQ.open();
-				suaThongtin(masinhvien,s_ngaysinh,s_gioitinh,s_diachi,s_sdt);
-				
-				// Khong cho tuong tac voi edittext
-				edtNgaysinhnguoidung.setEnabled(false);
-				edtGioitinhnguoidung.setEnabled(false);
-				edtDiachinguoidung.setEnabled(false);
-				edtSdtnguoidung.setEnabled(false);
-				
-				// dat lai mau chu va mau nen
-				edtNgaysinhnguoidung.setTextColor(Color.WHITE);
-				edtNgaysinhnguoidung.setBackgroundColor(Color.red(R.color.ColorPrimary));
-				
-				edtGioitinhnguoidung.setTextColor(Color.WHITE);
-				edtGioitinhnguoidung.setBackgroundColor(Color.red(R.color.ColorPrimary));
-				
-				edtDiachinguoidung.setTextColor(Color.WHITE);
-				edtDiachinguoidung.setBackgroundColor(Color.red(R.color.ColorPrimary));
-				
-				edtSdtnguoidung.setTextColor(Color.WHITE);
-				edtSdtnguoidung.setBackgroundColor(Color.red(R.color.ColorPrimary));
-				
-				// An di cac nut
-				btnHoantac.setVisibility(4);
-				btnSua.setVisibility(4);
-			}
-
-		
-
-		});
+//		btnSua.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				// chay ham update thong tin nguoi dung
+//				s_ngaysinh = edtNgaysinhnguoidung.getText().toString();
+//				s_gioitinh = edtGioitinhnguoidung.getText().toString();
+//				s_diachi = edtDiachinguoidung.getText().toString();
+//				s_sdt = edtSdtnguoidung.getText().toString();
+//				exeQ.open();
+//			//	suaThongtin(masinhvien,s_ngaysinh,s_gioitinh,s_diachi,s_sdt);
+//				
+//				// Khong cho tuong tac voi edittext
+//				edtNgaysinhnguoidung.setEnabled(false);
+//				edtGioitinhnguoidung.setEnabled(false);
+//				edtDiachinguoidung.setEnabled(false);
+//				edtSdtnguoidung.setEnabled(false);
+//				
+//				// dat lai mau chu va mau nen
+//				edtNgaysinhnguoidung.setTextColor(Color.WHITE);
+//				edtNgaysinhnguoidung.setBackgroundColor(Color.red(R.color.ColorPrimary));
+//				
+//				edtGioitinhnguoidung.setTextColor(Color.WHITE);
+//				edtGioitinhnguoidung.setBackgroundColor(Color.red(R.color.ColorPrimary));
+//				
+//				edtDiachinguoidung.setTextColor(Color.WHITE);
+//				edtDiachinguoidung.setBackgroundColor(Color.red(R.color.ColorPrimary));
+//				
+//				edtSdtnguoidung.setTextColor(Color.WHITE);
+//				edtSdtnguoidung.setBackgroundColor(Color.red(R.color.ColorPrimary));
+//				
+//				// An di cac nut
+//				btnHoantac.setVisibility(4);
+//				btnSua.setVisibility(4);
+//			}
+//
+//		
+//
+//		});
 
 		
 		edtNgaysinhnguoidung.setOnClickListener(new OnClickListener() {
@@ -242,41 +242,41 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.edit) {
-		//	Toast.makeText(getApplicationContext(), "Sua thong tin",Toast.LENGTH_SHORT).show();
-			btnHoantac.setVisibility(0);
-			btnSua.setVisibility(0);
-			edtNgaysinhnguoidung.setEnabled(true);
-			edtGioitinhnguoidung.setEnabled(true);
-			edtDiachinguoidung.setEnabled(true);
-			edtSdtnguoidung.setEnabled(true);
-			
-			ngaysinh = edtNgaysinhnguoidung.getText().toString();
-			gioitinh = edtGioitinhnguoidung.getText().toString();
-			diachi = edtDiachinguoidung.getText().toString();
-			sdt = edtSdtnguoidung.getText().toString();
-			//Toast.makeText(getApplicationContext(), ngaysinh +" + " + gioitinh +" + " + diachi + " + " + sdt,Toast.LENGTH_SHORT).show();
-			
-			edtNgaysinhnguoidung.setTextColor(Color.BLUE);
-			edtNgaysinhnguoidung.setBackgroundColor(Color.WHITE);
-	
-			edtGioitinhnguoidung.setTextColor(Color.BLUE);
-			edtGioitinhnguoidung.setBackgroundColor(Color.WHITE);
-			edtGioitinhnguoidung.isFocusable();
-			
-			edtDiachinguoidung.setTextColor(Color.BLUE);
-			edtDiachinguoidung.setBackgroundColor(Color.WHITE);
-			
-			
-			edtSdtnguoidung.setTextColor(Color.BLUE);
-			edtSdtnguoidung.setBackgroundColor(Color.WHITE);
-		
-			
-			edtNgaysinhnguoidung.setTextColor(Color.BLUE);
-			edtNgaysinhnguoidung.setBackgroundColor(Color.WHITE);
-			
-			return true;
-		}
+//		if (id == R.id.edit) {
+//		//	Toast.makeText(getApplicationContext(), "Sua thong tin",Toast.LENGTH_SHORT).show();
+//			btnHoantac.setVisibility(0);
+//			btnSua.setVisibility(0);
+//			edtNgaysinhnguoidung.setEnabled(true);
+//			edtGioitinhnguoidung.setEnabled(true);
+//			edtDiachinguoidung.setEnabled(true);
+//			edtSdtnguoidung.setEnabled(true);
+//			
+//			ngaysinh = edtNgaysinhnguoidung.getText().toString();
+//			gioitinh = edtGioitinhnguoidung.getText().toString();
+//			diachi = edtDiachinguoidung.getText().toString();
+//			sdt = edtSdtnguoidung.getText().toString();
+//			//Toast.makeText(getApplicationContext(), ngaysinh +" + " + gioitinh +" + " + diachi + " + " + sdt,Toast.LENGTH_SHORT).show();
+//			
+//			edtNgaysinhnguoidung.setTextColor(Color.BLUE);
+//			edtNgaysinhnguoidung.setBackgroundColor(Color.WHITE);
+//	
+//			edtGioitinhnguoidung.setTextColor(Color.BLUE);
+//			edtGioitinhnguoidung.setBackgroundColor(Color.WHITE);
+//			edtGioitinhnguoidung.isFocusable();
+//			
+//			edtDiachinguoidung.setTextColor(Color.BLUE);
+//			edtDiachinguoidung.setBackgroundColor(Color.WHITE);
+//			
+//			
+//			edtSdtnguoidung.setTextColor(Color.BLUE);
+//			edtSdtnguoidung.setBackgroundColor(Color.WHITE);
+//		
+//			
+//			edtNgaysinhnguoidung.setTextColor(Color.BLUE);
+//			edtNgaysinhnguoidung.setBackgroundColor(Color.WHITE);
+//			
+//			return true;
+//		}
 		if (id == android.R.id.home){
 			onBackPressed();
 			
