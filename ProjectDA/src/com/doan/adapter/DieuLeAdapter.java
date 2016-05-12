@@ -23,6 +23,7 @@ public class DieuLeAdapter extends BaseExpandableListAdapter {
 	private ArrayList<Object> childtems;
 	private LayoutInflater inflater;
 	private ArrayList<String> parentItems;
+	private ArrayList<DieuLe> child;
 
 	public DieuLeAdapter(ArrayList<String> parents, ArrayList<Object> childern, 
 			Activity c) {
@@ -39,12 +40,12 @@ public class DieuLeAdapter extends BaseExpandableListAdapter {
 	public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView,
 			ViewGroup parent) {
 
-		String child = childtems.get(groupPosition).toString();
+		child = (ArrayList<DieuLe>) childtems.get(groupPosition);
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.so_tay_thong_tin_child_item, null);
 		}
 		TextView tvNoiDung = (TextView) convertView.findViewById(R.id.tvChildDieuLe);
-		tvNoiDung.setText(child);
+		tvNoiDung.setText(child.get(childPosition).getNoiDung());
 		
 		return convertView;
 	}
@@ -55,7 +56,7 @@ public class DieuLeAdapter extends BaseExpandableListAdapter {
 			convertView = inflater.inflate(R.layout.so_tay_thong_tin_parent_item, null);
 		}
 		TextView tvParentDieuLe = (TextView) convertView.findViewById(R.id.tvParentDieuLe);
-		tvParentDieuLe.setText(parentItems.get(groupPosition).toString());
+		tvParentDieuLe.setText(parentItems.get(groupPosition));
 		
 		return convertView;
 	}

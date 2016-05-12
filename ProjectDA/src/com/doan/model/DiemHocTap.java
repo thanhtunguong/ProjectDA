@@ -103,7 +103,6 @@ public class DiemHocTap {
 
 	public double getDiemTongKet(){
 		double dtk = ((DiemCC + DiemKT*2 + DiemThi*7)/10)*1.0;
-		dtk = Math.floor(dtk*10)/10;
 		return dtk;
 	}
 }

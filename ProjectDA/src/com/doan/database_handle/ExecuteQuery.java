@@ -443,12 +443,14 @@ public class ExecuteQuery {
 		}
 		return arrTag;
 	}
-	public ArrayList<DieuLe> resultSearchTag(ArrayList<String> arrDLT){
+	public ArrayList<DieuLe> resultSearchTag(ArrayList<String> arrDLT, String input){
 		ArrayList<DieuLe> arDL = new ArrayList<DieuLe>();
 		if(arrDLT.size() > 0){
 			for (int i = 0; i < arrDLT.size(); i++) {
 				arDL.addAll(getDieuLeTheoTag(arrDLT.get(i).toString()));
 			}
+		}else {
+			arDL.addAll(getDieuLeTheoTu(input));
 		}
 		return arDL;
 	}
@@ -470,6 +472,28 @@ public class ExecuteQuery {
 				dl.setMaChuong(cursor.getInt(8));
 				
 				arrTag.add(dl);
+			} while (cursor.moveToNext());
+		}
+		return arrTag;
+	}
+	public ArrayList<DieuLe> getDieuLeTheoTu(String TagInput){
+		ArrayList<DieuLe> arrTag = new ArrayList<DieuLe>();
+		String selectQuery = "SELECT *"
+				+ "FROM " + ColumnName.DIEULE_TABLE;
+		database = mDbHelper.getReadableDatabase();
+		Cursor cursor = database.rawQuery(selectQuery, null);
+		if (cursor.moveToFirst()) {
+			do {
+				DieuLe dl = new DieuLe();
+				
+				dl.setTieuDe(cursor.getString(1));
+				dl.setNoiDung(cursor.getString(2));
+				String parent = dl.getNoiDung().toLowerCase();
+				int n = parent.indexOf(TagInput.toLowerCase());
+				dl.setMaChuong(cursor.getInt(4));
+				if(n != -1){
+					arrTag.add(dl);
+				}
 			} while (cursor.moveToNext());
 		}
 		return arrTag;

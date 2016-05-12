@@ -208,12 +208,13 @@ public class DuTinhFragment extends Fragment {
 				.findViewById(R.id.spDiemtichluymongmuon);
 		tv5 = (TextView) v.findViewById(R.id.tv5);
 		btnTinh = (Button) v.findViewById(R.id.btnTinh);
-
+		DecimalFormat df = new DecimalFormat("#.00");
 		tvSotinchitichluy.setText(soTinchitichluy + "");
-		tvDiemtbtichluy.setText(diemtbtichluy + "");
+		tvDiemtbtichluy.setText(df.format(diemtbtichluy) + "");
 		edtSotinchitichluysehoc.setText(120 + "");
 		sbSotinchitichluysehoc.setProgress(0);
-		tvDiemtbtichluycandat.setText(diemtbtichluy + "");
+		
+		tvDiemtbtichluycandat.setText(df.format(diemtbtichluy) + "");
 
 	}
 

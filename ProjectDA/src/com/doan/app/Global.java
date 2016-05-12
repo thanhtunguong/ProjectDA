@@ -28,13 +28,13 @@ public class Global {
 	
 	//__SharedPreference
 	public static String XML_FILE_NAME = "ImStudent_XML";
-	//__/SharedPreference
+	//__/Sha.redPreference
 	
 	public static String activityTitles[];
 	public static String activityTitlesHocTap[];
 	public static String MaSVDN;
 	//Tung
-	public static String BASE_URI ="http://192.168.3.102:8080/csdlda/";
+	public static String BASE_URI ="http://192.168.3.101:8080/csdlda/";
 	//public static String BASE_URI ="http://192.168.100.182:8080/csdlda/";
 	//public static String BASE_URI ="http://192.168.43.133:8080/csdlda/";
 	public static String URI_LICH_HOC ="api_LichHocTheoMaSV.php";

@@ -42,7 +42,11 @@ public class PhanTichHocTapActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_phan_tich_hoc_tap);
 		toolbar = (Toolbar) findViewById(R.id.phan_tich_hoc_tap_activity_tool_bar);
-        setSupportActionBar(toolbar);
+		setSupportActionBar(toolbar);
+
+		if (getSupportActionBar() != null) {
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		}
         
         context = this;
         exeQ = new ExecuteQuery(context);
@@ -83,20 +87,28 @@ public class PhanTichHocTapActivity extends ActionBarActivity {
 		getAllDiemQuaMonDiemQuaCaonhat(); //điểm qua cao nhất - trung bình tích lũy
 		getAllDiemQuaMonDiemQuaLanMot(); //điểm qua lần 1 - trung bình học kì
 		exeQ.close();
-        for (DiemHocTap diemHocTap : arlDiemQuaCaoNhat) {
-        	double sdtb = ((diemHocTap.getDiemCC() + diemHocTap.getDiemKT()*2 + diemHocTap.getDiemThi()*7)/10)*1.0;
-        	sdtb = Math.floor(sdtb*10)/10;
-        	//trạng thái = 0 tức là môn đã có điểm
+		for (DiemHocTap diemHocTap : arlDiemQuaCaoNhat) {
+        	//double sdtb = ((diemHocTap.getDiemCC() + diemHocTap.getDiemKT()*2 + diemHocTap.getDiemThi()*7)/10)*1.0;
+			double sdtb = diemHocTap.getDiemTongKet();
+        	//sdtb = Math.floor(sdtb*10)/10;
+        	//trạng thái = 0 tức là môn đã có điểm, 1 là đang học
         	if(diemHocTap.getMaTrangThaiDK().matches("0")){
         		tinhTongKetHocTap(diemHocTap.getSoTinChi(), sdtb);
         	}
 		}
 	}
-	private void tinhTongKetHocTap(int stc, double sdtb){
+	/*private void tinhTongKetHocTap(int stc, double sdtb){
     	TCtest = TCtest + stc;
     	tongDiemtest = tongDiemtest +  sdtb*stc;
     	DTBtest = (float)(tongDiemtest/TCtest);
     	DTBtest = (float)Math.floor(DTBtest*10)/10;    	
+    }*/
+	private void tinhTongKetHocTap(int stc, double sdtb){
+		TCtest = TCtest + stc;
+		tongDiemtest = tongDiemtest +  sdtb*stc;
+		DTBtest = (float)(tongDiemtest/TCtest);
+    	//DTB = (double) df.format(tongDiem/TC);
+    	//DTB = (float)Math.floor(DTB*10)/10;    	
     }
 	private void getAllDiemQuaMonDiemQuaCaonhat() {
 		arlDiemQuaCaoNhat = new ArrayList<DiemHocTap>();
@@ -195,9 +207,10 @@ public class PhanTichHocTapActivity extends ActionBarActivity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			onBackPressed();
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}

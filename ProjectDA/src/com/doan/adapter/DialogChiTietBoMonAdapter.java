@@ -1,5 +1,6 @@
 package com.doan.adapter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,24 +45,26 @@ public class DialogChiTietBoMonAdapter extends ArrayAdapter<MonHoc>{
 		TextView tvSinhVienTongKet = (TextView) convertView.findViewById(R.id.tvSinhVienTongKet);
 		TextView tvToanBoTongKet = (TextView) convertView.findViewById(R.id.tvSVNhieuDiemTongKet);
 		tvDialogBoMonTenMon.setText(mh.getTenMon());
-		double dtk = mh.getDiemTrungBinhSV();
-		if(dtk != 0){
-			if(dtk <5){
+		double diemtk = mh.getDiemTrungBinhSV();
+		DecimalFormat df = new DecimalFormat("#.00");
+		String dtk = df.format(diemtk);
+		if(diemtk != 0){
+			if(diemtk <5){
 				tvKQMau.setBackgroundColor(context.getColor(R.color.ColorPrimaryDark));
 				//tvKQMau.setText("Trung bình");
 				tvKQMau.setText(dtk+"");
 			}else {
-				if(dtk >= 5 && dtk <7){
+				if(diemtk >= 5 && diemtk <7){
 					tvKQMau.setBackgroundColor(context.getColor(R.color.ColorPrimary));
 					//tvKQMau.setText("Trung bình");
 					tvKQMau.setText(dtk+"");
 				} else {
-					if(dtk >= 7 && dtk < 9){
+					if(diemtk >= 7 && diemtk < 9){
 						tvKQMau.setBackgroundColor(context.getColor(R.color.bomon_Toan));
 						//tvKQMau.setText("Khá");
 						tvKQMau.setText(dtk+"");
 					}else {
-						if (dtk >= 9) {
+						if (diemtk >= 9) {
 							tvKQMau.setBackgroundColor(context.getColor(R.color.hard_green));
 							//tvKQMau.setText("Giỏi");
 							tvKQMau.setText(dtk+"");

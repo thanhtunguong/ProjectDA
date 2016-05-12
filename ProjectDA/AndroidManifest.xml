@@ -36,7 +36,8 @@
         </activity>
         <activity
             android:name=".GhiChuActivity"
-            android:label="@string/title_activity_ghi_chu" >
+            android:label="@string/title_activity_ghi_chu"
+            android:theme="@style/MyThemeForControl" >
         </activity>
         <activity
             android:name=".NhacLichActivity"
@@ -44,7 +45,8 @@
         </activity>
         <activity
             android:name=".ThongTinCaNhanActivity"
-            android:label="@string/title_activity_thong_tin_ca_nhan" >
+            android:label="@string/title_activity_thong_tin_ca_nhan"
+            android:theme="@style/MyThemeForControl" >
         </activity>
         <activity
             android:name=".DiemHocTapActivity"

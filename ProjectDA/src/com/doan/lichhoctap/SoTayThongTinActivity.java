@@ -145,7 +145,8 @@ public class SoTayThongTinActivity extends ActionBarActivity {
 	}
 	private ArrayList<DieuLe> searchTag(String input){
 		ArrayList<DieuLe> arrDL = new ArrayList<DieuLe>();
-		arrDL = exeQ.resultSearchTag(searchDieuLeTagTuongDoi(input));
+		ArrayList<String> arrStringInput = searchDieuLeTagTuongDoi(input);
+		arrDL = exeQ.resultSearchTag(searchDieuLeTagTuongDoi(input), input);
 		return arrDL;
 	}
 	private ArrayList<String> searchDieuLeTagTuongDoi(String input){
@@ -177,8 +178,8 @@ public class SoTayThongTinActivity extends ActionBarActivity {
 		childItems = new ArrayList<Object>();
 		for (DieuLe dl : arrDL) {
 			parentItems.add(dl.getTieuDe());
-			ArrayList<String> arStr = new ArrayList<String>();
-			arStr.add(dl.getNoiDung());
+			ArrayList<DieuLe> arStr = new ArrayList<DieuLe>();
+			arStr.add(dl);
 			childItems.add(arStr);
 		}
 		dlAdapter = new DieuLeAdapter(parentItems, childItems, c);

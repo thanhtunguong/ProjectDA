@@ -491,10 +491,11 @@ public class ThongTinCaNhanActivity extends ActionBarActivity {
 				String ngay = "";
 				String thang = "";
 				String nam = "";
-				if(dp.getMonth() < 10){
-					thang = "0" + dp.getMonth();
+				int x = dp.getMonth() + 1;
+				if(x < 10){
+					thang = "0" + x;
 				}else {
-					thang = dp.getMonth()+"";
+					thang = x + "";
 				}
 				if(dp.getDayOfMonth() < 10){
 					ngay = "0" + dp.getDayOfMonth();

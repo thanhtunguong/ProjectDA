@@ -1,5 +1,6 @@
 package com.doan.fragment;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -161,12 +162,12 @@ public class DiemFragment extends Fragment {
         hienThiTinhDiem();
     	float STCpc = TC/120;
     	int xSTC = 220;
-    	float x = (TC*width)/120;
+    	float x = (TC*width)/140;
     	tvSTCprogess.setLayoutParams(new LayoutParams(Math.round(x), 12));
     	tvSTCpc.setText(x + " %");
     	//getResultHocTap(arlDiemQuaCaoNhat, lnDTB, tvDTBprogess, tvDTBpc);
     	
-		tvSTCpc.setText(TC + "/120");
+		tvSTCpc.setText(TC + "/140");
         HocTapDiemAdapter adapter = new HocTapDiemAdapter(getActivity() , R.layout.hoctap_diem_diemso_item_test, arlDiemAll);
         lvDiem.setAdapter(adapter);
         lvDiem.setOnScrollChangeListener(new OnScrollChangeListener() {
@@ -224,8 +225,9 @@ public class DiemFragment extends Fragment {
 		DTB = 0;
 		tongDiem = 0;
 		for (DiemHocTap diemHocTap : arlDiem) {
-        	double sdtb = ((diemHocTap.getDiemCC() + diemHocTap.getDiemKT()*2 + diemHocTap.getDiemThi()*7)/10)*1.0;
-        	sdtb = Math.floor(sdtb*10)/10;
+        	//double sdtb = ((diemHocTap.getDiemCC() + diemHocTap.getDiemKT()*2 + diemHocTap.getDiemThi()*7)/10)*1.0;
+			double sdtb = diemHocTap.getDiemTongKet();
+        	//sdtb = Math.floor(sdtb*10)/10;
         	//trạng thái = 0 tức là môn đã có điểm, 1 là đang học
         	if(diemHocTap.getMaTrangThaiDK().matches("0")){
         		tinhTongKetHocTap(diemHocTap.getSoTinChi(), sdtb);
@@ -235,18 +237,21 @@ public class DiemFragment extends Fragment {
     	lnDTB.setGravity(Gravity.CENTER_VERTICAL);
        
         lnDTB.setLayoutParams(lp1);
+        DecimalFormat df = new DecimalFormat("#.00");
     	float DTBpc = DTB/10;
     	int xDTB = 220;
     	float y = (width*DTB)/10;
     	tvDTBprogess.setLayoutParams(new LayoutParams(Math.round(y), 12));	
-    	tvDTBpc.setText(DTB + "/10");
+    	//tvDTBpc.setText(DTB + "/10");
+    	tvDTBpc.setText(df.format(DTB) + "/10");
 	}
 
 	private void tinhTongKetHocTap(int stc, double sdtb){
     	TC = TC + stc;
     	tongDiem = tongDiem +  sdtb*stc;
     	DTB = (float)(tongDiem/TC);
-    	DTB = (float)Math.floor(DTB*10)/10;    	
+    	//DTB = (double) df.format(tongDiem/TC);
+    	//DTB = (float)Math.floor(DTB*10)/10;    	
     }
 	/*private void tinhTongKetHocTap2(int stc, double sdtb){
     	TC2 = TC2 + stc;
